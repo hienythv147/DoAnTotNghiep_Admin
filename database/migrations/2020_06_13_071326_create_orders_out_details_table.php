@@ -14,8 +14,11 @@ class CreateOrdersOutDetailsTable extends Migration
     public function up()
     {
         Schema::create('orders_out_detail', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->increments('id');
+            $table->integer('order_out_id')->unsigned();
+            $table->integer('product_id')->unsigned();
+            $table->integer('price');
+            $table->integer('amount');
         });
     }
 

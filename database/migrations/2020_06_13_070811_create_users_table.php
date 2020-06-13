@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('phone_number');
-            $table->integer('role_id');
+            $table->integer('role_id')->unsigned();
             $table->string('address');
             $table->timestamps();
             $table->softDeletes();

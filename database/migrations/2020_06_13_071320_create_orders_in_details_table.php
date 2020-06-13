@@ -14,8 +14,11 @@ class CreateOrdersInDetailsTable extends Migration
     public function up()
     {
         Schema::create('orders_in_detail', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->increments('id');
+            $table->integer('order_in_id')->unsigned();
+            $table->integer('ingredient_id')->unsigned();
+            $table->integer('price');
+            $table->integer('amount');
         });
     }
 
