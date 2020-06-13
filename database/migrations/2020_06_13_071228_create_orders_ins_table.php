@@ -13,7 +13,7 @@ class CreateOrdersInsTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders_ins', function (Blueprint $table) {
+        Schema::create('orders_in', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
