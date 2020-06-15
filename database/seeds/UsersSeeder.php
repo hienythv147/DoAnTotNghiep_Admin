@@ -14,7 +14,7 @@ class UsersSeeder extends Seeder
         DB::table('users')->insert([
         	//Quản trị viên
         	['email' => 'admin@gmail.com',
-        	'password' => '123',
+        	'password' => Hash::make('123'),
         	'first_name' => 'Master',
         	'last_name' => 'Projects',
         	'phone_number' => '0123456789',
@@ -22,7 +22,7 @@ class UsersSeeder extends Seeder
         	'address' => 'Dubai'],
         	//Nhân viên 1
         	['email' => 'tranphat123@gmail.com',
-        	'password' => '123',
+        	'password' => Hash::make('123'),
         	'first_name' => 'Tấn Phát',
         	'last_name' => 'Trần Lê',
         	'phone_number' => '0846080119',
@@ -30,7 +30,7 @@ class UsersSeeder extends Seeder
         	'address' => 'Cần Giuộc - Long An'],
         	//Nhân viên 2
         	['email' => 'xuansang123@gmail.com',
-        	'password' => '123',
+        	'password' => Hash::make('123'),
         	'first_name' => 'Xuân Sang',
         	'last_name' => 'Nguyễn',
         	'phone_number' => '0373801132',
