@@ -1,0 +1,4 @@
+<button data-href="{{route('xoa-cau-hoi',['$id' => $value->id ])}}"
+                                class="btn btn-danger waves-effect waves-light xoa-luon" style="color:white"><i
+                                    class="mdi mdi-trash-can-outline color " style="padding-right:5px"></i>Xóa
+                            </button>
