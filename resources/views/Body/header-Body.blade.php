@@ -9,25 +9,48 @@
             <div id="navigation">
                 <!-- Navigation Menu-->
                 <ul class="navigation-menu">
-                    <li class="has-submenu">
-                        <a href="">
-                            <i class="fa fa-bars" style="color: red"></i></i>Sản Phẩm</a>
+                    <li style="margin: 10px 0px 10px 0px; border-right: 1px solid white;" class="has-submenu">
+                        <a href="{{ route('products-list') }}"><i class="fas fa-utensils" style="color: red"></i>Sản Phẩm
+                        </a>
+                    </li>
+                    <li style="margin: 10px 0px 10px 0px; " class="has-submenu">
+                        <a href="{{ route('categories-list') }}"><i class="fas fa-tags" style="color:GreenYellow"></i>Loại SP
+                        </a>
+                    </li>
+                    <li style="margin: 10px 0px 10px 0px;border-right: 1px solid white; border-left: 1px solid white " class="has-submenu">
+                        <a href="{{ route('customers-list') }}"> <i class="fas fa-users" 
+                            style="color:PowderBlue"></i>
+                            Khách Hàng
+                        </a>
+                    </li>
+                    <li style="margin: 10px 0px 10px 0px; " class="has-submenu">
+                        <a href="{{ route('users-list') }}"> <i class="fas fa-users" 
+                            style="color:DarkTurquoise"></i>
+                            Nhân Viên
+                        </a>
+                    </li>
+                    <li style="margin: 10px 0px 10px 0px;border-right: 1px solid white; border-left: 1px solid white " class="has-submenu">
+                        <a href="{{ route('roles-list') }}"> <i class="fas fa-user-tag" style="color: SpringGreen"></i>
+                            Vai Trò
+                        </a>
+                    </li>
+                    <li style="margin: 10px 0px 10px 0px;" class="has-submenu">
+                        <a href="{{ route('ingredients-list') }}">
+                            <i class="fe-package" style="color:LawnGreen"></i>Nguyên Liệu </a>
+                    </li>   
+                    <li style="margin: 10px 0px 10px 0px; border-left: 1px solid white" class="has-submenu">
+                        <a href="#">
+                            <i class="fas fa-file-invoice" style="color:MediumSlateBlue"></i>Đơn Hàng <div class="arrow-down"></div></a>
                         <ul class="submenu">
                             <li>
-                                <a href="">Thêm Sản Phẩm</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="has-submenu">
-                        <a href=""> <i class="fas fa-users"
-                                style="color:PowderBlue"></i>Khách hàng</a>
-                    </li>
-                    <li class="has-submenu">
-                        <a href="">
-                            <i class="fe-package" style="color:DarkTurquoise"></i>Nguyên Liệu</a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="">Nhập nguyên liệu</a>
+                                <a href="{{ route('orders-out-list') }}">
+                                    <i class="fas fa-chevron-right"></i>
+                                    Đơn Bán
+                                </a>
+                                <a href="{{ route('orders-in-list') }}">
+                                    <i class="fas fa-chevron-right"></i>
+                                Đơn Nhập
+                                </a>
                             </li>
                         </ul>
                     </li>

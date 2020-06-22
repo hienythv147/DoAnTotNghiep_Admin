@@ -29,6 +29,6 @@ class CreateOrdersInsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders_ins');
+        Schema::dropIfExists('orders_in');
     }
 }
