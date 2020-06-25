@@ -13,8 +13,8 @@ class OrdersOutController extends Controller
      */
     public function index()
     {
-        $ordersout = Orders_out::get();
-        return view('OrdersIn.list',compact('ordersout'));
+        $orders_out = Orders_out::get();
+        return view('OrdersOut.list',compact('orders_out'));
     }
 
     /**

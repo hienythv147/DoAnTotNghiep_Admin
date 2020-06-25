@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\RolesRequest;
 use App\Roles;
 
 class RolesController extends Controller
@@ -26,7 +27,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        //
+        return view('Roles.add');
     }
 
     /**
@@ -35,9 +36,21 @@ class RolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RolesRequest $request)
     {
-        //
+        $newRoles = new Roles;
+        $roles_name = $request->roles_name;
+        $flag = $newRoles::where('name',$roles_name)->exists();
+        if (!$flag)
+        {
+            $newRoles->name  = $roles_name;
+            $newRoles->save();
+            return redirect()->route('roles-list');
+        }
+        else
+        {
+            return redirect()->route('roles-add');
+        }
     }
 
     /**
@@ -59,7 +72,8 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $roles =Roles::find($id);
+        return view('Roles.edit',compact('roles'));
     }
 
     /**
@@ -69,9 +83,20 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RolesRequest $request, $id)
     {
-        //
+        $roles = Roles::find($id);
+        $roles_name = $request->roles_name;
+        $flag = $roles::where('name',$roles_name)->exists();
+        if (!$flag) {
+            $roles->name = $roles_name;
+            $roles->save(); 
+        }
+        else
+        {
+            return view('Roles.edit',compact('roles'));
+        }      
+        return redirect()->route('roles-list');
     }
 
     /**
@@ -82,6 +107,29 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $roles = Roles::find($id);
+        if($roles->id == 1)
+        {
+            return redirect()->route('roles-list');  
+        }
+        else
+        {       
+            $roles->delete();
+            return redirect()->route('roles-list');
+        }
+    }
+
+    public function trash()
+    {
+        $hienThi = 2;
+        $roles = Roles::onlyTrashed()->get();
+        return view('Roles.list',compact('roles','hienThi'));
+    }
+
+    public function restore($id)
+    {
+        $roles = Roles::onlyTrashed()->find($id);
+        $roles->restore();
+        return redirect()->route('roles-list');
     }
 }

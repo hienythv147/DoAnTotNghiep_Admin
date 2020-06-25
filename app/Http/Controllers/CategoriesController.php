@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Categories;
+use App\Products;
 class CategoriesController extends Controller
 {
     /**
@@ -16,6 +17,12 @@ class CategoriesController extends Controller
         $hienThi = 1;
         $categories = Categories::all();
         return view('Categories.list',compact('categories','hienThi'));
+    }
+
+    public function products_list()
+    {
+        return $this->hasMany('App\Products','category_id','id');
+        //products.category_id = categories.id
     }
 
     /**

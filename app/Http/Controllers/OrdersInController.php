@@ -14,8 +14,8 @@ class OrdersInController extends Controller
      */
     public function index()
     {
-        $ordersin = Orders_in::all();
-        return view('OrdersIn.list',compact('ordersin'));
+        $orders_in = Orders_in::all();
+        return view('OrdersIn.list',compact('orders_in'));
     }
 
     /**

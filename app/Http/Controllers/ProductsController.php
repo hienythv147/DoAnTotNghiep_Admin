@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Products;
+use App\Categories;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -14,10 +15,18 @@ class ProductsController extends Controller
     public function index()
     {
         $hienThi = 1;
-        $products = Products::all();
+        //Lấy ds loại sản phẩm
+        $categories = Categories::all();
+        //Kiểm tra category_id đối chiếu với mã loại sản phẩm (khóa chính)
+        $products = Products::WhereIn('category_id',$categories->modelKeys())->get();
         return view('Products.list',compact('products','hienThi'));
     }
 
+    public function categories_list()
+    {
+        return $this->belongsTo('App\Categories','category_id','id');
+        //categories.id = products.category_id
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -11,6 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UserSeeder::class);
+    	//Tự động thêm seeder từ class
+        $this->call([
+        	CategoriesSeeder::class,
+        	ProductsSeeder::class,
+        	RolesSeeder::class,
+        	UsersSeeder::class,
+        	CustomersSeeder::class,
+        	IngredientsSeeder::class,
+        ]);
     }
 }

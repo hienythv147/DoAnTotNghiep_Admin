@@ -24,7 +24,7 @@
                     </thead>
                     <tbody>
                         {{-- @if($hienThi == 1) --}}
-                        @foreach($ordersout as $value) 
+                        @foreach($orders_out as $value) 
                         <tr style="font-size: 120%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->staff_id }}</td>

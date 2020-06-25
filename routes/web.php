@@ -30,7 +30,14 @@ Route::prefix('users')->group(function(){
 	Route::get('/list','UsersController@index')->name('users-list');
 });
 Route::prefix('roles')->group(function(){
-	Route::get('/list','RolesController@index')->name('roles-list');
+	Route::get('list','RolesController@index')->name('roles-list');
+	Route::get('add','RolesController@create')->name('roles-add');
+	Route::post('add','RolesController@store')->name('roles-add-process');
+	Route::get('edit/{id}','RolesController@edit')->name('roles-edit');
+	Route::post('edit/{id}','RolesController@update')->name('roles-edit-process');
+    Route::get('delete/{id}','RolesController@destroy')->name('roles-del');
+    Route::get('trash','RolesController@trash')->name('roles-trash');
+    Route::get('restore/{id}','RolesController@restore')->name('roles-res');
 });
 Route::prefix('ingredients')->group(function(){
 	Route::get('/list','IngredientsController@index')->name('ingredients-list');
