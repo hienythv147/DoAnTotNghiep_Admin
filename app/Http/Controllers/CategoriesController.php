@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoriesRequest;
 use App\Categories;
 use App\Products;
 class CategoriesController extends Controller
@@ -19,12 +20,6 @@ class CategoriesController extends Controller
         return view('Categories.list',compact('categories','hienThi'));
     }
 
-    public function products_list()
-    {
-        return $this->hasMany('App\Products','category_id','id');
-        //products.category_id = categories.id
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -32,7 +27,7 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('Categories.add');
     }
 
     /**
@@ -41,9 +36,17 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriesRequest $request)
     {
-        //
+        $category = new Categories();
+        $flag = $category::where('name',$request->category_name)->exists();
+        if(!$flag)
+        {
+            $category->name = $request->category_name;
+            $category->category_type = $request->category_type;
+            $category->save();
+        }
+        return redirect()->route('categories-list');
     }
 
     /**
@@ -65,7 +68,8 @@ class CategoriesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Categories::find($id);
+        return view('Categories.edit',compact('category'));
     }
 
     /**
@@ -75,9 +79,21 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoriesRequest $request, $id)
     {
-        //
+        $editCate = Categories::find($id);
+        $flag = $editCate::where('name',$request->category_name)->exists();
+        if(!$flag)
+        {
+            $editCate->name = $request->category_name;
+            $editCate->category_type = $request->category_type;
+            $editCate->save();
+        }
+        else
+        {
+            return redirect()->route('categories-edit',['id' => $id]);
+        }
+        return redirect()->route('categories-list');
     }
 
     /**
@@ -88,6 +104,22 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Categories::find($id);
+        $category->delete();
+        return redirect()->route('categories-list');
+    }
+
+    public function trash()
+    {
+        $hienThi = 2;
+        $categories = Categories::onlyTrashed()->get();
+        return view('Categories.list',compact('hienThi','categories'));
+    }
+
+    public function restore($id)
+    {
+        $category = Categories::onlyTrashed()->find($id);
+        $category->restore();
+        return redirect()->route('categories-list');
     }
 }

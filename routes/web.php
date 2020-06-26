@@ -21,7 +21,14 @@ Route::prefix('products')->group(function(){
 	Route::get('/list','ProductsController@index')->name('products-list');
 });
 Route::prefix('categories')->group(function(){
-	Route::get('/list','CategoriesController@index')->name('categories-list');
+	Route::get('list','CategoriesController@index')->name('categories-list');
+	Route::get('add','CategoriesController@create')->name('categories-add');
+	Route::post('add','CategoriesController@store')->name('categories-add-process');
+	Route::get('edit/{id}','CategoriesController@edit')->name('categories-edit');
+	Route::post('edit/{id}','CategoriesController@update')->name('categories-edit-process');
+	Route::get('delete/{id}','CategoriesController@destroy')->name('categories-del');
+    Route::get('trash','CategoriesController@trash')->name('categories-trash');
+	Route::get('restore/{id}','CategoriesController@restore')->name('categories-res');
 });
 Route::prefix('customers')->group(function(){
 	Route::get('/list','CustomersController@index')->name('customers-list');

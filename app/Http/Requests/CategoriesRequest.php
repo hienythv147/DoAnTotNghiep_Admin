@@ -24,11 +24,13 @@ class CategoriesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'category_name' => 'bail | required'
         ];
     }
     public function messages()
     {
-        
+        return [
+            'category_name.required' => 'Tên loại sản phẩm không được để trống!'
+        ];
     }
 }

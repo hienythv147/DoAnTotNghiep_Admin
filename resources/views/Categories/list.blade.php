@@ -16,11 +16,11 @@
 		<div class="card">
 			<div class="card-body">
                @if($hienThi == 1)
-                <a href="#" style="margin-bottom: 10px;color:black"
+                <a href="{{ route('categories-add') }}" style="margin-bottom: 10px;color:black"
                     class="btn btn-info waves-effect waves-light">
                     <i class="mdi mdi-plus mr-1" style="padding-right:10px"></i>Thêm mới
                 </a>
-                <a href="#" style="margin-bottom: 10px;color:black;"
+                <a href="{{ route('categories-trash') }}" style="margin-bottom: 10px;color:black;"
                     class="btn btn-warning waves-effect waves-light">
                     <i class="far fa-trash-alt" style="padding-right:10px"></i>Danh sách loại sản phẩm đã xóa</a>
                 @endif
@@ -33,24 +33,40 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @if($hienThi == 1) --}}
+                        @if($hienThi == 1)
                         @foreach($categories as $value) 
                         <tr style="font-size: 120%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
                             <td class="tool">
-                                <a href="#"
+                                <a href="{{ route('categories-edit',['id' => $value->id]) }}"
                                     class="btn btn-success waves-effect waves-light "><i class="mdi mdi-pencil color  "
                                         style="padding-right:5px"></i>Sửa</a>
-                                <a data-href="#"
-                                    class="btn btn-danger waves-effect waves-light xoa_linh_vuc" style="color:white"><i
-                                        class="mdi mdi-trash-can-outline color " style="padding-right:5px"></i>Xóa</a>
+                                <a href="{{ route('categories-del',['id' => $value->id]) }}"
+                                    class="btn btn-danger waves-effect waves-light" style="color:white"><i
+                                        class="mdi mdi-trash-can-outline color" style="padding-right:5px"></i>Xóa</a>
                             </td>
                         </tr>
                         @endforeach
+                        @else
+                        @foreach($categories as $value) 
+                        <tr style="font-size: 120%; font-weight: bold;">
+                            <td class="tool">{{ $value->id }}</td>
+                            <td>{{ $value->name }}</td>
+                            <td class="tool">
+                               <a href="{{ route('categories-res',['id' => $value->id])}}"
+                                    class="btn btn-success waves-effect waves-light "><i class=" la la-history"></i>
+                                    Phục hồi</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
-
+                @if($hienThi == 2)
+                <a href="{{route('categories-list')}}" class="btn btn-info waves-effect waves-light"><i
+                        class="mdi mdi-keyboard-return" style="padding-right:10px"></i>Quay lại</a>
+                @endif
 
 			</div>
 		</div>
