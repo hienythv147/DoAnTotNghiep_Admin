@@ -24,7 +24,7 @@
                     @endif
                     <div class="form-group row mb-3">
                         <div class="col-12">
-                            <input type="text" class="form-control" name="roles_name" value="{{ $roles->name }}" placeholder="Nhập vai trò mới">
+                            <input type="text" class="form-control" name="roles_name" value="{{ $role->name }}" placeholder="Nhập vai trò mới">
                         </div>
                     </div>
 

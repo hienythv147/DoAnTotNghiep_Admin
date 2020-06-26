@@ -38,7 +38,7 @@ class RolesController extends Controller
      */
     public function store(RolesRequest $request)
     {
-        $newRoles = new Roles;
+        $newRoles = new Roles();
         $roles_name = $request->roles_name;
         $flag = $newRoles::where('name',$roles_name)->exists();
         if (!$flag)
@@ -47,10 +47,7 @@ class RolesController extends Controller
             $newRoles->save();
             return redirect()->route('roles-list');
         }
-        else
-        {
-            return redirect()->route('roles-add');
-        }
+        return redirect()->route('roles-add');
     }
 
     /**
@@ -72,8 +69,8 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        $roles =Roles::find($id);
-        return view('Roles.edit',compact('roles'));
+        $role =Roles::find($id);
+        return view('Roles.edit',compact('role'));
     }
 
     /**
@@ -107,16 +104,9 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        $roles = Roles::find($id);
-        if($roles->id == 1)
-        {
-            return redirect()->route('roles-list');  
-        }
-        else
-        {       
-            $roles->delete();
-            return redirect()->route('roles-list');
-        }
+        $roles = Roles::find($id);      
+        $roles->delete();
+        return redirect()->route('roles-list');
     }
 
     public function trash()

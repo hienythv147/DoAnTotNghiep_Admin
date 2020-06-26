@@ -13,6 +13,12 @@
 	.h-tool{
 		text-align: center; width: 20%;
 	}
+	.w-20{
+		width: 20%;
+	}
+	.w-5{
+		width: 5%;
+	}
 </style>
 
 @endsection

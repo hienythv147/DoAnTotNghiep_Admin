@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UsersRequest;
 use App\Users;
+use App\Roles;
 
 class UsersController extends Controller
 {
@@ -16,7 +19,8 @@ class UsersController extends Controller
     public function index()
     {
         $hienThi = 1;
-        $users = Users::all();
+        $roles = Roles::all();
+        $users = Users::WhereIn('role_id',$roles->modelKeys())->get();
         return view('Users.list',compact('users','hienThi'));
     }
 
@@ -27,7 +31,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        $roles = Roles::all();
+        return view('Users.add',compact('roles'));
     }
 
     /**
@@ -36,9 +41,23 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsersRequest $request)
     {
-        //
+        $newUser = new Users();
+        $flag = $newUser::where('email',$request->email)->exists();
+        if(!$flag)
+        {
+            $newUser->email = $request->email;
+            $newUser->password = Hash::make($request->password);
+            $newUser->first_name = $request->first_name;
+            $newUser->last_name = $request->last_name;
+            $newUser->phone_number = $request->phone_number;
+            $newUser->role_id = $request->role_id;
+            $newUser->address = $request->address;
+            $newUser->save();
+            return redirect()->route('users-list');
+        }
+        return redirect()->route('users-list');
     }
 
     /**
@@ -60,7 +79,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $roles = Roles::all();
+        $user = Users::find($id);
+        return view('Users.edit',compact('user','roles'));
     }
 
     /**
@@ -72,7 +93,10 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = Users::find($id);
+        $user->role_id = $request->role_id;
+        $user->save();
+        return redirect()->route('users-list');
     }
 
     /**
@@ -81,8 +105,24 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function disable($id)
     {
-        //
+        $user = Users::find($id);
+        $user->delete();
+        return redirect()->route('users-list');
+    }
+
+    public function trash()
+    {
+        $hienThi = 2;
+        $users = Users::onlyTrashed()->get();
+        return view ('Users.list',compact('hienThi','users'));
+    }
+
+    public function restore($id)
+    {
+        $user = Users::onlyTrashed()->find($id);
+        $user->restore();
+        return redirect()->route('users-list');
     }
 }

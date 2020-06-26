@@ -26,9 +26,18 @@ Route::prefix('categories')->group(function(){
 Route::prefix('customers')->group(function(){
 	Route::get('/list','CustomersController@index')->name('customers-list');
 });
+
 Route::prefix('users')->group(function(){
-	Route::get('/list','UsersController@index')->name('users-list');
+	Route::get('list','UsersController@index')->name('users-list');
+	Route::get('add','UsersController@create')->name('users-add');
+	Route::post('add','UsersController@store')->name('users-add-process');
+	Route::get('edit/{id}','UsersController@edit')->name('users-edit');
+	Route::post('edit/{id}','UsersController@update')->name('users-edit-process');
+	Route::get('disable/{id}','UsersController@disable')->name('users-disable');
+    Route::get('trash','UsersController@trash')->name('users-trash');
+	Route::get('restore/{id}','UsersController@restore')->name('users-res');
 });
+
 Route::prefix('roles')->group(function(){
 	Route::get('list','RolesController@index')->name('roles-list');
 	Route::get('add','RolesController@create')->name('roles-add');
@@ -39,6 +48,7 @@ Route::prefix('roles')->group(function(){
     Route::get('trash','RolesController@trash')->name('roles-trash');
     Route::get('restore/{id}','RolesController@restore')->name('roles-res');
 });
+
 Route::prefix('ingredients')->group(function(){
 	Route::get('/list','IngredientsController@index')->name('ingredients-list');
 });

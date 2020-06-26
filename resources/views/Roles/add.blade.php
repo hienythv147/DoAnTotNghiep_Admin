@@ -24,13 +24,14 @@
                     @endif
                     <div class="form-group row mb-3">
                         <div class="col-12">
-                            <input type="text" class="form-control" name="roles_name" placeholder="Nhập vai trò mới">
+                            <label style="font-weight: bold;">Vai trò:</label>
+                            <input name="roles_name" type="text" class="form-control"  placeholder="Nhập vai trò mới">
                         </div>
                     </div>
 
                     <div class="form-group mb-0 justify-content-end row">
                         <div class="col-7">
-                            <button type="submit" id="btnThem" class="btn btn-primary btn-rounded waves-effect waves-light" value="add">Thêm </button>
+                            <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light">Thêm </button>
                             <a href="{{ route('roles-list') }}" class="btn btn-danger btn-rounded waves-effect waves-light">Hủy</a>
                         </div>
                     </div>

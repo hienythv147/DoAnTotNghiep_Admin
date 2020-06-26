@@ -13,7 +13,7 @@ class CategoriesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,5 +26,9 @@ class CategoriesRequest extends FormRequest
         return [
             //
         ];
+    }
+    public function messages()
+    {
+        
     }
 }

@@ -39,13 +39,17 @@
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
                             <td class="tool">
+                                
+                                @if($value->id != 1)
                                 <a href="{{ route('roles-edit',['id' => $value->id]) }}"
                                     class="btn btn-success waves-effect waves-light "><i class="mdi mdi-pencil color  "
                                         style="padding-right:5px"></i>Sửa</a>
                                 {{-- <a data-href="{{ route('roles-del',['id' => $value->id]) }}" --}}
+
                                 <a href="{{ route('roles-del',['id' => $value->id]) }}"
                                     class="btn btn-danger waves-effect waves-light xoa_linh_vuc" style="color:white"><i
                                         class="mdi mdi-trash-can-outline color " style="padding-right:5px"></i>Xóa</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
