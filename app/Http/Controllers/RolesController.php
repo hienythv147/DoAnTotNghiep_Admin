@@ -39,11 +39,10 @@ class RolesController extends Controller
     public function store(RolesRequest $request)
     {
         $newRoles = new Roles();
-        $roles_name = $request->roles_name;
-        $flag = $newRoles::where('name',$roles_name)->exists();
+        $flag = $newRoles::where('name',$request->role_name)->exists();
         if (!$flag)
         {
-            $newRoles->name  = $roles_name;
+            $newRoles->name  = $request->role_name;
             $newRoles->save();
             return redirect()->route('roles-list');
         }
@@ -69,7 +68,7 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        $role =Roles::find($id);
+        $role = Roles::find($id);
         return view('Roles.edit',compact('role'));
     }
 

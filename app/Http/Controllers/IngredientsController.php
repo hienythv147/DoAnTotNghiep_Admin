@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ingredients;
+use App\Http\Requests\IngredientsRequest;
 class IngredientsController extends Controller
 {
     /**
@@ -25,7 +26,7 @@ class IngredientsController extends Controller
      */
     public function create()
     {
-        //
+        return view('Ingredients.add');
     }
 
     /**
@@ -34,9 +35,19 @@ class IngredientsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IngredientsRequest $request)
     {
-        //
+        $ingredient = new Ingredients();
+        $flag = $ingredient::where('name',$request->ingredient_name)->exists();
+        if(!$flag)
+        {
+            $ingredient->name = $request->ingredient_name;
+            $ingredient->ingredient_unit = $request->ingredient_unit;
+            $ingredient->amount_stock = $request->amount_stock;
+            $ingredient->save();
+            return redirect()->route('ingredients-list');
+        }
+        return redirect()->route('ingredients-add');
     }
 
     /**
@@ -58,7 +69,9 @@ class IngredientsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ingredient = Ingredients::find($id);
+        return view('Ingredients.edit',compact('ingredient'));
+        
     }
 
     /**
@@ -70,7 +83,18 @@ class IngredientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ingredient = Ingredients::find($id);
+        $id = $ingredient->id;
+        $flag = $ingredient::where('name',$request->ingredient_name)->exists();
+        if(!$flag)
+        {
+            $ingredient->name = $request->ingredient_name;
+            $ingredient->ingredient_unit = $request->ingredient_unit;
+            $ingredient->amount_stock = $request->amount_stock;
+            $ingredient->save();
+            return redirect()->route('ingredients-list');
+        }
+        return redirect()->route('ingredients-edit','ingredient');
     }
 
     /**
@@ -81,6 +105,22 @@ class IngredientsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ingredient = Ingredients::onlyTrashed()->find($id);
+        $ingredient->delete();
+        return rediect()->route('ingredients-list');
+    }
+
+    public function trash()
+    {
+        $hienThi = 2;
+        $ingredients = Ingredients::onlyTrashed()->get();
+        return view('Ingredients.list',compact('hienThi','ingredients'));
+    }
+
+    public function restore($id)
+    {
+        $roles = Ingredients::onlyTrashed()->find($id);
+        $roles->restore();
+        return redirect()->route('ingredients-list');
     }
 }

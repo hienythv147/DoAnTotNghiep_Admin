@@ -18,7 +18,9 @@ Route::get('/', function () {
 });
 
 Route::prefix('products')->group(function(){
-	Route::get('/list','ProductsController@index')->name('products-list');
+	Route::get('list','ProductsController@index')->name('products-list');
+	Route::get('add','ProductsController@create')->name('products-add');
+	Route::post('add','ProductsController@store')->name('products-add-process');
 });
 Route::prefix('categories')->group(function(){
 	Route::get('list','CategoriesController@index')->name('categories-list');
@@ -31,7 +33,14 @@ Route::prefix('categories')->group(function(){
 	Route::get('restore/{id}','CategoriesController@restore')->name('categories-res');
 });
 Route::prefix('customers')->group(function(){
-	Route::get('/list','CustomersController@index')->name('customers-list');
+	Route::get('list','CustomersController@index')->name('customers-list');
+	Route::get('add','CustomersController@create')->name('customers-add');
+	Route::post('add','CustomersController@store')->name('customers-add-process');
+	Route::get('edit/{id}','CustomersController@edit')->name('customers-edit');
+	Route::post('edit/{id}','CustomersController@update')->name('customers-edit-process');
+	Route::get('disable/{id}','CustomersController@disable')->name('customers-disable');
+    Route::get('trash','CustomersController@trash')->name('customers-trash');
+	Route::get('restore/{id}','CustomersController@restore')->name('customers-res');
 });
 
 Route::prefix('users')->group(function(){
@@ -57,7 +66,14 @@ Route::prefix('roles')->group(function(){
 });
 
 Route::prefix('ingredients')->group(function(){
-	Route::get('/list','IngredientsController@index')->name('ingredients-list');
+	Route::get('list','IngredientsController@index')->name('ingredients-list');
+	Route::get('add','IngredientsController@create')->name('ingredients-add');
+	Route::post('add','IngredientsController@store')->name('ingredients-add-process');
+	Route::get('edit/{id}','IngredientsController@edit')->name('ingredients-edit');
+	Route::post('edit/{id}','IngredientsController@update')->name('ingredients-edit-process');
+    Route::get('delete/{id}','IngredientsController@destroy')->name('ingredients-del');
+    Route::get('trash','IngredientsController@trash')->name('ingredients-trash');
+    Route::get('restore/{id}','IngredientsController@restore')->name('ingredients-res');
 });
 Route::prefix('orders-in')->group(function(){
 	Route::get('/list','OrdersInController@index')->name('orders-in-list');

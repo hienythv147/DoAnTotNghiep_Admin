@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Customers extends Model
 {
     protected $customers = 'customers';
+    use SoftDeletes;
 }

@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Http\Requests\ProductsRequest;
 use App\Products;
 use App\Categories;
-use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
@@ -22,11 +24,6 @@ class ProductsController extends Controller
         return view('Products.list',compact('products','hienThi'));
     }
 
-    public function categories_list()
-    {
-        return $this->belongsTo('App\Categories','category_id','id');
-        //categories.id = products.category_id
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -34,7 +31,8 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Categories::all();
+        return view('Products.add',compact('categories'));
     }
 
     /**
@@ -43,9 +41,28 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductsRequest $request)
     {
-        //
+        $newProduct = new Products();
+        $getProductImage = '';
+        $flag = $newProduct::where('name',$request->product_name)->exists();
+        if(!$flag)
+        {
+            // $newProduct->name = $request->product_name;
+            // $newProduct->category_id = $request->category_id;
+            // $newProduct->price = $request->product_price;    
+            //     //Lưu hình ảnh vào thư mục public/upload/product_image
+            //     // $product_image = $request->file('product_image');
+            //     // $getProductImage = time().'_'.$product_image->getClientOriginalName();
+            //     // $destinationPath = public_path('upload/product_image');
+            //     // $product_image->move($destinationPath,$getProductImage);
+            //     $newProduct->save();
+            //     return redirect()->route('products-list');
+        }
+        else
+        {
+            return redirect()->route('products-add');
+        }
     }
 
     /**

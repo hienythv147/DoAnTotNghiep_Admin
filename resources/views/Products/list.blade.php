@@ -16,7 +16,7 @@
 		<div class="card">
 			<div class="card-body">
                @if($hienThi == 1)
-                <a href="#" style="margin-bottom: 10px;color:black"
+                <a href="{{ route('products-add') }}" style="margin-bottom: 10px;color:black"
                     class="btn btn-info waves-effect waves-light">
                     <i class="mdi mdi-plus mr-1" style="padding-right:10px"></i>Thêm mới
                 </a>
@@ -41,7 +41,7 @@
                         <tr style="font-size: 120%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
-                            <td>{{ $value->category_id }}</td>
+                            <td>{{ $value->Categories->name }}</td>
                             <td>{{ $value->price }}</td>
                             <td>{{ $value->image }}</td>
                             <td class="tool">

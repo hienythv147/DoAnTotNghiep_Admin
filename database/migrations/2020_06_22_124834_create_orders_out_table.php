@@ -13,7 +13,7 @@ class CreateOrdersOutTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders_out', function (Blueprint $table) {
+        Schema::create('orders_outs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('staff_id')->unsigned();
             $table->integer('customer_id')->nullable()->unsigned();

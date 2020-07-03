@@ -48,7 +48,7 @@
 
                                 <a href="{{ route('roles-del',['id' => $value->id]) }}"
                                     class="btn btn-danger waves-effect waves-light xoa_linh_vuc" style="color:white"><i
-                                        class="mdi mdi-trash-can-outline color " style="padding-right:5px"></i>Xóa</a>
+                                        class="mdi mdi-trash-can-outline color " style="padding-right:5px"></i>Tạm khóa</a>
                                 @endif
                             </td>
                         </tr>

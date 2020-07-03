@@ -16,7 +16,7 @@
 		<div class="card">
 			<div class="card-body">
                @if($hienThi == 1)
-                <a href="#" style="margin-bottom: 10px;color:black"
+                <a href="{{ route('ingredients-add') }}" style="margin-bottom: 10px;color:black"
                     class="btn btn-info waves-effect waves-light">
                     <i class="mdi mdi-plus mr-1" style="padding-right:10px"></i>Thêm mới
                 </a>
@@ -35,7 +35,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @if($hienThi == 1) --}}
+                        @if($hienThi == 1)
                         @foreach($ingredients as $value) 
                         <tr style="font-size: 120%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
@@ -43,7 +43,7 @@
                             <td>{{ $value->ingredient_unit }}</td>
                             <td>{{ $value->amount_stock }}</td>
                             <td class="tool">
-                                <a href="#"
+                                <a href="{{ route('ingredients-edit',['id'=>$value->id]) }}"
                                     class="btn btn-success waves-effect waves-light "><i class="mdi mdi-pencil color  "
                                         style="padding-right:5px"></i>Sửa</a>
                                 <a data-href="#"
@@ -52,9 +52,27 @@
                             </td>
                         </tr>
                         @endforeach
+                        @else
+                        @foreach($ingredients as $value) 
+                        <tr style="font-size: 120%; font-weight: bold;">
+                            <td class="tool">{{ $value->id }}</td>
+                            <td>{{ $value->name }}</td>
+                            <td>{{ $value->ingredient_unit }}</td>
+                            <td>{{ $value->amount_stock }}</td>
+                            <td class="tool">
+                                <a href="{{ route('ingredients-res',['id' => $value->id])}}"
+                                   class="btn btn-success waves-effect waves-light "><i class=" la la-history"></i>
+                                   Khôi phục</a>
+                           </td>
+                        </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
-
+                @if($hienThi == 2)
+                <a href="{{route('ingredients-list')}}" class="btn btn-info waves-effect waves-light"><i
+                        class="mdi mdi-keyboard-return" style="padding-right:10px"></i>Quay lại</a>
+                @endif
 
 			</div>
 		</div>

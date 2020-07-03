@@ -7,7 +7,7 @@
     <div style="margin-top: 50px;" class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h1 style=" text-align: center"> Thêm Nhân Viên Mới </h1>
+                <h1 style=" text-align: center"> Thêm nhân viên </h1>
                 <form class="form-horizontal" action="{{ route('users-add-process') }}" method="POST" >
                  @csrf
                     @if($errors->any())

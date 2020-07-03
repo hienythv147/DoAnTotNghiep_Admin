@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-class RolesRequest extends FormRequest
+
+class IngredientsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +23,8 @@ class RolesRequest extends FormRequest
      */
     public function rules()
     {
-        // https://viblo.asia/p/tap-21-validation-laravel-tiep-theo-gAm5yGaAZdb
         return [
-            'role_name' => 'bail | required'
+            'ingredient_name' => 'bail | required'
         ];
-    }
-
-    public function messages()
-    {
-        return [
-            'role_name.required' => 'Vai trò không được bỏ trống!'
-        ];
-        
     }
 }

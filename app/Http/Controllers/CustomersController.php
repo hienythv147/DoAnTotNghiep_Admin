@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customers;
+use App\Http\Requests\CustomersRequest;
 class CustomersController extends Controller
 {
     /**
@@ -25,7 +26,7 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        //
+        return view('Customers.add');
     }
 
     /**
@@ -34,11 +35,24 @@ class CustomersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomersRequest $request)
     {
-        //
+        $customer = new Customers();
+        $phone_number = $request->input('phone_number','0');
+        if($phone_number != 0)
+        {
+            $flag = $customer::where('phone_number',$phone_number)->exists();
+            if(!$flag)
+            {
+                $customer->last_name = $request->input('last_name');
+                $customer->first_name = $request->input('first_name');
+                $customer->phone_number = $phone_number;
+                $customer->save();
+                return redirect()->route('customers-list');
+            }
+        }
+        return redirect()->route('customers-add');
     }
-
     /**
      * Display the specified resource.
      *
@@ -58,7 +72,8 @@ class CustomersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $customer = Customers::find($id);
+        return view('Customers.edit',compact('customer'));
     }
 
     /**
@@ -68,9 +83,23 @@ class CustomersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CustomersRequest $request, $id)
     {
-        //
+        $customer = Customers::find($id);
+        $phone_number = $request->input('phone_number','0');
+        if($phone_number != 0)
+        {
+            $flag = $customer::where('phone_number',$phone_number)->exists();
+            if(!$flag)
+            {
+                $customer->last_name = $request->input('last_name');
+                $customer->first_name = $request->input('first_name');
+                $customer->phone_number = $phone_number;
+                $customer->save();
+                return redirect()->route('customers-list');
+            }
+        }
+        return redirect()->route('customers-add');
     }
 
     /**
@@ -79,8 +108,25 @@ class CustomersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function disable($id)
     {
-        //
+        $customer = Customers::find($id);
+        $customer->delete();
+        return redirect()->route('customers-list');
+    }
+
+    public function trash()
+    {
+        $hienThi = 2;
+        $customers = Customers::onlyTrashed()->get();
+        return view('Customers.list',compact('hienThi','customers'));
+        
+    }
+
+    public function restore($id)
+    {
+        $customer = Customers::onlyTrashed()->find($id);
+        $customer->restore();
+        return redirect()->route('customers-list');
     }
 }

@@ -22,11 +22,11 @@
                                 </ul>
                             </div>
                     @endif
-                    <div class="form-group row mb-3">
-                        <div class="col-12">
-                            <label style="font-weight: bold;">Vai trò:</label>
-                            <input name="roles_name" type="text" class="form-control"  placeholder="Nhập vai trò mới">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Vai trò</span>
                         </div>
+                        <input name="role_name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập vai trò">
                     </div>
 
                     <div class="form-group mb-0 justify-content-end row">
