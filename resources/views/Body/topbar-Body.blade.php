@@ -46,7 +46,6 @@
                     </span>
                 </a>
             </div>
-            <div class="clearfix"></div>
     </div>
 </div>
 <!-- end Topbar -->

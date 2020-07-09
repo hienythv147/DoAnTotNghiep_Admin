@@ -11,7 +11,6 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
     @yield('css')
-    @yield('css-2')
     <!-- App css -->
     <link href="{{ asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
@@ -46,7 +45,7 @@
     <!-- end Footer -->
 
     <!-- Right Sidebar -->
-    <div class="right-bar">
+    {{-- <div class="right-bar">
         <div class="rightbar-title">
             <a href="javascript:void(0);" class="right-bar-toggle float-right">
                 <i class="mdi mdi-close"></i>
@@ -142,7 +141,7 @@
             </div> <!-- end .p-3-->
 
         </div> <!-- end slimscroll-menu-->
-    </div>
+    </div> --}}
     <!-- /Right-bar -->
 
     <!-- Right bar overlay-->

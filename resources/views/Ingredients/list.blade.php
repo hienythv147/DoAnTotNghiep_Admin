@@ -20,7 +20,7 @@
                     class="btn btn-info waves-effect waves-light">
                     <i class="mdi mdi-plus mr-1" style="padding-right:10px"></i>Thêm mới
                 </a>
-                <a href="#" style="margin-bottom: 10px;color:black;"
+                <a href="{{ route('ingredients-trash') }}" style="margin-bottom: 10px;color:black;"
                     class="btn btn-warning waves-effect waves-light">
                     <i class="far fa-trash-alt" style="padding-right:10px"></i>Danh sách nguyên liệu đã xóa</a>
                 @endif
@@ -45,10 +45,10 @@
                             <td class="tool">
                                 <a href="{{ route('ingredients-edit',['id'=>$value->id]) }}"
                                     class="btn btn-success waves-effect waves-light "><i class="mdi mdi-pencil color  "
-                                        style="padding-right:5px"></i>Sửa</a>
-                                <a data-href="#"
-                                    class="btn btn-danger waves-effect waves-light xoa_linh_vuc" style="color:white"><i
-                                        class="mdi mdi-trash-can-outline color " style="padding-right:5px"></i>Xóa</a>
+                                        ></i>Sửa</a>
+                                <a href="{{ route('ingredients-del',['id' => $value->id]) }}"
+                                    class="btn btn-danger waves-effect waves-light " style="color:white"><i
+                                        class="mdi mdi-trash-can-outline color "></i>Xóa</a>
                             </td>
                         </tr>
                         @endforeach

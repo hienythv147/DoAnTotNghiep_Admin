@@ -46,11 +46,10 @@
                             <td>{{ $value->image }}</td>
                             <td class="tool">
                                 <a href="#"
-                                    class="btn btn-success waves-effect waves-light "><i class="mdi mdi-pencil color  "
-                                        style="padding-right:5px"></i>Sửa</a>
+                                    class="btn btn-success waves-effect waves-light "><i class="mdi mdi-pencil color  "></i>Sửa</a>
                                 <a data-href="#"
-                                    class="btn btn-danger waves-effect waves-light xoa_linh_vuc" style="color:white"><i
-                                        class="mdi mdi-trash-can-outline color " style="padding-right:5px"></i>Xóa</a>
+                                    class="btn btn-danger waves-effect waves-light" style="color:white"><i
+                                        class="mdi mdi-trash-can-outline color "></i>Xóa</a>
                             </td>
                         </tr>
                         @endforeach

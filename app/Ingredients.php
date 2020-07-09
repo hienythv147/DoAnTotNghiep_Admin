@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Ingredients extends Model
 {
-    protected $ingredients = 'ingredients';
+    protected $table = 'ingredients';
+    use SoftDeletes;
 }

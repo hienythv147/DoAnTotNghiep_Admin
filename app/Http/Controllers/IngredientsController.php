@@ -105,9 +105,9 @@ class IngredientsController extends Controller
      */
     public function destroy($id)
     {
-        $ingredient = Ingredients::onlyTrashed()->find($id);
+        $ingredient = Ingredients::find($id);
         $ingredient->delete();
-        return rediect()->route('ingredients-list');
+        return redirect()->route('ingredients-list');
     }
 
     public function trash()

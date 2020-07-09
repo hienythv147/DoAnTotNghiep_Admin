@@ -13,7 +13,7 @@ class CreateOrdersInTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders_ins', function (Blueprint $table) {
+        Schema::create('orders_in', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('staff_id')->unsigned();
             $table->integer('total');

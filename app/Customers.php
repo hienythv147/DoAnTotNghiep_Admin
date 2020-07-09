@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 class Customers extends Model
 {
-    protected $customers = 'customers';
+    protected $table = 'customers';
     use SoftDeletes;
 }

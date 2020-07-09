@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Orders_out_detail extends Model
 {
-    protected $ood = 'orders_out_detail';
+    protected $table = 'orders_out_detail';
 }

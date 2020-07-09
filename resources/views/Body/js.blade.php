@@ -12,11 +12,11 @@
 <script src="{{asset('assets/libs/datatables/buttons.print.min.js')}}"></script>
 <script src="{{asset('assets/libs/datatables/dataTables.keyTable.min.js')}}"></script>
 <script src="{{asset('assets/libs/datatables/dataTables.select.min.js')}}"></script>
-<script src="{{asset('assets/libs/pdfmake/pdfmake.min.js')}}"></script>
-<script src="{{asset('assets/libs/pdfmake/vfs_fonts.js')}}"></script>
+{{-- <script src="{{asset('assets/libs/pdfmake/pdfmake.min.js')}}"></script> --}}
+{{-- <script src="{{asset('assets/libs/pdfmake/vfs_fonts.js')}}"></script> --}}
 <!-- third party.js ends -->
 <!-- Datatables init -->
 <script src="{{asset('assets/js/pages/datatables.init.js')}}"></script>
-<script src="{{asset('js/my-sweet-alert.js')}}"></script>
+{{-- <script src="{{asset('js/my-sweet-alert.js')}}"></script> --}}
 @endsection
 <!-- END JS -->
