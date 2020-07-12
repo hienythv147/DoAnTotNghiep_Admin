@@ -46,7 +46,7 @@ class OrdersOutController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**

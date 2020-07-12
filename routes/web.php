@@ -76,8 +76,10 @@ Route::prefix('ingredients')->group(function(){
     Route::get('restore/{id}','IngredientsController@restore')->name('ingredients-res');
 });
 Route::prefix('orders-in')->group(function(){
-	Route::get('/list','OrdersInController@index')->name('orders-in-list');
+	Route::get('list','OrdersInController@index')->name('orders-in-list');
+	Route::get('detail/{id}','OrdersInDetailController@show')->name('orders-in-detail');
 });
 Route::prefix('orders-out')->group(function(){
-	Route::get('/list','OrdersOutController@index')->name('orders-out-list');
+	Route::get('list','OrdersOutController@index')->name('orders-out-list');
+	Route::get('detail/{id}','OrdersOutDetailController@show')->name('orders-out-detail');
 });

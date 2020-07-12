@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Orders_in;
+use App\Orders_in_detail;
 
 class OrdersInDetailController extends Controller
 {
@@ -45,7 +47,9 @@ class OrdersInDetailController extends Controller
      */
     public function show($id)
     {
-        //
+        $order_in = Orders_in::find($id);
+        $order_in_detail = Orders_in_detail::where('order_in_id',$order_in->id)->get();
+        return view('OrdersInDetail.list',compact('order_in_detail'));
     }
 
     /**

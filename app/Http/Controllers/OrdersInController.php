@@ -47,7 +47,7 @@ class OrdersInController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

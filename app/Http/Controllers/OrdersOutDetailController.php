@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Orders_out;
+use App\Orders_out_detail;
 class OrdersOutDetailController extends Controller
 {
     /**
@@ -45,7 +46,9 @@ class OrdersOutDetailController extends Controller
      */
     public function show($id)
     {
-        //
+        $order_out = Orders_out::find($id);
+        $order_out_detail = Orders_out_detail::where('order_out_id',$order_out->id)->get();
+        return view('OrdersOutDetail.list',compact('order_out_detail'));
     }
 
     /**
