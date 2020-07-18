@@ -28,11 +28,12 @@
                     <thead class="thead-dark">
                         <tr>
                             <th style="color:white; width: 5%;">ID</th>
-                            <th style="color:white">Tên Sản Phẩm</th>
-                            <th style="color:white">Loại Sản Phẩm</th>
+                            <th style="color:white">Tên sản phẩm</th>
+                            <th style="color:white">Loại sản phẩm</th>
                             <th style="color:white">Giá</th>
-                            <th style="color:white">Ảnh Minh Họa</th>
-                            <th class="h-tool" style="color: white;">Thao Tác</th>
+                            <th style="color:white">Ảnh minh họa</th>
+                            <th style="color:white">Trang thái</th>
+                            <th class="h-tool" style="color: white;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,7 +44,12 @@
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->Categories->name }}</td>
                             <td>{{ $value->price }}</td>
-                            <td>{{ $value->image }}</td>
+                            <td><img style="height:40px;width:40px;" src="{{asset('upload/product_image/'.$value->image)}}" alt="err"></td>
+                            @if($value->in_stock == 1)
+                            <td>Còn hàng</td>
+                            @else
+                            <td>Hết hàng</td>
+                            @endif
                             <td class="tool">
                                 <a href="#"
                                     class="btn btn-success waves-effect waves-light "><i class="mdi mdi-pencil color  "></i>Sửa</a>

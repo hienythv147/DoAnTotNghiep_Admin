@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use App\Orders_out;
 class OrdersOutController extends Controller
 {
+    // Xác thực
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

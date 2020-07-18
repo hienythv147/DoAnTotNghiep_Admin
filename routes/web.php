@@ -13,15 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('master-page');
-});
+
+Auth::routes(['register' => false]);
+
+Route::get('/','HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('products')->group(function(){
 	Route::get('list','ProductsController@index')->name('products-list');
 	Route::get('add','ProductsController@create')->name('products-add');
 	Route::post('add','ProductsController@store')->name('products-add-process');
 });
+
 Route::prefix('categories')->group(function(){
 	Route::get('list','CategoriesController@index')->name('categories-list');
 	Route::get('add','CategoriesController@create')->name('categories-add');
@@ -32,6 +35,7 @@ Route::prefix('categories')->group(function(){
     Route::get('trash','CategoriesController@trash')->name('categories-trash');
 	Route::get('restore/{id}','CategoriesController@restore')->name('categories-res');
 });
+
 Route::prefix('customers')->group(function(){
 	Route::get('list','CustomersController@index')->name('customers-list');
 	Route::get('add','CustomersController@create')->name('customers-add');
@@ -75,10 +79,12 @@ Route::prefix('ingredients')->group(function(){
     Route::get('trash','IngredientsController@trash')->name('ingredients-trash');
     Route::get('restore/{id}','IngredientsController@restore')->name('ingredients-res');
 });
+
 Route::prefix('orders-in')->group(function(){
 	Route::get('list','OrdersInController@index')->name('orders-in-list');
 	Route::get('detail/{id}','OrdersInDetailController@show')->name('orders-in-detail');
 });
+
 Route::prefix('orders-out')->group(function(){
 	Route::get('list','OrdersOutController@index')->name('orders-out-list');
 	Route::get('detail/{id}','OrdersOutDetailController@show')->name('orders-out-detail');

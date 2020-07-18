@@ -7,6 +7,11 @@ use App\Customers;
 use App\Http\Requests\CustomersRequest;
 class CustomersController extends Controller
 {
+    // Xác thực
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

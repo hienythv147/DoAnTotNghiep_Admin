@@ -7,6 +7,11 @@ use App\Orders_out;
 use App\Orders_out_detail;
 class OrdersOutDetailController extends Controller
 {
+    // Xác thực
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

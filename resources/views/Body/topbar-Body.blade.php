@@ -6,7 +6,7 @@
                     role="button" aria-haspopup="false" aria-expanded="false">
                     <img src = "{{asset('assets/images/users/user-1.jpg')}}" alt="user-image" class="rounded-circle">
                     <span class="pro-user-name ml-1">
-                        Marcia J. <i class="mdi mdi-chevron-down"></i>
+                        {{ Auth::user()->last_name . " " . Auth::user()->first_name }} <i class="mdi mdi-chevron-down"></i>
                     </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -27,13 +27,25 @@
                         <i class="fe-settings"></i>
                         <span>Settings</span>
                     </a>
-                    <div class="dropdown-divider"></div>
+                    {{-- <div class="dropdown-divider"></div> --}}
 
-                    <!-- item-->
-                   {{--  <a href="{{ route('dang-xuat') }}" class="dropdown-item notify-item">
+                    {{-- <!-- item-->
+                    <a href="{{ route('logout') }}" class="dropdown-item notify-item">
                         <i class="fe-log-out"></i>
                         <span>Logout</span>
                     </a> --}}
+                    {{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> --}}
+                        <a class="dropdown-item notify-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();">
+                                         <i class="fas fa-sign-out-alt"></i>  
+                            {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    {{-- </div> --}}
                 </div>
             </li>
         </ul>

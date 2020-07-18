@@ -9,6 +9,11 @@ use App\Categories;
 
 class ProductsController extends Controller
 {
+    // Xác thực
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

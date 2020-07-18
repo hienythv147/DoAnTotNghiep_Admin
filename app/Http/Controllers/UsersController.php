@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UsersRequest;
-use App\Users;
+use App\User;
 use App\Roles;
 
 class UsersController extends Controller
@@ -20,7 +20,7 @@ class UsersController extends Controller
     {
         $hienThi = 1;
         $roles = Roles::all();
-        $users = Users::WhereIn('role_id',$roles->modelKeys())->get();
+        $users = User::WhereIn('role_id',$roles->modelKeys())->get();
         return view('Users.list',compact('users','hienThi'));
     }
 
@@ -43,7 +43,7 @@ class UsersController extends Controller
      */
     public function store(UsersRequest $request)
     {
-        $newUser = new Users();
+        $newUser = new User();
         $flag = $newUser::where('email',$request->email)->exists();
         if(!$flag)
         {
@@ -80,7 +80,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $roles = Roles::all();
-        $user = Users::find($id);
+        $user = User::find($id);
         return view('Users.edit',compact('user','roles'));
     }
 
@@ -93,7 +93,7 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = Users::find($id);
+        $user = User::find($id);
         $user->role_id = $request->role_id;
         $user->save();
         return redirect()->route('users-list');
@@ -107,7 +107,7 @@ class UsersController extends Controller
      */
     public function disable($id)
     {
-        $user = Users::find($id);
+        $user = User::find($id);
         $user->delete();
         return redirect()->route('users-list');
     }
@@ -115,13 +115,13 @@ class UsersController extends Controller
     public function trash()
     {
         $hienThi = 2;
-        $users = Users::onlyTrashed()->get();
+        $users = User::onlyTrashed()->get();
         return view ('Users.list',compact('hienThi','users'));
     }
 
     public function restore($id)
     {
-        $user = Users::onlyTrashed()->find($id);
+        $user = User::onlyTrashed()->find($id);
         $user->restore();
         return redirect()->route('users-list');
     }

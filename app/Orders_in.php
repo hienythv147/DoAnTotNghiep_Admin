@@ -10,6 +10,6 @@ class Orders_in extends Model
 
     public function User()
     {
-        return $this->belongsTo('App\Users','staff_id','id');
+        return $this->belongsTo('App\User','staff_id','id');
     }
 }

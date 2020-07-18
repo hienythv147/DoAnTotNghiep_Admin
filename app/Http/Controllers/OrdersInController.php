@@ -7,6 +7,11 @@ use App\Orders_in;
 
 class OrdersInController extends Controller
 {
+    // Xác thực
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *

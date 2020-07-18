@@ -7,6 +7,11 @@ use App\Ingredients;
 use App\Http\Requests\IngredientsRequest;
 class IngredientsController extends Controller
 {
+    // Xác thực
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
