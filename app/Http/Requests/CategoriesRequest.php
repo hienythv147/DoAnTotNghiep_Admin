@@ -24,13 +24,17 @@ class CategoriesRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_name' => 'bail | required'
+            'category_name' => 'bail | required | regex:/[a-zA-Z]/',
+            'category_type' => 'bail | required | regex:/[12]/'
         ];
     }
     public function messages()
     {
         return [
-            'category_name.required' => 'Tên loại sản phẩm không được để trống!'
+            'category_name.required' => 'Tên loại sản phẩm không được để trống!',
+            'category_type.required' => 'Loại sản phẩm không hợp lệ!',
+            'category_name.regex' => 'Loại sản phẩm không hợp lệ!',
+            'category_type.regex' => 'Loại sản phẩm không tồn tại!',
         ];
     }
 }

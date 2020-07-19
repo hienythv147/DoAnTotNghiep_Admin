@@ -24,8 +24,8 @@ class CustomersRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'bail | required',
-            'last_name' => 'bail | required',
+            'first_name' => 'bail | required | regex:/[a-zA-Z]/',
+            'last_name' => 'bail | required | regex:/[a-zA-Z]/',
             'phone_number' => 'bail | required | regex:/^0[0-9]{9}$/'
         ];
     }
@@ -36,7 +36,11 @@ class CustomersRequest extends FormRequest
             'first_name.required' => 'Tên không được để trống!',
             'last_name.required' => 'Họ không được để trống',
             'phone_number.required' => 'Số điện thoại không được để trống!',
+
+            'first_name.regex' => 'Tên không hợp lệ!',
+            'last_name.regex' => 'Họ không hợp lệ!',
             'phone_number.regex' => 'Số điện thoại không hợp lệ'
+            
         ];
     }
 }

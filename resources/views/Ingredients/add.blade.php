@@ -10,20 +10,37 @@
                 <h1 style=" text-align: center"> Thêm nguyên liệu </h1>
                 <form class="form-horizontal" action="{{ route('ingredients-add-process') }}" method="POST" >
                  @csrf
-                    <div class="input-group" style="margin-top: 25px">
+                    {{-- Tên nguyên liệu --}}
+                    <div style="margin-top: 25px" class="input-group" >
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Tên nguyên liệu</span>
                         </div>
                         <input name="ingredient_name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập tên nguyên liệu" value="{{ old('ingredient_name') }}">
                     </div>
+                    {{-- End --}}
                     {{-- Thông báo lỗi --}}
                     @if($errors->has('ingredient_name'))
-                    <small class="form-text text-muted" style="margin-top: 25px">
+                    <small class="form-text text-muted">
                         <p style="color: red;">{{ $errors->first('ingredient_name')}}</p>
                         </small>
                     @endif
+                    {{-- Đơn vị tính --}}
+                    <div style="margin-top: 25px" class="input-group" >
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Đơn vị tính</span>
+                        </div>
+                        <input name="ingredient_unit" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập đơn vị" value="{{ old('ingredient_unit') }}">
+                    </div>
+                    {{-- End --}}
+                    {{-- Thông báo lỗi --}}
+                     @if($errors->has('ingredient_unit'))
+                     <small class="form-text text-muted">
+                         <p style="color: red;">{{ $errors->first('ingredient_unit')}}</p>
+                         </small>
+                     @endif
+                    {{-- End --}}
                     {{-- Loại nguyên liệu --}}
-                    <div class="input-group" style="margin-top: 25px">
+                    {{-- <div class="input-group" style="margin-top: 25px">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Đơn vị</label>
                         </div>
@@ -33,7 +50,7 @@
                             <option value="Chai">Chai</option>
                             <option value="ml">Ml</option>
                         </select>
-                    </div>
+                    </div> --}}
                     <div class="input-group" style="margin-top: 25px">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Số lượng</span>

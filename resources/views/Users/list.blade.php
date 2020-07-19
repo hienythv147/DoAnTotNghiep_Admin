@@ -1,7 +1,7 @@
 @extends('master-page')
 
 <!-- CSS  -->
-@include('Body.css')
+@include('layouts.css')
 {{-- Nội dung trang --}}
 @section('page-content')
 
@@ -91,4 +91,4 @@
 </div>
 @endif
 @endsection
-@include('Body.js')
+@include('layouts.js')

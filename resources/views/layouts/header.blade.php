@@ -1,7 +1,7 @@
 <header id="topnav">
 
     <!-- Topbar Start -->
-    @include('Body.topbar-Body')
+    @include('layouts.topbar')
     <!-- end Topbar -->
 
     <div class="topbar-menu">
