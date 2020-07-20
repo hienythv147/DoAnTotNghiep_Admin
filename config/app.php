@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
+    'project_name' => env('APP_ProjectName','Cà phê liên minh'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment

@@ -29,6 +29,6 @@ class CreateOrdersOutDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders_out_details');
+        Schema::dropIfExists('orders_out_detail');
     }
 }

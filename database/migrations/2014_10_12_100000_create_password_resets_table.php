@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersInsTable extends Migration
+class CreatePasswordResetsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateOrdersInsTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders_in', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('staff_id')->unsigned();
-            $table->integer('total');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::create('password_resets', function (Blueprint $table) {
+            $table->string('email')->index();
+            $table->string('token');
+            $table->timestamp('created_at')->nullable();
         });
     }
 
@@ -29,6 +27,6 @@ class CreateOrdersInsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders_ins');
+        Schema::dropIfExists('password_resets');
     }
 }
