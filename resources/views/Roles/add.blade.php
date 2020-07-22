@@ -12,9 +12,9 @@
                  @csrf
                     <div style="margin-top:25px" class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Vai trò</span>
+                            <span class="input-group-text" id="inputGroup-sizing-default">Loại nhân viên</span>
                         </div>
-                        <input name="role_name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập vai trò">
+                        <input name="role_name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập loại nhân viên">
                     </div>
                     {{-- Thông báo lỗi --}}
                     @if($errors->has('role_name'))
