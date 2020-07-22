@@ -31,9 +31,9 @@ class RolesRequest extends FormRequest
     public function messages()
     {
         return [
-            'role_name.required' => 'Vai trò không được bỏ trống!',
+            'role_name.required' => 'Loại nhân viên không được bỏ trống!',
             
-            'role_name.regex' => 'Vai trò không hợp lệ!',
+            'role_name.regex' => 'Loại nhân viên không hợp lệ!',
         ];
         
     }

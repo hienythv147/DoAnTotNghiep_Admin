@@ -10,18 +10,6 @@
                 <h1 style=" text-align: center"> Sửa loại nhân viên </h1>
                 <form class="form-horizontal" action="{{ route('roles-edit-process',['id' => $role->id]) }}" method="POST" >
                  @csrf
-                    {{-- @if($errors->any())
-                        <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                                <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{{ $error}}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                    @endif --}}
                     <div class="input-group" style="margin-top: 25px">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Loại nhân viên</span>
@@ -30,8 +18,14 @@
                     </div>
                     {{-- Thông báo lỗi --}}
                     @if($errors->has('role_name'))
-                    <small class="form-text text-muted" style="margin-top: 25px">
+                    <small class="form-text text-muted">
                         <p style="color: red;">{{ $errors->first('role_name')}}</p>
+                        </small>
+                    @endif
+                    {{-- Thông báo lỗi --}}
+                    @if(session('error'))
+                    <small class="form-text text-muted">
+                        <p style="color: red;">{{ session('error') }}</p>
                         </small>
                     @endif
 

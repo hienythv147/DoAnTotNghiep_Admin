@@ -88,14 +88,14 @@ class RolesController extends Controller
     {
         $role = Roles::find($id);
         $role_name = $request->role_name;
-        $flag = $roles::where('name',$role_name)->exists();
+        $flag = $role::where('name',$role_name)->exists();
         if (!$flag) {
             $role->name = $role_name;
             $role->save(); 
         }
         else
         {
-            return view('Roles.edit',compact('role'));
+            return redirect()->route('roles-edit-process',['id' => $role->id])->with('error','Loại nhân viên đã tồn tại');
         }      
         return redirect()->route('roles-list');
     }

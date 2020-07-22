@@ -9,8 +9,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                        <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
+                        <h1 class="m-b-20"><strong>Chào mừng đến với <br> Cà phê SP</strong></h1>
+                        <p  class="m-b-40">Sự hiện diện của bạn <br> là niềm hạnh phúc của chúng tôi.</p>
                     </div>
                 </div>
             </div>
@@ -20,8 +20,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                        <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
+                        <h1 class="m-b-20"><strong>Chào mừng đến với <br> Cà phê SP</strong></h1>
+                        <p  class="m-b-40">Sự hiện diện của bạn <br> là niềm hạnh phúc của chúng tôi.</p>
                     </div>
                 </div>
             </div>
@@ -31,8 +31,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="m-b-20"><strong>Welcome To <br> Freshshop</strong></h1>
-                        <p class="m-b-40">See how your users experience your website in realtime or view <br> trends to see any changes in performance over time.</p>
+                        <h1 class="m-b-20"><strong>Chào mừng đến với <br> Cà phê SP</strong></h1>
+                        <p  class="m-b-40">Sự hiện diện của bạn <br> là niềm hạnh phúc của chúng tôi.</p>
                     </div>
                 </div>
             </div>
@@ -106,7 +106,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="title-all text-center">
-                    <h1>Food & Drink</h1>
+                    <h1>Đồ ăn & Thức uống</h1>
                     <p>Những sản phẩm mới nhất và bán chạy nhất</p>
                 </div>
             </div>
@@ -130,16 +130,16 @@
                     <div class="box-img-hover">
                         <div class="type-lb">
                             @if($product->in_stock == 1)
-                            <p class="sale">New</p>
+                            <p class="sale">Mới</p>
                             @else
                             <p class="new">Hết hàng</p>
                             @endif
                         </div>
                         <div class="type-lb-price">
-                            <p class="price"> ${{ $product->price }}</p>
+                            <p class="price">{{ $product->price }} VNĐ</p>
                         </div>
                         @if(!empty($product->image))
-                        <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/'.$product->image) }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'.$product->image) }}" class="img-fluid" alt="Image"></a>
                         @else
                         <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/'. 'not_found.png') }}" class="img-fluid" alt="Image"></a>
                         @endif
@@ -147,7 +147,7 @@
                     <div class="why-text">
                         <h4>{{ $product->name }}</h4>
                         @auth
-                        <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})">Thêm giỏ hàng</button>
+                        <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i></button>
                         @endauth
                     </div>
                 </div>
@@ -160,16 +160,16 @@
                     <div class="box-img-hover">
                         <div class="type-lb">
                             @if($product->in_stock == 1)
-                            <p class="sale">Best Seller</p>
+                            <p class="sale">Bán chạy nhất</p>
                             @else
                             <p class="new">Hết hàng</p>
                             @endif
                         </div>
                         <div class="type-lb-price">
-                            <p class="price"> ${{ $product->price }}</p>
+                            <p class="price">{{ $product->price }} VNĐ</p>
                         </div>
                         @if(!empty($product->image))
-                        <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/'.$product->image) }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'.$product->image) }}" class="img-fluid" alt="Image"></a>
                         @else
                         <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="Image"></a>
                         @endif
@@ -177,7 +177,7 @@
                     <div class="why-text">
                         <h4>{{ $product->name }}</h4>
                         @auth
-                        <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})">Thêm giỏ hàng</button>
+                        <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i></button>
                         @endauth
                     </div>
                 </div>

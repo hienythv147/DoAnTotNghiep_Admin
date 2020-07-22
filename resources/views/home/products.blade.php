@@ -8,7 +8,7 @@
             <div class="col-lg-12">
                 <h2>Đặt hàng</h2>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
                     <li class="breadcrumb-item active">Đặt hàng</li>
                 </ul>
             </div>
@@ -58,16 +58,16 @@
                                             <div class="box-img-hover">
                                                 <div class="type-lb">
                                                     @if($product->in_stock == 1)
-                                                    <p class="sale">Sale</p>
+                                                    <p class="sale">Bán</p>
                                                     @else
                                                     <p class="new">Hết hàng</p>
                                                     @endif
                                                 </div>
                                                 <div class="type-lb-price">
-                                                    <p class="price"> {{ $product->price }}vnd</p>
+                                                    <p class="price"> {{ $product->price }} VNĐ</p>
                                                 </div>
                                                 @if(!empty($product->image))
-                                                <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/'. $product->image) }}" class="img-fluid" alt="Image"></a>
+                                                <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'. $product->image) }}" class="img-fluid" alt="Image"></a>
                                                 @else
                                                 <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="Image"></a>
                                                 @endif
@@ -75,7 +75,7 @@
                                             <div class="why-text">
                                                 <h4>{{ $product->name }}</h4>
                                                 @auth
-                                                <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})">Thêm giỏ hàng</button>
+                                                <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i></button>
                                                 @endauth
                                             </div>
                                         </div>
@@ -92,13 +92,13 @@
                                                 <div class="box-img-hover">
                                                     <div class="type-lb">
                                                         @if($product->in_stock == 1)
-                                                        <p class="sale">Sale</p>
+                                                        <p class="sale">Bán</p>
                                                         @else
                                                         <p class="new">Hết hàng</p>
                                                         @endif
                                                     </div>
                                                     @if(!empty($product->image))
-                                                    <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/'.$product->image) }}" class="img-fluid" alt="Image"></a>
+                                                    <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'.$product->image) }}" class="img-fluid" alt="Image"></a>
                                                     @else
                                                     <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="Image"></a>
                                                     @endif
@@ -108,11 +108,11 @@
                                         <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
                                             <div class="why-text full-width">
                                                 <h4>{{ $product->name }}</h4>
-                                                <h5>{{ $product->price }}vnd</h5>
+                                                <h5>{{ $product->price }} VNĐ</h5>
                                                 <p>Integer tincidunt aliquet nibh vitae dictum. In turpis sapien, imperdiet quis magna nec, iaculis ultrices ante.
                                                  Integer vitae suscipit nisi.</p>
                                                  @auth
-                                                 <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})">Thêm giỏ hàng</button>
+                                                 <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i></button>
                                                  @endauth
                                             </div>
                                         </div>

@@ -8,7 +8,7 @@
             <div class="col-lg-12">
                 <h2>Sản phẩm</h2>
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Shop</a></li>
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
                     <li class="breadcrumb-item active">Sản phẩm </li>
                 </ul>
             </div>
@@ -25,7 +25,7 @@
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active"> 
                             @if(!empty($productDetail->image))
-                            <img src="{{ asset('assets/images/'. $productDetail->image) }}" class="d-block w-100" alt="Image" style="height: 393px">
+                            <img src="{{ asset('assets/images/products_image/'. $productDetail->image) }}" class="d-block w-100" alt="Image" style="height: 393px">
                             @else
                             <img src="{{ asset('assets/images/not_found.png') }}" class="d-block w-100" alt="Image" style="height: 393px">
                             @endif
@@ -38,7 +38,7 @@
                     <form action="{{ Route('addCartPD') }}" type="submit"> 
                         @csrf
                         <h2>{{ $productDetail->name }}</h2>
-                        <h5>{{ $productDetail->price }}vnd</h5>
+                        <h5>{{ $productDetail->price }} VNĐ</h5>
                         @if($productDetail->in_stock != 1)
                         <p class="available-stock"><span><h4 style="color: red">Hết hàng!!</h4></span><p>
                         @endif
@@ -57,7 +57,7 @@
                         </ul>
                         <div class="price-box-bar">
                             <div class="cart-and-bay-btn">
-                                <button class="btn hvr-hover" id="btn-submit" style="color: #ffffff; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 600">Thêm giỏ hàng</button>
+                                <button class="btn hvr-hover" id="btn-submit" style="color: #ffffff; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 600"><i class="fas fa-cart-plus"></i></button>
                             </div>
                         </div>
                     </form>
@@ -68,7 +68,7 @@
         <div class="row my-5">
             <div class="col-lg-12">
                 <div class="title-all text-center">
-                    <h1>Featured Products</h1>
+                    <h1>Sản phẩm bán chạy</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
                 </div>
                 <div class="featured-products-box owl-carousel owl-theme">  
@@ -78,23 +78,23 @@
                             <div class="box-img-hover">
                                 <div class="type-lb">
                                     @if($product->in_stock == 1)
-                                    <p class="sale">Sale</p>
+                                    <p class="sale">Giảm giá</p>
                                     @else
                                     <p class="new">Hết hàng</p>
                                     @endif
                                 </div>
                                 <div class="type-lb-price">
-                                    <p class="price"> {{ $product->price }}vnd</p>
+                                    <p class="price"> {{ $product->price }} VNĐ</p>
                                 </div>
                                 @if(!empty($product->image))
-                                <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/'. $product->image) }}" class="img-fluid" alt="Image" style="width: 105%"></a>
+                                <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'. $product->image) }}" class="img-fluid" alt="Image" style="width: 105%"></a>
                                 @else
                                 <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="Image" style="width: 105%"></a>
                                 @endif
                             </div>
                             <div class="why-text">
                                 <h4>{{ $product->name }}</h4>
-                                <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})">Thêm giỏ hàng</button>
+                                <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i></button>
                             </div>
                         </div>
                     </div>

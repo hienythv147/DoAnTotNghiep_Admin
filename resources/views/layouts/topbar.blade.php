@@ -3,7 +3,7 @@
         
         <!- LOGO -->
         <div class="logo-box">
-            <a href="#" class="logo text-center">
+            <a href="{{ route('admin-home') }}" class="logo text-center">
                 <span class="logo-lg">
                     <img src = "{{asset('assets/images/logo-dark.png')}}" alt="" height="26">
                     <!-- <span class="logo-lg-text-dark">Upvex</span> -->
@@ -23,19 +23,19 @@
                     <!-- item-->
                     <div class="dropdown-item noti-title">
                         <h5 class="m-0">
-                            Welcome !
+                            Thao tác
                         </h5>
                     </div>
                     <!-- item-->
-                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                        <i class="fe-settings"></i>
-                        <span>Settings</span>
+                    <a href="{{ route('home') }}" class="dropdown-item notify-item">
+                        <i class="fas fa-backward"></i>
+                        <span>Bán hàng</span>
                     </a>
                     <a class="dropdown-item notify-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                                         <i class="fas fa-sign-out-alt"></i>  
-                        {{ __('Logout') }}
+                        {{ __('Đăng xuất') }}
                     </a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

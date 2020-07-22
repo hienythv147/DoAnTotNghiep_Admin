@@ -18,8 +18,8 @@ Auth::routes();
 
 Route::middleware('auth')->group(function() {
 	Route::prefix('admin')->group(function()  {
-		Route::get('/','HomeController@index')->name('home');
-		Route::get('/home', 'HomeController@index')->name('home');
+		Route::get('/','HomeController@index')->name('admin-home');
+		Route::get('/home', 'HomeController@index')->name('admin-home');
 	
 		Route::prefix('products')->group(function(){
 			Route::get('list','ProductsController@index')->name('products-list');
