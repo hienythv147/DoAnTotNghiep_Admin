@@ -12,7 +12,7 @@ class ProductsController extends Controller
     // Xác thực
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -71,17 +71,6 @@ class ProductsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -113,5 +102,36 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index_user()
+    {
+        $categories = Categories::all();
+        $products = Products::paginate(9);
+        return view('home/products', compact('products', 'categories'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $categories = Categories::all();
+        $products = Products::where('category_id', $id)->paginate(9);
+        return view('home/products', compact('products', 'categories'));
+    }
+
+    public function showProductDetail($id) {
+        $productDetail = Products::find($id);
+        $products = Products::where('category_id', $productDetail->category_id)->get();
+        return view('home.product_detail', compact('productDetail', 'products'));
     }
 }

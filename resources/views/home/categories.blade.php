@@ -1,0 +1,72 @@
+@extends('layout_user')
+
+@section('body')
+<!-- Start All Title Box -->
+<div class="all-title-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Thực đơn</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Thực đơn</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Title Box -->
+
+<!-- Start Gallery  -->
+<div class="products-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title-all text-center">
+                    <h1>Thực Đơn</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="special-menu text-center">
+                    <div class="button-group filter-button-group">
+                        <button class="active" data-filter="*">Tất cả</button>
+                        <button data-filter=".bulbs">Thức ăn</button>
+                        <button data-filter=".fruits">Giải khát</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row special-list">
+            @foreach($categories as $category)
+            @if($category->category_type == 0)
+            <div class="col-lg-3 col-md-6 special-grid bulbs">
+                <div class="products-single fix">
+                    <div class="box-img-hover">
+                        <div class="type-lb" style="width: 100%">
+                            <p class="sale">{{$category->name}}</p>
+                        </div>  
+                        <a href="{{ Route('category_detail', $category->id ) }}"><img src="{{ asset('assets/images/food.jpg') }}" class="img-fluid" alt="Image"></a>
+                    </div>
+                </div>
+            </div>
+            @else
+            <div class="col-lg-3 col-md-6 special-grid fruits">
+                <div class="products-single fix">
+                    <div class="box-img-hover">
+                        <div class="type-lb" style="width: 100%">
+                            <p class="sale">{{$category->name}}</p>
+                        </div>  
+                        <a href="{{ Route('category_detail', $category->id ) }}"><img src="{{ asset('assets/images/drink.jpg') }}" class="img-fluid" alt="Image"></a>
+                    </div>
+                </div>
+            </div>
+            @endif
+            @endforeach
+        </div>
+    </div>
+</div>
+<!-- End Gallery  -->
+@endsection

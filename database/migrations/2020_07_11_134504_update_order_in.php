@@ -14,7 +14,7 @@ class UpdateOrderIn extends Migration
     public function up()
     {
         Schema::table('orders_in_detail', function (Blueprint $table) {
-            $table->dropColumn('deleted_at');
+            $table->timestamps();
         });
     }
 

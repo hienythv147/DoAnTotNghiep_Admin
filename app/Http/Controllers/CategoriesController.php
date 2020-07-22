@@ -11,7 +11,7 @@ class CategoriesController extends Controller
     // Xác thực
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -126,5 +126,10 @@ class CategoriesController extends Controller
         $category = Categories::onlyTrashed()->find($id);
         $category->restore();
         return redirect()->route('categories-list');
+    }
+
+    public function index_user() {
+        $categories = Categories::all();
+        return view('home.categories', compact('categories'));
     }
 }
