@@ -11,8 +11,14 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
     @yield('css')
-    <!-- App css -->
-    <link href="{{ asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
+    <!-- Custom CSS -->
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"> --}}
     <link href="{{ asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
 </head>
