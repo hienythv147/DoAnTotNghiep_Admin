@@ -44,7 +44,7 @@
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->Categories->name }}</td>
                             <td>{{ $value->price }}</td>
-                            <td><img style="height:40px;width:40px;" src="{{asset('upload/product_image/'.$value->image)}}" alt="err"></td>
+                            <td><img style="height:40px;width:40px;" src="{{asset('assets/images/products_image/'.$value->image)}}" alt="err"></td>
                             @if($value->in_stock == 1)
                             <td>Còn hàng</td>
                             @else

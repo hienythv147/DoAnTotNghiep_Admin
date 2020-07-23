@@ -128,8 +128,11 @@ class CategoriesController extends Controller
         return redirect()->route('categories-list');
     }
 
-    public function index_user() {
-        $categories = Categories::all();
-        return view('home.categories', compact('categories'));
+    public function home_categories()
+    {
+        // $categories = Categories::all();
+        $categories_drink = Categories::where('category_type',1)->get();
+        $categories_food =Categories::where('category_type',2)->get();
+        return view('home.categories',compact('categories_food','categories_drink'));
     }
 }

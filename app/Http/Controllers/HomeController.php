@@ -32,14 +32,19 @@ class HomeController extends Controller
     {
         $productsNew = Products::select()->orderBy('created_at', 'desc')->take(4)->get();
         $productsBest =  Products::all();
+        $products = Products::all();
+        if( count($products->toArray()) >= 10)
+        {
+            $products = $products->random(10);
+        }
         if( count($productsBest->toArray()) >= 4) {
             $productsBest = $productsBest->random(4);
         }
-        $categories = Categories::all()->random(3);
-        if( count($categories->toArray()) >= 3) {
-            $categories = $categories->random(3);
-        }
-        return view('home.index', compact('productsNew', 'productsBest', 'categories'));
+        $categories = Categories::all();
+        // if( count($categories->toArray()) >= 3) {
+        //     $categories = $categories->random(3);
+        // }
+        return view('home.index', compact('products','productsNew', 'productsBest', 'categories'));
     }
 
     public function viewCart(Request $request) {

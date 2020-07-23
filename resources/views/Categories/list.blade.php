@@ -28,7 +28,9 @@
                     <thead class="thead-dark">
                         <tr>
                             <th style="color:white; width: 5%;">ID</th>
-                            <th style="color:white">Tên Loại Sản Phẩm</th>
+                            <th style="color:white">Tên loại sản phẩm</th>
+                            <th style="color:white">Ảnh minh họa</th>
+                            <th style="color:white">Loại thực phẩm</th>
                             <th class="h-tool" style="color: white;">Thao Tác</th>
                         </tr>
                     </thead>
@@ -38,6 +40,12 @@
                         <tr style="font-size: 120%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
+                            <td><img style="height:40px;width:40px;" src="{{asset('assets/images/categories_image/'.$value->image)}}" alt="err"></td>
+                            @if($value->category_type == 1)
+                            <td>Thức uống</td>
+                            @else
+                            <td>Đồ ăn</td>
+                            @endif
                             <td class="tool">
                                 <a href="{{ route('categories-edit',['id' => $value->id]) }}"
                                     class="btn btn-success waves-effect waves-light "><i class="mdi mdi-pencil color  "

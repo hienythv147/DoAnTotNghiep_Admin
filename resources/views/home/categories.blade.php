@@ -33,37 +33,49 @@
                 <div class="special-menu text-center">
                     <div class="button-group filter-button-group">
                         <button class="active" data-filter="*">Tất cả</button>
-                        <button data-filter=".bulbs">Thức ăn</button>
-                        <button data-filter=".fruits">Giải khát</button>
+                        <button data-filter=".food">Thức ăn</button>
+                        <button data-filter=".drink">Giải khát</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row special-list">
-            @foreach($categories as $category)
-            @if($category->category_type == 0)
-            <div class="col-lg-3 col-md-6 special-grid bulbs">
+            {{-- @foreach($categories as $value)
+            <div class="col-lg-3 col-md-6 special-grid *">
                 <div class="products-single fix">
                     <div class="box-img-hover">
                         <div class="type-lb" style="width: 100%">
-                            <p class="sale">{{$category->name}}</p>
+                            <p class="sale">{{$value->name}}</p>
                         </div>  
-                        <a href="{{ Route('category_detail', $category->id ) }}"><img src="{{ asset('assets/images/food.jpg') }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/categories_image/'. $value->image) }}" class="img-fluid" alt="Image"></a>
                     </div>
                 </div>
             </div>
-            @else
-            <div class="col-lg-3 col-md-6 special-grid fruits">
+            @endforeach --}}
+            @foreach($categories_food as $value)
+            <div class="col-lg-3 col-md-6 special-grid food">
                 <div class="products-single fix">
                     <div class="box-img-hover">
                         <div class="type-lb" style="width: 100%">
-                            <p class="sale">{{$category->name}}</p>
+                            <p class="sale">{{$value->name}}</p>
                         </div>  
-                        <a href="{{ Route('category_detail', $category->id ) }}"><img src="{{ asset('assets/images/drink.jpg') }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/categories_image/'. $value->image) }}" class="img-fluid" alt="Image"></a>
                     </div>
                 </div>
             </div>
-            @endif
+            @endforeach
+            
+            @foreach($categories_drink as $value)
+            <div class="col-lg-3 col-md-6 special-grid drink">
+                <div class="products-single fix">
+                    <div class="box-img-hover">
+                        <div class="type-lb" style="width: 100%">
+                            <p class="sale">{{$value->name}}</p>
+                        </div>  
+                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/categories_image/'. $value->image) }}" class="img-fluid" alt="Image"></a>
+                    </div>
+                </div>
+            </div>
             @endforeach
         </div>
     </div>

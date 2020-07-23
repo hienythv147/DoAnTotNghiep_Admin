@@ -99,7 +99,7 @@ Route::get('/', 'HomeController@index_user')->name('home');
 Route::get('/home', 'HomeController@index_user')->name('home');
 
 // Route page categories
-Route::get('/categories', 'CategoriesController@index_user')->name('categories');
+Route::get('/categories', 'CategoriesController@home_categories')->name('categories');
 Route::get('/category/{id}', 'ProductsController@show')->name('category_detail');
 
 // Route page list products
