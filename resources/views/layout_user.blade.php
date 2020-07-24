@@ -317,7 +317,7 @@
 
     <!-- Start copyright  -->
     <div class="footer-copyright">
-        <p class="footer-company">All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a>
+        <p class="footer-company">All Rights Reserved. &copy; 2020 <a href="#">ThewayShop</a>
     </div>
     <!-- End copyright  -->
 
