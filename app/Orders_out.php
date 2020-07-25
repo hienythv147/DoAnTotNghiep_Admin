@@ -13,13 +13,13 @@ class Orders_out extends Model
     {
         return $this->belongsTo('App\User','staff_id', 'id');
     }
-    public function Customer()
-    {
-        return $this->belongsTo('App\Customers','customer_id','id');
-    }
-
-    // public function OrderOutDetail()
+    // public function Customer()
     // {
-    //     return $this->belongsToMany('App\Orders_out_detail','orders_out_detail','order_out_id','product_id','id','id')->withPivot('order_out_id','price','amount');
+    //     return $this->belongsTo('App\Customers','customer_id','id');
     // }
+
+    public function OrdersOutDetail()
+    {
+        return $this->belongsToMany('App\Products','orders_out_detail','order_out_id','product_id','id','id')->withPivot('id','price','amount');
+    }
 }

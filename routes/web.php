@@ -18,7 +18,7 @@ Auth::routes();
 
 Route::middleware('auth')->group(function() {
 	Route::middleware(['can:isAdmin'])->group(function() {
-		Route::prefix('admin')->group(function()  {
+		Route::prefix('Admin')->group(function()  {
 			Route::get('/','HomeController@index')->name('admin-home');
 			Route::get('/home', 'HomeController@index')->name('admin-home');
 
@@ -88,12 +88,12 @@ Route::middleware('auth')->group(function() {
 
 			Route::prefix('orders-in')->group(function(){
 				Route::get('list','OrdersInController@index')->name('orders-in-list');
-				Route::get('detail/{id}','OrdersInDetailController@show')->name('orders-in-detail');
+				Route::get('detail/{id}','OrdersInController@show')->name('orders-in-detail');
 			});
 
 			Route::prefix('orders-out')->group(function(){
 				Route::get('list','OrdersOutController@index')->name('orders-out-list');
-				Route::get('detail/{id}','OrdersOutDetailController@show')->name('orders-out-detail');
+				Route::get('detail/{id}','OrdersOutController@show')->name('orders-out-detail');
 			});
 		});
 	});

@@ -32,7 +32,7 @@
                             <th style="color:white">Loại sản phẩm</th>
                             <th style="color:white">Giá</th>
                             <th style="color:white">Ảnh minh họa</th>
-                            <th style="color:white">Trang thái</th>
+                            <th style="color:white; t">Trang thái</th>
                             <th class="h-tool" style="color: white;">Thao tác</th>
                         </tr>
                     </thead>
