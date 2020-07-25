@@ -1,3 +1,26 @@
+
+//delete comfirm
+$(document).ready(function () {
+    $('.delete-confirm').on('click', function (event) {
+        event.preventDefault();
+        var url = $(this).attr('href');
+        Swal.fire({
+            title: 'Bạn có chắc muốn xóa?',
+            text: "Dữ liệu sẽ bị xóa tạm thời!",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Đồng ý',
+            cancelButtonText: 'Hủy'
+        }).then(function(result) {
+            if (result.value) {
+                console.log(url);
+                window.location.href = url;
+            }
+        });
+    });
+})
+
 function toastr(id) {
     $('#flash-message').remove();
     $.ajaxSetup({
@@ -30,14 +53,14 @@ function toastr(id) {
                         value.image = 'not_found.png';
                     }
                     $('#cart-box').append(
-                        '<li><a href="#" class="photo"><img src="assets/images/' + value.image + '"' + 'class="cart-thumb" alt="" /></a>' +
+                        '<li><a href="#" class="photo"><img src="assets/images/products_image/' + value.image + '"' + 'class="cart-thumb" alt="" /></a>' +
                         '<h6><a href="#">' +  value.name + '</a></h6>' + 
-                        '<p>' + value.amount + 'x - <span class="price">' + value.price + 'vnd</span></p>' + '</li>'
+                        '<p>' + value.amount + 'x - <span class="price">' + value.price + ' VNĐ</span></p>' + '</li>'
                     )
                 });
                 $('#cart-box').append(
                     '<li class="total"><a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem</a>' +
-                    '<span class="float-right"><strong>Total</strong>: <b>' + total + '</b>vnd</span>' + '</li>'
+                    '<span class="float-right"><strong>Total</strong>: <b>' + total + '</b> VNĐ</span>' + '</li>'
                 )   
             }
         },
@@ -63,3 +86,5 @@ window.setTimeout(function() {
         $(this).remove(); 
     });
 }, 3000);
+
+

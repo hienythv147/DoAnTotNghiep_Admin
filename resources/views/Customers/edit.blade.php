@@ -51,11 +51,16 @@
                         <p style="color: red;">{{ $errors->first('phone_number')}}</p>
                         </small>
                     @endif
+                    @if(session('error'))
+                    <small class="form-text text-muted">
+                        <p style="color: red;">{{ session('error')}}</p>
+                        </small>
+                    @endif
                     <div class="form-group mb-0 justify-content-end row" style="margin-top: 25px">
                         <div class="col-7">
-                            <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" >Sửa 
+                            <button type="submit" class="btn btn-primary waves-effect waves-light" >Sửa 
                             </button>
-                            <a href="{{ route('customers-list') }}" class="btn btn-danger btn-rounded waves-effect waves-light">Hủy</a>
+                            <a href="{{ route('customers-list') }}" class="btn btn-danger waves-effect waves-light">Hủy</a>
                         </div>
                     </div>
                 </form>

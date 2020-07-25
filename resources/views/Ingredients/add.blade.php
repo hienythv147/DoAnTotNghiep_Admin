@@ -66,9 +66,9 @@
                     
                     <div class="form-group justify-content-end row" style="margin-top: 25px">
                         <div class="col-7">
-                            <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" >Thêm 
+                            <button type="submit" class="btn btn-primary waves-effect waves-light" >Thêm 
                             </button>
-                            <a href="{{ route('products-list') }}" class="btn btn-danger btn-rounded waves-effect waves-light">Hủy</a>
+                            <a href="{{ route('products-list') }}" class="btn btn-danger waves-effect waves-light">Hủy</a>
                         </div>
                     </div>
                 </form>

@@ -10,45 +10,53 @@
                 <!-- Navigation Menu-->
                 <ul class="navigation-menu">
                     <li style="margin: 10px 0px 10px 0px" class="has-submenu">
-                        <a href="{{ route('products-list') }}"><i class="fas fa-utensils" ></i>Sản phẩm
+                        <a href="{{ route('products-list') }}"><i class="fas fa-utensils" ></i>SẢN PHẨM
                         </a>
                     </li>
                     <li style="margin: 10px 0px 10px 0px; " class="has-submenu">
-                        <a href="{{ route('categories-list') }}"><i class="fas fa-tags" ></i>Loại sản phẩm
+                        <a href="{{ route('categories-list') }}"><i class="fas fa-tags" ></i>LOẠI SẢN PHẨM
                         </a>
                     </li>
                     <li style="margin: 10px 0px 10px 0px; " class="has-submenu">
                         <a href="{{ route('customers-list') }}"> <i class="fas fa-users" ></i>
-                            Khách hàng
+                            KHÁCH HÀNG
                         </a>
                     </li>
                     <li style="margin: 10px 0px 10px 0px; " class="has-submenu">
-                        <a href="{{ route('users-list') }}"> <i class="fas fa-users" 
-                            ></i>
-                            Nhân viên
+                        <a href="{{ route('users-list') }}">
+                            <i class="fas fa-users"></i>
+                            NHÂN VIÊN<div class="arrow-down"></div></a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="{{ route('roles-list') }}">
+                                        <i class="fas fa-chevron-right"></i>
+                                       LOẠI NHÂN VIÊN
+                                    </a>
+                                </li>
+                            </ul>
                         </a>
                     </li>
-                    <li style="margin: 10px 0px 10px 0px;" class="has-submenu">
+                    {{-- <li style="margin: 10px 0px 10px 0px;" class="has-submenu">
                         <a href="{{ route('roles-list') }}"> <i class="fas fa-user-tag" ></i>
-                            Loại nhân viên
+                            LOẠI NHÂN VIÊN
                         </a>
-                    </li>
+                    </li> --}}
                     <li style="margin: 10px 0px 10px 0px;" class="has-submenu">
                         <a href="{{ route('ingredients-list') }}">
-                            <i class="fe-package" ></i>Nguyên liệu </a>
+                            <i class="fe-package" ></i>NGUYÊN LIỆU </a>
                     </li>   
                     <li style="margin: 10px 0px 10px 0px;" class="has-submenu">
                         <a href="#">
-                            <i class="fas fa-file-invoice" ></i>Hóa đơn <div class="arrow-down"></div></a>
+                            <i class="fas fa-file-invoice" ></i>HÓA ĐƠN <div class="arrow-down"></div></a>
                         <ul class="submenu">
                             <li>
                                 <a href="{{ route('orders-out-list') }}">
                                     <i class="fas fa-chevron-right"></i>
-                                    Hóa đơn bán
+                                    HÓA ĐƠN BÁN
                                 </a>
                                 <a href="{{ route('orders-in-list') }}">
                                     <i class="fas fa-chevron-right"></i>
-                                    Hóa đơn nhập
+                                    HÓA ĐƠN NHẬP
                                 </a>
                             </li>
                         </ul>

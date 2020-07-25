@@ -18,5 +18,7 @@
 <!-- Datatables init -->
 <script src="{{asset('assets/js/pages/datatables.init.js')}}"></script>
 {{-- <script src="{{asset('js/my-sweet-alert.js')}}"></script> --}}
+{{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --}}
+<script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 @endsection
 <!-- END JS -->

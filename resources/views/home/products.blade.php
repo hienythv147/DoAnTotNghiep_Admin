@@ -7,10 +7,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2>Đặt hàng</h2>
-                <ul class="breadcrumb">
+                {{-- <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
                     <li class="breadcrumb-item active">Đặt hàng</li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
                                             <div class="why-text">
                                                 <h4>{{ $product->name }}</h4>
                                                 @auth
-                                                <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i></button>
+                                                <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus">  Thêm giỏ</i></button>
                                                 @endauth
                                             </div>
                                         </div>
@@ -112,7 +112,7 @@
                                                 <p>Integer tincidunt aliquet nibh vitae dictum. In turpis sapien, imperdiet quis magna nec, iaculis ultrices ante.
                                                  Integer vitae suscipit nisi.</p>
                                                  @auth
-                                                 <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i></button>
+                                                 <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i>  Thêm giỏ</button>
                                                  @endauth
                                             </div>
                                         </div>
@@ -146,8 +146,8 @@
                                 <div class="collapse show" id="sub-men1" data-parent="#list-group-men">
                                     <div class="list-group">
                                         @foreach($categories as $category)
-                                        @if($category->category_type == 0)
-                                        <a href="{{ Route('category_detail', $category->id ) }}" class="list-group-item list-group-item-action {{ 'category/'.$category->id == Request::path() ? 'active' : '' }}"">{{$category->name}} <small class="text-muted"></small></a>
+                                        @if($category->category_type == 2)
+                                        <a href="{{ Route('category_detail', $category->id ) }}" class="list-group-item list-group-item-action {{ 'category/'.$category->id == Request::path() ? 'active' : '' }}">{{$category->name}} <small class="text-muted"></small></a>
                                         @endif
                                         @endforeach
                                     </div>

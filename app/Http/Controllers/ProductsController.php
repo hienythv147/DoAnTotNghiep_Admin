@@ -101,9 +101,24 @@ class ProductsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Products::find($id);
+        $product->delete();
+        return back();
     }
 
+    public function trash()
+    {
+        $hienThi = 2;
+        $products = Products::onlyTrashed()->get();
+        return view('Products.list',compact('hienThi','products'));
+    }
+
+    public function restore($id)
+    {
+        $product = Products::onlyTrashed()->find($id);
+        $product->restore();
+        return back();
+    }
     /**
      * Display a listing of the resource.
      *

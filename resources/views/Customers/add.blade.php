@@ -24,6 +24,7 @@
                         <p style="color: red;">{{ $errors->first('last_name') }}</p>
                         </small>
                     @endif
+                    
                     <div class="input-group " style="margin-top: 25px">
                         <div class="input-group-prepend">
                             <span class="input-group-text" >Tên</span>
@@ -51,11 +52,16 @@
                         <p style="color: red;">{{ $errors->first('phone_number')}}</p>
                         </small>
                     @endif
+                    @if(session('error'))
+                    <small class="form-text text-muted">
+                        <p style="color: red;">{{ session('error')}}</p>
+                        </small>
+                    @endif
                     <div class="form-group mb-0 justify-content-end row" style="margin-top: 25px">
                         <div class="col-7">
-                            <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" >Thêm 
+                            <button type="submit" class="btn btn-primary waves-effect waves-light" >Thêm 
                             </button>
-                            <a href="{{ route('customers-list') }}" class="btn btn-danger btn-rounded waves-effect waves-light">Hủy</a>
+                            <a href="{{ route('customers-list') }}" class="btn btn-danger waves-effect waves-light">Hủy</a>
                         </div>
                     </div>
                 </form>

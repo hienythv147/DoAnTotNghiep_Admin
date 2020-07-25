@@ -47,7 +47,7 @@
                                     class="btn btn-success waves-effect waves-light "><i class="mdi mdi-pencil color  "
                                         style="padding-right:5px"></i>Sửa</a>
                                 <a href="{{ route('customers-disable',['id' => $value->id]) }}"
-                                    class="btn btn-danger waves-effect waves-light xoa_linh_vuc" style="color:white"><i
+                                    class="btn btn-danger waves-effect waves-light delete-confirm" style="color:white"><i
                                         class="mdi mdi-trash-can-outline color " style="padding-right:5px"></i>Tạm Khóa</a>
                             </td>
                         </tr>
@@ -63,7 +63,7 @@
                                     <a href="{{ route('customers-res',['id' => $value->id])}}"
                                        class="btn btn-success waves-effect waves-light ">
                                        <i class=" la la-history"></i>
-                                       Phục hồi</a>
+                                       Khôi phục</a>
                             </td>
                         </tr>
                         @endforeach

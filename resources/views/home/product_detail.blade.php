@@ -7,10 +7,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2>Sản phẩm</h2>
-                <ul class="breadcrumb">
+                {{-- <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
                     <li class="breadcrumb-item active">Sản phẩm </li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
     </div>
@@ -57,7 +57,7 @@
                         </ul>
                         <div class="price-box-bar">
                             <div class="cart-and-bay-btn">
-                                <button class="btn hvr-hover" id="btn-submit" style="color: #ffffff; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 600"><i class="fas fa-cart-plus"></i></button>
+                                <button class="btn hvr-hover" id="btn-submit" style="color: #ffffff; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 600"><i class="fas fa-cart-plus"></i>  Thêm giỏ</button>
                             </div>
                         </div>
                     </form>
@@ -94,7 +94,7 @@
                             </div>
                             <div class="why-text">
                                 <h4>{{ $product->name }}</h4>
-                                <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i></button>
+                                <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i>  Thêm giỏ</button>
                             </div>
                         </div>
                     </div>

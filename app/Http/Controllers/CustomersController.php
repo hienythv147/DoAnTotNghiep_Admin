@@ -52,11 +52,19 @@ class CustomersController extends Controller
                 $customer->last_name = $request->input('last_name');
                 $customer->first_name = $request->input('first_name');
                 $customer->phone_number = $phone_number;
-                $customer->save();
-                return redirect()->route('customers-list');
+                $result = $customer->save();
+                if($result)
+                {
+                    session()->flash('message_success', 'Thêm thành công!');
+                    return redirect()->back();
+                }
+                else{
+                    session()->flash('message_error', 'Thêm thất bại');
+                    return redirect()->back();
+                }
             }
         }
-        return redirect()->route('customers-add');
+        return redirect()->back()->with('error','Số điện thoại đã được đăng ký!');
     }
     /**
      * Display the specified resource.
@@ -92,19 +100,43 @@ class CustomersController extends Controller
     {
         $customer = Customers::find($id);
         $phone_number = $request->input('phone_number','0');
+        $cur_phone = $customer->phone_number;
         if($phone_number != 0)
         {
-            $flag = $customer::where('phone_number',$phone_number)->exists();
-            if(!$flag)
+            if($cur_phone == $phone_number)
             {
                 $customer->last_name = $request->input('last_name');
-                $customer->first_name = $request->input('first_name');
-                $customer->phone_number = $phone_number;
-                $customer->save();
-                return redirect()->route('customers-list');
+                    $customer->first_name = $request->input('first_name');
+                    $customer->phone_number = $phone_number;
+                    $result = $customer->save();
+                    if($result)
+                    {
+                        session()->flash('message_success', 'Thêm thành công!');
+                        return redirect()->back();
+                    }
+                    else{
+                        session()->flash('message_error', 'Thêm thất bại');
+                        return redirect()->back();
+                    }
+                // $flag = $customer::where('phone_number',$phone_number)->exists();
+                if(!$flag)
+                {
+                    $customer->last_name = $request->input('last_name');
+                    $customer->first_name = $request->input('first_name');
+                    $customer->phone_number = $phone_number;
+                    $result = $customer->save();
+                    if($result)
+                    {
+                        session()->flash('message_success', 'Thêm thành công!');
+                        return redirect()->back();
+                    }
+                    else{
+                        session()->flash('message_error', 'Thêm thất bại');
+                        return redirect()->back();
+                    }
+                }
             }
         }
-        return redirect()->route('customers-add');
     }
 
     /**

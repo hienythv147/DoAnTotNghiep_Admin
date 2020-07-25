@@ -49,9 +49,18 @@ class CategoriesController extends Controller
         {
             $category->name = $request->category_name;
             $category->category_type = $request->category_type;
-            $category->save();
+            $result = $category->save();
+            if($result)
+            {
+                session()->flash('message_success', 'Thêm thành công!');
+                return redirect()->back();
+            }
+            else{
+                session()->flash('message_error', 'Thêm thất bại');
+                return redirect()->back();
+            }
         }
-        return redirect()->route('categories-list');
+        return redirect()->route('categories-add')->with('error','Loại sản phẩm đã tồn tại');
     }
 
     /**
@@ -92,13 +101,21 @@ class CategoriesController extends Controller
         {
             $editCate->name = $request->category_name;
             $editCate->category_type = $request->category_type;
-            $editCate->save();
+            $result = $editCate->save();
+            if($result)
+            {
+                session()->flash('message_success', 'Sửa thành công!');
+                return redirect()->back();
+            }
+            else{
+                session()->flash('message_error', 'Sửa thất bại');
+                return redirect()->back();
+            }
         }
         else
         {
-            return redirect()->route('categories-edit',['id' => $id]);
+            return redirect()->route('categories-edit',['id' => $id])->with('error','Loại sản phẩm đã tồn tại!');
         }
-        return redirect()->route('categories-list');
     }
 
     /**
@@ -111,7 +128,7 @@ class CategoriesController extends Controller
     {
         $category = Categories::find($id);
         $category->delete();
-        return redirect()->route('categories-list');
+        return redirect()->back();
     }
 
     public function trash()
@@ -125,7 +142,8 @@ class CategoriesController extends Controller
     {
         $category = Categories::onlyTrashed()->find($id);
         $category->restore();
-        return redirect()->route('categories-list');
+        session()->flash('message_success', 'Khôi phục thành công!');
+        return redirect()->back();
     }
 
     public function home_categories()

@@ -5,7 +5,7 @@
         <div class="logo-box">
             <a href="{{ route('admin-home') }}" class="logo text-center">
                 <span class="logo-lg">
-                    <img src = "{{asset('assets/images/logo-dark.png')}}" alt="" height="26">
+                    <img src = "{{asset('assets/images/logo.png')}}" alt="" height="65" width="70">
                     <!-- <span class="logo-lg-text-dark">Upvex</span> -->
                 </span>
             </a>
@@ -14,7 +14,7 @@
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#"
                     role="button" aria-haspopup="false" aria-expanded="false">
-                    <img src = "{{asset('assets/images/users/user-1.jpg')}}" alt="user-image" class="rounded-circle">
+                    <img src = "{{asset('assets/images/nyan.jpg')}}" alt="user-image" class="rounded-circle">
                     <span class="pro-user-name ml-1">
                         {{ Auth::user()->last_name . " " . Auth::user()->first_name }} <i class="mdi mdi-chevron-down"></i>
                     </span>

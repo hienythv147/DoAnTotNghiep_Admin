@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Site Metas -->
-    <title>Freshshop</title>
+    <title>Cafe SP</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -127,7 +127,7 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                    <a class="navbar-brand" href="{{ Route('home') }}"><img src="{{ asset('assets/images/logo.png') }}" class="logo" alt=""></a>
+                    <a class="navbar-brand" href="{{ Route('home') }}"><img style="width: 100px;height:100px" src="{{ asset('assets/images/logo.png') }}" class="logo" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
@@ -175,19 +175,19 @@
                         @foreach(Session('cart') as $item)
                         <li>
                             @if(!empty($item['image']))
-                            <a href="#" class="photo"><img src="{{ asset('assets/images/'.$item['image']) }}" class="cart-thumb" alt="" /></a>
+                            <a href="#" class="photo"><img src="{{ asset('assets/images/products_image/'.$item['image']) }}" class="cart-thumb" alt="" /></a>
                             @else
                             <a href="#" class="photo"><img src="{{ asset('assets/images/not_found.png') }}" class="cart-thumb" alt="" /></a>
                             @endif
                             <h6><a href="#">{{$item['name']}} </a></h6>
-                            <p>{{$item['amount']}}x - <span class="price">{{$item['price']}}vnd</span></p>
+                            <p>{{$item['amount']}}x - <span class="price">{{$item['price']}} VNĐ</span></p>
                         </li>
                         <p style="display: none">{{$total += $item['price'] * $item['amount']}}<p>  
                         @endforeach
                         @endif
                         <li class="total">
                             <a href="{{ Route('cart') }}" class="btn btn-default hvr-hover btn-cart">Xem</a>
-                            <span class="float-right"><strong>Total</strong>: <b>{{ $total }}</b>vnd</span>
+                            <span class="float-right"><strong>Total</strong>: <b>{{ $total }}</b> VNĐ</span>
                         </li>
                     </ul>
                 </li>
@@ -321,7 +321,7 @@
     </div>
     <!-- End copyright  -->
 
-    <a href="#" id="back-to-top" title="Back to top" style="display: none; ">&uarr;</a>
+    <a href="#" id="back-to-top" title="Back to top" style="padding-top: 15px; display: none; ">&uarr;</a>
 
     <!-- ALL JS FILES -->
     <script src="{{ asset('assets/js/jquery-3.2.1.min.js') }}"></script>

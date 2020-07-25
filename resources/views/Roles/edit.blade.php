@@ -31,8 +31,8 @@
 
                     <div class="form-group justify-content-end row" style="margin-top: 25px">
                         <div class="col-7">
-                            <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" value="add">Sửa </button>
-                            <a href="{{ route('roles-list') }}" class="btn btn-danger btn-rounded waves-effect waves-light">Hủy</a>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light" value="add">Sửa </button>
+                            <a href="{{ route('roles-list') }}" class="btn btn-danger waves-effect waves-light">Hủy</a>
                         </div>
                     </div>
                 </form>

@@ -20,7 +20,8 @@ class HomeController extends Controller
     }
 
     public function index() {
-        return view('master-page');
+
+        return view('layouts.dashboard');
     }
 
     /**
@@ -41,9 +42,9 @@ class HomeController extends Controller
             $productsBest = $productsBest->random(4);
         }
         $categories = Categories::all();
-        // if( count($categories->toArray()) >= 3) {
-        //     $categories = $categories->random(3);
-        // }
+        if( count($categories->toArray()) >= 3) {
+            $categories = $categories->random(3);
+        }
         return view('home.index', compact('products','productsNew', 'productsBest', 'categories'));
     }
 

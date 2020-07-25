@@ -14,11 +14,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <!-- Site CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}"> --}}
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
-    <!-- Custom CSS -->
-    {{-- <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}"> --}}
     <link href="{{ asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
 </head>
@@ -33,7 +34,22 @@
     <!-- ============================================================== -->
     <!-- Start Page Content here -->
     <!-- ============================================================== -->
-
+    @if($flash = session('message_success'))
+    <div style="margin-top: 30px;" id="flash-message" class="alert alert-success alert-dismissible fade show" role="alert">
+        {{$flash }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
+    @if($flash = session('message_error'))
+    <div id="flash-message" class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{$flash}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    @endif
     <div class="wrapper">
         <div class="container-fluid">
             @yield('page-content')
@@ -49,6 +65,7 @@
     <script src="{{asset('assets/js/vendor.min.js')}}"></script>
     @yield('script')
     <!-- App js-->
+    <script src="{{ asset('assets/js/common.js') }}"></script>
     {{-- <script src="{{asset('assets/js/app.min.js')}}"></script> --}}
    
 </body>

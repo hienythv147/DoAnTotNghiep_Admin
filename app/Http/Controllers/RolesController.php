@@ -110,7 +110,7 @@ class RolesController extends Controller
     {
         $roles = Roles::find($id);      
         $roles->delete();
-        return redirect()->route('roles-list');
+        return redirect()->back();
     }
 
     public function trash()

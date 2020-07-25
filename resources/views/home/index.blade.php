@@ -55,12 +55,21 @@
         </div>
         <div class="row">
             @foreach($categories as $category)
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="shop-cat-box">
-                        <img  style="height:200px" class="img-fluid" src="{{ asset('assets/images/categories_image/' . $category->image) }}" alt="" />
-                        <a class="btn hvr-hover" href="{{ Route('category_detail', $category->id ) }}">{{$category->name}}</a>
-                    </div>
+            @if(!empty($category->image))
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="shop-cat-box">
+                    <img  style="height:200px" class="img-fluid" src="{{ asset('assets/images/categories_image/' . $category->image) }}" alt="" />
+                    <a class="btn hvr-hover" href="{{ Route('category_detail', $category->id ) }}">{{$category->name}}</a>
                 </div>
+            </div>
+            @else
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <div class="shop-cat-box">
+                    <img  style="height:200px" class="img-fluid" src="{{ asset('assets/images/not_found.png') }}" alt="" />
+                    <a class="btn hvr-hover" href="{{ Route('category_detail', $category->id ) }}">{{$category->name}}</a>
+                </div>
+            </div>
+            @endif
                 {{-- @if($category->category_type == 0)
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="shop-cat-box">
@@ -112,7 +121,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="title-all text-center">
-                    <h1>Đồ ăn & Thức uống</h1>
+                    <h1>Thức ăn & Đồ uống</h1>
                     <p>Những sản phẩm mới nhất và bán chạy nhất</p>
                 </div>
             </div>
@@ -153,7 +162,7 @@
                     <div class="why-text">
                         <h4>{{ $product->name }}</h4>
                         @auth
-                        <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i></button>
+                        <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toatoastr({{$product->id}})"><i class="fas fa-cart-plus">  Thêm giỏ</i></button>
                         @endauth
                     </div>
                 </div>
@@ -183,7 +192,7 @@
                     <div class="why-text">
                         <h4>{{ $product->name }}</h4>
                         @auth
-                        <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i></button>
+                        <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus">  Thêm giỏ</i></button>
                         @endauth
                     </div>
                 </div>
@@ -206,6 +215,7 @@
             </div>
         </div> --}}
         @foreach($products as $product)
+        @if(!empty($product->image))
         <div class="item">
             <div class="ins-inner-box">
                 <img style="height: 150px" src="{{ asset('assets/images/products_image/'.$product->image) }}" alt="Image"></a>
@@ -214,6 +224,16 @@
                 </div>
             </div>
         </div>
+        @else
+        <div class="item">
+            <div class="ins-inner-box">
+                <img style="height: 150px" src="{{ asset('assets/images/not_found.png') }}" alt="Image"></a>
+                <div class="hov-in">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        @endif
         @endforeach
     </div>
 </div>

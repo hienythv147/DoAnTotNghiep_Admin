@@ -26,6 +26,9 @@ Route::middleware('auth')->group(function() {
 				Route::get('list','ProductsController@index')->name('products-list');
 				Route::get('add','ProductsController@create')->name('products-add');
 				Route::post('add','ProductsController@store')->name('products-add-process');
+				Route::get('delete/{id}','ProductsController@destroy')->name('products-del');
+				Route::get('trash','ProductsController@trash')->name('products-trash');
+				Route::get('restore/{id}','ProductsController@restore')->name('products-res');
 			});
 
 			Route::prefix('categories')->group(function(){

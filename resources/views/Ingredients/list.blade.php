@@ -47,7 +47,7 @@
                                     class="btn btn-success waves-effect waves-light "><i class="mdi mdi-pencil color  "
                                         ></i>Sửa</a>
                                 <a href="{{ route('ingredients-del',['id' => $value->id]) }}"
-                                    class="btn btn-danger waves-effect waves-light " style="color:white"><i
+                                    class="btn btn-danger waves-effect waves-light delete-confirm" style="color:white"><i
                                         class="mdi mdi-trash-can-outline color "></i>Xóa</a>
                             </td>
                         </tr>

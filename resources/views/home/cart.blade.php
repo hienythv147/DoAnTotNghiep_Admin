@@ -7,10 +7,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2>Giỏ hàng</h2>
-                <ul class="breadcrumb">
+                {{-- <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Shop</a></li>
                     <li class="breadcrumb-item active">Giỏ hàng</li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
     </div>

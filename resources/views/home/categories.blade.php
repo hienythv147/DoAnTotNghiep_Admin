@@ -7,10 +7,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <h2>Thực đơn</h2>
-                <ul class="breadcrumb">
+                {{-- <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">Thực đơn</li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
     </div>
@@ -53,6 +53,7 @@
             </div>
             @endforeach --}}
             @foreach($categories_food as $value)
+            @if(!empty($value->image))
             <div class="col-lg-3 col-md-6 special-grid food">
                 <div class="products-single fix">
                     <div class="box-img-hover">
@@ -63,9 +64,22 @@
                     </div>
                 </div>
             </div>
+            @else
+            <div class="col-lg-3 col-md-6 special-grid food">
+                <div class="products-single fix">
+                    <div class="box-img-hover">
+                        <div class="type-lb" style="width: 100%">
+                            <p class="sale">{{$value->name}}</p>
+                        </div>  
+                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="Image"></a>
+                    </div>
+                </div>
+            </div>
+            @endif
             @endforeach
             
             @foreach($categories_drink as $value)
+            @if(!empty($value->image))
             <div class="col-lg-3 col-md-6 special-grid drink">
                 <div class="products-single fix">
                     <div class="box-img-hover">
@@ -76,6 +90,18 @@
                     </div>
                 </div>
             </div>
+            @else
+            <div class="col-lg-3 col-md-6 special-grid drink">
+                <div class="products-single fix">
+                    <div class="box-img-hover">
+                        <div class="type-lb" style="width: 100%">
+                            <p class="sale">{{$value->name}}</p>
+                        </div>  
+                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="Image"></a>
+                    </div>
+                </div>
+            </div>
+            @endif
             @endforeach
         </div>
     </div>
