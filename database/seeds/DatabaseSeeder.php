@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         	ProductsSeeder::class,
         	RolesSeeder::class,
         	UsersSeeder::class,
-        	CustomersSeeder::class,
+        	// CustomersSeeder::class,
             IngredientsSeeder::class,
             OrdersOutSeeder::class,
             OrdersOutDetailSeeder::class,

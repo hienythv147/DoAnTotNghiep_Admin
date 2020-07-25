@@ -21,7 +21,6 @@ class CreateFk extends Migration
         });
         Schema::table('orders_out', function (Blueprint $table) {
             $table->foreign('staff_id')->references('id')->on('users');
-            $table->foreign('customer_id')->references('id')->on('customers');
         });
         Schema::table('orders_in', function (Blueprint $table) {
             $table->foreign('staff_id')->references('id')->on('users');
