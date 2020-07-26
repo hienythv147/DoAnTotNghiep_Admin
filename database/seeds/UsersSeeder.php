@@ -35,6 +35,14 @@ class UsersSeeder extends Seeder
         	'last_name' => 'Nguyễn',
         	'phone_number' => '0373801132',
         	'role_id' => 2,
+			'address' => 'Ninh Thuận'],
+			// khách hàng 1
+        	['email' => '0306171385@caothang.edu.vn',
+        	'password' => Hash::make('123'),
+        	'first_name' => 'Xuân Sang',
+        	'last_name' => 'Nguyễn',
+        	'phone_number' => '0373801132',
+        	'role_id' => 3,
         	'address' => 'Ninh Thuận']
         ]);
     }
