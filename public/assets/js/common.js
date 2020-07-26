@@ -19,7 +19,7 @@ $(document).ready(function () {
             }
         });
     });
-})
+});
 
 function toastr(id) {
     $('#flash-message').remove();

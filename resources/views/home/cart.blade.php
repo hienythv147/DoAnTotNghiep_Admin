@@ -148,7 +148,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn hvr-hover" data-dismiss="modal"
                     style="color: #ffffff; font-size: 14px; font-weight: 600; background: grey">Hủy bỏ</button>
-                    <a href="{{ Route('create_order') }}" type="button" class="btn hvr-hover"
+                    <a href="{{ Route('create_order') }}" type="button" id="button-accept" class="btn hvr-hover"
                     style="color: #ffffff; font-size: 14px; font-weight: 600">Đồng ý</a>
                 </div>
                 </div>

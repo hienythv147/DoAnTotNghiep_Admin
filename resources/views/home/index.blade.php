@@ -162,7 +162,7 @@
                     <div class="why-text">
                         <h4>{{ $product->name }}</h4>
                         @auth
-                        <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toatoastr({{$product->id}})"><i class="fas fa-cart-plus">  Thêm giỏ</i></button>
+                        <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus">  Thêm giỏ</i></button>
                         @endauth
                     </div>
                 </div>
