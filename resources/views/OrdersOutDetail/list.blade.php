@@ -13,20 +13,20 @@
                     <thead class="thead-dark">
                         <tr>
                             <th style="color:white; width: 5%;">ID</th>
-                            <th style="color:white">Đơn bán</th>
-                            <th style="color:white">Sản phẩm</th>
+                            <th style="color:white">Mã đơn bán</th>
+                            <th style="color:white">Tên sản phẩm</th>
                             <th style="color:white">Giá</th>
                             <th style="color:white">Số lượng</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($order_out_detail as $value) 
+                        @foreach($orders_out_detail as $value) 
                         <tr style="font-size: 120%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
-                            <td>{{ $value->order_out_id }}</td>
-                            <td>{{ $value->Product->name }}</td>
-                            <td>{{ $value->price }}</td>
-                            <td>{{ $value->amount }}</td>
+                            <td>{{ $value->pivot->order_out_id }}</td>
+                            <td>{{ $value->name }}</td>
+                            <td>{{ $value->pivot->price }}</td>
+                            <td>{{ $value->pivot->amount }}</td>
                         </tr>
                         @endforeach
                     </tbody>

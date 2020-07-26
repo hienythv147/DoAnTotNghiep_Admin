@@ -12,4 +12,8 @@ class Orders_in extends Model
     {
         return $this->belongsTo('App\User','staff_id','id');
     }
+    public function OrdersInDetail()
+    {
+        return $this->belongsToMany('App\Ingredients','orders_in_detail','order_in_id','ingredient_id','id','id')->withPivot('id','price','amount');
+    }
 }

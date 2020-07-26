@@ -13,8 +13,11 @@ class OrdersOutSeeder extends Seeder
     {
         DB::table('orders_out')->insert([
             ['staff_id' => 2,
-            'customer_id' => 2,
-            'total' => 100000]
+            'total' => 90000,
+            'status' => 0],
+            ['staff_id' => 2,
+            'total' => 90000,
+            'status' => 1]
         ]);
     }
 }
