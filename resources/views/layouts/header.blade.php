@@ -17,20 +17,20 @@
                         <a href="{{ route('categories-list') }}"><i class="fas fa-tags" ></i>LOẠI SẢN PHẨM
                         </a>
                     </li>
-                    <li style="margin: 10px 0px 10px 0px; " class="has-submenu">
+                    {{-- <li style="margin: 10px 0px 10px 0px; " class="has-submenu">
                         <a href="{{ route('customers-list') }}"> <i class="fas fa-users" ></i>
                             KHÁCH HÀNG
                         </a>
-                    </li>
+                    </li> --}}
                     <li style="margin: 10px 0px 10px 0px; " class="has-submenu">
                         <a href="{{ route('users-list') }}">
                             <i class="fas fa-users"></i>
-                            NHÂN VIÊN<div class="arrow-down"></div></a>
+                            NGƯỜI DÙNG<div class="arrow-down"></div></a>
                             <ul class="submenu">
                                 <li>
                                     <a href="{{ route('roles-list') }}">
                                         <i class="fas fa-chevron-right"></i>
-                                       LOẠI NHÂN VIÊN
+                                       LOẠI NGƯỜI DÙNG
                                     </a>
                                 </li>
                             </ul>

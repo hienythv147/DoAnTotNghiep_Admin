@@ -49,25 +49,38 @@ class ProductsController extends Controller
     public function store(ProductsRequest $request)
     {
         $newProduct = new Products();
-        $getProductImage = '';
         $flag = $newProduct::where('name',$request->product_name)->exists();
         if(!$flag)
         {
-            // $newProduct->name = $request->product_name;
-            // $newProduct->category_id = $request->category_id;
-            // $newProduct->price = $request->product_price;    
-            //     //Lưu hình ảnh vào thư mục public/upload/product_image
-            //     // $product_image = $request->file('product_image');
-            //     // $getProductImage = time().'_'.$product_image->getClientOriginalName();
-            //     // $destinationPath = public_path('upload/product_image');
-            //     // $product_image->move($destinationPath,$getProductImage);
-            //     $newProduct->save();
-            //     return redirect()->route('products-list');
+            $newProduct->name = $request->product_name;
+            $newProduct->category_id = $request->category_id;
+            $newProduct->price = $request->product_price;
+            if( $request->hasFile('product_image')){
+                $file = $request->product_image;
+                //Hàm lấy tên file
+                $file_name = time().'_'.$file->getClientOriginalName();
+                //Lấy đuôi file
+                // $file_extension = $file->getClientOriginalExtension();
+                //Lấy đường dẫn tạm thời
+                // $file_path = $file->getRealPath();
+                //Lấy kích cỡ file theo bytes
+                // $file_size = $file->getSize();
+                //Lấy kiểu file (nếu ảnh là dạng jpg thì image/jpg)
+                // $file_type = $file->getMimeType();
+                //Đường dẫn tuyệt đối lưu thư mục
+                $destinationPath = public_path('assets\images\products_image');
+                //Chuyển file tới thư mục cần lưu
+                $file->move($destinationPath,$file_name);
+                $newProduct->image = $file_name;
+                $newProduct->save();
+                return back()->with('message_success','Thêm thành công!');
+            }      
+            else
+            {
+                return back()->with('error_image','File không tồn tại!');
+            }
         }
-        else
-        {
-            return redirect()->route('products-add');
-        }
+        return back()->with('error_name','Tên sản phẩm đã tồn tại!');
     }
 
     /**

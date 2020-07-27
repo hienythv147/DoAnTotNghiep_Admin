@@ -41,7 +41,7 @@
                                 <td class="thumbnail-img">
                                     <a href="#">
                                 @if(!empty($item['image']))
-                                <img class="img-fluid" src="{{ asset('assets/images/'.$item['image']) }}" alt=""/> 
+                                <img class="img-fluid" src="{{ asset('assets/images/products_image/'.$item['image']) }}" alt=""/> 
                                 @else
                                 <img class="img-fluid" src="{{ asset('assets/images/not_found.png') }}" alt=""/> 
                                 @endif

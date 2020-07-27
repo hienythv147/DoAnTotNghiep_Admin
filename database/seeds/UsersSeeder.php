@@ -43,7 +43,15 @@ class UsersSeeder extends Seeder
         	'last_name' => 'Nguyễn',
         	'phone_number' => '0373801132',
         	'role_id' => 3,
-        	'address' => 'Ninh Thuận']
+			'address' => 'Ninh Thuận'],
+			// khách hàng 2
+        	['email' => 'tp17041999@gmail.com',
+        	'password' => Hash::make('123'),
+        	'first_name' => 'Phát Bodoi',
+        	'last_name' => 'Trần',
+        	'phone_number' => '0704443304',
+        	'role_id' => 3,
+        	'address' => 'Long An']
         ]);
     }
 }

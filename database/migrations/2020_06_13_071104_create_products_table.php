@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->integer('category_id')->unsigned();
             $table->integer('price');
-            $table->boolean('in_stock');
+            $table->boolean('in_stock')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
