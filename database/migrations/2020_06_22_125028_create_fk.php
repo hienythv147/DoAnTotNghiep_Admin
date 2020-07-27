@@ -20,10 +20,10 @@ class CreateFk extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
         });
         Schema::table('orders_out', function (Blueprint $table) {
-            $table->foreign('staff_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
         Schema::table('orders_in', function (Blueprint $table) {
-            $table->foreign('staff_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
         });
         Schema::table('orders_out_detail', function (Blueprint $table) {
             $table->foreign('order_out_id')->references('id')->on('orders_out');

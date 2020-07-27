@@ -15,7 +15,7 @@ class CreateOrdersInTable extends Migration
     {
         Schema::create('orders_in', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('staff_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->integer('total');
             $table->timestamps();
             $table->softDeletes();

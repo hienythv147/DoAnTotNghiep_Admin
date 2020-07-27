@@ -11,7 +11,7 @@ class Orders_out extends Model
     
     public function User()
     {
-        return $this->belongsTo('App\User','staff_id', 'id');
+        return $this->belongsTo('App\User','user_id', 'id');
     }
     // public function Customer()
     // {

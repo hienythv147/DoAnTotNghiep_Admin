@@ -15,7 +15,7 @@ class CreateOrdersOutTable extends Migration
     {
         Schema::create('orders_out', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('staff_id')->nullable()->unsigned();
+            $table->integer('user_id')->nullable()->unsigned();
             $table->integer('total');
             $table->integer('status')->default(0);
             $table->timestamps();

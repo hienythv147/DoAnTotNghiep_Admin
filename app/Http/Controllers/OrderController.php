@@ -23,11 +23,7 @@ class OrderController extends Controller
             $userId =  Auth::user()['id'];
             $userEmail =  Auth::user()['email'];
             // check role is staff
-            if(Auth::user()['role_id'] == 1 || Auth::user()['role_id'] == 2) {
-                $order->staff_id = $userId;
-            } else {
-                $order->customer_id = $userId;
-            }
+            $order->user_id = $userId;
             $order->total = $total;
             $result = $order->save();
             if($result == false) {

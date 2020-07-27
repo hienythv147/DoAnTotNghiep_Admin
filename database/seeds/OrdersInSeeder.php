@@ -12,7 +12,7 @@ class OrdersInSeeder extends Seeder
     public function run()
     {
         DB::table('orders_in')->insert([
-            ['staff_id' => 2,
+            ['user_id' => 2,
             'total' => 100000]
         ]);
     }
