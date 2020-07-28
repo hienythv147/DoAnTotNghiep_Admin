@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <h1 style=" text-align: center"> Thêm loại sản phẩm </h1>
-                <form class="form-horizontal" action="{{ route('categories-add-process') }}" method="POST" >
+                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('categories-add-process') }}" method="POST" >
                  @csrf
                     
                     {{-- Tên loại sản phẩm --}}
@@ -16,7 +16,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Loại sản phẩm</span>
                         </div>
-                        <input name="category_name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập loại sản phẩm">
+                        <input value="{{old('category_name') }}" name="category_name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập loại sản phẩm">
                     </div>
                     {{-- Thông báo lỗi --}}
                     @if($errors->has('category_name'))
@@ -47,6 +47,26 @@
                         <p style="color: red;">{{ $errors->first('category_type')}}</p>
                         </small>
                     @endif
+                    <div style="margin-top: 25px" class="input-group">
+                        <label class="input-group-text" for="category_image">Chọn ảnh minh họa</label>
+                        <input hidden accept="image/*" type="file" id="category_image" name="category_image" onchange="loadFile(event)">
+                        
+                    </div>
+                    {{-- Thông báo lỗi  --}}
+                    @if($errors->has('category_image'))
+                    <small class="form-text text-muted" >
+                        <p style="color: red;">{{ $errors->first('category_image')}}</p>
+                        </small>
+                    @endif
+                    {{-- Thông báo lỗi --}}
+                    @if(session('error_image'))
+                    <small class="form-text text-muted">
+                        <p style="color: red;">{{ session('error_image') }}</p>
+                        </small>
+                    @endif
+                    <div style="margin-top: 25px" class="input-group">
+                    <img style="width:250px; height:250px;" id="output" >
+                    </div>
                     <div style="margin-top:25px" class="form-group mb-0 justify-content-end row">
                         <div class="col-7">
                             <button type="submit" class="btn btn-primary waves-effect waves-light" >Thêm 

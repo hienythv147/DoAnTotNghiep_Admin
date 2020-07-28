@@ -51,9 +51,9 @@
                             <td style="text-align: center;"><span class="badge badge-pill badge-danger">Hết hàng</span></td>
                             @endif
                             <td class="tool">
-                                <a href="#"
+                                <a href="{{ Route('products-edit',['id' => $value->id]) }}"
                                     class="btn btn-success waves-effect waves-light "><i class="mdi mdi-pencil color  "></i>Sửa</a>
-                                    <a href="{{ route('products-del',['id' => $value->id]) }}"
+                                <a href="{{ route('products-del',['id' => $value->id]) }}"
                                         class="btn btn-danger waves-effect waves-light delete-confirm" style="color:white"><i
                                             class="mdi mdi-trash-can-outline color "></i>Xóa</a>
                             </td>

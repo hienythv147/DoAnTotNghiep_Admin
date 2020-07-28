@@ -51,6 +51,32 @@
                         <p style="color: red;">{{ $errors->first('category_type')}}</p>
                         </small>
                     @endif
+                    {{-- Thông báo lỗi --}}
+                    @if($errors->has('category_type'))
+                    <small class="form-text text-muted">
+                        <p style="color: red;">{{ $errors->first('category_type')}}</p>
+                        </small>
+                    @endif
+                    <div style="margin-top: 25px" class="input-group">
+                        <label class="input-group-text" for="category_image">Chọn ảnh minh họa</label>
+                        <input hidden accept="image/*" type="file" id="category_image" name="category_image" value="{{$category->image }}" onchange="loadFile(event)">
+                        
+                    </div>
+                    {{-- Thông báo lỗi  --}}
+                    @if($errors->has('category_image'))
+                    <small class="form-text text-muted" >
+                        <p style="color: red;">{{ $errors->first('category_image')}}</p>
+                        </small>
+                    @endif
+                    {{-- Thông báo lỗi --}}
+                    @if(session('error_image'))
+                    <small class="form-text text-muted">
+                        <p style="color: red;">{{ session('error_image') }}</p>
+                        </small>
+                    @endif
+                    <div style="margin-top: 25px" class="input-group">
+                    <img style="width:250px; height:250px;" id="output" src={{ asset('assets/images/categories_image/'.$category->image)}}>
+                    </div>
                     <div style="margin-top:25px" class="form-group mb-0 justify-content-end row">
                         <div class="col-7">
                             <button type="submit" class="btn btn-primary waves-effect waves-light" >Sửa 

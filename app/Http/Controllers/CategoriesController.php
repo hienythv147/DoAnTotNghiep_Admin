@@ -48,19 +48,33 @@ class CategoriesController extends Controller
         if(!$flag)
         {
             $category->name = $request->category_name;
-            $category->category_type = $request->category_type;
-            $result = $category->save();
-            if($result)
+            $category->category_type= $request->category_type;
+            if( $request->hasFile('category_image')){
+                $file = $request->category_image;
+                //Hàm lấy tên file
+                $file_name = time().'_'.$file->getClientOriginalName();
+                //Lấy đuôi file
+                // $file_extension = $file->getClientOriginalExtension();
+                //Lấy đường dẫn tạm thời
+                // $file_path = $file->getRealPath();
+                //Lấy kích cỡ file theo bytes
+                // $file_size = $file->getSize();
+                //Lấy kiểu file (nếu ảnh là dạng jpg thì image/jpg)
+                $file_type = $file->getMimeType();
+                //Đường dẫn tuyệt đối lưu thư mục
+                $destinationPath = public_path('assets\images\categories_image');
+                //Chuyển file tới thư mục cần lưu
+                $file->move($destinationPath,$file_name);
+                $category->image = $file_name;
+                $category->save();
+                return back()->with('message_success','Thêm thành công!');
+            }      
+            else
             {
-                session()->flash('message_success', 'Thêm thành công!');
-                return redirect()->back();
-            }
-            else{
-                session()->flash('message_error', 'Thêm thất bại');
-                return redirect()->back();
+                return back()->with('error_image','File không tồn tại!');
             }
         }
-        return redirect()->route('categories-add')->with('error','Loại sản phẩm đã tồn tại');
+        return back()->with('error_name','Loại sản phẩm đã tồn tại!');
     }
 
     /**
@@ -96,8 +110,32 @@ class CategoriesController extends Controller
     public function update(CategoriesRequest $request, $id)
     {
         $editCate = Categories::find($id);
-        $flag = $editCate::where('name',$request->category_name)->exists();
-        if(!$flag)
+        $newCate = $request->category_name;
+        $flag = $editCate::where('name',$newCate)->exists();
+        if(!$flag)  
+        {
+            $editCate->name = $request->category_name;
+            $editCate->category_type = $request->category_type;
+            if( $request->hasFile('category_image')){
+                $file = $request->product_image;
+                //Hàm lấy tên file
+                $file_name = time().'_'.$file->getClientOriginalName();
+                $destinationPath = public_path('assets\images\products_image');
+                //Chuyển file tới thư mục cần lưu
+                $file->move($destinationPath,$file_name);
+                $editCate->image = $file_name;
+                $result = $editCate->save();
+                if($result)
+                    return back()->with('message_success','Sửa thành công!');
+                else
+                    return back()->with('message_success','Sửa thất bại!');
+            }      
+            else
+            {
+                return back()->with('error_image','File không tồn tại!');
+            }
+        }
+        else if($editCate->name == $newCate)
         {
             $editCate->name = $request->category_name;
             $editCate->category_type = $request->category_type;
@@ -112,10 +150,7 @@ class CategoriesController extends Controller
                 return redirect()->back();
             }
         }
-        else
-        {
-            return redirect()->route('categories-edit',['id' => $id])->with('error','Loại sản phẩm đã tồn tại!');
-        }
+        return redirect()->route('categories-edit',['id' => $id])->with('error','Loại sản phẩm đã tồn tại!');
     }
 
     /**

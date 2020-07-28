@@ -91,7 +91,9 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Products::find($id);
+        $categories = Categories::all();
+        return view('Products.edit',compact('product','categories'));
     }
 
     /**
@@ -103,7 +105,56 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product =  Products::find($id);
+        $newName = $request->product_name;
+        //Nếu chỉ sửa loại hoặc giá tiền mà không đổi tên
+        if($product->name == $newName)
+        {
+            $product->category_id = $request->category_id;
+            $product->price = $request->product_price;
+            if( $request->hasFile('product_image')){
+                $file = $request->product_image;
+                //Hàm lấy tên file
+                $file_name = time().'_'.$file->getClientOriginalName();
+                $destinationPath = public_path('assets\images\products_image');
+                //Chuyển file tới thư mục cần lưu
+                $file->move($destinationPath,$file_name);
+                $product->image = $file_name;
+                $product->save();
+                return back()->with('message_success','Sửa thành công!');
+            }      
+            else
+            {
+                return back()->with('error_image','File không tồn tại!');
+            }
+        }
+        //Nếu đổi tên sản phẩm
+        else{
+            $listProducts = new Products();
+            // Kiểm tra tên mới có trùng hay không
+            $flag = $listProducts::where('name',$request->product_name)->exists();
+            if(!$flag)
+            {
+                $product->category_id = $request->category_id;
+                $product->price = $request->product_price;
+                if( $request->hasFile('product_image')){
+                    $file = $request->product_image;
+                    //Hàm lấy tên file
+                    $file_name = time().'_'.$file->getClientOriginalName();
+                    $destinationPath = public_path('assets\images\products_image');
+                    //Chuyển file tới thư mục cần lưu
+                    $file->move($destinationPath,$file_name);
+                    $product->image = $file_name;
+                    $product->save();
+                    return back()->with('message_success','Sửa thành công!');
+                }      
+                else
+                {
+                    return back()->with('error_image','File không tồn tại!');
+                }
+            }
+            return back()->with('error_name','Tên sản phẩm đã tồn tại!');
+        }
     }
 
     /**

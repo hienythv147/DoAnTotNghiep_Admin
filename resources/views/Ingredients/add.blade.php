@@ -24,6 +24,11 @@
                         <p style="color: red;">{{ $errors->first('ingredient_name')}}</p>
                         </small>
                     @endif
+                    @if(session('error_name'))
+                    <small class="form-text text-muted">
+                        <p style="color: red;">{{ session('error_name')}}</p>
+                        </small>
+                    @endif
                     {{-- Đơn vị tính --}}
                     <div style="margin-top: 25px" class="input-group" >
                         <div class="input-group-prepend">
@@ -68,7 +73,7 @@
                         <div class="col-7">
                             <button type="submit" class="btn btn-primary waves-effect waves-light" >Thêm 
                             </button>
-                            <a href="{{ route('products-list') }}" class="btn btn-danger waves-effect waves-light">Hủy</a>
+                            <a href="{{ route('ingredients-list') }}" class="btn btn-danger waves-effect waves-light">Hủy</a>
                         </div>
                     </div>
                 </form>

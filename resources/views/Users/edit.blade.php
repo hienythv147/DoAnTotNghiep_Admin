@@ -28,10 +28,10 @@
                             <label class="input-group-text" for="inputGroupSelect01">Loại nhân viên</label>
                         </div>
                         <select name="role_id" class="custom-select" id="inputGroupSelect01">
-                            {{-- <option selected>Choose...</option> --}}
 
+                            <option value="{{ $user->role_id }}" selected>{{$user->Roles->name }}</option>
                             @foreach($roles as $value)
-                            @if($value->id != 1)
+                            @if($value->id != 1 && !($user->role_id == $value->id))
                             <option value="{{ $value->id }}">{{$value->name}}</option>
                             @endif
                             @endforeach
@@ -51,13 +51,13 @@
                         </div>
                         <input  type="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập email"value="{{$user->email}}" disabled="true">
                     </div>
-                    {{-- Mật khẩu --}}
+                    {{-- Mật khẩu
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Mật khẩu</span>
                         </div>
                         <input type="password" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập mật khẩu" value="{{$user->password}}" disabled="true">
-                    </div>
+                    </div> --}}
                     {{-- Số điện thoại --}}
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
