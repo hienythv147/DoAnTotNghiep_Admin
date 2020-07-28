@@ -132,28 +132,74 @@
                 </button>
             </div>
         </div>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="font-family: 'Poppins', sans-serif;">
-            <div class="modal-dialog" role="document">
+        <div id="exampleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; font-family: 'Poppins', sans-serif;">
+            <div class="modal-dialog">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel"><strong>Xác nhận thanh toán</strong></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Bạn có đồng ý thanh toán hóa đơn này?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn hvr-hover" data-dismiss="modal"
-                    style="color: #ffffff; font-size: 14px; font-weight: 600; background: grey">Hủy bỏ</button>
-                    <a href="{{ Route('create_order') }}" type="button" id="button-accept" class="btn hvr-hover"
-                    style="color: #ffffff; font-size: 14px; font-weight: 600">Đồng ý</a>
-                </div>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Xác Nhận Thanh Toán</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <form action="{{ Route('create_order') }}" type="POST">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">Họ</label>
+                                        <input type="text" class="form-control" id="field-1" placeholder="Nhập họ của bạn" value="{{ Auth::user()->last_name }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-2" class="control-label">Tên</label>
+                                        <input type="text" class="form-control" id="field-2" placeholder="Nhập tên của bạn" value="{{ Auth::user()->first_name }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-4" class="control-label">Email</label>
+                                        <input type="text" class="form-control" id="field-4" placeholder="Nhập email" value="{{ Auth::user()->email }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-5" class="control-label">Số Điện Thoại</label>
+                                        <input type="text" class="form-control" id="field-5" placeholder="Nhập số điện thoại" value="{{ Auth::user()->phone_number }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="field-3" class="control-label">Địa Chỉ</label>
+                                        <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" value="{{ Auth::user()->address }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group no-margin">
+                                        <label for="field-7" class="control-label">Thanh Toán Online</label>
+                                        <div>
+                                            <input type="checkbox" class="control-label" id="field-7">
+                                            <label for="field-7" class="control-label"> Ví Momo</label>
+                                        </div>
+                                        <img src="{{ asset('assets/images/momo.png') }}" style="width: 100px; height:100px">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn hvr-hover" data-dismiss="modal"
+                                style="color: #ffffff; font-size: 14px; font-weight: 600; background: grey">Hủy bỏ</button>
+                                <button href="" type="submit" id="button-accept" class="btn hvr-hover"
+                                style="color: #ffffff; font-size: 14px; font-weight: 600">Đồng ý</a>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </div><!-- /.modal -->
     </div>
 </div>
 <!-- End Cart -->
