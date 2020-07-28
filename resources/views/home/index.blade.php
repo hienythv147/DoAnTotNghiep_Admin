@@ -58,14 +58,14 @@
             @if(!empty($category->image))
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box">
-                    <img  style="height:200px" class="img-fluid" src="{{ asset('assets/images/categories_image/' . $category->image) }}" alt="" />
+                    <img  style="height:300px" class="img-fluid" src="{{ asset('assets/images/categories_image/' . $category->image) }}" alt="" />
                     <a class="btn hvr-hover" href="{{ Route('category_detail', $category->id ) }}">{{$category->name}}</a>
                 </div>
             </div>
             @else
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="shop-cat-box">
-                    <img  style="height:200px" class="img-fluid" src="{{ asset('assets/images/not_found.png') }}" alt="" />
+                    <img  style="height:300px" class="img-fluid" src="{{ asset('assets/images/not_found.png') }}" alt="" />
                     <a class="btn hvr-hover" href="{{ Route('category_detail', $category->id ) }}">{{$category->name}}</a>
                 </div>
             </div>

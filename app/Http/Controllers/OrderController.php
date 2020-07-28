@@ -21,6 +21,7 @@ class OrderController extends Controller
                 $total += $item['price'] * $item['amount'];
             }
             $userId =  Auth::user()['id'];
+            $roleId = Auth::user()['role_id'];
             $userEmail =  Auth::user()['email'];
             // check role is staff
             $order->user_id = $userId;
@@ -46,7 +47,7 @@ class OrderController extends Controller
                 }
             }
             // send mail if user is customer
-            if($userId == 3) {
+            if($roleId == 3) {
                 $this->sendMail($orderId, $total, $data, $userEmail, true);
             }
             // send email for admin
