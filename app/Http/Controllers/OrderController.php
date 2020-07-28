@@ -7,6 +7,7 @@ use App\Orders_out;
 use App\Orders_out_detail;
 use Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class OrderController extends Controller
@@ -31,6 +32,8 @@ class OrderController extends Controller
                 session()->flash('message_error', 'Thanh toán thất bại. Vui lòng thử lại sau');
                 return redirect()->back();
             }
+            // get created date
+            $created_at = $order->created_at;
             // save new order detail
             // get last id of table order
             $orderId = Orders_out::all()->last()['id'];
@@ -48,10 +51,10 @@ class OrderController extends Controller
             }
             // send mail if user is customer
             if($roleId == 3) {
-                $this->sendMail($orderId, $total, $data, $userEmail, true);
+                $this->sendMail($orderId, $total, $data, $created_at, $userEmail, true);
             }
             // send email for admin
-            $this->sendMail($orderId, $total, $data);
+            $this->sendMail($orderId, $total, $data, $created_at);
             // clear order session
             $request->session()->pull('cart');
             // flash session
@@ -63,7 +66,7 @@ class OrderController extends Controller
     }
 
     // Send mail by Sendgrid
-    public function sendMail($orderId, $total, $data, $userEmail = null, $isUser = false) {
+    public function sendMail($orderId, $total, $data, $created_at, $userEmail = null, $isUser = false) {
         // mail from
         $emailFrom = "xuansang3105@gmail.com";
         // name from
@@ -91,6 +94,7 @@ class OrderController extends Controller
         $urlOrder = 'http://'.$_SERVER['HTTP_HOST'].'/Admin/orders-out/detail/'.$orderId;
         // get new content email
         $newContent = str_replace('order_id', $orderId, $content);
+        $newContent = str_replace('datetime_order', $created_at, $newContent);
         $newContent = str_replace('expected_time', '45 phút', $newContent);
         $newContent = str_replace('list_products', $listProducts, $newContent);
         $newContent = str_replace('sub_total', $total.'VND', $newContent);
@@ -98,7 +102,7 @@ class OrderController extends Controller
         $newContent = str_replace('ship_code', '15000VND', $newContent);
         $newContent = str_replace('grand_total', $total + 15000 . "VND", $newContent);
         if($isUser) {
-            $newContent = str_replace('url_order', 'http://'.$_SERVER['HTTP_HOST'], $newContent);
+            $newContent = str_replace('url_order', 'http://'.$_SERVER['HTTP_HOST'].'/history-order', $newContent);
         } else {
             $newContent = str_replace('url_order', $urlOrder, $newContent);
         }
@@ -120,5 +124,25 @@ class OrderController extends Controller
 
     public function paymentMomo() {
         
+    }
+
+    public function historyOrder() {
+        $orders = Orders_out::orderBy('created_at', 'DESC')->get();
+        return view('home.history_order', compact('orders'));
+    }
+
+    public function historyOrderDetail(Request $request) {
+        $orderId = $request->id;
+        if ($request->ajax()) {
+            if(!empty($orderId)) {
+                $query = DB::table('orders_out')
+                ->join('orders_out_detail', 'orders_out.id', '=', 'orders_out_detail.order_out_id')
+                ->join('products', 'products.id', '=', 'orders_out_detail.product_id')
+                ->select('products.name', 'orders_out_detail.price', 'orders_out_detail.amount')
+                ->where('orders_out.id', '=', $orderId)
+                ->get();
+                return response()->json($query->toArray());
+            }
+        }
     }
 }

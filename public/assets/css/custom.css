@@ -9,3 +9,7 @@
 .modal-scrollbar-measure {
     overflow: hidden !important; 
 }
+
+.modal-body {
+overflow-x: auto;
+}

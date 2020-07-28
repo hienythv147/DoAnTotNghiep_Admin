@@ -125,3 +125,9 @@ Route::get('/about', function () {
 
 // Route order products
 Route::get('/create-order', 'OrderController@createOrder')->name('create_order')->middleware('auth');
+
+// Route history order
+Route::get('/history-order', 'OrderController@historyOrder')->name('history_order')->middleware('auth');
+
+// Route history order detail
+Route::get('/history-order-detail/{id}', 'OrderController@historyOrderDetail')->middleware('auth');

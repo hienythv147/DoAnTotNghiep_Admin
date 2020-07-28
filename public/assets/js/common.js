@@ -66,11 +66,7 @@ function toastr(id) {
         },
         error: function(err) {
             console.log(err);
-        },
-        complete: function() {
-            $('#btn-add-to-cart-'+id).prop('disabled', false);
         }
-
     })
     // set timeout for alert using ajax
     window.setTimeout(function() {
@@ -88,11 +84,48 @@ window.setTimeout(function() {
 }, 3000);
 
 //Load ảnh sau khi chọn
-  var loadFile = function(event) {
+var loadFile = function(event) {
     var output = document.getElementById('output');
     output.src = URL.createObjectURL(event.target.files[0]);
     output.onload = function() {
-      URL.revokeObjectURL(output.src) // free memory
+        URL.revokeObjectURL(output.src) // free memory
     }
-  };
+};
+
+// call ajax get history order detail
+function historyOrderDetail(id) {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type: 'GET',
+        url: 'history-order-detail/'+id,
+        data: {
+            id
+        },
+        success: function(result) {
+            if(result.length != 0) {
+                $('#table-content').html('');
+                var content = '';
+                var count = 1;
+                result.forEach(element => {
+                    content += "<tr style='font-weight: 1000'>" +
+                                    "<td style='text-align: center'>" + count + "</td>" +
+                                    "<td>" + element.name + "</td>" +
+                                    "<td>" + element.price + "</td>" +
+                                    "<td style='text-align: center'>" + element.amount + "</td>" +
+                                "</tr>"
+                    count++;
+                });
+                $('#table-content').append(content);
+            }
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    })
+}
 

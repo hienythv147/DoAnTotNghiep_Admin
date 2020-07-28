@@ -135,12 +135,12 @@
         <div id="exampleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; font-family: 'Poppins', sans-serif;">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Xác Nhận Thanh Toán</h4>
+                    <div class="modal-header" style="background: #b0b435;">
+                        <h3 class="modal-title">Xác Nhận Thanh Toán</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
-                    <div class="modal-body p-4">
-                        <form action="{{ Route('create_order') }}" type="POST">
+                    <form action="{{ Route('create_order') }}" type="POST">
+                        <div class="modal-body p-4">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -182,21 +182,21 @@
                                     <div class="form-group no-margin">
                                         <label for="field-7" class="control-label">Thanh Toán Online</label>
                                         <div>
-                                            <input type="checkbox" class="control-label" id="field-7">
-                                            <label for="field-7" class="control-label"> Ví Momo</label>
+                                            <input type="checkbox" class="control-label" id="field-7" style="cursor: pointer;">
+                                            <label for="field-7" class="control-label" style="cursor: pointer;"> Ví Momo</label>
                                         </div>
                                         <img src="{{ asset('assets/images/momo.png') }}" style="width: 100px; height:100px">
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn hvr-hover" data-dismiss="modal"
-                                style="color: #ffffff; font-size: 14px; font-weight: 600; background: grey">Hủy bỏ</button>
-                                <button href="" type="submit" id="button-accept" class="btn hvr-hover"
-                                style="color: #ffffff; font-size: 14px; font-weight: 600">Đồng ý</a>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="modal-footer" style="background">
+                            <button type="button" class="btn hvr-hover" data-dismiss="modal"
+                            style="color: #ffffff; font-size: 14px; font-weight: 600; background: grey">Hủy bỏ</button>
+                            <button href="" type="submit" id="button-accept" class="btn hvr-hover"
+                            style="color: #ffffff; font-size: 14px; font-weight: 600">Đồng ý</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div><!-- /.modal -->
