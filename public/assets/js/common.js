@@ -14,7 +14,6 @@ $(document).ready(function () {
             cancelButtonText: 'Hủy'
         }).then(function(result) {
             if (result.value) {
-                console.log(url);
                 window.location.href = url;
             }
         });
@@ -107,8 +106,8 @@ function historyOrderDetail(id) {
             id
         },
         success: function(result) {
+            $('#table-content').html('');
             if(result.length != 0) {
-                $('#table-content').html('');
                 var content = '';
                 var count = 1;
                 result.forEach(element => {
@@ -127,5 +126,29 @@ function historyOrderDetail(id) {
             console.log(err);
         }
     })
+}
+
+// remove item in table
+function removeItem(id) {
+    document.getElementById("cart-table").deleteRow(--id);
+}
+
+function deleteRow(btn, index) {
+    event.preventDefault();
+    console.log(index)
+    var url = $(this).attr('href');
+    Swal.fire({
+        title: 'Bạn có chắc muốn xóa sản phẩm này?',
+        showCancelButton: true,
+        cancelButtonColor: 'grey',
+        confirmButtonColor: '#b0b435',
+        confirmButtonText: 'Đồng ý',
+        cancelButtonText: 'Hủy bỏ'
+    }).then(function(result) {
+        if (result.value) {
+            var row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    });
 }
 

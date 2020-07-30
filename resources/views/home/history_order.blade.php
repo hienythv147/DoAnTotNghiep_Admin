@@ -45,9 +45,9 @@
                                     {{$item->total}}
                                 </td>
                                 @if($item->status == 1)
-                                <td><span class="badge badge-pill badge-success">Đã thanh toán</span></td>
+                                <td><span class="badge badge-pill badge-success" style="width: 100px">Đã hoàn tất</span></td>
                                 @else
-                                <td><span class="badge badge-pill badge-danger">Chờ xác nhận</span></td>
+                                <td><span class="badge badge-pill badge-danger" style="width: 100px">Chờ xác nhận</span></td>
                                 @endif
                                 <td>
                                     {{$item->created_at}}
@@ -72,6 +72,9 @@
                             @endif
                         </tbody>
                     </table>
+                    <!-- start paginate products -->
+                    {{ $orders->links() }}
+                    <!-- end paginate products -->
                     <div id="exampleModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalCenter" aria-hidden="true" style="display: none;">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -83,10 +86,10 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th style='text-align: center'>Stt</th>
-                                                <th>Tên sản phẩm</th>
-                                                <th>Giá tiền</th>
-                                                <th style='text-align: center'>Số lượng</th>
+                                                <th style='text-align: center; width:10%'>Stt</th>
+                                                <th style='width:50%'>Tên sản phẩm</th>
+                                                <th style='width:20%'>Giá tiền</th>
+                                                <th style='text-align: center; width:10%'>Số lượng</th>
                                             </tr>
                                         </thead>
                                         <tbody id="table-content">

@@ -53,7 +53,7 @@ class HomeController extends Controller
         $subTotal = 0;
         if(!empty($cart)) {
             foreach($cart as $item) {
-                $subTotal += $item['price'];
+                $subTotal += $item['price'] * $item['amount'];
             }
         }
         return view('home.cart', compact('cart', 'subTotal'));
@@ -65,6 +65,7 @@ class HomeController extends Controller
             $product = Products::find($spId);
             
             if($spId != null) {
+                $index = 0;
                 $productCart = [
                     'id' => $product->id,
                     'name' => $product->name,
@@ -72,7 +73,8 @@ class HomeController extends Controller
                     'amount' => 1,
                     'image' => $product->image,
                     'category_id' => $product->category_id,
-                    'is_delete' => false
+                    'is_delete' => false,
+                    'index' => $index++
                 ];
                 $cart =$request->session()->get('cart', null);
                 if($cart == null) {

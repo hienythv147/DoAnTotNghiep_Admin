@@ -1,0 +1,12 @@
+.swal2-popup .swal2-styled {
+    border-radius: 0 !important;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: .45rem .9rem;
+    
+}
+
+body {
+    padding-right: 0 !important;
+}

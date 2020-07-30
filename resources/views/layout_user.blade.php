@@ -22,13 +22,15 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <!-- Sweetalert2 CSS -->
+    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
     <!-- Site CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
-
+    @yield('css');
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js') }}"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js') }}"></script>
@@ -349,6 +351,7 @@
     <script src="{{ asset('assets/js/baguetteBox.min.js') }}"></script>
     <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
     <script src="{{ asset('assets/js/contact-form-script.js') }}"></script>
+    <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script src="{{ asset('assets/js/common.js') }}"></script>
 </body>

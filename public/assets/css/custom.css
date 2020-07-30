@@ -13,3 +13,20 @@
 .modal-body {
 overflow-x: auto;
 }
+
+.page-item.active .page-link {
+    background-color: #b0b435;
+    border-color: #b0b435;
+}
+
+.page-item .page-link {
+    border-radius: 30px!important;
+    margin: 0 3px;
+    border: none;
+}
+
+.page-link:hover {
+    z-index: 2;
+    color: #414d5f;
+    text-decoration: none;
+}

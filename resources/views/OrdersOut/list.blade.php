@@ -26,9 +26,9 @@
                             <td>{{ $value->User->last_name ." ". $value->User->first_name }}</td>
                             <td>{{ $value->total }}</td>
                             @if($value->status == 1)
-                            <td style="text-align: center;"><span class="badge badge-pill badge-success">Đã thanh toán</span></td>
+                            <td style="text-align: center;"><span class="badge badge-pill badge-success" style="width: 100px">Đã hoàn tất</span></td>
                             @else
-                            <td style="text-align: center;"><span class="badge badge-pill badge-danger">Chờ xác nhận</span></td>
+                            <td style="text-align: center;"><span class="badge badge-pill badge-danger" style="width: 100px">Chờ xác nhận</span></td>
                             @endif
 
                             <td class="tool">

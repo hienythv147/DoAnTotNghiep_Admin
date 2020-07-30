@@ -1,4 +1,8 @@
+
 @extends('layout_user')
+@section('css')
+<link rel="stylesheet" href="{{ asset('assets/css/cart.css') }}">
+@endsection
 
 @section('body')
 <!-- Start All Title Box -->
@@ -23,7 +27,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-main table-responsive">
-                    <table class="table">
+                    <table class="table" id="cart-table">
                         <thead>
                             <tr>
                                 <th>Hình ảnh</th>
@@ -37,7 +41,7 @@
                         <tbody>
                             @if(isset($cart))
                             @foreach($cart as $item)
-                            <tr>
+                            <tr style="font-weight: 1000">
                                 <td class="thumbnail-img">
                                     <a href="#">
                                 @if(!empty($item['image']))
@@ -59,10 +63,10 @@
                                 <td class="total-pr">
                                     <p>$ {{ $item['price'] * $item['amount'] }}</p>
                                 </td>
-                                <td class="remove-pr">
-                                    <a href="#">
-                                <i class="fas fa-times"></i>
-                            </a>
+                                <td style="text-align: center">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="deleteRow(this, {{ $item['index'] }})" style="float: none;">
+                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
@@ -81,14 +85,14 @@
 
         <div class="row my-5">
             <div class="col-lg-6 col-sm-6">
-                <div class="coupon-box">
+                <!-- <div class="coupon-box">
                     <div class="input-group input-group-sm">
                         <input class="form-control" placeholder="Nhập mã giảm giá" aria-label="Coupon code" type="text">
                         <div class="input-group-append">
                             <button class="btn btn-theme" type="button">Chọn mã</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="col-lg-6 col-sm-6">
                 <div class="update-box">
@@ -139,19 +143,20 @@
                         <h3 class="modal-title">Xác Nhận Thanh Toán</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     </div>
-                    <form action="{{ Route('create_order') }}" type="POST">
+                    <form action="{{ Route('process_payment') }}" method="post" enctype="application/x-www-form-urlencoded">
+                        @csrf
                         <div class="modal-body p-4">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="field-1" class="control-label">Họ</label>
-                                        <input type="text" class="form-control" id="field-1" placeholder="Nhập họ của bạn" value="{{ Auth::user()->last_name }}">
+                                        <input type="text" class="form-control" id="field-1" placeholder="Nhập họ của bạn" name="last_name" value="{{ Auth::user()->last_name }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="field-2" class="control-label">Tên</label>
-                                        <input type="text" class="form-control" id="field-2" placeholder="Nhập tên của bạn" value="{{ Auth::user()->first_name }}">
+                                        <input type="text" class="form-control" id="field-2" placeholder="Nhập tên của bạn" name="first_name" value="{{ Auth::user()->first_name }}">
                                     </div>
                                 </div>
                             </div>
@@ -159,13 +164,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="field-4" class="control-label">Email</label>
-                                        <input type="text" class="form-control" id="field-4" placeholder="Nhập email" value="{{ Auth::user()->email }}">
+                                        <input type="text" class="form-control" id="field-4" placeholder="Nhập email" name="email" value="{{ Auth::user()->email }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="field-5" class="control-label">Số Điện Thoại</label>
-                                        <input type="text" class="form-control" id="field-5" placeholder="Nhập số điện thoại" value="{{ Auth::user()->phone_number }}">
+                                        <input type="text" class="form-control" id="field-5" placeholder="Nhập số điện thoại" name="phone_number" value="{{ Auth::user()->phone_number }}">
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +178,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="field-3" class="control-label">Địa Chỉ</label>
-                                        <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" value="{{ Auth::user()->address }}">
+                                        <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" name="address" value="{{ Auth::user()->address }}">
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +187,7 @@
                                     <div class="form-group no-margin">
                                         <label for="field-7" class="control-label">Thanh Toán Online</label>
                                         <div>
-                                            <input type="checkbox" class="control-label" id="field-7" style="cursor: pointer;">
+                                            <input type="checkbox" class="control-label" name="momo" id="field-7" style="cursor: pointer;">
                                             <label for="field-7" class="control-label" style="cursor: pointer;"> Ví Momo</label>
                                         </div>
                                         <img src="{{ asset('assets/images/momo.png') }}" style="width: 100px; height:100px">
@@ -193,7 +198,7 @@
                         <div class="modal-footer" style="background">
                             <button type="button" class="btn hvr-hover" data-dismiss="modal"
                             style="color: #ffffff; font-size: 14px; font-weight: 600; background: grey">Hủy bỏ</button>
-                            <button href="" type="submit" id="button-accept" class="btn hvr-hover"
+                            <button type="submit" id="button-accept" class="btn hvr-hover"
                             style="color: #ffffff; font-size: 14px; font-weight: 600">Đồng ý</a>
                         </div>
                     </form>
