@@ -53,7 +53,9 @@
                             <b>Quên mật khẩu?</b>
                         </a>
                     @endif
-                    <p class="text-muted">Bạn chưa có tài khoản? <a href="#" class="text-muted ml-1"><b class="font-weight-semibold">Đăng ký</b></a></p>
+                    @if (Route::has('register'))
+                    <p class="text-muted">Bạn chưa có tài khoản? <a href="{{ route('register') }}" class="text-muted ml-1"><b class="font-weight-semibold">{{ __('Đăng ký') }}</b></a></p>
+                    @endif
                 </div>
             </div>
         </div>

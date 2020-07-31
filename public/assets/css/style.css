@@ -248,7 +248,7 @@
  .our-link ul li{
      display: inline-block;
      border-right: 1px solid #ffffff;
-     padding: 0px 10px;
+     padding: 0px 5px;
      line-height: 14px;
 }
  .our-link ul{
@@ -257,7 +257,7 @@
  .our-link ul li a{
      color: #ffffff;
      font-weight: 700;
-     text-transform: uppercase;
+     /* text-transform: uppercase; */
      font-size: 14px;
 }
  .our-link ul li a:hover{
