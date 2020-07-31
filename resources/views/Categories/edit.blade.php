@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-body">
                 <h1 style=" text-align: center"> Chỉnh sửa loại sản phẩm </h1>
-                <form class="form-horizontal" action="{{ route('categories-edit-process',['id' => $category->id]) }}" method="POST" >
+                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('categories-edit-process',['id' => $category->id]) }}" method="POST" >
                  @csrf
                     
                     {{-- Tên loại sản phẩm --}}
@@ -59,7 +59,7 @@
                     @endif
                     <div style="margin-top: 25px" class="input-group">
                         <label class="input-group-text" for="category_image">Chọn ảnh minh họa</label>
-                        <input hidden accept="image/*" type="file" id="category_image" name="category_image" value="{{$category->image }}" onchange="loadFile(event)">
+                        <input hidden accept="image/*" type="file" id="category_image" name="category_image"  onchange="loadFile(event)">
                         
                     </div>
                     {{-- Thông báo lỗi  --}}

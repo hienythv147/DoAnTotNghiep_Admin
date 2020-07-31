@@ -56,6 +56,17 @@ class ProductsController extends Controller
             $newProduct->category_id = $request->category_id;
             $newProduct->price = $request->product_price;
             if( $request->hasFile('product_image')){
+                $this->validate($request, 
+                    [
+                        //Kiểm tra đúng file đuôi .jpg,.jpeg,.png.gif và dung lượng không quá 2M
+                        'product_image' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                    ],			
+                    [
+                        //Tùy chỉnh hiển thị thông báo không thõa điều kiện
+                        'product_image.mimes' => 'Chỉ chấp nhận ảnh minh họa với đuôi .jpg .jpeg .png .gif',
+                        'product_image.max' => 'Ảnh giới hạn dung lượng không quá 2M',
+                    ]
+                );
                 $file = $request->product_image;
                 //Hàm lấy tên file
                 $file_name = time().'_'.$file->getClientOriginalName();
@@ -77,7 +88,7 @@ class ProductsController extends Controller
             }      
             else
             {
-                return back()->with('error_image','File không tồn tại!');
+                return back()->with('error_image','Chưa chọn file ảnh!');
             }
         }
         return back()->with('error_name','Tên sản phẩm đã tồn tại!');
@@ -105,56 +116,108 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product =  Products::find($id);
+        $editProduct = Products::find($id);
         $newName = $request->product_name;
-        //Nếu chỉ sửa loại hoặc giá tiền mà không đổi tên
-        if($product->name == $newName)
+        
+        // Kiểm tra xem  sp mới đã có hay chưa có = true không = false
+        $flag = $editProduct::where('name',$newName)->exists();
+        // Nếu tên sp chưa tồn tại
+        if(!$flag)  
         {
-            $product->category_id = $request->category_id;
-            $product->price = $request->product_price;
+            // Lưu lại tên và loại
+            $editProduct->name = $request->product_name;
+            $editProduct->category_id = $request->category_id;
+            $editProduct->price = $request->product_price;
+            // Kiểm tra có thay đổi hình hay không 
             if( $request->hasFile('product_image')){
+                $this->validate($request, 
+                    [
+                        //Kiểm tra đúng file đuôi .jpg,.jpeg,.png.gif và dung lượng không quá 2M
+                        'product_image' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                    ],			
+                    [
+                        //Tùy chỉnh hiển thị thông báo không thõa điều kiện
+                        'product_image.mimes' => 'Chỉ chấp nhận ảnh minh họa với đuôi .jpg .jpeg .png .gif',
+                        'product_image.max' => 'Ảnh giới hạn dung lượng không quá 2M',
+                    ]
+                );
+                // Xóa file cũ
+                $getImage = $editProduct["image"];
+                if($getImage != '' && file_exists(public_path('assets/images/products_image/'.$getImage)))
+                    unlink(public_path('assets/images/products_image/'.$getImage));
+                // Tiến hành lưu file mới
                 $file = $request->product_image;
                 //Hàm lấy tên file
                 $file_name = time().'_'.$file->getClientOriginalName();
-                $destinationPath = public_path('assets\images\products_image');
+                $destinationPath = public_path('assets/images/products_image');
                 //Chuyển file tới thư mục cần lưu
                 $file->move($destinationPath,$file_name);
-                $product->image = $file_name;
-                $product->save();
-                return back()->with('message_success','Sửa thành công!');
+                // Lưu file
+                $editProduct->image = $file_name;
+                $result = $editProduct->save();
+                if($result)
+                    return back()->with('message_success','Sửa thành công!');
+                else
+                    return back()->with('message_error','Sửa thất bại!');
             }      
             else
             {
-                return back()->with('error_image','File không tồn tại!');
-            }
-        }
-        //Nếu đổi tên sản phẩm
-        else{
-            $listProducts = new Products();
-            // Kiểm tra tên mới có trùng hay không
-            $flag = $listProducts::where('name',$request->product_name)->exists();
-            if(!$flag)
-            {
-                $product->category_id = $request->category_id;
-                $product->price = $request->product_price;
-                if( $request->hasFile('product_image')){
-                    $file = $request->product_image;
-                    //Hàm lấy tên file
-                    $file_name = time().'_'.$file->getClientOriginalName();
-                    $destinationPath = public_path('assets\images\products_image');
-                    //Chuyển file tới thư mục cần lưu
-                    $file->move($destinationPath,$file_name);
-                    $product->image = $file_name;
-                    $product->save();
+                $result = $editProduct->save();
+                if($result)
                     return back()->with('message_success','Sửa thành công!');
-                }      
                 else
-                {
-                    return back()->with('error_image','File không tồn tại!');
-                }
+                    return back()->with('message_error','Sửa thất bại!');
             }
-            return back()->with('error_name','Tên sản phẩm đã tồn tại!');
         }
+        // Nếu trùng tên
+        else if($editProduct->name == $newName)
+        {
+            // Lưu lại tên và loại
+            $editProduct->name = $request->product_name;
+            $editProduct->category_id = $request->category_id;
+            $editProduct->price = $request->product_price;
+            // Kiểm tra có thay đổi hình hay không 
+            if( $request->hasFile('product_image')){
+                $this->validate($request, 
+                    [
+                        //Kiểm tra đúng file đuôi .jpg,.jpeg,.png.gif và dung lượng không quá 2M
+                        'product_image' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                    ],			
+                    [
+                        //Tùy chỉnh hiển thị thông báo không thõa điều kiện
+                        'product_image.mimes' => 'Chỉ chấp nhận ảnh minh họa với đuôi .jpg .jpeg .png .gif',
+                        'product_image.max' => 'Ảnh giới hạn dung lượng không quá 2M',
+                    ]
+                );
+                // Xóa file cũ
+                $getImage = $editProduct["image"];
+                if($getImage != '' && file_exists(public_path('assets/images/products_image/'.$getImage)))
+                    unlink(public_path('assets/images/products_image/'.$getImage));
+                // Tiến hành lưu file mới
+                $file = $request->product_image;
+                //Hàm lấy tên file
+                $file_name = time().'_'.$file->getClientOriginalName();
+                $destinationPath = public_path('assets/images/products_image');
+                //Chuyển file tới thư mục cần lưu
+                $file->move($destinationPath,$file_name);
+                // Lưu file
+                $editProduct->image = $file_name;
+                $result = $editProduct->save();
+                if($result)
+                    return back()->with('message_success','Sửa thành công!');
+                else
+                    return back()->with('message_error','Sửa thất bại!');
+            }      
+            else
+            {
+                $result = $editCate->save();
+                if($result)
+                    return back()->with('message_success','Sửa thành công!');
+                else
+                    return back()->with('message_error','Sửa thất bại!');
+            }
+        }
+        return back()->with('error','Sản phẩm đã tồn tại!');
     }
 
     /**

@@ -61,6 +61,10 @@
                             </li>
                         </ul>
                     </li>
+                    <li style="margin: 10px 0px 10px 0px;" class="has-submenu">
+                        <a href="{{ route('statistic') }}">
+                            <i class="far fa-chart-bar"></i></i>THỐNG KÊ </a>
+                    </li>
                 </ul>
                 <!-- End navigation menu -->
 

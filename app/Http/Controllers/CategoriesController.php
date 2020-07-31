@@ -50,6 +50,17 @@ class CategoriesController extends Controller
             $category->name = $request->category_name;
             $category->category_type= $request->category_type;
             if( $request->hasFile('category_image')){
+                $this->validate($request, 
+                    [
+                        //Kiểm tra đúng file đuôi .jpg,.jpeg,.png.gif và dung lượng không quá 2M
+                        'category_image' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                    ],			
+                    [
+                        //Tùy chỉnh hiển thị thông báo không thõa điều kiện
+                        'category_image.mimes' => 'Chỉ chấp nhận ảnh minh họa với đuôi .jpg .jpeg .png .gif',
+                        'category_image.max' => 'Ảnh giới hạn dung lượng không quá 2M',
+                    ]
+                );
                 $file = $request->category_image;
                 //Hàm lấy tên file
                 $file_name = time().'_'.$file->getClientOriginalName();
@@ -71,7 +82,7 @@ class CategoriesController extends Controller
             }      
             else
             {
-                return back()->with('error_image','File không tồn tại!');
+                return back()->with('error_image','Chưa chọn file ảnh!');
             }
         }
         return back()->with('error_name','Loại sản phẩm đã tồn tại!');
@@ -111,46 +122,104 @@ class CategoriesController extends Controller
     {
         $editCate = Categories::find($id);
         $newCate = $request->category_name;
+        
+        // Kiểm tra xem loại sp mới đã có hay chưa có = true không = false
         $flag = $editCate::where('name',$newCate)->exists();
+        // Nếu tên loại sp mới
         if(!$flag)  
         {
+            // Lưu lại tên và loại
             $editCate->name = $request->category_name;
             $editCate->category_type = $request->category_type;
+            // Kiểm tra có thay đổi hình hay không 
             if( $request->hasFile('category_image')){
-                $file = $request->product_image;
+                $this->validate($request, 
+                    [
+                        //Kiểm tra đúng file đuôi .jpg,.jpeg,.png.gif và dung lượng không quá 2M
+                        'category_image' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                    ],			
+                    [
+                        //Tùy chỉnh hiển thị thông báo không thõa điều kiện
+                        'category_image.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
+                        'category_image.max' => 'Hình thẻ giới hạn dung lượng không quá 2M',
+                    ]
+                );
+                // Xóa file cũ
+                $getImage = $editCate["image"];
+                if($getImage != '' && file_exists(public_path('assets/images/categories_image/'.$getImage)))
+                    unlink(public_path('assets/images/categories_image/'.$getImage));
+                // Tiến hành lưu file mới
+                $file = $request->category_image;
                 //Hàm lấy tên file
                 $file_name = time().'_'.$file->getClientOriginalName();
-                $destinationPath = public_path('assets\images\products_image');
+                $destinationPath = public_path('assets/images/categories_image');
                 //Chuyển file tới thư mục cần lưu
                 $file->move($destinationPath,$file_name);
+                // Lưu file
                 $editCate->image = $file_name;
                 $result = $editCate->save();
                 if($result)
                     return back()->with('message_success','Sửa thành công!');
                 else
-                    return back()->with('message_success','Sửa thất bại!');
+                    return back()->with('message_error','Sửa thất bại!');
             }      
             else
             {
-                return back()->with('error_image','File không tồn tại!');
+                $result = $editCate->save();
+                if($result)
+                    return back()->with('message_success','Sửa thành công!');
+                else
+                    return back()->with('message_error','Sửa thất bại!');
             }
         }
+        // Nếu trùng tên
         else if($editCate->name == $newCate)
         {
+            // Lưu lại tên và loại
             $editCate->name = $request->category_name;
             $editCate->category_type = $request->category_type;
-            $result = $editCate->save();
-            if($result)
+            // Kiểm tra có thay đổi hình hay không 
+            if( $request->hasFile('category_image')){
+                $this->validate($request, 
+                    [
+                        //Kiểm tra đúng file đuôi .jpg,.jpeg,.png.gif và dung lượng không quá 2M
+                        'category_image' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                    ],			
+                    [
+                        //Tùy chỉnh hiển thị thông báo không thõa điều kiện
+                        'category_image.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
+                        'category_image.max' => 'Hình thẻ giới hạn dung lượng không quá 2M',
+                    ]
+                );
+                // Xóa file cũ
+                $getImage = $editCate["image"];
+                if($getImage != '' && file_exists(public_path('assets/images/categories_image/'.$getImage)))
+                    unlink(public_path('assets/images/categories_image/'.$getImage));
+                // Tiến hành lưu file mới
+                $file = $request->category_image;
+                //Hàm lấy tên file
+                $file_name = time().'_'.$file->getClientOriginalName();
+                $destinationPath = public_path('assets/images/categories_image');
+                //Chuyển file tới thư mục cần lưu
+                $file->move($destinationPath,$file_name);
+                // Lưu file
+                $editCate->image = $file_name;
+                $result = $editCate->save();
+                if($result)
+                    return back()->with('message_success','Sửa thành công!');
+                else
+                    return back()->with('message_error','Sửa thất bại!');
+            }      
+            else
             {
-                session()->flash('message_success', 'Sửa thành công!');
-                return redirect()->back();
-            }
-            else{
-                session()->flash('message_error', 'Sửa thất bại');
-                return redirect()->back();
+                $result = $editCate->save();
+                if($result)
+                    return back()->with('message_success','Sửa thành công!');
+                else
+                    return back()->with('message_error','Sửa thất bại!');
             }
         }
-        return redirect()->route('categories-edit',['id' => $id])->with('error','Loại sản phẩm đã tồn tại!');
+        return back()->with('error','Loại sản phẩm đã tồn tại!');
     }
 
     /**

@@ -80,7 +80,7 @@
                     @endif
                     <div style="margin-top: 25px" class="input-group">
 
-                    <img style="width:250px; height:250px;" id="output">
+                    <img style="width:250px; height:250px;" id="output" src={{ asset('assets/images/products_image/'.$product->image)}}>
 
                     </div>
                     <div style="margin-top: 25px" class="form-group justify-content-end row">
