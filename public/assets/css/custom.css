@@ -9,3 +9,48 @@
 .modal-scrollbar-measure {
     overflow: hidden !important; 
 }
+
+.modal-body {
+overflow-x: auto;
+}
+
+.page-item.active .page-link {
+    background-color: #b0b435;
+    border-color: #b0b435;
+}
+
+.page-item .page-link {
+    border-radius: 30px!important;
+    margin: 0 3px;
+    border: none;
+}
+
+.page-link:hover {
+    z-index: 2;
+    color: #414d5f;
+    text-decoration: none;
+}
+
+#result.list-group{
+    position: absolute; 
+    z-index: 12; 
+    font-family: 'Poppins', sans-serif !important; 
+    width: 100%; 
+    margin-top: 50px;
+    flex: 1 1 0; /* flex: 1, which you had before, is equivalent but doesn't work */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 300px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#result::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#result {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

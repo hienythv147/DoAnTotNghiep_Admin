@@ -1,4 +1,8 @@
+
 @extends('layout_user')
+@section('css')
+<link rel="stylesheet" href="{{ asset('assets/css/cart.css') }}">
+@endsection
 
 @section('body')
 <!-- Start All Title Box -->
@@ -23,13 +27,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-main table-responsive">
-                    <table class="table">
+                    <table class="table" id="cart-table">
                         <thead>
                             <tr>
                                 <th>Hình ảnh</th>
                                 <th>Sản phẩm</th>
                                 <th>Giá</th>
-                                <th>Số lượng</th>
+                                <th style="text-align: center">Số lượng</th>
                                 <th>Tổng tiền</th>
                                 <th style="text-align: center">Xóa</th>
                             </tr>
@@ -37,62 +41,56 @@
                         <tbody>
                             @if(isset($cart))
                             @foreach($cart as $item)
-                            <tr>
+                            <tr style="font-weight: 1000">
                                 <td class="thumbnail-img">
                                     <a href="#">
                                 @if(!empty($item['image']))
-                                <img class="img-fluid" src="{{ asset('assets/images/products_image/'.$item['image']) }}" alt=""/> 
+                                <a href="{{ Route('product_detail', $item['id']) }}"><img class="img-fluid" src="{{ asset('assets/images/products_image/'.$item['image']) }}" alt=""/></a>
                                 @else
                                 <img class="img-fluid" src="{{ asset('assets/images/not_found.png') }}" alt=""/> 
                                 @endif
                             </a>
                                 </td>
                                 <td class="name-pr">
-                                    <a href="#">
-                                {{ $item['name'] }}
-                            </a>
+                                    <a href="{{ Route('product_detail', $item['id']) }}">
+                                        {{ $item['name'] }}
+                                    </a>
                                 </td>
                                 <td class="price-pr">
-                                    <p>$ {{ $item['price'] }}</p>
+                                    <p>{{ $item['price'] }} VND</p>
                                 </td>
-                                <td class="quantity-box"><input type="number" size="4" value="{{ $item['amount'] }}" min="0" step="1" class="c-input-text qty text"></td>
+                                <td style="text-align: center">
+                                    {{ $item['amount'] }}
+                                </td>
                                 <td class="total-pr">
-                                    <p>$ {{ $item['price'] * $item['amount'] }}</p>
+                                    <p>{{ $item['price'] * $item['amount'] }} VND</p>
                                 </td>
-                                <td class="remove-pr">
-                                    <a href="#">
-                                <i class="fas fa-times"></i>
-                            </a>
+                                <td style="text-align: center">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="deleteRow(this, {{ $item['id'] }})" style="float: none;">
+                                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
                             @else 
                             <tr>
-                                <td class="name-pr">
+                                <td>
+                                </td> 
+                                <td>
+                                </td> 
+                                <td>
+                                <td class="name-pr" style="font-weight: 1000">
                                     <p>Không có sản phẩm</p>
-                                </td>   
+                                </td>  
+                                </td> 
+                                <td>
+                                </td> 
+                                <td>
+                                </td>  
                             </tr>
                             @endif
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="row my-5">
-            <div class="col-lg-6 col-sm-6">
-                <div class="coupon-box">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control" placeholder="Nhập mã giảm giá" aria-label="Coupon code" type="text">
-                        <div class="input-group-append">
-                            <button class="btn btn-theme" type="button">Chọn mã</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-sm-6">
-                <div class="update-box">
-                    <input value="Cập nhật" type="submit">
                 </div>
             </div>
         </div>
@@ -126,34 +124,86 @@
                     </div>
                     <hr> </div>
             </div>
-            <div class="col-12 d-flex shopping-box">
+            <div style="width: 100%">
                 <button type="button" class="ml-auto btn hvr-hover" style="color: #ffffff; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 600"
                      data-toggle="modal" data-target="#exampleModal">Thanh toán</a> 
                 </button>
-            </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="font-family: 'Poppins', sans-serif;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel"><strong>Xác nhận thanh toán</strong></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <a href="{{ Route('cart') }}">
+                    <button type="button" class="ml-auto btn hvr-hover" style="color: #ffffff; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 600; margin-right: 20px">
+                        Cập nhật
                     </button>
-                </div>
-                <div class="modal-body">
-                    Bạn có đồng ý thanh toán hóa đơn này?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn hvr-hover" data-dismiss="modal"
-                    style="color: #ffffff; font-size: 14px; font-weight: 600; background: grey">Hủy bỏ</button>
-                    <a href="{{ Route('create_order') }}" type="button" id="button-accept" class="btn hvr-hover"
-                    style="color: #ffffff; font-size: 14px; font-weight: 600">Đồng ý</a>
-                </div>
-                </div>
+                </a>
             </div>
         </div>
+        <div id="exampleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; font-family: 'Poppins', sans-serif;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background: #b0b435;">
+                        <h3 class="modal-title">Xác Nhận Thanh Toán</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    </div>
+                    <form action="{{ Route('process_payment') }}" method="post" enctype="application/x-www-form-urlencoded">
+                        @csrf
+                        <div class="modal-body p-4">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">Họ</label>
+                                        <input type="text" class="form-control" id="field-1" placeholder="Nhập họ của bạn" name="last_name" value="{{ Auth::user()->last_name }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-2" class="control-label">Tên</label>
+                                        <input type="text" class="form-control" id="field-2" placeholder="Nhập tên của bạn" name="first_name" value="{{ Auth::user()->first_name }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-4" class="control-label">Email</label>
+                                        <input type="text" class="form-control" id="field-4" placeholder="Nhập email" name="email" value="{{ Auth::user()->email }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-5" class="control-label">Số Điện Thoại</label>
+                                        <input type="text" class="form-control" id="field-5" placeholder="Nhập số điện thoại" name="phone_number" value="{{ Auth::user()->phone_number }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="field-3" class="control-label">Địa Chỉ</label>
+                                        <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" name="address" value="{{ Auth::user()->address }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group no-margin">
+                                        <label for="field-7" class="control-label">Thanh Toán Online</label>
+                                        <div>
+                                            <input type="checkbox" class="control-label" name="momo" id="field-7" style="cursor: pointer;">
+                                            <label for="field-7" class="control-label" style="cursor: pointer;"> Ví Momo</label>
+                                        </div>
+                                        <img src="{{ asset('assets/images/momo.png') }}" style="width: 100px; height:100px">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer" style="background">
+                            <button type="button" class="btn hvr-hover" data-dismiss="modal"
+                            style="color: #ffffff; font-size: 14px; font-weight: 600; background: grey">Hủy bỏ</button>
+                            <button type="submit" id="button-accept" class="btn hvr-hover"
+                            style="color: #ffffff; font-size: 14px; font-weight: 600">Đồng ý</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- /.modal -->
     </div>
 </div>
 <!-- End Cart -->

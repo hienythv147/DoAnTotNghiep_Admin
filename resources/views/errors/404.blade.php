@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="id" dir="ltr">
 
@@ -11,271 +9,35 @@
 
      <!-- Title -->
      <title>Sorry, This Page Can&#39;t Be Accessed</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous" />
      <style>
-        html,
-body {
-  height: 100%;
-}
-body {
-  display: grid;
-  font-family: Inconsolata, monospace;
-}
-body div#error {
-  position: relative;
-  margin: auto;
-  padding: 20px;
-  z-index: 2;
-}
-body div#error div#box {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 1px solid #000;
-}
-body div#error div#box:before,
-body div#error div#box:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  box-shadow: inset 0px 0px 0px 1px #000;
-  mix-blend-mode: multiply;
-  animation: dance 2s infinite steps(1);
-}
-body div#error div#box:before {
-  clip-path: polygon(0 0, 65% 0, 35% 100%, 0 100%);
-  box-shadow: inset 0px 0px 0px 1px currentColor;
-  color: #f0f;
-}
-body div#error div#box:after {
-  clip-path: polygon(65% 0, 100% 0, 100% 100%, 35% 100%);
-  animation-duration: 0.5s;
-  animation-direction: alternate;
-  box-shadow: inset 0px 0px 0px 1px currentColor;
-  color: #0ff;
-}
-body div#error h3 {
-  position: relative;
-  font-size: 5vw;
-  font-weight: 700;
-  text-transform: uppercase;
-  animation: blink 1.3s infinite steps(1);
-}
-body div#error h3:before,
-body div#error h3:after {
-  content: 'ERROR 500';
-  position: absolute;
-  top: -1px;
-  left: 0;
-  mix-blend-mode: soft-light;
-  animation: dance 2s infinite steps(2);
-}
-body div#error h3:before {
-  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-  color: #f0f;
-  animation: shiftright 2s steps(2) infinite;
-}
-body div#error h3:after {
-  clip-path: polygon(0 100%, 100% 100%, 100% 50%, 0 50%);
-  color: #0ff;
-  animation: shiftleft 2s steps(2) infinite;
-}
-body div#error p {
-  position: relative;
-  margin-bottom: 8px;
-}
-body div#error p span {
-  position: relative;
-  display: inline-block;
-  font-weight: bold;
-  color: #000;
-  animation: blink 3s steps(1) infinite;
-}
-body div#error p span:before,
-body div#error p span:after {
-  content: 'unstable';
-  position: absolute;
-  top: -1px;
-  left: 0;
-  mix-blend-mode: multiply;
-}
-body div#error p span:before {
-  clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
-  color: #f0f;
-  animation: shiftright 1.5s steps(2) infinite;
-}
-body div#error p span:after {
-  clip-path: polygon(0 100%, 100% 100%, 100% 50%, 0 50%);
-  color: #0ff;
-  animation: shiftleft 1.7s steps(2) infinite;
-}
-@-moz-keyframes dance {
-  0%, 84%, 94% {
-    transform: skew(0deg);
-  }
-  85% {
-    transform: skew(5deg);
-  }
-  90% {
-    transform: skew(-5deg);
-  }
-  98% {
-    transform: skew(3deg);
-  }
-}
-@-webkit-keyframes dance {
-  0%, 84%, 94% {
-    transform: skew(0deg);
-  }
-  85% {
-    transform: skew(5deg);
-  }
-  90% {
-    transform: skew(-5deg);
-  }
-  98% {
-    transform: skew(3deg);
-  }
-}
-@-o-keyframes dance {
-  0%, 84%, 94% {
-    transform: skew(0deg);
-  }
-  85% {
-    transform: skew(5deg);
-  }
-  90% {
-    transform: skew(-5deg);
-  }
-  98% {
-    transform: skew(3deg);
-  }
-}
-@keyframes dance {
-  0%, 84%, 94% {
-    transform: skew(0deg);
-  }
-  85% {
-    transform: skew(5deg);
-  }
-  90% {
-    transform: skew(-5deg);
-  }
-  98% {
-    transform: skew(3deg);
-  }
-}
-@-moz-keyframes shiftleft {
-  0%, 87%, 100% {
-    transform: translate(0, 0) skew(0deg);
-  }
-  84%, 90% {
-    transform: translate(-8px, 0) skew(20deg);
-  }
-}
-@-webkit-keyframes shiftleft {
-  0%, 87%, 100% {
-    transform: translate(0, 0) skew(0deg);
-  }
-  84%, 90% {
-    transform: translate(-8px, 0) skew(20deg);
-  }
-}
-@-o-keyframes shiftleft {
-  0%, 87%, 100% {
-    transform: translate(0, 0) skew(0deg);
-  }
-  84%, 90% {
-    transform: translate(-8px, 0) skew(20deg);
-  }
-}
-@keyframes shiftleft {
-  0%, 87%, 100% {
-    transform: translate(0, 0) skew(0deg);
-  }
-  84%, 90% {
-    transform: translate(-8px, 0) skew(20deg);
-  }
-}
-@-moz-keyframes shiftright {
-  0%, 87%, 100% {
-    transform: translate(0, 0) skew(0deg);
-  }
-  84%, 90% {
-    transform: translate(8px, 0) skew(20deg);
-  }
-}
-@-webkit-keyframes shiftright {
-  0%, 87%, 100% {
-    transform: translate(0, 0) skew(0deg);
-  }
-  84%, 90% {
-    transform: translate(8px, 0) skew(20deg);
-  }
-}
-@-o-keyframes shiftright {
-  0%, 87%, 100% {
-    transform: translate(0, 0) skew(0deg);
-  }
-  84%, 90% {
-    transform: translate(8px, 0) skew(20deg);
-  }
-}
-@keyframes shiftright {
-  0%, 87%, 100% {
-    transform: translate(0, 0) skew(0deg);
-  }
-  84%, 90% {
-    transform: translate(8px, 0) skew(20deg);
-  }
-}
-@-moz-keyframes blink {
-  0%, 50%, 85%, 100% {
-    color: #000;
-  }
-  87%, 95% {
-    color: transparent;
-  }
-}
-@-webkit-keyframes blink {
-  0%, 50%, 85%, 100% {
-    color: #000;
-  }
-  87%, 95% {
-    color: transparent;
-  }
-}
-@-o-keyframes blink {
-  0%, 50%, 85%, 100% {
-    color: #000;
-  }
-  87%, 95% {
-    color: transparent;
-  }
-}
-@keyframes blink {
-  0%, 50%, 85%, 100% {
-    color: #000;
-  }
-  87%, 95% {
-    color: transparent;
-  }
-}
-
+        #footer{
+            text-align: center;
+            position: fixed;
+            margin-left: 530px;
+            bottom: 0px
+        }
      </style>
 </head>
 
-<body>
-    <div id="error">
-        <div id="box"></div>
-        <h3>ERROR 500</h3>
-        <p>Things are a little <span>unstable</span> here</p>
-        <p>I suggest come back later</p>
-    </div>
+<body class="bg-dark text-white py-5">
+     <div class="container py-5">
+          <div class="row">
+               <div class="col-md-2 text-center">
+                    <p><i class="fa fa-exclamation-triangle fa-5x"></i><br/>Mã trạng thái: 404</p>
+               </div>
+               <div class="col-md-10">
+                    <h3>OPPSSS!!!! Xin lỗi...</h3>
+                    <p>Không tìm thấy trang. Đảm bảo địa chỉ chính xác và trang chưa được di chuyển.</br> Vui lòng quay lại trang trước để tiếp tục duyệt.</p>
+                    <a class="btn btn-danger" href="javascript:history.back()">Quay lại</a>
+               </div>
+          </div>
+     </div>
+
+     <div id="footer" class="text-center">
+        All Rights Reserved. &copy; 2020 <a href="{{ Route('home') }}">ThewayShop</a>
+     </div>
 </body>
 
 </html>

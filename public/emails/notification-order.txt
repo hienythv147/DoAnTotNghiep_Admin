@@ -205,7 +205,7 @@
         <td style="padding:18px 20px 18px 30px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: inherit">Mã Hóa Đơn: order_id</div>
           <div style="font-family: inherit; text-align: inherit"><span style="color: #0055ff"><strong>Thời Gian Giao Hàng Dự Kiến: expected_time</strong></span></div>
           <div style="font-family: inherit; text-align: inherit"><br></div>
-          <div style="font-family: inherit; text-align: inherit">datetime_order</div>
+          <div style="font-family: inherit; text-align: inherit">Ngày lập: datetime_order</div>
           <div style="font-family: inherit; text-align: inherit">Cửa hàng: Cafe SP</div>
           <div style="font-family: inherit; text-align: inherit">157 Dương Bá Trạc, Phường 1, Quận 8 TP HCM&nbsp;</div><div></div></div></td>
       </tr>

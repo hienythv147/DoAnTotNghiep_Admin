@@ -53,7 +53,7 @@ class HomeController extends Controller
         $subTotal = 0;
         if(!empty($cart)) {
             foreach($cart as $item) {
-                $subTotal += $item['price'];
+                $subTotal += $item['price'] * $item['amount'];
             }
         }
         return view('home.cart', compact('cart', 'subTotal'));
@@ -134,5 +134,28 @@ class HomeController extends Controller
             session()->flash('message_success', 'Thêm thành công');
             return redirect()->back();
         } 
+    }
+
+    public function removeProduct(Request $request) {
+        $id = $request->id;
+        $data = Session::get('cart', null);
+        if($request->ajax()) {
+            for($i = 0; $i < count($data); $i++) {
+                if($data[$i]['id'] == $id) {
+                    array_splice($data, $i, 1);
+                }
+            }
+            Session::pull('cart', null);
+            Session::put('cart', $data);
+            return response()->json($data);
+        }
+    }
+
+    public function liveSearch(Request $request) {
+        if($request->ajax()) {
+            $products = Products::all();
+            $products = $products->toArray();
+            return response()->json($products);
+        }
     }
 }

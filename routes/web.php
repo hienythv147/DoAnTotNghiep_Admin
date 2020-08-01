@@ -128,4 +128,19 @@ Route::get('/about', function () {
 })->name('about');
 
 // Route order products
-Route::get('/create-order', 'OrderController@createOrder')->name('create_order')->middleware('auth');
+Route::post('/process-payment', 'OrderController@processPayment')->name('process_payment')->middleware('auth');
+
+// Route order products
+Route::get('/process-result-momo', 'OrderController@processResultMomo')->name('process_result_momo')->middleware('auth');
+
+// Route history order
+Route::get('/history-order', 'OrderController@historyOrder')->name('history_order')->middleware('auth');
+
+// Route history order detail
+Route::get('/history-order-detail/{id}', 'OrderController@historyOrderDetail')->middleware('auth');
+
+// Route remove product
+Route::get('/remove-product', 'HomeController@removeProduct')->middleware('auth');
+
+// Reute live search
+Route::get('/live-search', 'HomeController@liveSearch');

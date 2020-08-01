@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <div class="banner-frame"> <img class="img-fluid" src="images/about-img.jpg" alt="" />
+                <div class="banner-frame"> <img class="img-fluid" src="" alt="" />
                 </div>
             </div>
             <div class="col-lg-6">

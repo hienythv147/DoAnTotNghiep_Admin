@@ -3,67 +3,75 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Orders_out;
 use App\Orders_out_detail;
 use Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 
 class OrderController extends Controller
 {
-    public function createOrder(Request $request) {
-        $order = new Orders_out();
+    public function processPayment(Request $request) {
         $data = $request->session()->get('cart', null);
+        $total = 0;
         if(!empty($data)) {
-            $total = 0;
-            // save new order
             foreach($data as $item) {
                 $total += $item['price'] * $item['amount'];
             }
-            $userId =  Auth::user()['id'];
-            $roleId = Auth::user()['role_id'];
-            $userEmail =  Auth::user()['email'];
-            // check role is staff
-            $order->user_id = $userId;
-            $order->total = $total;
-            $result = $order->save();
-            if($result == false) {
-                session()->flash('message_error', 'Thanh toán thất bại. Vui lòng thử lại sau');
-                return redirect()->back();
-            }
-            // save new order detail
-            // get last id of table order
-            $orderId = Orders_out::all()->last()['id'];
-            foreach($data as $item) {
-                $orderDetail = new Orders_out_detail();
-                $orderDetail->order_out_id = $orderId;
-                $orderDetail->product_id = $item['id'];
-                $orderDetail->price = $item['price'];
-                $orderDetail->amount = $item['amount'];
-                $resultDetail = $orderDetail->save();
-                if($resultDetail == false) {
-                    session()->flash('message_error', 'Thanh toán thất bại. Vui lòng thử lại sau');
-                    return redirect()->back();
-                }
-            }
-            // send mail if user is customer
-            if($roleId == 3) {
-                $this->sendMail($orderId, $total, $data, $userEmail, true);
-            }
-            // send email for admin
-            $this->sendMail($orderId, $total, $data);
-            // clear order session
-            $request->session()->pull('cart');
-            // flash session
-            session()->flash('message_success', 'Thanh toán thành công');
-            return redirect('/home');
+        } else {
+            session()->flash('message_error', 'Giỏ hàng rỗng');
+            return redirect()->back();
         }
-        session()->flash('message_error', 'Giỏ hàng rỗng');
-        return redirect()->back();
+        $userId =  Auth::user()['id'];
+        $roleId = Auth::user()['role_id'];
+        $userEmail =  Auth::user()['email'];
+        // Check payment momo
+        if($request->momo == 'on') {
+            $endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
+            $partnerCode = 'MOMORPLR20200727';
+            $accessKey = '5HrD4Ed8cgIuoLnu';
+            $serectkey = 'hOoRGC1IcOLQOpG5NQICKjTDuKnVGYfj';
+            $orderId = time() . "";
+            $orderInfo = "Thanh toán Momo";
+            $amount = $total . "";
+            $notifyurl = 'Http://'.$_SERVER['HTTP_HOST'];
+            $returnUrl = 'Http://'.$_SERVER['HTTP_HOST'].'/process-result-momo';
+            $extraData = "merchantName=MOMORPLR20200727";
+
+            $requestId = time() . "";
+            $extraData = "email=abc@gmail.com";
+            $requestType = "captureMoMoWallet";
+            $rawHash = "partnerCode=" . $partnerCode . "&accessKey=" . $accessKey . "&requestId=" . $requestId . "&amount=" . $amount . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&returnUrl=" . $returnUrl . "&notifyUrl=" . $notifyurl . "&extraData=" . $extraData;
+            $signature = hash_hmac("sha256", $rawHash, $serectkey);
+            $dataMomo = [
+                'partnerCode' => $partnerCode,
+                'accessKey' => $accessKey,
+                'requestId' => $requestId,
+                'amount' => $amount,
+                'orderId' => $orderId,
+                'orderInfo' => $orderInfo,
+                'returnUrl' => $returnUrl,
+                'notifyUrl' => $notifyurl,
+                'extraData' => $extraData,
+                'requestType' => $requestType,
+                'signature' => $signature
+            ];
+            $response = Http::post($endpoint, $dataMomo);
+            $jsonResult = json_decode($response, true);
+            // check response OK
+            if($jsonResult['errorCode'] == 0) {
+                return redirect()->to($jsonResult['payUrl'])->send();
+            }
+        }   
+        $result = $this->createOrder($data, $total, $userId, $roleId, $userEmail);
+        return redirect($result);
     }
 
     // Send mail by Sendgrid
-    public function sendMail($orderId, $total, $data, $userEmail = null, $isUser = false) {
+    public function sendMail($orderId, $total, $data, $created_at, $userEmail = null, $isUser = false) {
         // mail from
         $emailFrom = "xuansang3105@gmail.com";
         // name from
@@ -91,6 +99,7 @@ class OrderController extends Controller
         $urlOrder = 'http://'.$_SERVER['HTTP_HOST'].'/Admin/orders-out/detail/'.$orderId;
         // get new content email
         $newContent = str_replace('order_id', $orderId, $content);
+        $newContent = str_replace('datetime_order', $created_at, $newContent);
         $newContent = str_replace('expected_time', '45 phút', $newContent);
         $newContent = str_replace('list_products', $listProducts, $newContent);
         $newContent = str_replace('sub_total', $total.'VND', $newContent);
@@ -98,7 +107,7 @@ class OrderController extends Controller
         $newContent = str_replace('ship_code', '15000VND', $newContent);
         $newContent = str_replace('grand_total', $total + 15000 . "VND", $newContent);
         if($isUser) {
-            $newContent = str_replace('url_order', 'http://'.$_SERVER['HTTP_HOST'], $newContent);
+            $newContent = str_replace('url_order', 'http://'.$_SERVER['HTTP_HOST'].'/history-order', $newContent);
         } else {
             $newContent = str_replace('url_order', $urlOrder, $newContent);
         }
@@ -116,5 +125,92 @@ class OrderController extends Controller
         $sendgrid = new \SendGrid($key);
         $response = $sendgrid->send($email);
         return $response;
+    }
+
+    public function createOrder($data, $total, $userId, $roleId, $userEmail) {
+        if(!empty($data)) {
+            $order = new Orders_out();
+            // check role is staff
+            $order->user_id = $userId;
+            $order->total = $total;
+            $result = $order->save();
+            if($result == false) {
+                session()->flash('message_error', 'Thanh toán thất bại. Vui lòng thử lại sau');
+                return '/cart';
+            }
+            // get created date
+            $created_at = $order->created_at;
+            // get last id of table order
+            $orderId = Orders_out::all()->last()['id'];
+            // save new order detail
+            foreach($data as $item) {
+                $orderDetail = new Orders_out_detail();
+                $orderDetail->order_out_id = $orderId;
+                $orderDetail->product_id = $item['id'];
+                $orderDetail->price = $item['price'];
+                $orderDetail->amount = $item['amount'];
+                $resultDetail = $orderDetail->save();
+                if($resultDetail == false) {
+                    session()->flash('message_error', 'Thanh toán thất bại. Vui lòng thử lại sau');
+                    return '/cart';
+                }
+            }
+            // send mail if user is customer
+            if($roleId == 3) {
+                $this->sendMail($orderId, $total, $data, $created_at, $userEmail, true);
+            }
+            // send email for admin
+            $this->sendMail($orderId, $total, $data, $created_at);
+            // clear order session
+            Session::pull('cart');
+            // flash session
+            session()->flash('message_success', 'Thanh toán thành công');
+            return "/home";
+        }
+        session()->flash('message_error', 'Giỏ hàng rỗng');
+        return "/cart";
+    }
+
+    public function processResultMomo(Request $request) {
+        if($request->errorCode == 0) {
+            $data = $request->session()->get('cart', null);
+            $total = 0;
+            if(!empty($data)) {
+                foreach($data as $item) {
+                    $total += $item['price'] * $item['amount'];
+                }
+            } else {
+                session()->flash('message_error', 'Giỏ hàng rỗng');
+                return redirect('/cart');
+            }
+            $userId =  Auth::user()['id'];
+            $roleId = Auth::user()['role_id'];
+            $userEmail =  Auth::user()['email'];
+            // create order
+            $result = $this->createOrder($data, $total, $userId, $roleId, $userEmail);
+            return redirect($result);
+        }
+        session()->flash('message_error', $request->localMessage);
+        return redirect('/cart');
+    }
+
+    public function historyOrder() {
+        $orders = Orders_out::orderBy('created_at', 'DESC')->paginate(10);
+        return view('home.history_order', compact('orders'));
+    }
+
+    public function historyOrderDetail(Request $request) {
+        $orderId = $request->id;
+        if ($request->ajax()) {
+            if(!empty($orderId)) {
+                $query = DB::table('orders_out')
+                ->join('orders_out_detail', 'orders_out.id', '=', 'orders_out_detail.order_out_id')
+                ->join('products', 'products.id', '=', 'orders_out_detail.product_id')
+                ->select('products.name', 'orders_out_detail.price', 'orders_out_detail.amount')
+                ->where('orders_out.id', '=', $orderId)
+                ->get();
+                return response()->json($query->toArray());
+            }
+        }
     }
 }

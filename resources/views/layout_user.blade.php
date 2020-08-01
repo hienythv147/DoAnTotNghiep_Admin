@@ -22,13 +22,15 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
+    <!-- Sweetalert2 CSS -->
+    <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css">
     <!-- Site CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
-
+    @yield('css');
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js') }}"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js') }}"></script>
@@ -66,7 +68,17 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="{{ route('logout') }}" style="color: black"
+                                        @if(Auth::user()->role_id == 1)
+                                        <a class="dropdown-item" href="{{ route('admin-home') }}" style="color: black; padding: 10px">
+                                            Admin
+                                        </a>
+                                        @endif
+                                        @if(Auth::user()->role_id == 3)
+                                        <a class="dropdown-item" href="{{ route('history_order') }}" style="color: black; padding: 10px">
+                                            Lịch sử
+                                        </a>
+                                        @endif
+                                        <a class="dropdown-item" href="{{ route('logout') }}" style="color: black; padding: 10px"
                                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
                                             Đăng xuất
@@ -142,26 +154,22 @@
                 <!-- /.navbar-collapse -->
 
                 <!-- Start Atribute Navigation -->
-                @guest
+                
                 <div class="attr-nav">
-                        <ul>
-                            <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        </ul>
-                    </div>
-                @else
-                    <div class="attr-nav">
-                        <ul>
-                            <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                            <li class="side-menu">
-                                <a href="#">
-                                    <i class="fa fa-shopping-bag"></i>
-                                    <span class="badge" style="color: red" id="cart_amount">{{ empty(Session::get('cart', null)) ? '' : count(Session::get('cart', null)) }}</span>
-                                    <p>GIỎ HÀNG</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                @endguest
+                    <ul>
+                        <li class="search" onclick="clearSearch()"><a href="#"><i class="fa fa-search"></i></a></li>
+                        @auth
+                        <li class="side-menu">
+                            <a href="#">
+                                <i class="fa fa-shopping-bag"></i>
+                                <span class="badge" style="color: red" id="cart_amount">{{ empty(Session::get('cart', null)) ? '' : count(Session::get('cart', null)) }}</span>
+                                <p>GIỎ HÀNG</p>
+                            </a>
+                        </li>
+                        @endauth
+                    </ul>
+                   
+                </div>
                 <!-- End Atribute Navigation -->
             </div>
             <!-- Start Side Menu -->
@@ -204,11 +212,15 @@
         <div class="container">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                <input style="font-family: 'Poppins', sans-serif" id="search"type="text" class="form-control" placeholder="Tìm kiếm" autocomplete="off">
+                <span class="input-group-addon close-search" onclick="clearSearch()"><i class="fa fa-times"></i></span>
+                <ul class="list-group" id="result"></ul>
             </div>
         </div>
     </div>
+    <!-- <div class="container" s>
+        
+    </div> -->
     <!-- End Top Search -->
 
     <!-- Start Body -->
@@ -339,6 +351,7 @@
     <script src="{{ asset('assets/js/baguetteBox.min.js') }}"></script>
     <script src="{{ asset('assets/js/form-validator.min.js') }}"></script>
     <script src="{{ asset('assets/js/contact-form-script.js') }}"></script>
+    <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script src="{{ asset('assets/js/common.js') }}"></script>
 </body>
