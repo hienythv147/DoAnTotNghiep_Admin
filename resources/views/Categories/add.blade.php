@@ -16,17 +16,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Loại sản phẩm</span>
                         </div>
-                        <input value="{{old('category_name') }}" name="category_name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập loại sản phẩm">
+                        <input value="{{old('name') }}" name="name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập loại sản phẩm">
                     </div>
                     {{-- Thông báo lỗi --}}
-                    @if($errors->has('category_name'))
+                    @if($errors->has('name'))
                     <small class="form-text text-muted">
-                        <p style="color: red;">{{ $errors->first('category_name')}}</p>
-                        </small>
-                    @endif
-                    @if(session('error'))
-                    <small class="form-text text-muted">
-                        <p style="color: red;">{{ session('error')}}</p>
+                        <p style="color: red;">{{ $errors->first('name')}}</p>
                         </small>
                     @endif
                     
@@ -56,12 +51,6 @@
                     @if($errors->has('category_image'))
                     <small class="form-text text-muted" >
                         <p style="color: red;">{{ $errors->first('category_image')}}</p>
-                        </small>
-                    @endif
-                    {{-- Thông báo lỗi --}}
-                    @if(session('error_image'))
-                    <small class="form-text text-muted">
-                        <p style="color: red;">{{ session('error_image') }}</p>
                         </small>
                     @endif
                     <div style="margin-top: 25px" class="input-group">

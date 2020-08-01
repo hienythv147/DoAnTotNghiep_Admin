@@ -44,14 +44,16 @@ class RolesController extends Controller
     public function store(RolesRequest $request)
     {
         $newRoles = new Roles();
-        $flag = $newRoles::where('name',$request->role_name)->exists();
-        if (!$flag)
-        {
-            $newRoles->name  = $request->role_name;
-            $newRoles->save();
-            return redirect()->route('roles-list');
-        }
-        return redirect()->route('roles-add');
+        $this->validate($request,
+        [
+            'name' => 'unique:roles'
+        ],
+        [
+            'name.unique' => 'Loại nhân viên đã tồn tại.'
+        ]);
+        $newRoles->name  = $request->name;
+        $newRoles->save();
+        return back()->with('message_success','Thêm thành công.');
     }
 
     /**
@@ -87,17 +89,24 @@ class RolesController extends Controller
     public function update(RolesRequest $request, $id)
     {
         $role = Roles::find($id);
-        $role_name = $request->role_name;
-        $flag = $role::where('name',$role_name)->exists();
-        if (!$flag) {
-            $role->name = $role_name;
-            $role->save(); 
+        if($role->name == $request->name)
+        {
+            $role->save();
+            return back()->with('message_success','Chưa thay đổi dữ liệu nhưng ok thành công :)).');
         }
         else
         {
-            return redirect()->route('roles-edit-process',['id' => $role->id])->with('error','Loại nhân viên đã tồn tại');
-        }      
-        return redirect()->route('roles-list');
+            $this->validate($request,
+            [
+                'name' => 'unique:roles'
+            ],
+            [
+                'name.unique' => 'Loại nhân viên đã tồn tại.'
+            ]);
+            $role->name  = $request->name;
+            $role->save();
+            return back()->with('message_success','Sửa thành công.');
+        }
     }
 
     /**

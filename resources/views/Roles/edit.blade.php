@@ -14,18 +14,12 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Loại nhân viên</span>
                         </div>
-                        <input name="role_name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập loại nhân viên" value="{{ $role->name }}">
+                        <input name="name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập loại nhân viên" value="{{ $role->name }}">
                     </div>
                     {{-- Thông báo lỗi --}}
-                    @if($errors->has('role_name'))
+                    @if($errors->has('name'))
                     <small class="form-text text-muted">
-                        <p style="color: red;">{{ $errors->first('role_name')}}</p>
-                        </small>
-                    @endif
-                    {{-- Thông báo lỗi --}}
-                    @if(session('error'))
-                    <small class="form-text text-muted">
-                        <p style="color: red;">{{ session('error') }}</p>
+                        <p style="color: red;">{{ $errors->first('name')}}</p>
                         </small>
                     @endif
 

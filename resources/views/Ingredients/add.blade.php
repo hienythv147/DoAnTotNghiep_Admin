@@ -15,18 +15,13 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Tên nguyên liệu</span>
                         </div>
-                        <input name="ingredient_name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập tên nguyên liệu" value="{{ old('ingredient_name') }}">
+                        <input name="name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập tên nguyên liệu" value="{{ old('name') }}">
                     </div>
                     {{-- End --}}
                     {{-- Thông báo lỗi --}}
-                    @if($errors->has('ingredient_name'))
+                    @if($errors->has('name'))
                     <small class="form-text text-muted">
-                        <p style="color: red;">{{ $errors->first('ingredient_name')}}</p>
-                        </small>
-                    @endif
-                    @if(session('error_name'))
-                    <small class="form-text text-muted">
-                        <p style="color: red;">{{ session('error_name')}}</p>
+                        <p style="color: red;">{{ $errors->first('name')}}</p>
                         </small>
                     @endif
                     {{-- Đơn vị tính --}}
@@ -43,19 +38,6 @@
                          <p style="color: red;">{{ $errors->first('ingredient_unit')}}</p>
                          </small>
                      @endif
-                    {{-- End --}}
-                    {{-- Loại nguyên liệu --}}
-                    {{-- <div class="input-group" style="margin-top: 25px">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Đơn vị</label>
-                        </div>
-                        <select name="ingredient_unit" class="custom-select" id="inputGroupSelect01">
-                            <option value="g" selected>Gam</option>
-                            <option value="Gói">Gói</option>
-                            <option value="Chai">Chai</option>
-                            <option value="ml">Ml</option>
-                        </select>
-                    </div> --}}
                     <div class="input-group" style="margin-top: 25px">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Số lượng</span>

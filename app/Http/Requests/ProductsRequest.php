@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use App\Products;
 class ProductsRequest extends FormRequest
 {
     /**
@@ -24,7 +24,7 @@ class ProductsRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_name' => 'bail | required | regex:/[a-zA-Z]/',
+            'name' => 'bail | required | regex:/[a-zA-Z]/ ',
             'product_price' => 'bail | required | digits_between:4,7',
             //Trường được xác thực phải là một ảnh và đáp ứng các ràng buộc về kích thước được chỉ định bởi các tham số của rule.
             //dimensions:param_1,param_2,..param_n
@@ -46,14 +46,13 @@ class ProductsRequest extends FormRequest
     public function messages()
     {
         return [
-            'product_name.required' => 'Tên sản phẩm không được để trống!',
-            'product_price.required' => 'Giá tiền không được để trống!',
+            'name.required' => 'Tên sản phẩm không được để trống.',
+            'product_price.required' => 'Giá tiền không được để trống.',
             // 'product_image.required' => 'Chưa chọn file ảnh!',
             
-            'product_price.digits_between' => 'Đơn giá không hợp lệ!',
+            'product_price.digits_between' => 'Đơn giá không hợp lệ.',
 
-            'product_name.regex' => 'Tên sản phẩm không hợp lệ!',
-
+            'name.regex' => 'Tên sản phẩm không hợp lệ.',
             // 'product_image.mimes' => 'File được chọn phải là định dạng ảnh!',
 
             // 'product_image.max' => 'File không được quá 2MB',

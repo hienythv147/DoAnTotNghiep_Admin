@@ -44,20 +44,15 @@ class UsersController extends Controller
     public function store(UsersRequest $request)
     {
         $newUser = new User();
-        $flag = $newUser::where('email',$request->email)->exists();
-        if(!$flag)
-        {
-            $newUser->email = $request->email;
-            $newUser->password = Hash::make($request->password);
-            $newUser->first_name = $request->first_name;
-            $newUser->last_name = $request->last_name;
-            $newUser->phone_number = $request->phone_number;
-            $newUser->role_id = $request->role_id;
-            $newUser->address = $request->address;
-            $newUser->save();
-            return redirect()->route('users-list');
-        }
-        return redirect()->route('users-list');
+        $newUser->email = $request->email;
+        $newUser->password = Hash::make($request->password);
+        $newUser->first_name = $request->first_name;
+        $newUser->last_name = $request->last_name;
+        $newUser->phone_number = $request->phone_number;
+        $newUser->role_id = $request->role_id;
+        $newUser->address = $request->address;
+        $newUser->save();
+        return back()->with('message_success','Thêm thành công.');
     }
 
     /**

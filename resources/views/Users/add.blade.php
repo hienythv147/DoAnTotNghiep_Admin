@@ -31,8 +31,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="">Họ và tên</span>
                         </div>
-                        <input id="last_name" class="form-control" name="first_name" type="text" placeholder="Họ">
-                        <input id="first_name" class="form-control" name="last_name" type="text" placeholder="Tên">
+                        <input value="{{ old('last_name') }}" id="last_name" 
+                        class="form-control" name="last_name" type="text" placeholder="Họ">
+                        <input value="{{ old('first_name') }}"   id="first_name" class="form-control" name="first_name" type="text" placeholder="Tên">
                     </div>
                     {{-- end --}}
                     {{-- Thông báo lỗi  --}}
@@ -55,7 +56,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
                         </div>
-                        <input name="email" type="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập email">
+                        <input value="{{ old('email') }}" name="email" type="email" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập email">
                     </div>
                     {{-- Thông báo lỗi  --}}
                     @if($errors->has('email'))
@@ -73,9 +74,9 @@
                     </div>
                     {{-- end --}}
                     {{-- Thông báo lỗi  --}}
-                    @if($errors->has('email'))
+                    @if($errors->has('password'))
                     <small class="form-text text-muted" >
-                        <p style="color: red;">{{ $errors->first('email')}}</p>
+                        <p style="color: red;">{{ $errors->first('password')}}</p>
                     </small>
                     @endif
                     {{-- end --}}
@@ -84,7 +85,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Số điện thoại</span>
                         </div>
-                        <input name="phone_number" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập số điện thoại">
+                        <input value="{{ old('phone_number') }}" name="phone_number" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập số điện thoại">
                     </div>
                     {{-- end --}}
                     {{-- Thông báo lỗi  --}}
@@ -99,7 +100,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Địa chỉ</span>
                         </div>
-                        <input name="address" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập địa chỉ">
+                        <input value="{{ old('address') }}"  name="address" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập địa chỉ">
                     </div>
                     {{-- end --}}
                     {{-- Thông báo lỗi  --}}

@@ -24,16 +24,16 @@ class RolesRequest extends FormRequest
     {
         // https://viblo.asia/p/tap-21-validation-laravel-tiep-theo-gAm5yGaAZdb
         return [
-            'role_name' => 'bail | required | regex: /[a-zA-Z]/ '
+            'name' => 'bail | required | regex: /[a-zA-Z]/ '
         ];
     }
 
     public function messages()
     {
         return [
-            'role_name.required' => 'Loại nhân viên không được bỏ trống!',
+            'name.required' => 'Loại nhân viên không được bỏ trống!',
             
-            'role_name.regex' => 'Loại nhân viên không hợp lệ!',
+            'name.regex' => 'Loại nhân viên không hợp lệ!',
         ];
         
     }

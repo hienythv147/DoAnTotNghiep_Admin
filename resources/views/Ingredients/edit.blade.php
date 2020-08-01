@@ -15,22 +15,16 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroup-sizing-default">Tên nguyên liệu</span>
                         </div>
-                        <input name="ingredient_name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập tên nguyên liệu" value="{{ $ingredient->name }}">
+                        <input name="name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập tên nguyên liệu" value="{{ $ingredient->name }}">
                     </div>
                     {{-- end --}}
                     {{-- Thông báo lỗi --}}
-                    @if($errors->has('ingredient_name'))
+                    @if($errors->has('name'))
                     <small class="form-text text-muted">
-                        <p style="color: red;">{{ $errors->first('ingredient_name')}}</p>
+                        <p style="color: red;">{{ $errors->first('name')}}</p>
                         </small>
                     @endif
                     {{-- end --}}
-                    {{-- Thông báo lỗi --}}
-                    @if(session('error_name'))
-                    <small class="form-text text-muted">
-                        <p style="color: red;">{{ session('error_name') }}</p>
-                        </small>
-                    @endif
                     {{-- Đơn vị tính --}}
                     <div style="margin-top: 25px" class="input-group" >
                         <div class="input-group-prepend">

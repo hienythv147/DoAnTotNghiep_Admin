@@ -10,19 +10,6 @@
                 <h1 style=" text-align: center"> Sửa thông tin </h1>
                 <form class="form-horizontal" action="{{ route('users-edit-process',['id' => $user->id]) }}" method="POST" >
                  @csrf
-                    @if($errors->any())
-                        {{-- <div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert"> --}}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                                <ul>
-                                    @foreach($errors->all() as $error)
-                                        <li>{{ $error}}</li>
-                                    @endforeach
-                                </ul>
-                            {{-- </div> --}}
-                    @endif
-
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Loại nhân viên</label>

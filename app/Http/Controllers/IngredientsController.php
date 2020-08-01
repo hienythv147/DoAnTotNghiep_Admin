@@ -43,16 +43,18 @@ class IngredientsController extends Controller
     public function store(IngredientsRequest $request)
     {
         $ingredient = new Ingredients();
-        $flag = $ingredient::where('name',$request->ingredient_name)->exists();
-        if(!$flag)
-        {
-            $ingredient->name = $request->ingredient_name;
-            $ingredient->ingredient_unit = $request->ingredient_unit;
-            $ingredient->amount_stock = $request->amount_stock; 
-            $ingredient->save();
-            return back()->with('message_success','Thêm thành công!');
-        }
-        return back()->with('error_name','Nguyên liệu đã tồn tại!');
+        $this->validate($request,
+        [
+            'name' => 'unique:ingredients'
+        ],
+        [
+            'name.unique' => 'Nguyên liệu đã tồn tại.'
+        ]);
+        $ingredient->name = $request->name;
+        $ingredient->ingredient_unit = $request->ingredient_unit;
+        $ingredient->amount_stock = $request->amount_stock; 
+        $ingredient->save();
+        return back()->with('message_success','Thêm thành công.');
     }
 
     /**
@@ -86,45 +88,32 @@ class IngredientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(IngredientsRequest $request, $id)
     {
         $ingredient = Ingredients::find($id);
-        $ingredient_name = $request->ingredient_name;
-        $flag = $ingredient::where('name',$ingredient_name)->exists();
-        if(!$flag)  
+        if($ingredient->name == $request->name)
         {
-            $ingredient->name = $ingredient_name;
             $ingredient->ingredient_unit = $request->ingredient_unit;
-            $ingredient->amount_stock = $request->amount_stock;
+            $ingredient->amount_stock = $request->amount_stock; 
             $result = $ingredient->save();
             if($result)
-            {
-                session()->flash('message_success', 'Sửa thành công!');
-                return redirect()->back();
-            }
-            else{
-                session()->flash('message_error', 'Sửa thất bại!');
-                return redirect()->back();
-            }
-            
+            return back()->with('message_success','Sửa thành công.');
         }
-        else if($ingredient->name == $ingredient_name)
+        else
         {
-            $ingredient->name = $ingredient_name;
+            $this->validate($request,
+            [
+                'name' => 'unique:ingredients'
+            ],
+            [
+                'name.unique' => 'Nguyên liệu đã tồn tại.'
+            ]);
             $ingredient->ingredient_unit = $request->ingredient_unit;
-            $ingredient->amount_stock = $request->amount_stock;
+            $ingredient->amount_stock = $request->amount_stock; 
             $result = $ingredient->save();
             if($result)
-            {
-                session()->flash('message_success', 'Sửa thành công!');
-                return redirect()->back();
-            }
-            else{
-                session()->flash('message_error', 'Sửa thất bại');
-                return redirect()->back();
-            }
+            return back()->with('message_success','Sửa thành công.');
         }
-        return redirect()->route('ingredients-edit',['id' => $id])->with('error_name','Nguyên liệu đã tồn tại!');
     }
 
     /**
