@@ -30,3 +30,27 @@ overflow-x: auto;
     color: #414d5f;
     text-decoration: none;
 }
+
+#result.list-group{
+    position: absolute; 
+    z-index: 12; 
+    font-family: 'Poppins', sans-serif !important; 
+    width: 100%; 
+    margin-top: 50px;
+    flex: 1 1 0; /* flex: 1, which you had before, is equivalent but doesn't work */
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 300px;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#result::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+#result {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

@@ -33,7 +33,7 @@
                                 <th>Hình ảnh</th>
                                 <th>Sản phẩm</th>
                                 <th>Giá</th>
-                                <th>Số lượng</th>
+                                <th style="text-align: center">Số lượng</th>
                                 <th>Tổng tiền</th>
                                 <th style="text-align: center">Xóa</th>
                             </tr>
@@ -45,26 +45,28 @@
                                 <td class="thumbnail-img">
                                     <a href="#">
                                 @if(!empty($item['image']))
-                                <img class="img-fluid" src="{{ asset('assets/images/products_image/'.$item['image']) }}" alt=""/> 
+                                <a href="{{ Route('product_detail', $item['id']) }}"><img class="img-fluid" src="{{ asset('assets/images/products_image/'.$item['image']) }}" alt=""/></a>
                                 @else
                                 <img class="img-fluid" src="{{ asset('assets/images/not_found.png') }}" alt=""/> 
                                 @endif
                             </a>
                                 </td>
                                 <td class="name-pr">
-                                    <a href="#">
-                                {{ $item['name'] }}
-                            </a>
+                                    <a href="{{ Route('product_detail', $item['id']) }}">
+                                        {{ $item['name'] }}
+                                    </a>
                                 </td>
                                 <td class="price-pr">
-                                    <p>$ {{ $item['price'] }}</p>
-                                </td>
-                                <td class="quantity-box"><input type="number" size="4" value="{{ $item['amount'] }}" min="0" step="1" class="c-input-text qty text"></td>
-                                <td class="total-pr">
-                                    <p>$ {{ $item['price'] * $item['amount'] }}</p>
+                                    <p>{{ $item['price'] }} VND</p>
                                 </td>
                                 <td style="text-align: center">
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="deleteRow(this, {{ $item['index'] }})" style="float: none;">
+                                    {{ $item['amount'] }}
+                                </td>
+                                <td class="total-pr">
+                                    <p>{{ $item['price'] * $item['amount'] }} VND</p>
+                                </td>
+                                <td style="text-align: center">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="deleteRow(this, {{ $item['id'] }})" style="float: none;">
                                         <span aria-hidden="true"><i class="fas fa-times"></i></span>
                                     </button>
                                 </td>
@@ -72,31 +74,23 @@
                             @endforeach
                             @else 
                             <tr>
-                                <td class="name-pr">
+                                <td>
+                                </td> 
+                                <td>
+                                </td> 
+                                <td>
+                                <td class="name-pr" style="font-weight: 1000">
                                     <p>Không có sản phẩm</p>
-                                </td>   
+                                </td>  
+                                </td> 
+                                <td>
+                                </td> 
+                                <td>
+                                </td>  
                             </tr>
                             @endif
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="row my-5">
-            <div class="col-lg-6 col-sm-6">
-                <!-- <div class="coupon-box">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control" placeholder="Nhập mã giảm giá" aria-label="Coupon code" type="text">
-                        <div class="input-group-append">
-                            <button class="btn btn-theme" type="button">Chọn mã</button>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-            <div class="col-lg-6 col-sm-6">
-                <div class="update-box">
-                    <input value="Cập nhật" type="submit">
                 </div>
             </div>
         </div>
@@ -130,10 +124,15 @@
                     </div>
                     <hr> </div>
             </div>
-            <div class="col-12 d-flex shopping-box">
+            <div style="width: 100%">
                 <button type="button" class="ml-auto btn hvr-hover" style="color: #ffffff; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 600"
                      data-toggle="modal" data-target="#exampleModal">Thanh toán</a> 
                 </button>
+                <a href="{{ Route('cart') }}">
+                    <button type="button" class="ml-auto btn hvr-hover" style="color: #ffffff; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 600; margin-right: 20px">
+                        Cập nhật
+                    </button>
+                </a>
             </div>
         </div>
         <div id="exampleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; font-family: 'Poppins', sans-serif;">
@@ -183,7 +182,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group no-margin">
                                         <label for="field-7" class="control-label">Thanh Toán Online</label>
                                         <div>

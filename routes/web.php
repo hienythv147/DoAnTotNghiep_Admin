@@ -134,3 +134,9 @@ Route::get('/history-order', 'OrderController@historyOrder')->name('history_orde
 
 // Route history order detail
 Route::get('/history-order-detail/{id}', 'OrderController@historyOrderDetail')->middleware('auth');
+
+// Route remove product
+Route::get('/remove-product', 'HomeController@removeProduct')->middleware('auth');
+
+// Reute live search
+Route::get('/live-search', 'HomeController@liveSearch');

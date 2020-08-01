@@ -50,14 +50,16 @@
                             <li>
                                 <div class="form-group quantity-box">
                                     <label class="control-label">Số lượng</label>
-                                    <input class="form-control" name="amount" value="1" min="0" max="20" type="number">
+                                    <input class="form-control" name="amount" value="1" min="1" max="20" type="number">
                                     <input type="hidden" value="{{ $productDetail->id }}" name="id">
                                 </div>
                             </li>
                         </ul>
                         <div class="price-box-bar">
                             <div class="cart-and-bay-btn">
+                                @if($productDetail->in_stock == 1)
                                 <button class="btn hvr-hover" id="btn-submit" style="color: #ffffff; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 600"><i class="fas fa-cart-plus"></i>  Thêm giỏ</button>
+                                @endif
                             </div>
                         </div>
                     </form>
@@ -78,7 +80,7 @@
                             <div class="box-img-hover">
                                 <div class="type-lb">
                                     @if($product->in_stock == 1)
-                                    <p class="sale">Giảm giá</p>
+                                    <p class="sale">Bán</p>
                                     @else
                                     <p class="new">Hết hàng</p>
                                     @endif
@@ -94,7 +96,12 @@
                             </div>
                             <div class="why-text">
                                 <h4>{{ $product->name }}</h4>
-                                <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i>  Thêm giỏ</button>
+                                @if($product->in_stock == 1)
+                                    <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i>  Thêm giỏ</button>
+                                @else
+                                    <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}"><i class="fas fa-cart-plus"></i>  Thêm giỏ</button>
+                                @endif
+                                
                             </div>
                         </div>
                     </div>

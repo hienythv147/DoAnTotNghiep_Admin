@@ -154,26 +154,22 @@
                 <!-- /.navbar-collapse -->
 
                 <!-- Start Atribute Navigation -->
-                @guest
+                
                 <div class="attr-nav">
-                        <ul>
-                            <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                        </ul>
-                    </div>
-                @else
-                    <div class="attr-nav">
-                        <ul>
-                            <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                            <li class="side-menu">
-                                <a href="#">
-                                    <i class="fa fa-shopping-bag"></i>
-                                    <span class="badge" style="color: red" id="cart_amount">{{ empty(Session::get('cart', null)) ? '' : count(Session::get('cart', null)) }}</span>
-                                    <p>GIỎ HÀNG</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                @endguest
+                    <ul>
+                        <li class="search" onclick="clearSearch()"><a href="#"><i class="fa fa-search"></i></a></li>
+                        @auth
+                        <li class="side-menu">
+                            <a href="#">
+                                <i class="fa fa-shopping-bag"></i>
+                                <span class="badge" style="color: red" id="cart_amount">{{ empty(Session::get('cart', null)) ? '' : count(Session::get('cart', null)) }}</span>
+                                <p>GIỎ HÀNG</p>
+                            </a>
+                        </li>
+                        @endauth
+                    </ul>
+                   
+                </div>
                 <!-- End Atribute Navigation -->
             </div>
             <!-- Start Side Menu -->
@@ -216,11 +212,15 @@
         <div class="container">
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" class="form-control" placeholder="Search">
-                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+                <input style="font-family: 'Poppins', sans-serif" id="search"type="text" class="form-control" placeholder="Tìm kiếm" autocomplete="off">
+                <span class="input-group-addon close-search" onclick="clearSearch()"><i class="fa fa-times"></i></span>
+                <ul class="list-group" id="result"></ul>
             </div>
         </div>
     </div>
+    <!-- <div class="container" s>
+        
+    </div> -->
     <!-- End Top Search -->
 
     <!-- Start Body -->

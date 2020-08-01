@@ -65,7 +65,6 @@ class HomeController extends Controller
             $product = Products::find($spId);
             
             if($spId != null) {
-                $index = 0;
                 $productCart = [
                     'id' => $product->id,
                     'name' => $product->name,
@@ -73,8 +72,7 @@ class HomeController extends Controller
                     'amount' => 1,
                     'image' => $product->image,
                     'category_id' => $product->category_id,
-                    'is_delete' => false,
-                    'index' => $index++
+                    'is_delete' => false
                 ];
                 $cart =$request->session()->get('cart', null);
                 if($cart == null) {
@@ -136,5 +134,28 @@ class HomeController extends Controller
             session()->flash('message_success', 'Thêm thành công');
             return redirect()->back();
         } 
+    }
+
+    public function removeProduct(Request $request) {
+        $id = $request->id;
+        $data = Session::get('cart', null);
+        if($request->ajax()) {
+            for($i = 0; $i < count($data); $i++) {
+                if($data[$i]['id'] == $id) {
+                    array_splice($data, $i, 1);
+                }
+            }
+            Session::pull('cart', null);
+            Session::put('cart', $data);
+            return response()->json($data);
+        }
+    }
+
+    public function liveSearch(Request $request) {
+        if($request->ajax()) {
+            $products = Products::all();
+            $products = $products->toArray();
+            return response()->json($products);
+        }
     }
 }
