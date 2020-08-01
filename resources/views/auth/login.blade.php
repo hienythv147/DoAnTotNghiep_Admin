@@ -7,6 +7,8 @@
             <div class="card-body p-4" style="background: #f4f4f4; margin-top:20px">
 
                 <div class="card-body">
+                    <h1 style=" text-align: center"> ĐĂNG NHẬP </h1>
+
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

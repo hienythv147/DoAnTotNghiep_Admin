@@ -60,11 +60,11 @@ class RegisterController extends Controller
         ],
         [
             'first_name.required' => "Tên không được để trống.",
-            'last_name.required' => "Tên không được để trống.",
+            'last_name.required' => "Họ không được để trống.",
             'address.required' => "Địa chỉ không được để trống.",
             'phone_number.required' => "Số điện thoại không được để trống.",
-            'email.required' => "Số điện thoại không được để trống.",
-            'password.required' => "Số điện thoại không được để trống.",
+            'email.required' => "Email không được để trống.",
+            'password.required' => "Mật khẩu không được để trống.",
 
             'first_name.regex' => "Tên không hợp lệ.",
             'last_name.regex' => "Họ không hợp lệ.",

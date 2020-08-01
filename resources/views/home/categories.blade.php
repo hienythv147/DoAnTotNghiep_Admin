@@ -47,7 +47,7 @@
                         <div class="type-lb" style="width: 100%">
                             <p class="sale">{{$value->name}}</p>
                         </div>  
-                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/categories_image/'. $value->image) }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/categories_image/'. $value->image) }}" class="img-fluid" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                         <div class="type-lb" style="width: 100%">
                             <p class="sale">{{$value->name}}</p>
                         </div>  
-                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/categories_image/'. $value->image) }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/categories_image/'. $value->image) }}" class="img-fluid" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                         <div class="type-lb" style="width: 100%">
                             <p class="sale">{{$value->name}}</p>
                         </div>  
-                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -86,7 +86,7 @@
                         <div class="type-lb" style="width: 100%">
                             <p class="sale">{{$value->name}}</p>
                         </div>  
-                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/categories_image/'. $value->image) }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/categories_image/'. $value->image) }}" class="img-fluid" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                         <div class="type-lb" style="width: 100%">
                             <p class="sale">{{$value->name}}</p>
                         </div>  
-                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('category_detail', $value->id ) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt=""></a>
                     </div>
                 </div>
             </div>

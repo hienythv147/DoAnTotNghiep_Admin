@@ -67,9 +67,9 @@
                                                     <p class="price"> {{ $product->price }} VNĐ</p>
                                                 </div>
                                                 @if(!empty($product->image))
-                                                <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'. $product->image) }}" class="img-fluid" alt="Image"></a>
+                                                <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'. $product->image) }}" class="img-fluid" alt=""></a>
                                                 @else
-                                                <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="Image"></a>
+                                                <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt=""></a>
                                                 @endif
                                             </div>
                                             <div class="why-text">
@@ -98,9 +98,9 @@
                                                         @endif
                                                     </div>
                                                     @if(!empty($product->image))
-                                                    <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'.$product->image) }}" class="img-fluid" alt="Image"></a>
+                                                    <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'.$product->image) }}" class="img-fluid" alt=""></a>
                                                     @else
-                                                    <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="Image"></a>
+                                                    <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt=""></a>
                                                     @endif
                                                 </div>
                                             </div>

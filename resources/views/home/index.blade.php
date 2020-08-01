@@ -154,9 +154,9 @@
                             <p class="price">{{ $product->price }} VNĐ</p>
                         </div>
                         @if(!empty($product->image))
-                        <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'.$product->image) }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'.$product->image) }}" class="img-fluid" alt=""></a>
                         @else
-                        <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/'. 'not_found.png') }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/'. 'not_found.png') }}" class="img-fluid" alt=""></a>
                         @endif
                     </div>
                     <div class="why-text">
@@ -184,9 +184,9 @@
                             <p class="price">{{ $product->price }} VNĐ</p>
                         </div>
                         @if(!empty($product->image))
-                        <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'.$product->image) }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'.$product->image) }}" class="img-fluid" alt=""></a>
                         @else
-                        <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="Image"></a>
+                        <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt=""></a>
                         @endif
                     </div>
                     <div class="why-text">
@@ -218,7 +218,7 @@
         @if(!empty($product->image))
         <div class="item">
             <div class="ins-inner-box">
-                <img style="height: 150px" src="{{ asset('assets/images/products_image/'.$product->image) }}" alt="Image"></a>
+                <img style="height: 150px" src="{{ asset('assets/images/products_image/'.$product->image) }}" alt=""></a>
                 <div class="hov-in">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>
@@ -227,7 +227,7 @@
         @else
         <div class="item">
             <div class="ins-inner-box">
-                <img style="height: 150px" src="{{ asset('assets/images/not_found.png') }}" alt="Image"></a>
+                <img style="height: 150px" src="{{ asset('assets/images/not_found.png') }}" alt=""></a>
                 <div class="hov-in">
                     <a href="#"><i class="fab fa-instagram"></i></a>
                 </div>

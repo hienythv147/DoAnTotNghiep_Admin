@@ -25,9 +25,9 @@
                     <div class="carousel-inner" role="listbox">
                         <div class="carousel-item active"> 
                             @if(!empty($productDetail->image))
-                            <img src="{{ asset('assets/images/products_image/'. $productDetail->image) }}" class="d-block w-100" alt="Image" style="height: 393px">
+                            <img src="{{ asset('assets/images/products_image/'. $productDetail->image) }}" class="d-block w-100" alt="" style="height: 393px">
                             @else
-                            <img src="{{ asset('assets/images/not_found.png') }}" class="d-block w-100" alt="Image" style="height: 393px">
+                            <img src="{{ asset('assets/images/not_found.png') }}" class="d-block w-100" alt="" style="height: 393px">
                             @endif
                         </div>
                     </div>
@@ -87,9 +87,9 @@
                                     <p class="price"> {{ $product->price }} VNĐ</p>
                                 </div>
                                 @if(!empty($product->image))
-                                <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'. $product->image) }}" class="img-fluid" alt="Image" style="width: 105%"></a>
+                                <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'. $product->image) }}" class="img-fluid" alt="" style="width: 105%"></a>
                                 @else
-                                <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="Image" style="width: 105%"></a>
+                                <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/not_found.png') }}" class="img-fluid" alt="" style="width: 105%"></a>
                                 @endif
                             </div>
                             <div class="why-text">
