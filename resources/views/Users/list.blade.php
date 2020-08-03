@@ -24,23 +24,23 @@
                     class="btn btn-warning waves-effect waves-light">
                     <i class="far fa-trash-alt" style="padding-right:10px"></i>Danh sách nhân viên tạm khóa</a>
                 @endif
-				<table id="basic-datatable" class="table table-striped table-bordered dt-responsive nowrap">
+				<table  id="basic-datatable" class="table table-striped table-bordered table-wrap">
                     <thead class="thead-dark">
                         <tr>
-                            <th style="color:white;">ID</th>
-                            <th style="color:white">Email</th>
-                            <th style="color:white">Tên</th>
-                            <th style="color:white">Họ</th>
-                            <th style="color:white">Số Điện Thoại</th>
-                            <th style="color:white">Vai trò</th>
-                            <th style="color:white">Địa chỉ</th>
+                            <th style="color:white; width:7%;">ID</th>      
+                            <th style="color:white; width:20%">Email</th>
+                            <th style="color:white; width:10%;">Tên</th>
+                            <th style="color:white; width:10%">Họ</th>
+                            <th style="color:white; width:17%">Số Điện Thoại</th>
+                            <th style="color:white; width:12%">Vai trò</th>
+                            <th style="color:white; width:20%">Địa chỉ</th>
                             <th class="h-tool" style="color: white;">Thao Tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if($hienThi == 1)
                         @foreach($users as $value) 
-                        <tr style="font-size: 120%; font-weight: bold;">
+                        <tr style="font-size: 90%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->email }}</td>
                             <td>{{ $value->first_name }}</td>
@@ -54,7 +54,7 @@
                                     class="btn btn-success waves-effect waves-light ">
                                     <i class="mdi mdi-pencil color " style="padding-right:5px"></i>Sửa</a>
                                 <a href="{{ route('users-disable',['id' => $value->id]) }}"
-                                    class="btn btn-danger waves-effect waves-light xoa_linh_vuc" style="color:white">
+                                    class="btn btn-danger waves-effect waves-light delete-confirm" style="color:white">
                                     <i class="mdi mdi-trash-can-outline color " style="padding-right:5px"></i>Tạm Khóa</a>
                                 @endif
                             </td>
@@ -62,7 +62,7 @@
                         @endforeach
                         @else
                         @foreach($users as $value) 
-                        <tr style="font-size: 120%; font-weight: bold;">
+                        <tr style="font-size: 90%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->email }}</td>
                             <td>{{ $value->first_name }}</td>

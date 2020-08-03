@@ -12,13 +12,16 @@
 		text-align: center;
 	}
 	.h-tool{
-		text-align: center; width: 20%;
+		text-align: center; width: 25%;
 	}
 	.w-20{
 		width: 20%;
 	}
 	.w-5{
 		width: 5%;
+	}
+	.table-wrap{
+		table-layout: fixed; width: 100%;
 	}
 </style>
 

@@ -24,8 +24,8 @@ class IngredientsRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail | required | regex: /[a-zA-Z]/',
-            'ingredient_unit' => 'bail | required | regex: /[a-zA-Z]/',
+            'name' => 'bail | required | regex: /[a-zA-Z]/ | max:255',
+            'ingredient_unit' => 'bail | required | regex: /[a-zA-Z]/ | max:255',
             'amount_stock' => 'bail | required | digits_between:1,7 '
         ];
     }
@@ -40,6 +40,10 @@ class IngredientsRequest extends FormRequest
             'name.regex' => "Tên nguyên liệu không hợp lệ!",
             'ingredient_unit.regex' => "Đơn vị không hợp lệ!",
             'amount_stock.digits_between' => "Số lượng không hợp lệ!",
+
+            'name.max' => 'Tên nguyên liệu chỉ được tối đa 255 kí tự.',
+            'ingredient_unit.max' => 'Đơn vị chỉ được tối đa 255 kí tự.',
+
             
         ];
     }

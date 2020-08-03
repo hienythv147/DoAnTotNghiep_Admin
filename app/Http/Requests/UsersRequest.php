@@ -29,7 +29,7 @@ class UsersRequest extends FormRequest
             'address' => ['required', 'regex: /[a-zA-Z]/', 'max:255'],
             'phone_number' => ['required', 'regex:/^0[0-9]{9}$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6',
+            'password' => ['required', 'string', 'min:6','max:20',
                             'regex:/^.*(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d).*$/'],
         ];
     }
@@ -56,6 +56,7 @@ class UsersRequest extends FormRequest
             'email.max' => "Email không được quá 255 kí tự.",
             
             'password.min' => "Mật khẩu phải có ít nhất 6 kí tự.",
+            'password.min' => "Mật khẩu chỉ được tối đa 20 kí tự.",
 
             'email.unique' => "Email đã tồn tại.",
         ];
