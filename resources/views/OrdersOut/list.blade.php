@@ -24,7 +24,7 @@
                         <tr style="font-size: 90%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->User->last_name ." ". $value->User->first_name }}</td>
-                            <td>{{ $value->total }}</td>
+                            <td>{{ $value->total }} VNĐ</td>
                             @if($value->status == 1)
                             <td style="text-align: center;"><span class="badge badge-pill badge-success" style="width: 100px">Đã hoàn tất</span></td>
                             @else

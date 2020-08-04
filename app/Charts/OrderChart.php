@@ -12,6 +12,8 @@ use ConsoleTVs\Charts\BaseChart;
 use Illuminate\Http\Request;
 use App\Orders_out;
 use App\Orders_in;
+use Illuminate\Support\Facades\DB;
+
 class OrderChart extends BaseChart
 {
     /**
@@ -48,12 +50,48 @@ class OrderChart extends BaseChart
      */
     public function handler(Request $request): Chartisan
     {
+        
         $keys = Orders_out::all()->modelKeys();
+
         $values = Orders_out::pluck("total")->toArray() ;
-        // dd($values);
-        return Chartisan::build()
-            ->labels($keys)
-            ->dataset('Tổng tiền', $values);
+
+        $days = Orders_out::pluck("created_at")->toArray() ;
+
+        // Tổng đơn trong ngày
+        $orders_day = DB::table('orders_out')
+                        ->select(DB::raw('count(*) don_trong_ngay'))
+                        ->groupBy('created_at')
+                        ->get();
+        $orders_day = $orders_day->pluck("don_trong_ngay")->toArray();
+
+        // Lấy tổng đơn hoàn thành trong ngày
+        $orders_complete_day = DB::table('orders_out')
+                     ->select(DB::raw('count(*) don_ht_trong_ngay'))
+                     ->where('status', '=', 1)
+                     ->groupBy('created_at')
+                     ->get();
+        $orders_complete_day = $orders_complete_day->pluck("don_ht_trong_ngay")->toArray();
+
+        $orders_queue = DB::table('orders_out')
+                        ->select(DB::raw('count(*) don_cho_trong_ngay'))
+                        ->where('status', '=', 0)
+                        ->groupBy('created_at')
+                        ->get();
+        $orders_queue = $orders_queue->pluck("don_cho_trong_ngay")->toArray();
+        // Lấy tổng tiền các đơn hoàn thành theo ngày
+        // $total_by_day = DB::table('orders_out')
+        //             ->select(DB::raw("sum(total) tien_trong_ngay"))
+        //             ->where('status', '=', 1)
+        //             ->groupBy('created_at')
+        //             ->get();
+        // $total_by_day = $total_by_day->pluck("tien_trong_ngay")->toArray();
+
+        $chart = Chartisan::build()
+        ->labels(['Ngày'])
+        ->dataset('Tổng đơn trong ngày', $orders_day)
+        ->dataset('Tổng đơn chờ xác nhận trong ngày', $orders_queue)
+        ->dataset('Tổng đơn hoàn thành trong ngày', $orders_complete_day);
+        return $chart;
             
     }
 }
