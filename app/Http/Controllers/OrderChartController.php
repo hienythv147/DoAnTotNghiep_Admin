@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Charts\OrderChart;
 use App\Orders_out;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 class OrderChartController extends Controller
 {
     /**
@@ -15,42 +17,32 @@ class OrderChartController extends Controller
      */
     public function index()
     {
-        // $orders = Orders_out::all();
-
-        // $keys = Orders_out::all()->modelKeys();
-        // dd($keys);
-
-        // $values = Orders_out::pluck("total")->toArray() ;
-        // dd($values);
-
-        // Tổng đơn trong ngày
-        // $orders_queue = DB::table('orders_out')
-        //                 ->select(DB::raw('count(*) don_trong_ngay'))
-        //                 ->groupBy('created_at')
-        //                 ->get();
-        // $orders_queue = $orders_queue->pluck("don_trong_ngay")->toArray();
 
         // Raw expression
         //Số đơn hoàn thành trong ngày
         // SELECT COUNT(*) FROM orders_out WHERE status = 1 GROUP BY created_at
-        // Lấy tổng đơn hoàn thành theo ngày
-        // $orders_day = DB::table('orders_out')
-        //              ->select(DB::raw('count(*) don_ht_trong_ngay'))
-        //              ->where('status', '=', 1)
-        //              ->groupBy('created_at')
-        //              ->get();
-        // $orders_day = $orders_day->pluck("don_trong_ngay")->toArray();
-
-
-        // //Tổng tiền các đơn hoàn thành trong ngày
-        // // SELECT sum(total) FROM orders_out WHERE status = 1 GROUP BY created_at
-        // $total_by_day = DB::table('orders_out')
-        // ->select(DB::raw("sum(total) tien_trong_ngay"))
-        // ->where('status', '=', 1)
-        // ->groupBy('created_at')
-        // ->get();
-        // $total_by_day = $total_by_day->pluck("tien_trong_ngay")->toArray();
-        // return response()->json($days);
+        // Tổng tiền các đơn hoàn thành trong ngày
+        // SELECT sum(total) FROM orders_out WHERE status = 1 GROUP BY created_at
+        // Tổng đơn các ngày trong tuần
+        // SELECT COUNT(*) FROM orders_out WHERE created_at BETWEEN '2020-08-03' and '2020-08-08' GROUP by created_at  
+        // $currentDay = Carbon::now();
+        // $startDay = $currentDay->startOfWeek()->format('Y-m-d');
+        // $endDay = $currentDay->endOfWeek()->addDay()->format('Y-m-d');
+        // echo $endDay->addDays(29)->format('Y-m-d'). '</br>';                  
+        // echo $endDay->addDay()->format('Y-m-d'). '</br>';                   
+        // echo $endDay->subDay()->format('Y-m-d'). '</br>';                     
+        // echo $endDay->subDays(29)->format('Y-m-d'). '</br>'; 
+        // dd($startDay,$endDay);
+        // between >= startDay < endDay nên phải + thêm 1 ngày
+        // $orders_dayOfWeek = DB::table('orders_out')
+        //                 ->select(DB::raw('count(*) don_trong_ngay'))
+        //                 ->whereBetween('created_at',array($startDay.'%', $endDay.'%'))
+        //                 ->where('status', '=', 1)
+        //                 ->groupBy(DB::raw('Date(created_at)'))
+        //                 ->get();
+        // // dd($orders_dayOfWeek);
+        // $orders_dayOfWeek = $orders_dayOfWeek->pluck("don_trong_ngay")->toArray();
+        // dd($orders_dayOfWeek);
 
         return view('Dashboard.statistic');
     }

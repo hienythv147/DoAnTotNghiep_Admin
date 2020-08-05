@@ -8,10 +8,7 @@
 
      <!-- Chart's container -->
      <div id="chart" style="height: 300px;margin-top: 50px;"></div>
-     <!-- Charting library -->
-     {{-- <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script> --}}
-     <!-- Chartisan -->
-     {{-- <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script> --}}
+     <div id="chart2" style="height: 300px;margin-top: 50px;"></div>
      <!-- Charting library -->
     <script src="https://unpkg.com/chart.js@2.9.3/dist/Chart.min.js"></script>
     <!-- Chartisan -->
@@ -21,20 +18,20 @@
        const chart = new Chartisan({
          el: '#chart',
          url: "@chart('order_chart')", 
-    //      loader: {
-    //         color: '#ff00ff',
-    //         size: [30, 30],
-    //         type: 'bar',
-    //         textColor: '#ffff00',
-    //         text: 'Đang tải dữ liệu..',
-    //     },
+         loader: {
+            color: '#1ed865',
+            size: [30, 30],
+            type: 'bar',
+            textColor: '#1c1c59',
+            text: 'Đang tải dữ liệu..',
+        },
          hooks: new ChartisanHooks()
-        .colors(['#ECC94B', '#4299E1'])
-        .responsive()
-        .beginAtZero()
-        
-        .legend({ position: 'top' })
-        .title('Đồ thị thống kê doanh thu')
+          .title('Đồ thị thống kê đơn hàng')
+          .responsive(true)
+          .beginAtZero()
+          .colors()
+          .borderColors()
+          .datasets([{ type: 'line', fill: false }, 'bar']),
        });
      </script>
 <!-- end row -->

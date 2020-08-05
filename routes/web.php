@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function() {
 			Route::get('/home', 'HomeController@index')->name('admin-home');
 
 			Route::get('statistic','OrderChartController@index')->name('statistic');
+			
 
 			Route::prefix('products')->group(function(){
 				Route::get('list','ProductsController@index')->name('products-list');

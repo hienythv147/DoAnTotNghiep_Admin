@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Orders_out;
 use App\Orders_in;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class OrderChart extends BaseChart
 {
@@ -51,26 +52,24 @@ class OrderChart extends BaseChart
     public function handler(Request $request): Chartisan
     {
         
-        $keys = Orders_out::all()->modelKeys();
-
-        $values = Orders_out::pluck("total")->toArray() ;
-
-        $days = Orders_out::pluck("created_at")->toArray() ;
-
-        // Tổng đơn trong ngày
-        $orders_day = DB::table('orders_out')
+        // Tổng đơn các ngày trong tuần
+        $currentDay = Carbon::now();
+        $startDay = $currentDay->startOfWeek()->format('Y-m-d');
+        $endDay = $currentDay->endOfWeek()->addDay()->format('Y-m-d');
+        $orders_dayOfWeek = DB::table('orders_out')
                         ->select(DB::raw('count(*) don_trong_ngay'))
-                        ->groupBy('created_at')
+                        ->whereBetween('created_at',array($startDay.'%', $endDay.'%'))
+                        ->groupBy(DB::raw('Date(created_at)'))
                         ->get();
-        $orders_day = $orders_day->pluck("don_trong_ngay")->toArray();
-
-        // Lấy tổng đơn hoàn thành trong ngày
-        $orders_complete_day = DB::table('orders_out')
-                     ->select(DB::raw('count(*) don_ht_trong_ngay'))
-                     ->where('status', '=', 1)
-                     ->groupBy('created_at')
-                     ->get();
-        $orders_complete_day = $orders_complete_day->pluck("don_ht_trong_ngay")->toArray();
+        $orders_dayOfWeek = $orders_dayOfWeek->pluck("don_trong_ngay")->toArray();
+        // Lấy tổng đơn hoàn thành các ngày trong tuần
+        $orders_complete = DB::table('orders_out')
+                        ->select(DB::raw('count(*) don_ht_trong_ngay'))
+                        ->whereBetween('created_at',array($startDay.'%', $endDay.'%'))
+                        ->where('status', '=', 1)
+                        ->groupBy(DB::raw('Date(created_at)'))
+                        ->get();
+        $orders_complete = $orders_complete->pluck("don_ht_trong_ngay")->toArray();
 
         $orders_queue = DB::table('orders_out')
                         ->select(DB::raw('count(*) don_cho_trong_ngay'))
@@ -78,19 +77,12 @@ class OrderChart extends BaseChart
                         ->groupBy('created_at')
                         ->get();
         $orders_queue = $orders_queue->pluck("don_cho_trong_ngay")->toArray();
-        // Lấy tổng tiền các đơn hoàn thành theo ngày
-        // $total_by_day = DB::table('orders_out')
-        //             ->select(DB::raw("sum(total) tien_trong_ngay"))
-        //             ->where('status', '=', 1)
-        //             ->groupBy('created_at')
-        //             ->get();
-        // $total_by_day = $total_by_day->pluck("tien_trong_ngay")->toArray();
 
         $chart = Chartisan::build()
-        ->labels(['Ngày'])
-        ->dataset('Tổng đơn trong ngày', $orders_day)
-        ->dataset('Tổng đơn chờ xác nhận trong ngày', $orders_queue)
-        ->dataset('Tổng đơn hoàn thành trong ngày', $orders_complete_day);
+        ->labels(['Thứ hai', 'Thứ ba ', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy', 'Chủ nhật'])
+        ->dataset('Tổng đơn', $orders_dayOfWeek)
+        // ->dataset('Tổng đơn chờ xác nhận', $orders_complete)
+        ->dataset('Tổng đơn hoàn thành', $orders_complete);
         return $chart;
             
     }
