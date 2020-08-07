@@ -24,26 +24,58 @@ class OrderChartController extends Controller
         // Tổng tiền các đơn hoàn thành trong ngày
         // SELECT sum(total) FROM orders_out WHERE status = 1 GROUP BY created_at
         // Tổng đơn các ngày trong tuần
-        // SELECT COUNT(*) FROM orders_out WHERE created_at BETWEEN '2020-08-03' and '2020-08-08' GROUP by created_at  
+        // SELECT COUNT(*) FROM orders_out WHERE created_at BETWEEN '2020-08-03' and '2020-08-08' GROUP by created_at 
+        
+        
         // $currentDay = Carbon::now();
-        // $startDay = $currentDay->startOfWeek()->format('Y-m-d');
-        // $endDay = $currentDay->endOfWeek()->addDay()->format('Y-m-d');
+        // $startDay = $currentDay->startOfMonth()->format('Y-m-d');
+        // $endDay = $currentDay->endOfMonth()->format('Y-m-d');
+        // $daysInMonth = DB::table('orders_out')
+        // ->select(DB::raw('Date(created_at) ngay'))->distinct()
+        // ->whereBetween(DB::raw('Date(created_at)'), array($startDay, $endDay))
+        // ->orderBy('ngay', 'asc')
+        // ->get();
+        // $daysInMonth = $daysInMonth->pluck("ngay")->toArray();
+
+        // $orders_dayInMonth = DB::table('orders_out')
+        //                 ->select(DB::raw('count(*) don_trong_thang'))
+        //                 ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
+        //                 ->groupBy(DB::raw('Date(created_at)'))
+        //                 ->get();
+        // $orders_dayInMonth = $orders_dayInMonth->pluck("don_trong_thang")->toArray();
+        
+        // $countOrder = 0;
+        // for($i = 0; $i < count($daysInMonth); $i++) {
+        //     $start =  $currentDay->startOfMonth();
+        //     for($j = 0; $j < $currentDay->daysInMonth; $j++) {
+        //         if($j != 0) {
+        //             $start->addDay();
+        //         }
+        //         if($daysInMonth[$i] == $start->toDateString())
+        //         {
+        //             $countOrder++;
+        //         }
+        //     }
+        // }
+        // dd($countOrder);
+
+
+
+        // dd($arr);
+        // dd($daysInMonth);
         // echo $endDay->addDays(29)->format('Y-m-d'). '</br>';                  
         // echo $endDay->addDay()->format('Y-m-d'). '</br>';                   
         // echo $endDay->subDay()->format('Y-m-d'). '</br>';                     
         // echo $endDay->subDays(29)->format('Y-m-d'). '</br>'; 
         // dd($startDay,$endDay);
         // between >= startDay < endDay nên phải + thêm 1 ngày
-        // $orders_dayOfWeek = DB::table('orders_out')
-        //                 ->select(DB::raw('count(*) don_trong_ngay'))
-        //                 ->whereBetween('created_at',array($startDay.'%', $endDay.'%'))
-        //                 ->where('status', '=', 1)
-        //                 ->groupBy(DB::raw('Date(created_at)'))
-        //                 ->get();
-        // // dd($orders_dayOfWeek);
-        // $orders_dayOfWeek = $orders_dayOfWeek->pluck("don_trong_ngay")->toArray();
-        // dd($orders_dayOfWeek);
-
+        // $total_by_day = $total_by_day->pluck("tien_trong_ngay")->toArray();
+        // $newArray = [];
+        // foreach($total_by_day as $item )
+        // {
+        //     array_push($newArray,number_format($item,0,".","."));
+        // }
+        // // dd($newArray);
         return view('Dashboard.statistic');
     }
 

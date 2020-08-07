@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Orders_out;
 use App\Orders_in;
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
 class OrderChart2 extends BaseChart
 {
     /**
@@ -53,6 +53,17 @@ class OrderChart2 extends BaseChart
      */
     public function handler(Request $request): Chartisan
     {
+        $currentDay = Carbon::now();
+        $startDay = $currentDay->startOfMonth()->format('Y-m-d');
+        $endDay = $currentDay->endOfMonth()->format('Y-m-d');
+        
+        $daysInMonth = DB::table('orders_out')
+        ->select(DB::raw('Date(created_at) ngay'))->distinct()
+        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
+        ->orderBy('ngay', 'asc')
+        ->get();
+        $daysInMonth = $daysInMonth->pluck("ngay")->toArray();
+
         $total_by_day = DB::table('orders_out')
         ->select(DB::raw("sum(total) tien_trong_ngay"))
         ->where('status', '=', 1)
@@ -60,8 +71,9 @@ class OrderChart2 extends BaseChart
         ->get();
         $total_by_day = $total_by_day->pluck("tien_trong_ngay")->toArray();
 
+        
         return Chartisan::build()
-        ->labels(['Thứ hai', 'Thứ ba ', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy', 'Chủ nhật'])
+        ->labels($daysInMonth)
         ->dataset('Tổng tiền', $total_by_day);
     }
 }

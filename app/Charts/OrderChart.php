@@ -52,36 +52,48 @@ class OrderChart extends BaseChart
     public function handler(Request $request): Chartisan
     {
         
-        // Tổng đơn các ngày trong tuần
+        // Tổng đơn các ngày trong tháng
         $currentDay = Carbon::now();
-        $startDay = $currentDay->startOfWeek()->format('Y-m-d');
-        $endDay = $currentDay->endOfWeek()->addDay()->format('Y-m-d');
-        $orders_dayOfWeek = DB::table('orders_out')
-                        ->select(DB::raw('count(*) don_trong_ngay'))
-                        ->whereBetween('created_at',array($startDay.'%', $endDay.'%'))
+        $startDay = $currentDay->startOfMonth()->format('Y-m-d');
+        $endDay = $currentDay->endOfMonth()->format('Y-m-d');
+        
+        $daysInMonth = DB::table('orders_out')
+        ->select(DB::raw('Date(created_at) ngay'))->distinct()
+        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
+        ->orderBy('ngay', 'asc')
+        ->get();
+        $daysInMonth = $daysInMonth->pluck("ngay")->toArray();
+
+        $orders_dayInMonth = DB::table('orders_out')
+                        ->select(DB::raw('count(*) don_trong_thang'))
+                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
                         ->groupBy(DB::raw('Date(created_at)'))
                         ->get();
-        $orders_dayOfWeek = $orders_dayOfWeek->pluck("don_trong_ngay")->toArray();
+        $orders_dayInMonth = $orders_dayInMonth->pluck("don_trong_thang")->toArray();
+
+
+
         // Lấy tổng đơn hoàn thành các ngày trong tuần
         $orders_complete = DB::table('orders_out')
-                        ->select(DB::raw('count(*) don_ht_trong_ngay'))
-                        ->whereBetween('created_at',array($startDay.'%', $endDay.'%'))
+                        ->select(DB::raw('count(*) don_ht_trong_thang'))
+                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
                         ->where('status', '=', 1)
                         ->groupBy(DB::raw('Date(created_at)'))
                         ->get();
-        $orders_complete = $orders_complete->pluck("don_ht_trong_ngay")->toArray();
+        $orders_complete = $orders_complete->pluck("don_ht_trong_thang")->toArray();
 
-        $orders_queue = DB::table('orders_out')
-                        ->select(DB::raw('count(*) don_cho_trong_ngay'))
-                        ->where('status', '=', 0)
-                        ->groupBy('created_at')
-                        ->get();
-        $orders_queue = $orders_queue->pluck("don_cho_trong_ngay")->toArray();
+        // $orders_queue = DB::table('orders_out')
+        //                 ->select(DB::raw('count(*) don_cho_trong_thang'))
+        //                 ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
+        //                 ->where('status', '=', 0)
+        //                 ->groupBy(DB::raw('Date(created_at)'))
+        //                 ->get();
+        // $orders_queue = $orders_queue->pluck("don_cho_trong_thang")->toArray();
 
         $chart = Chartisan::build()
-        ->labels(['Thứ hai', 'Thứ ba ', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy', 'Chủ nhật'])
-        ->dataset('Tổng đơn', $orders_dayOfWeek)
-        // ->dataset('Tổng đơn chờ xác nhận', $orders_complete)
+        ->labels($daysInMonth)
+        ->dataset('Tổng đơn', $orders_dayInMonth)
+        // ->dataset('Tổng đơn thất bại', $orders_queue)
         ->dataset('Tổng đơn hoàn thành', $orders_complete);
         return $chart;
             

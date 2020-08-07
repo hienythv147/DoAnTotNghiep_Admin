@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Products;
 use App\Categories;
 use Session;
-
+use App\User;
+use Carbon\Carbon;
+use App\Orders_out;
+use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     /**
@@ -20,8 +23,64 @@ class HomeController extends Controller
     }
 
     public function index() {
+        $currentDay = Carbon::now();
+        $currentDay2 = Carbon::now();
+        $day = $currentDay->toDateString();
 
-        return view('layouts.dashboard');
+        // Ngày bắt đầu, kết thúc tuần trước
+        $startDay = $currentDay->startOfWeek()->format('Y-m-d');
+        $endDay = $currentDay->endOfWeek()->addDay()->format('Y-m-d');
+        // dd($startDay,$endDay);
+
+        $orders_toWeek = Orders_out::select(DB::raw('count(*) tong_don'))
+                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))     
+                        ->where('status', '=', 1)
+                        ->get();
+        $orders_toWeek = $orders_toWeek->pluck("tong_don")->toArray();
+
+        $total_toWeek = Orders_out::select(DB::raw("sum(total) tien_tuan_truoc"))
+                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))      
+                        ->where('status', '=', 1)
+                        ->get();
+        $total_toWeek = $total_toWeek->pluck("tien_tuan_truoc")->toArray();
+        // dd($startDay,$endDay);
+        // Lấy ngày bắt đầu, kết thúc tuần trước
+        $startDay = $currentDay2->startOfWeek()->subDays(7)->format('Y-m-d');
+        $endDay = $currentDay2->endOfWeek()->addDay()->format('Y-m-d');
+        
+        // dd($startDay,$endDay);
+
+        $newCustomer = User::select(DB::raw("count(*) kh_moi"))
+                        ->where(DB::raw('Date(created_at)'),'=',$day)       
+                        ->where('role_id', '=', 3)
+                        ->get();
+        $newCustomer = $newCustomer->pluck('kh_moi')->toArray();
+
+        $newCustomerLastWeek = User::select(DB::raw("count(*) kh_moi"))
+                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
+                        ->where('role_id', '=', 3)
+                        ->get();
+        $newCustomerLastWeek = $newCustomerLastWeek->pluck('kh_moi')->toArray();
+        // dd($newCustomerLastWeek,$endDay);
+        $orders_toDay = Orders_out::select(DB::raw('count(*) tong_don'))
+                        ->where(DB::raw('Date(created_at)'),'=',$day)
+                        ->get();
+        $orders_toDay = $orders_toDay->pluck("tong_don")->toArray();
+
+        $orders_LastWeek = Orders_out::select(DB::raw('count(*) tong_don'))
+                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))     
+                        ->where('status', '=', 1)
+                        ->get();
+        $orders_LastWeek = $orders_LastWeek->pluck("tong_don")->toArray();
+        // dd($orders_LastWeek);
+        $total_toDay = Orders_out::select(DB::raw("sum(total) tien_trong_ngay"))
+                        ->where(DB::raw('Date(created_at)'),'=',$day)     
+                        ->where('status', '=', 1)
+                        ->get();
+        $total_toDay = $total_toDay->pluck("tien_trong_ngay")->toArray();
+
+        
+        return view('layouts.dashboard',compact('newCustomer','newCustomerLastWeek','orders_toDay','orders_toWeek','orders_LastWeek','total_toDay','total_toWeek'));
     }
 
     /**

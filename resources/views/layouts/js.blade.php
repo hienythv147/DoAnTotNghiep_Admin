@@ -1,5 +1,5 @@
 <!-- JS -->
-@section('script')
+@section('js')
 <!-- third party.js -->
 <script src="{{asset('assets/libs/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('assets/libs/datatables/dataTables.bootstrap4.js')}}"></script>
