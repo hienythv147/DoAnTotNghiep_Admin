@@ -188,14 +188,14 @@
                             <a href="#" class="photo"><img src="{{ asset('assets/images/not_found.png') }}" class="cart-thumb" alt="" /></a>
                             @endif
                             <h6><a href="#">{{$item['name']}} </a></h6>
-                            <p>{{$item['amount']}}x - <span class="price">{{$item['price']}} VNĐ</span></p>
+                            <p>{{$item['amount']}}x - <span class="price">{{ number_format($item['price'], "0", ".", ".")}} VNĐ</span></p>
                         </li>
                         <p style="display: none">{{$total += $item['price'] * $item['amount']}}<p>  
                         @endforeach
                         @endif
                         <li class="total">
                             <a href="{{ Route('cart') }}" class="btn btn-default hvr-hover btn-cart">Xem</a>
-                            <span class="float-right"><strong>Total</strong>: <b>{{ $total }}</b> VNĐ</span>
+                            <span class="float-right"><strong>Total</strong>: <b>{{ number_format($total, "0", ".", ".") }}</b> VNĐ</span>
                         </li>
                     </ul>
                 </li>

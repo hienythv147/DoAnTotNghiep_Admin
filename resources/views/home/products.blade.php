@@ -64,7 +64,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="type-lb-price">
-                                                    <p class="price"> {{ $product->price }} VNĐ</p>
+                                                    <p class="price"> {{ number_format($product->price, "0", ".", ".") }} VNĐ</p>
                                                 </div>
                                                 @if(!empty($product->image))
                                                 <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'. $product->image) }}" class="img-fluid" alt=""></a>
@@ -112,7 +112,7 @@
                                         <div class="col-sm-6 col-md-6 col-lg-8 col-xl-8">
                                             <div class="why-text full-width">
                                                 <h4>{{ $product->name }}</h4>
-                                                <h5>{{ $product->price }} VNĐ</h5>
+                                                <h5>{{ number_format($product->price, "0", ".", ".")  }} VNĐ</h5>
                                                 <p>Integer tincidunt aliquet nibh vitae dictum. In turpis sapien, imperdiet quis magna nec, iaculis ultrices ante.
                                                  Integer vitae suscipit nisi.</p>
                                                  @auth

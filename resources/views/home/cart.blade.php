@@ -45,9 +45,9 @@
                                 <td class="thumbnail-img">
                                     <a href="#">
                                 @if(!empty($item['image']))
-                                <a href="{{ Route('product_detail', $item['id']) }}"><img class="img-fluid" src="{{ asset('assets/images/products_image/'.$item['image']) }}" alt=""/></a>
+                                <a href="{{ Route('product_detail', $item['id']) }}"><img class="img-fluid" src="{{ asset('assets/images/products_image/'.$item['image']) }}" style="width: 60px; height: 60px" alt=""/></a>
                                 @else
-                                <img class="img-fluid" src="{{ asset('assets/images/not_found.png') }}" alt=""/> 
+                                <img class="img-fluid" style="width: 60px; height: 60px" src="{{ asset('assets/images/not_found.png') }}" alt=""/> 
                                 @endif
                             </a>
                                 </td>
@@ -57,13 +57,13 @@
                                     </a>
                                 </td>
                                 <td class="price-pr">
-                                    <p>{{ $item['price'] }} VND</p>
+                                    <p>{{ number_format($item['price'], "0", ".", ".") }} VNĐ</p>
                                 </td>
                                 <td style="text-align: center">
                                     {{ $item['amount'] }}
                                 </td>
                                 <td class="total-pr">
-                                    <p>{{ $item['price'] * $item['amount'] }} VND</p>
+                                    <p>{{ number_format($item['price'] * $item['amount'], "0", ".", ".") }} VNĐ</p>
                                 </td>
                                 <td style="text-align: center">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="deleteRow(this, {{ $item['id'] }})" style="float: none;">
@@ -102,7 +102,7 @@
                     <h3>Tổng Tiền Đơn Hàng</h3>
                     <div class="d-flex">
                         <h4>Tổng tiền</h4>
-                        <div class="ml-auto font-weight-bold">{{ isset($subTotal) ? $subTotal : 0 }} vnd</div>
+                        <div class="ml-auto font-weight-bold">{{ isset($subTotal) ? number_format($subTotal, "0", ".", ".") : 0 }} VNĐ</div>
                     </div>
                     <!-- <div class="d-flex">
                         <h4>Discount</h4>
@@ -111,16 +111,16 @@
                     <hr class="my-1">
                     <div class="d-flex">
                         <h4>Mã giảm giá</h4>
-                        <div class="ml-auto font-weight-bold"> 0 vnd</div>
+                        <div class="ml-auto font-weight-bold"> {{ number_format("0", "0", ".", ".") }} VNĐ</div>
                     </div>
                     <div class="d-flex">
                         <h4>Phí vận chuyển</h4>
-                        <div class="ml-auto font-weight-bold"> Miễn phí </div>
+                        <div class="ml-auto font-weight-bold"> {{ number_format("15000", "0", ".", ".") }} VNĐ</div>
                     </div>
                     <hr>
                     <div class="d-flex gr-total">
                         <h5>Thành tiền</h5>
-                        <div class="ml-auto h5"> {{ isset($subTotal) ? $subTotal : 0 }} vnd </div>
+                        <div class="ml-auto h5 font-weight-bold"> {{ isset($subTotal) ? number_format($subTotal+15000, "0", ".", ".") : 0 }} VNĐ </div>
                     </div>
                     <hr> </div>
             </div>

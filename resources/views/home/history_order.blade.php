@@ -42,7 +42,7 @@
                                     {{$item->id}}
                                 </td>
                                 <td>
-                                    {{$item->total}}
+                                    {{ number_format($item->total, "0", ".", ".")}}
                                 </td>
                                 @if($item->status == 1)
                                 <td><span class="badge badge-pill badge-success" style="width: 100px">Đã hoàn tất</span></td>
