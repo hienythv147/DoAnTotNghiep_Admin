@@ -70,7 +70,7 @@
         <div class="row my-5">
             <div class="col-lg-12">
                 <div class="title-all text-center">
-                    <h1>Sản phẩm bán chạy</h1>
+                    <h1>Sản phẩm liên quan</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
                 </div>
                 <div class="featured-products-box owl-carousel owl-theme">  

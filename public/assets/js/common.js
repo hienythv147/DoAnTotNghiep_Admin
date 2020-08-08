@@ -46,7 +46,7 @@ $(document).ready(function () {
                             }
                             $('#result').append('<li class="list-group-item" style="background: rgba(0, 0, 0, 0.5);" ><a href="'+url+'">' + 
                                 '<img style="height: 50px; width: 50px" src="' + image + '"class="img-thumbnail"/>' +
-                                '<span style="margin-left: 10px;  color:#fff !important;">' + value.name + '</span>' +
+                                '<span style="margin-left: 10px;  color:#fff !important;">' + value.name + ' - ' + value.price +' VND</span>' +
                             '</a></li>');
                         }
                     });

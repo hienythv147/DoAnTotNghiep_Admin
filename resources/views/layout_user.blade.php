@@ -50,7 +50,7 @@
                     <div class="our-link">
                         <ul>
                             <li><a href="#"><i class="fas fa-location-arrow"></i> Vị Trí</a></li>
-                            <li><a href="#"><i class="fas fa-headset"></i> Liện hệ</a></li>
+                            <li><a href="#"><i class="fas fa-headset"></i> Liên hệ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                             @else
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->last_name . ' ' . Auth::user()->first_name  }} <span class="caret"></span>
+                                        {{ Auth::user()->first_name  }} <span class="caret"></span>
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
