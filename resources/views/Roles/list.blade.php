@@ -24,18 +24,18 @@
                     class="btn btn-warning waves-effect waves-light">
                     <i class="far fa-trash-alt" style="padding-right:10px"></i>Danh sách loại nhân viên đã xóa</a>
                 @endif
-				<table id="basic-datatable" class="table table-striped table-bordered dt-responsive nowrap">
+				<table id="basic-datatable" class="table table-striped table-bordered  table-wrap">
                     <thead class="thead-dark">
                         <tr>
-                            <th style="color:white; width: 5%;">ID</th>
-                            <th style="color:white">Tên loại nhân viên</th>
+                            <th style="color:white; width: 6%;">ID</th>
+                            <th style="color:white; width: 69%;">Tên loại nhân viên</th>
                             <th class="h-tool" style="color: white;">Thao Tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if($hienThi == 1)
                         @foreach($roles as $value) 
-                        <tr style="font-size: 120%; font-weight: bold;">
+                        <tr style="font-size: 90%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
                             <td class="tool">
@@ -53,7 +53,7 @@
                         @endforeach
                         @else
                         @foreach($roles as $value) 
-                        <tr style="font-size: 120%; font-weight: bold;">
+                        <tr style="font-size: 90%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
                             <td class="tool">

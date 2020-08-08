@@ -24,7 +24,7 @@ class ProductsRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail | required | regex:/[a-zA-Z]/ ',
+            'name' => 'bail | required | regex:/[a-zA-Z]/ | max:255',
             'product_price' => 'bail | required | digits_between:4,7',
             //Trường được xác thực phải là một ảnh và đáp ứng các ràng buộc về kích thước được chỉ định bởi các tham số của rule.
             //dimensions:param_1,param_2,..param_n
@@ -53,6 +53,8 @@ class ProductsRequest extends FormRequest
             'product_price.digits_between' => 'Đơn giá không hợp lệ.',
 
             'name.regex' => 'Tên sản phẩm không hợp lệ.',
+            
+            'name.max' => 'Tên sản phẩm chỉ được tối đa 255 kí tự.'
             // 'product_image.mimes' => 'File được chọn phải là định dạng ảnh!',
 
             // 'product_image.max' => 'File không được quá 2MB',

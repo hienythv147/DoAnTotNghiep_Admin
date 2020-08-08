@@ -24,26 +24,26 @@
                     class="btn btn-warning waves-effect waves-light">
                     <i class="far fa-trash-alt" style="padding-right:10px"></i>Danh sách sản phẩm đã xóa</a>
                 @endif
-				<table id="basic-datatable" class="table table-striped table-bordered dt-responsive nowrap">
+				<table id="basic-datatable" class="table table-striped table-bordered table-wrap">
                     <thead class="thead-dark">
                         <tr>
                             <th style="color:white; width: 5%;">ID</th>
-                            <th style="color:white">Tên sản phẩm</th>
-                            <th style="color:white">Loại sản phẩm</th>
-                            <th style="color:white">Giá</th>
-                            <th style="color:white">Ảnh minh họa</th>
-                            <th style="color:white; t">Trang thái</th>
-                            <th class="h-tool" style="color: white;">Thao tác</th>
+                            <th style="color:white; width:20%;">Tên sản phẩm</th>
+                            <th style="color:white; width:13%;">Loại sản phẩm</th>
+                            <th style="color:white; width:10%;">Giá</th>
+                            <th style="color:white; width:13%;">Ảnh minh họa</th>
+                            <th style="color:white; width:12%;">Trang thái</th>
+                            <th style="color: white; text-align: center; width:15%;">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if($hienThi == 1)
                         @foreach($products as $value) 
-                        <tr style="font-size: 120%; font-weight: bold;">
+                        <tr style="font-size: 90%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->Categories->name }}</td>
-                            <td>{{ $value->price }}</td>
+                            <td>{{ $value->price }} VNĐ</td>
                             <td style="text-align: center;"><img style="height:40px;width:40px;" src="{{asset('assets/images/products_image/'.$value->image)}}" alt=""></td>
                             @if($value->in_stock == 1)
                             <td style="text-align: center;"><span class="badge badge-pill badge-success">Còn hàng</span></td>
@@ -61,7 +61,7 @@
                         @endforeach
                         @else
                         @foreach($products as $value) 
-                        <tr style="font-size: 120%; font-weight: bold;">
+                        <tr style="font-size: 90%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->Categories->name }}</td>

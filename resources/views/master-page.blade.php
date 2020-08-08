@@ -67,7 +67,7 @@
     <div class="rightbar-overlay"></div>
     <!-- Vendor js -->
     <script src="{{asset('assets/js/vendor.min.js')}}"></script>
-    @yield('script')
+    @yield('js')
     <!-- App js-->
     <script src="{{ asset('assets/js/common.js') }}"></script>
     {{-- <script src="{{asset('assets/js/app.min.js')}}"></script> --}}

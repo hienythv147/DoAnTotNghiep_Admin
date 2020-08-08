@@ -24,7 +24,7 @@ class RolesRequest extends FormRequest
     {
         // https://viblo.asia/p/tap-21-validation-laravel-tiep-theo-gAm5yGaAZdb
         return [
-            'name' => 'bail | required | regex: /[a-zA-Z]/ '
+            'name' => 'bail | required | regex: /[a-zA-Z]/ | max:255'
         ];
     }
 
@@ -34,6 +34,7 @@ class RolesRequest extends FormRequest
             'name.required' => 'Loại nhân viên không được bỏ trống!',
             
             'name.regex' => 'Loại nhân viên không hợp lệ!',
+            'name.max' => 'Loại nhân viên chỉ được tối đa 255 kí tự.'
         ];
         
     }

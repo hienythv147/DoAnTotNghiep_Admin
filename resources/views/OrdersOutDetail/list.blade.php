@@ -9,23 +9,23 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-body">
-				<table id="basic-datatable" class="table table-striped table-bordered dt-responsive nowrap">
+				<table id="basic-datatable" class="table table-striped table-bordered table-wrap">
                     <thead class="thead-dark">
                         <tr>
-                            <th style="color:white; width: 5%;">ID</th>
-                            <th style="color:white">Mã đơn bán</th>
-                            <th style="color:white">Tên sản phẩm</th>
-                            <th style="color:white">Giá</th>
-                            <th style="color:white">Số lượng</th>
+                            <th style="color:white; width: 5%; text-align: center;">ID</th>
+                            <th style="color:white; width: 10%;">Mã đơn bán</th>
+                            <th style="color:white; width: 20%;">Tên sản phẩm</th>
+                            <th style="color:white; width: 10%;">Giá</th>
+                            <th style="color:white; width: 10%;">Số lượng</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($orders_out_detail as $value) 
-                        <tr style="font-size: 120%; font-weight: bold;">
+                        <tr style="font-size: 90%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->pivot->order_out_id }}</td>
                             <td>{{ $value->name }}</td>
-                            <td>{{ $value->pivot->price }}</td>
+                            <td>{{ $value->pivot->price }} VNĐ</td>
                             <td>{{ $value->pivot->amount }}</td>
                         </tr>
                         @endforeach

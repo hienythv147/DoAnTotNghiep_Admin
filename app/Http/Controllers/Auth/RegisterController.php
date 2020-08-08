@@ -50,12 +50,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name' => ['required', 'regex: /[a-zA-Z]/', 'max:255'],
-            'last_name' => ['required', 'regex: /[a-zA-Z]/', 'max:255'],
+            'first_name' => ['required', 'regex: /[a-zA-Z]/', 'max:20'],
+            'last_name' => ['required', 'regex: /[a-zA-Z]/', 'max:20'],
             'address' => ['required', 'regex: /[a-zA-Z]/', 'max:255'],
             'phone_number' => ['required', 'regex:/^0[0-9]{9}$/'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6',
+            'password' => ['required', 'string', 'min:6','max:20',
                             'regex:/^.*(?=.*?[a-z])(?=.*?[A-Z])(?=.*?\d).*$/', 'confirmed'],
         ],
         [
@@ -72,10 +72,12 @@ class RegisterController extends Controller
             'phone_number.regex' => "Số điện thoại không hợp lệ.",
             'password.regex' => "Mật khẩu phải có ít nhất 1 chữ cái hoa và 1 kí tự đăc biệt.",
 
-            'first_name.max' => "Tên không được quá 255 kí tự.",
-            'last_name.max' => "Họ không được quá 255 kí tự.",
+            'first_name.max' => "Tên không được quá 20 kí tự.",
+            'last_name.max' => "Họ không được quá 20 kí tự.",
             'address.max' => "Địa chỉ không được quá 255 kí tự.",
             'email.max' => "Email không được quá 255 kí tự.",
+            'password.max' => "Mạt khẩu không được quá 20 kí tự.",
+
             
             'password.min' => "Mật khẩu phải có ít nhất 6 kí tự.",
 

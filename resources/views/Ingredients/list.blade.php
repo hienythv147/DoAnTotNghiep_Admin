@@ -24,20 +24,20 @@
                     class="btn btn-warning waves-effect waves-light">
                     <i class="far fa-trash-alt" style="padding-right:10px"></i>Danh sách nguyên liệu đã xóa</a>
                 @endif
-				<table id="basic-datatable" class="table table-striped table-bordered dt-responsive nowrap">
+				<table id="basic-datatable" class="table table-striped table-bordered table-wrap">
                     <thead class="thead-dark">
                         <tr>
                             <th style="color:white; width: 5%;">ID</th>
-                            <th style="color:white">Tên Nguyên Liệu</th>
-                            <th style="color:white">Đơn vị</th>
-                            <th style="color:white">Số lượng còn lại</th>
+                            <th style="color:white; width: 25%;">Tên Nguyên Liệu</th>
+                            <th style="color:white; width: 10%;">Đơn vị</th>
+                            <th style="color:white; width: 14%;">Số lượng còn lại</th>
                             <th class="h-tool" style="color: white;">Thao Tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         @if($hienThi == 1)
                         @foreach($ingredients as $value) 
-                        <tr style="font-size: 120%; font-weight: bold;">
+                        <tr style="font-size: 90%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->ingredient_unit }}</td>
@@ -54,7 +54,7 @@
                         @endforeach
                         @else
                         @foreach($ingredients as $value) 
-                        <tr style="font-size: 120%; font-weight: bold;">
+                        <tr style="font-size: 90%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->ingredient_unit }}</td>

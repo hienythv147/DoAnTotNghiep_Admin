@@ -24,8 +24,8 @@ class CategoriesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail | required | regex:/[a-zA-Z]/',
-            'category_type' => 'bail | required | regex:/[12]/',
+            'name' => 'bail | required | regex:/[a-zA-Z]/ | max:255',
+            'category_type' => 'bail | required | regex:/[12]/ | max: 255',
             // 'category_image' => 'bail | required | max:2048 | mimes: jpg,jpeg,png,gif',
         ];
     }
@@ -38,6 +38,8 @@ class CategoriesRequest extends FormRequest
 
             'name.regex' => 'Loại sản phẩm không hợp lệ!',
             'category_type.regex' => 'Loại sản phẩm không tồn tại!',
+
+            'name.max' => 'Tên loại sản phẩm chỉ được tối đa 255 kí tự.',
 
             // 'category_image.mimes' => 'File được chọn phải là định dạng ảnh!',
 

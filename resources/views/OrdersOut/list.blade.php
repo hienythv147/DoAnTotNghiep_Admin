@@ -9,22 +9,22 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-body">
-				<table id="basic-datatable" class="table table-striped table-bordered dt-responsive nowrap">
+				<table id="basic-datatable" class="table table-striped table-bordered table-wrap">
                     <thead class="thead-dark">
                         <tr>
                             <th style="color:white; width: 5%;">ID</th>
-                            <th style="color:white">Người lập hóa đơn</th>
-                            <th style="color:white">Tổng tiền</th>
-                            <th style="color:white; text-align: center;">Trạng thái</th>
+                            <th style="color:white; width: 20%;">Người lập hóa đơn</th>
+                            <th style="color:white; width: 10%;">Tổng tiền</th>
+                            <th style="color:white; width: 10%; text-align: center;">Trạng thái</th>
                             <th class="h-tool" style="color: white;">Thao Tác</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($orders_out as $value) 
-                        <tr style="font-size: 120%; font-weight: bold;">
+                        <tr style="font-size: 90%; font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->User->last_name ." ". $value->User->first_name }}</td>
-                            <td>{{ $value->total }}</td>
+                            <td>{{ $value->total }} VNĐ</td>
                             @if($value->status == 1)
                             <td style="text-align: center;"><span class="badge badge-pill badge-success" style="width: 100px">Đã hoàn tất</span></td>
                             @else

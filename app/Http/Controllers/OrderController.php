@@ -157,10 +157,10 @@ class OrderController extends Controller
             }
             // send mail if user is customer
             if($roleId == 3) {
-                $this->sendMail($orderId, $total, $data, $created_at, $userEmail, true);
+                // $this->sendMail($orderId, $total, $data, $created_at, $userEmail, true);
             }
             // send email for admin
-            $this->sendMail($orderId, $total, $data, $created_at);
+            // $this->sendMail($orderId, $total, $data, $created_at);
             // clear order session
             Session::pull('cart');
             // flash session
