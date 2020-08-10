@@ -27,36 +27,52 @@ class OrderChartController extends Controller
         // SELECT COUNT(*) FROM orders_out WHERE created_at BETWEEN '2020-08-03' and '2020-08-08' GROUP by created_at 
         
         
-        // $currentDay = Carbon::now();
-        // $startDay = $currentDay->startOfMonth()->format('Y-m-d');
-        // $endDay = $currentDay->endOfMonth()->format('Y-m-d');
-        // $daysInMonth = DB::table('orders_out')
-        // ->select(DB::raw('Date(created_at) ngay'))->distinct()
-        // ->whereBetween(DB::raw('Date(created_at)'), array($startDay, $endDay))
-        // ->orderBy('ngay', 'asc')
-        // ->get();
-        // $daysInMonth = $daysInMonth->pluck("ngay")->toArray();
+        $currentDay = Carbon::now();
+        $startDay = $currentDay->startOfMonth()->format('Y-m-d');
+        $endDay = $currentDay->endOfMonth()->format('Y-m-d');
+        $daysInMonth = DB::table('orders_out')
+        ->select(DB::raw('Date(created_at) ngay'))->distinct()
+        ->whereBetween(DB::raw('Date(created_at)'), array($startDay, $endDay))
+        ->orderBy('ngay', 'asc')
+        ->get();
+        $daysInMonth = $daysInMonth->pluck("ngay")->toArray();
 
-        // $orders_dayInMonth = DB::table('orders_out')
-        //                 ->select(DB::raw('count(*) don_trong_thang'))
-        //                 ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
-        //                 ->groupBy(DB::raw('Date(created_at)'))
-        //                 ->get();
-        // $orders_dayInMonth = $orders_dayInMonth->pluck("don_trong_thang")->toArray();
-        
-        // $countOrder = 0;
+        $orders_dayInMonth = DB::table('orders_out')
+                        ->select(DB::raw('count(*) don_trong_thang'))
+                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
+                        ->groupBy(DB::raw('Date(created_at)'))
+                        ->get();
+        $orders_dayInMonth = $orders_dayInMonth->pluck("don_trong_thang")->toArray();
+        // dd($orders_dayInMonth);
+
+        $arrMonth = [];
+        $start =  $currentDay->startOfMonth();
+        // for($i = 0; $i < $currentDay->daysInMonth; $i++) {
+                
+        //     if($i == 0 )
+        //     {
+        //         array_push($arrMonth,$start->toDateString());
+        //     }
+        //     else {
+        //         $start->addDay();
+        //         array_push($arrMonth,$start->toDateString());
+        //     }
+        // }
+        // // dd($arrMonth);
+        // $res = [];
+        // $a = 0;
+        // $b = 0;
         // for($i = 0; $i < count($daysInMonth); $i++) {
-        //     $start =  $currentDay->startOfMonth();
-        //     for($j = 0; $j < $currentDay->daysInMonth; $j++) {
-        //         if($j != 0) {
-        //             $start->addDay();
-        //         }
-        //         if($daysInMonth[$i] == $start->toDateString())
+
+        //     for($j = 0; $j < count($arrMonth); $j++)
+        //     {
+        //         if($daysInMonth[$i] == $arrMonth[$j])
         //         {
-        //             $countOrder++;
+        //             echo $b = $b +1;
         //         }
         //     }
         // }
+        // dd($res,$orders_dayInMonth);
         // dd($countOrder);
 
 

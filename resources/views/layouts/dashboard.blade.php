@@ -104,22 +104,22 @@
 <div class="row">
     <div class="col-xl-6">
         <div class="card-box">
-            <h4 class="mt-0 font-16">Doanh Thu</h4>
-            <h2 class="text-primary my-4 text-center"><span data-plugin="counterup">31,570</span> VNĐ</h2>
+            <h4 class="mt-0 font-16">Tổng doanh thu tháng {{ $month }}</h4>
+            <h2 class="text-primary my-4 text-center"><span>{{ number_format($total_toMonth[0],0,'.','.') }}</span> VNĐ</h2>
             <div class="row mb-4">
                 <div class="col-6">
                     <p class="text-muted mb-1">Tuần Này</p>
-                    <h3 class="mt-0 font-20 text-truncate">120,254 VNĐ<small class="badge badge-light-success font-13">+15%</small></h3>
+                    <h3 class="mt-0 font-20 text-truncate">{{ number_format($total_toWeek[0],0,".",".")}} VNĐ<small class="badge badge-light-success font-13">+15%</small></h3>
                 </div>
-
+                
                 <div class="col-6">
                     <p class="text-muted mb-1">Tuần Trước</p>
-                    <h3 class="mt-0 font-20 text-truncate">98,741 VNĐ<small class="badge badge-light-danger font-13">-5%</small></h3>
+                    <h3 class="mt-0 font-20 text-truncate">{{ number_format($total_LastWeek[0],0,".",".")}} VNĐ<small class="badge badge-light-danger font-13">-5%</small></h3>
                 </div>
             </div>
 
             <div class="mt-5">
-                <span data-plugin="peity-line" data-fill="#56c2d6" data-stroke="#4297a6" data-width="100%" data-height="50">3,5,2,9,7,2,5,3,9,6,5,9,7</span>
+            <span data-plugin="peity-line" data-fill="#56c2d6" data-stroke="#4297a6" data-width="100%" data-height="50">{{ implode(',', $orders_InMonth) }}</span>
             </div>
             
 
@@ -149,7 +149,7 @@
             text: 'Đang tải dữ liệu..',
         },
          hooks: new ChartisanHooks()
-          .title("Đồ thị thống kê doanh thu")
+          .title("Đồ thị thống kê doanh thu tháng")
           .responsive(true)
           .beginAtZero()
           .colors(['rgb(240, 100, 59)'])
