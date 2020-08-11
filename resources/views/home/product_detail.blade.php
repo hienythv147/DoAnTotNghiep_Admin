@@ -38,7 +38,7 @@
                     <form action="{{ Route('addCartPD') }}" type="submit"> 
                         @csrf
                         <h2>{{ $productDetail->name }}</h2>
-                        <h5>{{ $productDetail->price }} VNĐ</h5>
+                        <h5>{{ number_format($productDetail->price, "0", ".", ".") }} VNĐ</h5>
                         @if($productDetail->in_stock != 1)
                         <p class="available-stock"><span><h4 style="color: red">Hết hàng!!</h4></span><p>
                         @endif
@@ -70,7 +70,7 @@
         <div class="row my-5">
             <div class="col-lg-12">
                 <div class="title-all text-center">
-                    <h1>Sản phẩm bán chạy</h1>
+                    <h1>Sản phẩm liên quan</h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
                 </div>
                 <div class="featured-products-box owl-carousel owl-theme">  
@@ -86,7 +86,7 @@
                                     @endif
                                 </div>
                                 <div class="type-lb-price">
-                                    <p class="price"> {{ $product->price }} VNĐ</p>
+                                    <p class="price"> {{ number_format($product->price, "0", ".", ".") }} VNĐ</p>
                                 </div>
                                 @if(!empty($product->image))
                                 <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'. $product->image) }}" class="img-fluid" alt="" style="width: 105%"></a>

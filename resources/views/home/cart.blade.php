@@ -45,9 +45,9 @@
                                 <td class="thumbnail-img">
                                     <a href="#">
                                 @if(!empty($item['image']))
-                                <a href="{{ Route('product_detail', $item['id']) }}"><img class="img-fluid" src="{{ asset('assets/images/products_image/'.$item['image']) }}" alt=""/></a>
+                                <a href="{{ Route('product_detail', $item['id']) }}"><img class="img-fluid" src="{{ asset('assets/images/products_image/'.$item['image']) }}" style="width: 60px; height: 60px" alt=""/></a>
                                 @else
-                                <img class="img-fluid" src="{{ asset('assets/images/not_found.png') }}" alt=""/> 
+                                <img class="img-fluid" style="width: 60px; height: 60px" src="{{ asset('assets/images/not_found.png') }}" alt=""/> 
                                 @endif
                             </a>
                                 </td>
@@ -57,13 +57,13 @@
                                     </a>
                                 </td>
                                 <td class="price-pr">
-                                    <p>{{ $item['price'] }} VND</p>
+                                    <p>{{ number_format($item['price'], "0", ".", ".") }} VNĐ</p>
                                 </td>
                                 <td style="text-align: center">
                                     {{ $item['amount'] }}
                                 </td>
                                 <td class="total-pr">
-                                    <p>{{ $item['price'] * $item['amount'] }} VND</p>
+                                    <p>{{ number_format($item['price'] * $item['amount'], "0", ".", ".") }} VNĐ</p>
                                 </td>
                                 <td style="text-align: center">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="deleteRow(this, {{ $item['id'] }})" style="float: none;">
@@ -102,7 +102,7 @@
                     <h3>Tổng Tiền Đơn Hàng</h3>
                     <div class="d-flex">
                         <h4>Tổng tiền</h4>
-                        <div class="ml-auto font-weight-bold">{{ isset($subTotal) ? $subTotal : 0 }} vnd</div>
+                        <div class="ml-auto font-weight-bold">{{ isset($subTotal) ? number_format($subTotal, "0", ".", ".") : 0 }} VNĐ</div>
                     </div>
                     <!-- <div class="d-flex">
                         <h4>Discount</h4>
@@ -111,16 +111,21 @@
                     <hr class="my-1">
                     <div class="d-flex">
                         <h4>Mã giảm giá</h4>
-                        <div class="ml-auto font-weight-bold"> 0 vnd</div>
+                        <div class="ml-auto font-weight-bold"> {{ number_format("0", "0", ".", ".") }} VNĐ</div>
                     </div>
+                    
                     <div class="d-flex">
                         <h4>Phí vận chuyển</h4>
-                        <div class="ml-auto font-weight-bold"> Miễn phí </div>
+                        @if(isset($cart))
+                        <div class="ml-auto font-weight-bold"> {{ number_format("15000", "0", ".", ".") }} VNĐ</div>
+                        @else
+                        <div class="ml-auto font-weight-bold"> 0 VNĐ</div>
+                        @endif
                     </div>
                     <hr>
                     <div class="d-flex gr-total">
                         <h5>Thành tiền</h5>
-                        <div class="ml-auto h5"> {{ isset($subTotal) ? $subTotal : 0 }} vnd </div>
+                        <div class="ml-auto h5 font-weight-bold"> {{ isset($subTotal) ? number_format($subTotal+15000, "0", ".", ".") : 0 }} VNĐ </div>
                     </div>
                     <hr> </div>
             </div>
@@ -149,27 +154,29 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="field-1" class="control-label">Họ</label>
-                                        <input type="text" class="form-control" id="field-1" placeholder="Nhập họ của bạn" name="last_name" value="{{ Auth::user()->last_name }}">
+                                        <input type="text" class="form-control" id="field-1" placeholder="Nhập họ của bạn" disabled name="last_name" value="{{ Auth::user()->last_name }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="field-2" class="control-label">Tên</label>
-                                        <input type="text" class="form-control" id="field-2" placeholder="Nhập tên của bạn" name="first_name" value="{{ Auth::user()->first_name }}">
+                                        <input type="text" class="form-control" id="field-2" placeholder="Nhập tên của bạn" disabled name="first_name" value="{{ Auth::user()->first_name }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="field-4" class="control-label">Email</label>
-                                        <input type="text" class="form-control" id="field-4" placeholder="Nhập email" name="email" value="{{ Auth::user()->email }}">
+                                        <input type="text" class="form-control" id="field-4" placeholder="Nhập email" disabled name="email" value="{{ Auth::user()->email }}">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="field-5" class="control-label">Số Điện Thoại</label>
-                                        <input type="text" class="form-control" id="field-5" placeholder="Nhập số điện thoại" name="phone_number" value="{{ Auth::user()->phone_number }}">
+                                        <input type="text" class="form-control" id="field-5" placeholder="Nhập số điện thoại" disabled name="phone_number" value="{{ Auth::user()->phone_number }}">
                                     </div>
                                 </div>
                             </div>
@@ -177,9 +184,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="field-3" class="control-label">Địa Chỉ</label>
-                                        <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" name="address" value="{{ Auth::user()->address }}">
+                                        <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" disabled name="address" value="{{ Auth::user()->address }}">
                                     </div>
                                 </div>
+                                
                             </div>
                             <div class="row">
                                 <div class="col-md-6">

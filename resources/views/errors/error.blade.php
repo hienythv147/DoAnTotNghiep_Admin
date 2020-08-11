@@ -25,11 +25,11 @@
      <div class="container py-5">
           <div class="row">
                <div class="col-md-2 text-center">
-                    <p><i class="fa fa-exclamation-triangle fa-5x"></i><br/>Mã trạng thái: 403</p>
+                    <p><i class="fa fa-exclamation-triangle fa-5x"></i><br/>Mã trạng thái: 500</p>
                </div>
                <div class="col-md-10">
                     <h3>OPPSSS!!!! Xin lỗi...</h3>
-                    <p>Xin lỗi, quyền truy cập của bạn bị từ chối vì lý do bảo mật của máy chủ và dữ liệu nhạy cảm của chúng tôi.<br/>Vui lòng quay lại trang trước để tiếp tục duyệt.</p>
+                    <p>Xin lỗi, đã xảy ra một lỗi hệ thống. Vui lòng liên hệ Admin hoặc nhà cung cấp dịch vụ.<br/>Vui lòng quay lại trang trước để tiếp tục duyệt.</p>
                     <a class="btn btn-danger" href="javascript:history.back()">Quay lại</a>
                </div>
           </div>

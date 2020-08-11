@@ -44,9 +44,10 @@ $(document).ready(function () {
                             } else {
                                 image = "http://"+window.location.hostname+":"+window.location.port+"/assets/images/products_image/not_found.png";
                             }
+                            var num = new Number(value.price).toLocaleString("vn-VI");
                             $('#result').append('<li class="list-group-item" style="background: rgba(0, 0, 0, 0.5);" ><a href="'+url+'">' + 
                                 '<img style="height: 50px; width: 50px" src="' + image + '"class="img-thumbnail"/>' +
-                                '<span style="margin-left: 10px;  color:#fff !important;">' + value.name + '</span>' +
+                                '<span style="margin-left: 10px;  color:#fff !important;">' + value.name + ' - ' + num +' VNĐ</span>' +
                             '</a></li>');
                         }
                     });
@@ -98,6 +99,7 @@ function toastr(id) {
                         '<p>' + value.amount + 'x - <span class="price">' + value.price + ' VNĐ</span></p>' + '</li>'
                     )
                 });
+                
                 $('#cart-box').append(
                     '<li class="total"><a href="/cart" class="btn btn-default hvr-hover btn-cart">Xem</a>' +
                     '<span class="float-right"><strong>Total</strong>: <b>' + total + '</b> VNĐ</span>' + '</li>'
@@ -152,10 +154,11 @@ function historyOrderDetail(id) {
                 var content = '';
                 var count = 1;
                 result.forEach(element => {
+                    var num = new Number(element.price).toLocaleString("vn-VI");
                     content += "<tr style='font-weight: 1000'>" +
                                     "<td style='text-align: center'>" + count + "</td>" +
                                     "<td>" + element.name + "</td>" +
-                                    "<td>" + element.price + "</td>" +
+                                    "<td>" + num + "</td>" +
                                     "<td style='text-align: center'>" + element.amount + "</td>" +
                                 "</tr>"
                     count++;

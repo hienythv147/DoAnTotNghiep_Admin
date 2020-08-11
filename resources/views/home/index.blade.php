@@ -151,7 +151,7 @@
                             @endif
                         </div>
                         <div class="type-lb-price">
-                            <p class="price">{{ $product->price }} VNĐ</p>
+                            <p class="price">{{ number_format($product->price, "0", ".", ".") }} VNĐ</p>
                         </div>
                         @if(!empty($product->image))
                         <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'.$product->image) }}" class="img-fluid" alt=""></a>
@@ -179,13 +179,13 @@
                     <div class="box-img-hover">
                         <div class="type-lb">
                             @if($product->in_stock == 1)
-                            <p class="sale">Bán chạy nhất</p>
+                            <p class="sale">Bán chạy</p>
                             @else
                             <p class="new">Hết hàng</p>
                             @endif
                         </div>
                         <div class="type-lb-price">
-                            <p class="price">{{ $product->price }} VNĐ</p>
+                            <p class="price">{{ number_format($product->price, "0", ".", ".") }} VNĐ</p>
                         </div>
                         @if(!empty($product->image))
                         <a href="{{ Route('product_detail', $product->id) }}"><img src="{{ asset('assets/images/products_image/'.$product->image) }}" class="img-fluid" alt=""></a>

@@ -32,4 +32,15 @@ class OrdersOutController extends Controller
        $orders_out_detail = Orders_out::find($id)->OrdersOutDetail;
        return view('OrdersOutDetail.list',compact('orders_out_detail'));
     }
+
+    public function confirmOrder($id) {
+        $orders_out = Orders_out::find($id);
+        $orders_out->status = 1;
+        $result = $orders_out->save();
+        if($result) {
+            return back()->with('message_success','Đơn hàng đã được xác nhận!');
+        } else {
+            return back()->with('message_error','Xác nhận đơn hàng không thành công!');
+        }
+    }
 }
