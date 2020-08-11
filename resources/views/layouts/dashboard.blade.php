@@ -61,7 +61,7 @@
         <div class="card-box">
             
 
-            <h4 class="header-title mt-0 mb-3">Doanh thu (VNĐ)</h4>
+            <h4 class="header-title mt-0 mb-3">Trong tuần (VNĐ)</h4>
 
             <div class="mt-1">
                 <div class="float-left" dir="ltr">
@@ -83,12 +83,12 @@
         <div class="card-box">
             
 
-            <h4 class="header-title mt-0 mb-3">Trung bình (VNĐ)</h4>
+            <h4 class="header-title mt-0 mb-3">Trong ngày (VNĐ)</h4>
 
             <div class="mt-1">
                 <div class="float-left" dir="ltr">
                     <input data-plugin="knob" data-width="64" data-height="64" data-fgColor="#ffbd4a"
-                        data-bgColor="#FFE6BA" value="35"
+                        data-bgColor="#FFE6BA" value="{{ $orders_toDay[0] }}"
                         data-skin="tron" data-angleOffset="180" data-readOnly=true
                         data-thickness=".15"/>
                 </div>
@@ -109,12 +109,12 @@
             <div class="row mb-4">
                 <div class="col-6">
                     <p class="text-muted mb-1">Tuần Này</p>
-                    <h3 class="mt-0 font-20 text-truncate">{{ number_format($total_toWeek[0],0,".",".")}} VNĐ<small class="badge badge-light-success font-13">+15%</small></h3>
+                    <h3 class="mt-0 font-20 text-truncate">{{ number_format($total_toWeek[0],0,".",".")}} VNĐ<small class="badge badge-light-success font-13"></small></h3>
                 </div>
                 
                 <div class="col-6">
                     <p class="text-muted mb-1">Tuần Trước</p>
-                    <h3 class="mt-0 font-20 text-truncate">{{ number_format($total_LastWeek[0],0,".",".")}} VNĐ<small class="badge badge-light-danger font-13">-5%</small></h3>
+                    <h3 class="mt-0 font-20 text-truncate">{{ number_format($total_LastWeek[0],0,".",".")}} VNĐ<small class="badge badge-light-danger font-13"></small></h3>
                 </div>
             </div>
 
@@ -158,9 +158,6 @@
        });
 </script>
 
-
-<!-- Vendor js -->
-<script src="{{ asset('assets/js/vendor.min.js') }}"></script>
 
 <!-- Third Party js-->
 <script src="{{ asset('assets/libs/jquery-knob/jquery.knob.min.js') }}"></script>
