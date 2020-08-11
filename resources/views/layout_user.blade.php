@@ -271,7 +271,7 @@
 					<div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-top-box">
 							<h3>Mạng Xã Hội</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+							<p></p>
 							<ul>
                                 <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
@@ -288,20 +288,18 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-widget">
-                            <h4>Freshshop</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> 
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p> 							
+                            <h4>CAFE SP</h4>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-link">
                             <h4>Thông tin</h4>
                             <ul>
-                                <li><a href="#">Dịch Vụ Khách Hàng</a></li>
+                                <!-- <li><a href="#">Dịch Vụ Khách Hàng</a></li>
                                 <li><a href="#">Vị Trí</a></li>
                                 <li><a href="#">Điều Khoản &amp; Điều Kiện</a></li>
                                 <li><a href="#">Chính Sách Bảo Mật</a></li>
-                                <li><a href="#">Thông Tin Giao Hàng</a></li>
+                                <li><a href="#">Thông Tin Giao Hàng</a></li> -->
                             </ul>
                         </div>
                     </div>
@@ -316,7 +314,7 @@
                                     <p><i class="fas fa-phone-square"></i>SĐT: <a href="tel:+84373801132">037-380-1132</a></p>
                                 </li>
                                 <li>
-                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
+                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:hienythv147@gmail.com">contactinfo@gmail.com</a></p>
                                 </li>
                             </ul>
                         </div>

@@ -26,14 +26,13 @@
                     <div class="product-item-filter row">
                         <div class="col-12 col-sm-8 text-center text-sm-left">
                             <div class="toolbar-sorter-right">
-                                <span><strong>Sắp Xếp </strong></span>
-                                <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
-                                <option data-display="Select">Mặc định</option>
-                                <option value="1">Mới nhất</option>
-                                <option value="2">Cao nhất → Thấp nhất</option>
-                                <option value="3">Thấp nhất → Cao nhất</option>
-                                <option value="4">Bán chạy nhất</option>
-                            </select>
+                                <span style="font-size: 20px"><strong>Danh Sách Sản Phẩm </strong></span>
+                                <!-- <select id="basic" class="selectpicker show-tick form-control" data-placeholder="$ USD">
+                                    <option data-display="Select"><strong>Mặc định</option>
+                                    <option value="1"><a href="{{ Route('products') }}">Mới nhất</a></option>
+                                    <option value="2">Cao nhất → Thấp nhất</option>
+                                    <option value="3">Thấp nhất → Cao nhất</option>
+                                </select> -->
                             </div>
                         </div>
                         <div class="col-12 col-sm-4 text-center text-sm-right">
@@ -145,27 +144,27 @@
                         </div>
                         <div class="list-group list-group-collapse list-group-sm list-group-tree" id="list-group-men" data-children=".sub-men">
                             <div class="list-group-collapse sub-men">
-                                <a class="list-group-item list-group-item-action" href="#sub-men1" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1"><b> Thức ăn </b> <small class="text-muted"></small>
+                                <a class="list-group-item list-group-item-action" href="#sub-men1" data-toggle="collapse" aria-expanded="true" aria-controls="sub-men1"><b> Thức Ăn </b> <small class="text-muted"></small>
                             </a>
                                 <div class="collapse show" id="sub-men1" data-parent="#list-group-men">
                                     <div class="list-group">
                                         @foreach($categories as $category)
                                         @if($category->category_type == 2)
-                                        <a href="{{ Route('category_detail', $category->id ) }}" class="list-group-item list-group-item-action {{ 'category/'.$category->id == Request::path() ? 'active' : '' }}">{{$category->name}} <small class="text-muted"></small></a>
+                                        <a href="{{ Route('category_detail', $category->id ) }}" class="list-group-item list-group-item-action {{ 'category/'.$category->id == Request::path() ? 'active' : '' }}"><strong>{{$category->name}}</strong> <small class="text-muted"></small></a>
                                         @endif
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
                             <div class="list-group-collapse sub-men">
-                                <a class="list-group-item list-group-item-action" href="#sub-men2" data-toggle="collapse" aria-expanded="false" aria-controls="sub-men2"><b> Thức uống </b> 
+                                <a class="list-group-item list-group-item-action" href="#sub-men2" data-toggle="collapse" aria-expanded="false" aria-controls="sub-men2"><b> Đồ Uống </b> 
                             <small class="text-muted"></small>
                             </a>
                                 <div class="collapse show" id="sub-men2" data-parent="#list-group-men">
                                     <div class="list-group">
                                         @foreach($categories as $category)
                                         @if($category->category_type == 1)
-                                        <a href="{{ Route('category_detail', $category->id ) }}" class="list-group-item list-group-item-action {{ 'category/'.$category->id == Request::path() ? 'active' : '' }}">{{$category->name}} <small class="text-muted"></small></a>
+                                        <a href="{{ Route('category_detail', $category->id ) }}" class="list-group-item list-group-item-action {{ 'category/'.$category->id == Request::path() ? 'active' : '' }}"><strong>{{$category->name}}</strong> <small class="text-muted"></small></a>
                                         @endif
                                         @endforeach
                                     </div>

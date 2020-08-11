@@ -179,7 +179,7 @@
                     <div class="box-img-hover">
                         <div class="type-lb">
                             @if($product->in_stock == 1)
-                            <p class="sale">Bán chạy nhất</p>
+                            <p class="sale">Bán chạy</p>
                             @else
                             <p class="new">Hết hàng</p>
                             @endif

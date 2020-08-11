@@ -10,6 +10,7 @@ use Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
 
 
 class OrderController extends Controller
@@ -90,7 +91,7 @@ class OrderController extends Controller
             $listProducts = "<tr>" .
                                 "<td>" . $item['name'] . "</td>" .
                                 "<td style='margin-left: 20px'>x" . $item['amount'] . "</td>" .
-                                "<td style='margin-left: 20px'>" . $item['price'] . "VND</td>" .
+                                "<td style='margin-left: 20px'>" . number_format($item['price'], "0", ".", ".") . "VND</td>" .
                              "</tr>";
             array_push($arrayProduct, $listProducts);
         }
@@ -99,13 +100,13 @@ class OrderController extends Controller
         $urlOrder = 'http://'.$_SERVER['HTTP_HOST'].'/Admin/orders-out/detail/'.$orderId;
         // get new content email
         $newContent = str_replace('order_id', $orderId, $content);
-        $newContent = str_replace('datetime_order', $created_at, $newContent);
+        $newContent = str_replace('datetime_order', $created_at->format('d-m-yy H:i:s'), $newContent);
         $newContent = str_replace('expected_time', '45 phút', $newContent);
         $newContent = str_replace('list_products', $listProducts, $newContent);
-        $newContent = str_replace('sub_total', $total.'VND', $newContent);
-        $newContent = str_replace('gif_code', '0VND', $newContent);
-        $newContent = str_replace('ship_code', '15000VND', $newContent);
-        $newContent = str_replace('grand_total', $total + 15000 . "VND", $newContent);
+        $newContent = str_replace('sub_total', number_format($total, "0", ".", ".").' VNĐ', $newContent);
+        $newContent = str_replace('gif_code', '0 VNĐ', $newContent);
+        $newContent = str_replace('ship_code', '15.000 VNĐ', $newContent);
+        $newContent = str_replace('grand_total', number_format($total + 15000, "0", ".", ".") . " VNĐ", $newContent);
         if($isUser) {
             $newContent = str_replace('url_order', 'http://'.$_SERVER['HTTP_HOST'].'/history-order', $newContent);
         } else {
@@ -139,7 +140,7 @@ class OrderController extends Controller
                 return '/cart';
             }
             // get created date
-            $created_at = $order->created_at;
+            $created_at = Carbon::now('Asia/Ho_Chi_Minh');
             // get last id of table order
             $orderId = Orders_out::all()->last()['id'];
             // save new order detail
@@ -157,10 +158,10 @@ class OrderController extends Controller
             }
             // send mail if user is customer
             if($roleId == 3) {
-                // $this->sendMail($orderId, $total, $data, $created_at, $userEmail, true);
+                $this->sendMail($orderId, $total, $data, $created_at, $userEmail, true);
             }
             // send email for admin
-            // $this->sendMail($orderId, $total, $data, $created_at);
+            $this->sendMail($orderId, $total, $data, $created_at);
             // clear order session
             Session::pull('cart');
             // flash session

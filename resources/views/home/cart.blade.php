@@ -113,9 +113,14 @@
                         <h4>Mã giảm giá</h4>
                         <div class="ml-auto font-weight-bold"> {{ number_format("0", "0", ".", ".") }} VNĐ</div>
                     </div>
+                    
                     <div class="d-flex">
                         <h4>Phí vận chuyển</h4>
+                        @if(isset($cart))
                         <div class="ml-auto font-weight-bold"> {{ number_format("15000", "0", ".", ".") }} VNĐ</div>
+                        @else
+                        <div class="ml-auto font-weight-bold"> 0 VNĐ</div>
+                        @endif
                     </div>
                     <hr>
                     <div class="d-flex gr-total">
@@ -149,27 +154,29 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="field-1" class="control-label">Họ</label>
-                                        <input type="text" class="form-control" id="field-1" placeholder="Nhập họ của bạn" name="last_name" value="{{ Auth::user()->last_name }}">
+                                        <input type="text" class="form-control" id="field-1" placeholder="Nhập họ của bạn" disabled name="last_name" value="{{ Auth::user()->last_name }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="field-2" class="control-label">Tên</label>
-                                        <input type="text" class="form-control" id="field-2" placeholder="Nhập tên của bạn" name="first_name" value="{{ Auth::user()->first_name }}">
+                                        <input type="text" class="form-control" id="field-2" placeholder="Nhập tên của bạn" disabled name="first_name" value="{{ Auth::user()->first_name }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="field-4" class="control-label">Email</label>
-                                        <input type="text" class="form-control" id="field-4" placeholder="Nhập email" name="email" value="{{ Auth::user()->email }}">
+                                        <input type="text" class="form-control" id="field-4" placeholder="Nhập email" disabled name="email" value="{{ Auth::user()->email }}">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="field-5" class="control-label">Số Điện Thoại</label>
-                                        <input type="text" class="form-control" id="field-5" placeholder="Nhập số điện thoại" name="phone_number" value="{{ Auth::user()->phone_number }}">
+                                        <input type="text" class="form-control" id="field-5" placeholder="Nhập số điện thoại" disabled name="phone_number" value="{{ Auth::user()->phone_number }}">
                                     </div>
                                 </div>
                             </div>
@@ -177,9 +184,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="field-3" class="control-label">Địa Chỉ</label>
-                                        <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" name="address" value="{{ Auth::user()->address }}">
+                                        <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" disabled name="address" value="{{ Auth::user()->address }}">
                                     </div>
                                 </div>
+                                
                             </div>
                             <div class="row">
                                 <div class="col-md-6">

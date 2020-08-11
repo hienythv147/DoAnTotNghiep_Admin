@@ -99,6 +99,7 @@ Route::middleware('auth')->group(function() {
 			Route::prefix('orders-out')->group(function(){
 				Route::get('list','OrdersOutController@index')->name('orders-out-list');
 				Route::get('detail/{id}','OrdersOutController@show')->name('orders-out-detail');
+				Route::get('confirm-order/{id}','OrdersOutController@confirmOrder')->name('confirm-order');
 			});
 		});
 	});
