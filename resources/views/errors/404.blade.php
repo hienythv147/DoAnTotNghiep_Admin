@@ -34,10 +34,6 @@
                </div>
           </div>
      </div>
-
-     <div id="footer" class="text-center">
-        All Rights Reserved. &copy; 2020 <a href="{{ Route('home') }}">ThewayShop</a>
-     </div>
 </body>
 
 </html>

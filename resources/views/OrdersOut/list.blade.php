@@ -26,13 +26,16 @@
                             <td>{{ $value->User->last_name ." ". $value->User->first_name }}</td>
                             <td>{{ $value->total }} VNĐ</td>
                             @if($value->status == 1)
-                            <td style="text-align: center;"><span class="badge badge-pill badge-success" style="width: 100px">Đã hoàn tất</span></td>
+                            <td style="text-align: center;"><span class="badge badge-pill badge-success" style="width: 100px; padding: .50em .4em;">Đã hoàn tất</span></td>
                             @else
-                            <td style="text-align: center;"><span class="badge badge-pill badge-danger" style="width: 100px">Chờ xác nhận</span></td>
+                            <td style="text-align: center;"><span class="badge badge-pill badge-danger" style="width: 100px; padding: .50em .4em;">Chờ xác nhận</span></td>
                             @endif
 
-                            <td class="tool">
-                                <a href="{{ route('orders-out-detail',['id' => $value->id]) }}"  class="btn btn-success waves-effect waves-light "><i class="fas fa-info"></i> Chi tiết</a>
+                            <td>
+                                <a href="{{ route('orders-out-detail',['id' => $value->id]) }}" style="margin-left: 100px" class="btn btn-success waves-effect waves-light "><i class="fas fa-info"></i> Chi tiết</a>
+                                @if( $value->status != 1)
+                                    <a href="{{ route('confirm-order',['id' => $value->id]) }}"  class="btn btn-danger waves-effect waves-light ">Xác nhận</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
