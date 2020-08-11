@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Roles;
+use App\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable
 {
@@ -47,4 +48,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    // public function sendPasswordResetNotification($token)
+    // {
+    //     $this->notify(new ResetPasswordNotification($token));
+    // }
 }
