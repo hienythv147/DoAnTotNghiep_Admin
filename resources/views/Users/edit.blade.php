@@ -62,8 +62,7 @@
 
                     <div class="form-group mb-0 justify-content-end row">
                         <div class="col-7">
-                            <button type="submit" class="btn btn-primary btn-rounded waves-effect waves-light" >Sửa
-                            </button>
+                            <button type="submit" class="btn btn-primary waves-effect waves-light" value="add">Sửa </button>
                             <a href="{{ route('users-list') }}" class="btn btn-danger btn-rounded waves-effect waves-light">Hủy</a>
                         </div>
                     </div>

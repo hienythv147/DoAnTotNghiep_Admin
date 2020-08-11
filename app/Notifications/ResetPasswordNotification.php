@@ -43,7 +43,7 @@ class ResetPasswordNotification extends Notification
         return (new MailMessage)
                     ->greeting('Xin chào!')
                     ->line('Chúng tôi đã được yêu cầu đặt lại tài khoản của bạn. Làm theo hướng dẫn bên dưới đây để lấy lại mật khẩu. Bỏ qua E-Mail nếu bạn không yêu cầu đặt lại mật khẩu. Đừng lo lắng, tài khoản của bạn vẫn an toàn. Nhấp vào liên kết sau để đặt mật khẩu mới.')
-                    ->action('Lấy lại mật khẩu', url('/password/reset/'. $notifiable.''))
+                    ->action('Lấy lại mật khẩu', url('/password/reset/'))
                     ->line('Một ngày tốt lành!');
                     
     }

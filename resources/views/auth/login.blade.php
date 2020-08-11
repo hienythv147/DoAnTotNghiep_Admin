@@ -35,12 +35,12 @@
                             @enderror
                         </div>
 
-                        <div class="form-group mb-3">
+                        {{-- <div class="form-group mb-3">
                             <div class="custom-control custom-checkbox checkbox-info">
                                 <input type="checkbox" class="custom-control-input" id="checkbox-signin" {{ old('remember') ? 'checked' : '' }}>
                                 <label class="custom-control-label" for="checkbox-signin">Lưu mật khẩu</label>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group mb-0 text-center">
                             <button class="btn btn-danger btn-block" type="submit" style="font-weight: 700;"> Đăng Nhập </button>

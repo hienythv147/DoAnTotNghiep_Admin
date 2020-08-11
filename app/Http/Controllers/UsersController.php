@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UsersRequest;
 use App\User;
 use App\Roles;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -120,4 +121,50 @@ class UsersController extends Controller
         $user->restore();
         return redirect()->route('users-list');
     }
+
+    // User
+
+    public function showProfile()
+    {
+        if(Auth::user()->role_id == 3)
+            return view('Users.profile');
+        else
+            return view('errors.404');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $this->validate($request,
+        [
+            'first_name' => ['required', 'regex: /[a-zA-Z]/', 'max:255'],
+            'last_name' => ['required', 'regex: /[a-zA-Z]/', 'max:255'],
+            'address' => ['required', 'regex: /[a-zA-Z]/', 'max:255'],
+            'phone_number' => ['required', 'regex:/^0[0-9]{9}$/'],
+        ],
+        [
+            'first_name.required' => "Tên không được để trống.",
+            'last_name.required' => "Họ không được để trống.",
+            'address.required' => "Địa chỉ không được để trống.",
+            'phone_number.required' => "Số điện thoại không được để trống.",
+
+            'first_name.regex' => "Tên không hợp lệ.",
+            'last_name.regex' => "Họ không hợp lệ.",
+            'address.regex' => "Địa chỉ không hợp lệ.",
+            'phone_number.regex' => "Số điện thoại không hợp lệ.",
+
+            'first_name.max' => "Tên không được quá 255 kí tự.",
+            'last_name.max' => "Họ không được quá 255 kí tự.",
+            'address.max' => "Địa chỉ không được quá 255 kí tự.",
+        ]);
+        
+        $profile = User::find(Auth::user()->id);
+        $profile->first_name = $request->first_name;
+        $profile->last_name = $request->last_name;
+        $profile->phone_number = $request->phone_number;
+        $profile->address = $request->address;
+        $profile->save();
+        return back()->with('message_success','Cập nhật thành công.');
+
+    }
+
 }

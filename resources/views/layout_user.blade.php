@@ -64,7 +64,7 @@
                             @else
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ Auth::user()->last_name . ' ' . Auth::user()->first_name  }} <span class="caret"></span>
+                                        {{ Auth::user()->first_name  }} <span class="caret"></span>
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -74,6 +74,9 @@
                                         </a>
                                         @endif
                                         @if(Auth::user()->role_id == 3)
+                                        <a class="dropdown-item" href="{{ route('profile-edit') }}" style="color: black; padding: 10px">
+                                            Thông tin tài khoản
+                                        </a>
                                         <a class="dropdown-item" href="{{ route('history_order') }}" style="color: black; padding: 10px">
                                             Lịch sử
                                         </a>

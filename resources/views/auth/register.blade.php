@@ -44,7 +44,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-3" class="control-label"><b>Họ</b></label>
-                                    <input id="field-3" value="{{ old('first_name') }}" id="last_name" class="form-control @error('last_name') is-invalid @enderror @error('first_name') is-invalid @enderror" name="first_name" type="text" placeholder="Họ"  autofocus>
+                                    <input id="field-3" value="{{ old('last_name') }}" id="last_name" class="form-control @error('last_name') is-invalid @enderror" name="last_name" type="text" placeholder="Họ"  autofocus>
                                     @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -55,7 +55,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="field-4" class="control-label"><b>Tên</b></label>
-                                    <input id="field-4" value="{{ old('last_name') }}" id="first_name" class="form-control @error('first_name') is-invalid @enderror" name="last_name" type="text" placeholder="Tên" >
+                                    <input id="field-4" value="{{ old('first_name') }}" id="first_name" class="form-control @error('first_name') is-invalid @enderror" name="first_name" type="text" placeholder="Tên" >
                                     @error('first_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
