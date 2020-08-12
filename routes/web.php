@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function() {
 			Route::get('/home', 'HomeController@index')->name('admin-home');
 
 			Route::get('statistic','OrderChartController@index')->name('statistic');
-			
+			Route::post('statistic','OrderChartController@index');
 
 			Route::prefix('products')->group(function(){
 				Route::get('list','ProductsController@index')->name('products-list');
@@ -104,6 +104,10 @@ Route::middleware('auth')->group(function() {
 		});
 	});
 });
+Route::middleware('auth')->group(function() {
+	//Custom reset password
+	Route::get('/password/reset','CustomsController@showRequestEmail')->name('show-request-email');
+});
 
 // Route home index
 Route::get('/', 'HomeController@index_user')->name('home');
@@ -120,7 +124,7 @@ Route::get('/category/{id}', 'ProductsController@show')->name('category_detail')
 Route::get('/products', 'ProductsController@index_user')->name('products');
 
 // Route page product detail
-Route::get('/product/{id}', 'ProductsController@showProductDetail')->name('product_detail')->middleware('auth');;
+Route::get('/product/{id}', 'ProductsController@showProductDetail')->name('product_detail');
 
 // Route page cart
 Route::get('/cart', 'HomeController@viewCart')->name('cart')->middleware('auth');

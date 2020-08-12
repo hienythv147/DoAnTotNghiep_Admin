@@ -43,9 +43,9 @@
                         <p class="available-stock"><span><h4 style="color: red">Hết hàng!!</h4></span><p>
                         @endif
                         <p class="available-stock"><span style="color: red"></span><p>
-                        <h4>Short Description:</h4>
-                        <p>Nam sagittis a augue eget scelerisque. Nullam lacinia consectetur sagittis. Nam sed neque id eros fermentum dignissim quis at tortor. Nullam ultricies urna quis sem sagittis pharetra. Nam erat turpis, cursus in ipsum at,
-                            tempor imperdiet metus. In interdum id nulla tristique accumsan. Ut semper in quam nec pretium. Donec egestas finibus suscipit. Curabitur tincidunt convallis arcu. </p>
+                        <h4>Mô tả sản phẩm:</h4>
+                        <p>Là sự kết hợp hoàn hảo giữa vị ngọt đặc trưng của siro đường hổ quyện với vị ngậy béo của sữa tươi cùng trân châu dẻo dai uống rồi lại muốn thêm ly nữa.</p>
+                        @if($productDetail->in_stock == 1)
                         <ul>
                             <li>
                                 <div class="form-group quantity-box">
@@ -55,6 +55,8 @@
                                 </div>
                             </li>
                         </ul>
+                        @endif
+                        
                         <div class="price-box-bar">
                             <div class="cart-and-bay-btn">
                                 @if($productDetail->in_stock == 1)
@@ -71,7 +73,7 @@
             <div class="col-lg-12">
                 <div class="title-all text-center">
                     <h1>Sản phẩm liên quan</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+                    <p>Là sự kết hợp hoàn hảo giữa vị ngọt đặc trưng của siro đường hổ quyện với vị ngậy béo của sữa tươi cùng trân châu dẻo dai uống rồi lại muốn thêm ly nữa.</p>
                 </div>
                 <div class="featured-products-box owl-carousel owl-theme">  
                     @foreach($products as $product)

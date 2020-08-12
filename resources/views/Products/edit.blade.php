@@ -41,6 +41,26 @@
                     </div>
                     <div style="margin-top: 25px" class="input-group">
                         <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Trạng thái</label>
+                        </div>
+                        <select name="in_stock" class="custom-select" id="inputGroupSelect01">
+                            {{-- Loại sp của sp --}}
+                            <option value="{{ $product->in_stock }}" selected>
+                            @if($product->in_stock == 0)
+                                Hết hàng
+                            @else 
+                                Còn hàng
+                            @endif
+                            </option>
+                            @if($product->in_stock == 1))
+                                <option value="0">Hết hàng</option>
+                            @elseif($product->in_stock == 0)
+                                <option value="1">Còn hàng</option>
+                            @endif
+                        </select>
+                    </div>
+                    <div style="margin-top: 25px" class="input-group">
+                        <div class="input-group-prepend">
                             <label class="input-group-text" for="product_price">Đơn giá</label>
                         </div>
                         <input id="product_price" name="product_price" type="text" class="form-control" aria-label="Amount (to the nearest dollar)" 

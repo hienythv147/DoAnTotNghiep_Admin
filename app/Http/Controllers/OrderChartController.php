@@ -15,86 +15,64 @@ class OrderChartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-
-        // Raw expression
-        //Số đơn hoàn thành trong ngày
-        // SELECT COUNT(*) FROM orders_out WHERE status = 1 GROUP BY created_at
-        // Tổng tiền các đơn hoàn thành trong ngày
-        // SELECT sum(total) FROM orders_out WHERE status = 1 GROUP BY created_at
-        // Tổng đơn các ngày trong tuần
-        // SELECT COUNT(*) FROM orders_out WHERE created_at BETWEEN '2020-08-03' and '2020-08-08' GROUP by created_at 
+        $startDay = '';
+        $endDay = '';
+        if($request->post())
+        {
+            if(!empty($request->all()))
+            {
+                $startDay = $request->startDay;
+                $endDay = $request->endDay;
+            }
+        }
+        else
+        {
+            $currentDay = Carbon::now();
+            $startDay = $currentDay->startOfMonth()->format('Y-m-d');
+            $endDay = $currentDay->endOfMonth()->format('Y-m-d');
+        }
+        // Tổng đơn các ngày trong tháng
         
-        
-        $currentDay = Carbon::now();
-        $startDay = $currentDay->startOfMonth()->format('Y-m-d');
-        $endDay = $currentDay->endOfMonth()->format('Y-m-d');
+        // dd($startDay,$endDay);
         $daysInMonth = DB::table('orders_out')
         ->select(DB::raw('Date(created_at) ngay'))->distinct()
-        ->whereBetween(DB::raw('Date(created_at)'), array($startDay, $endDay))
+        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
         ->orderBy('ngay', 'asc')
         ->get();
         $daysInMonth = $daysInMonth->pluck("ngay")->toArray();
+        // dd($daysInMonth);
+        $daysInMonth = json_encode($daysInMonth);
 
         $orders_dayInMonth = DB::table('orders_out')
                         ->select(DB::raw('count(*) don_trong_thang'))
-                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
+                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
                         ->groupBy(DB::raw('Date(created_at)'))
                         ->get();
         $orders_dayInMonth = $orders_dayInMonth->pluck("don_trong_thang")->toArray();
-        // dd($orders_dayInMonth);
-
-        $arrMonth = [];
-        $start =  $currentDay->startOfMonth();
-        // for($i = 0; $i < $currentDay->daysInMonth; $i++) {
-                
-        //     if($i == 0 )
-        //     {
-        //         array_push($arrMonth,$start->toDateString());
-        //     }
-        //     else {
-        //         $start->addDay();
-        //         array_push($arrMonth,$start->toDateString());
-        //     }
-        // }
-        // // dd($arrMonth);
-        // $res = [];
-        // $a = 0;
-        // $b = 0;
-        // for($i = 0; $i < count($daysInMonth); $i++) {
-
-        //     for($j = 0; $j < count($arrMonth); $j++)
-        //     {
-        //         if($daysInMonth[$i] == $arrMonth[$j])
-        //         {
-        //             echo $b = $b +1;
-        //         }
-        //     }
-        // }
-        // dd($res,$orders_dayInMonth);
-        // dd($countOrder);
+        $orders_dayInMonth = json_encode($orders_dayInMonth);
 
 
+        // Lấy tổng đơn hoàn thành các ngày trong tuần
+        $orders_complete = DB::table('orders_out')
+                        ->select(DB::raw('count(*) don_ht_trong_thang'))
+                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
+                        ->where('status', '=', 1)
+                        ->groupBy(DB::raw('Date(created_at)'))
+                        ->get();
+        $orders_complete = $orders_complete->pluck("don_ht_trong_thang")->toArray();
+        $orders_complete = json_encode($orders_complete);
+        // $orders_queue = DB::table('orders_out')
+        //                 ->select(DB::raw('count(*) don_cho_trong_thang'))
+        //                 ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
+        //                 ->where('status', '=', 0)
+        //                 ->groupBy(DB::raw('Date(created_at)'))
+        //                 ->get();
+        // $orders_queue = $orders_queue->pluck("don_cho_trong_thang")->toArray();
 
-        // dd($arr);
-        // dd($daysInMonth);
-        // echo $endDay->addDays(29)->format('Y-m-d'). '</br>';                  
-        // echo $endDay->addDay()->format('Y-m-d'). '</br>';                   
-        // echo $endDay->subDay()->format('Y-m-d'). '</br>';                     
-        // echo $endDay->subDays(29)->format('Y-m-d'). '</br>'; 
-        // dd($startDay,$endDay);
-        // between >= startDay < endDay nên phải + thêm 1 ngày
-        // $total_by_day = $total_by_day->pluck("tien_trong_ngay")->toArray();
-        // $newArray = [];
-        // foreach($total_by_day as $item )
-        // {
-        //     array_push($newArray,number_format($item,0,".","."));
-        // }
-        // // dd($newArray);
-        return view('Dashboard.statistic');
+        return view('Dashboard.statistic',compact('daysInMonth','orders_dayInMonth','orders_complete'));
     }
-
     /**
      * Show the form for creating a new resource.
      *

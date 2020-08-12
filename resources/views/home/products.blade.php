@@ -112,8 +112,7 @@
                                             <div class="why-text full-width">
                                                 <h4>{{ $product->name }}</h4>
                                                 <h5>{{ number_format($product->price, "0", ".", ".")  }} VNĐ</h5>
-                                                <p>Integer tincidunt aliquet nibh vitae dictum. In turpis sapien, imperdiet quis magna nec, iaculis ultrices ante.
-                                                 Integer vitae suscipit nisi.</p>
+                                                <p>Là sự kết hợp hoàn hảo giữa vị ngọt đặc trưng của siro đường hổ quyện với vị ngậy béo của sữa tươi cùng trân châu dẻo dai uống rồi lại muốn thêm ly nữa.</p>
                                                  @auth
                                                  <button type="button" class="btn hvr-hover" id="btn-add-to-cart-{{$product->id}}" onclick="toastr({{$product->id}})"><i class="fas fa-cart-plus"></i>  Thêm giỏ</button>
                                                  @endauth

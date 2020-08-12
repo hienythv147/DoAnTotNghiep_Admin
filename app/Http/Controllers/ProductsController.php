@@ -136,6 +136,7 @@ class ProductsController extends Controller
             // Lưu lại tên và loại
             $editProduct->name = $request->name;
             $editProduct->category_id = $request->category_id;
+            $editProduct->in_stock = $request->in_stock;
             $editProduct->price = $request->product_price;
             // Kiểm tra có thay đổi hình hay không 
             if( $request->hasFile('product_image')){
@@ -193,6 +194,7 @@ class ProductsController extends Controller
             // Lưu lại tên và loại
             $editProduct->name = $request->name;
             $editProduct->category_id = $request->category_id;
+            $editProduct->in_stock = $request->in_stock;
             $editProduct->price = $request->product_price;
             // Kiểm tra có thay đổi hình hay không 
             if( $request->hasFile('product_image')){

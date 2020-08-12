@@ -259,7 +259,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-lg-4 col-md-12 col-sm-12">
+					{{-- <div class="col-lg-4 col-md-12 col-sm-12">
 						<div class="footer-top-box">
 							<h3>Hộp Thư</h3>
 							<form class="newsletter-box">
@@ -269,6 +269,22 @@
 								</div>
 								<button class="btn hvr-hover" type="button">Gửi</button>
 							</form>
+						</div>
+                    </div> --}}
+                    <div class="col-lg-4 col-md-12 col-sm-12">
+						<div class="footer-top-box">
+							<h3>Thông Tin Liên Hệ</h3>
+							<ul class="list-time">
+                                <li>
+                                    <p><i class="fas fa-map-marker-alt"></i>  Địa Chỉ: 157 Dương Bá Trạc<br>Phường 1, Quận 8 TP HCM</p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-phone-square"></i>  SĐT: 037-380-1132</p>
+                                </li>
+                                <li>
+                                    <p><i class="fas fa-envelope"></i>  Email: hienythv147@gmail.com</a></p>
+                                </li>
+							</ul>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-12 col-sm-12">
@@ -288,7 +304,7 @@
 					</div>
 				</div>
 				<hr>
-                <div class="row">
+                {{-- <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-widget">
                             <h4>CAFE SP</h4>
@@ -322,7 +338,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </footer>
