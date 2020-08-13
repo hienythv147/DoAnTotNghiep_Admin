@@ -7,12 +7,12 @@
     <div style="margin-top: 50px;" class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h1 style=" text-align: center"> Sửa loại nhân viên </h1>
+                <h1 style=" text-align: center"> Sửa loại người dùng </h1>
                 <form class="form-horizontal" action="{{ route('roles-edit-process',['id' => $role->id]) }}" method="POST" >
                  @csrf
                     <div class="input-group" style="margin-top: 25px">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Loại nhân viên</span>
+                            <span class="input-group-text" id="inputGroup-sizing-default">Loại người dùng</span>
                         </div>
                         <input name="name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập loại nhân viên" value="{{ $role->name }}">
                     </div>

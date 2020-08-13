@@ -7,14 +7,14 @@
     <div style="margin-top: 50px;" class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h1 style=" text-align: center"> Thêm loại nhân viên </h1>
+                <h1 style=" text-align: center"> Thêm loại người dùng </h1>
                 <form class="form-horizontal" action="{{ route('roles-add-process') }}" method="POST" >
                  @csrf
                     <div style="margin-top:25px" class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroup-sizing-default">Loại nhân viên</span>
+                            <span class="input-group-text" id="inputGroup-sizing-default">Loại người dùng</span>
                         </div>
-                        <input value="{{ old('name') }}" name="name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập loại nhân viên">
+                        <input value="{{ old('name') }}" name="name" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập loại người dùng">
                     </div>
                     {{-- Thông báo lỗi --}}
                     @if($errors->has('name'))

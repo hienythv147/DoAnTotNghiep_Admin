@@ -14,9 +14,9 @@ return [
     */
 
     'reset' => 'Mật khẩu của bạn đã được tạo mới!',
-    'sent' => 'Chúng tôi đã gửi mật khẩu mới đến mail của bạn!',
+    'sent' => 'Yêu cầu đang được gửi đến mail của bạn!',
     'throttled' => 'Vui lòng đợi trong giây lát.',
-    'token' => 'This password reset token is invalid.',
+    'token' => 'Lượt truy cập không hợp lệ.',
     'user' => "Chúng tôi không tìm thấy tài khoản của bạn với email này!",
 
 ];

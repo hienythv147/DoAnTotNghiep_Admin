@@ -12,7 +12,7 @@
                  @csrf
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Loại nhân viên</label>
+                            <label class="input-group-text" for="inputGroupSelect01">Loại người dùng</label>
                         </div>
                         <select name="role_id" class="custom-select" id="inputGroupSelect01">
 

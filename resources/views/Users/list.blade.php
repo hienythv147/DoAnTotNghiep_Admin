@@ -7,9 +7,9 @@
 
 @if(isset($hienThi))
 @if($hienThi == 1)
-<h1 style="margin-top: 50px; text-align: center;">Danh sách nhân viên</h1>
+<h1 style="margin-top: 50px; text-align: center;">Danh sách người dùng</h1>
 @else
-<h1 style="margin-top: 50px; text-align: center;">Danh sách nhân viên tạm khóa</h1>
+<h1 style="margin-top: 50px; text-align: center;">Danh sách người dùng tạm khóa</h1>
 @endif
 <div class="row">
 	<div class="col-12">
@@ -22,7 +22,7 @@
                 </a>
                 <a href="{{ route('users-trash') }}" style="margin-bottom: 10px;color:black;"
                     class="btn btn-warning waves-effect waves-light">
-                    <i class="far fa-trash-alt" style="padding-right:10px"></i>Danh sách nhân viên tạm khóa</a>
+                    <i class="far fa-trash-alt" style="padding-right:10px"></i>Danh sách tạm khóa</a>
                 @endif
 				<table  id="basic-datatable" class="table table-striped table-bordered table-wrap">
                     <thead class="thead-dark">
