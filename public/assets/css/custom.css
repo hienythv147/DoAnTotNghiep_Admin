@@ -54,3 +54,8 @@ overflow-x: auto;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+.why-text{
+    background: #f3eded;
+    padding: 15px;
+}

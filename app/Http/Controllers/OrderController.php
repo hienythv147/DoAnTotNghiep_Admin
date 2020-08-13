@@ -90,7 +90,7 @@ class OrderController extends Controller
         foreach($data as $item) {
             $listProducts = "<tr>" .
                                 "<td>" . $item['name'] . "</td>" .
-                                "<td style='margin-left: 20px'>x" . $item['amount'] . "</td>" .
+                                "<td style='margin-left: 20px'>" . $item['amount'] . "x</td>" .
                                 "<td style='margin-left: 20px'>" . number_format($item['price'], "0", ".", ".") . "VND</td>" .
                              "</tr>";
             array_push($arrayProduct, $listProducts);
@@ -198,7 +198,7 @@ class OrderController extends Controller
     public function historyOrder() {
         if(Auth::user()->role_id == 3)
         {
-            $orders = Orders_out::where('id',Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(10);
+            $orders = Orders_out::where('user_id', Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(5);
             return view('home.history_order', compact('orders'));
         }
         else

@@ -10,23 +10,18 @@
      <script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisan_chartjs.umd.js"></script>
 @endsection
 @section('page-content')
-
-{{-- <h1 style="margin-top: 50px; text-align: center;">Danh sách thống kê</h1> --}}
-  <div class="row" style="margin-top: 50px;">
+  <div class="row" style="margin-top: 50px; margin-bottom: 30px;">
     <form method="POST">
       @csrf
       <div class="row">
-
-        <input name="startDay" id="datepicker1" width="276"/>
-        
-      <input style="margin-left: 10px" name="endDay" id="datepicker2" width="276"/>
-      <button style="margin-left: 10px" class="btn btn-primary waves-effect waves-light"> Tìm</button>
+        <input name="startDay" id="datepicker1" width="276" autocomplete="off"/>
+        <input style="margin-left: 10px" name="endDay" id="datepicker2" width="276" autocomplete="off"/>
+        <button style="margin-left: 10px" class="btn btn-primary waves-effect waves-light"> Tìm</button>
       </div>
     </form>
   </div>
 
      <div id="chart" style="height: 300px;"></div>
-     <div id="chart2" style="height: 300px;"></div>
 
      <!-- Your application script -->
      <script>
