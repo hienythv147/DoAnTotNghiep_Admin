@@ -4,7 +4,7 @@
 @include('layouts.css')
 {{-- Nội dung trang --}}
 @section('page-content')
-<h1 style="margin-top: 50px; text-align: center;">Chi tiết hóa đơn bán</h1>
+<h1 style="margin-top: 50px; text-align: center;">Chi tiết hóa đơn nhập</h1>
 <div class="row">
 	<div class="col-12">
 		<div class="card">

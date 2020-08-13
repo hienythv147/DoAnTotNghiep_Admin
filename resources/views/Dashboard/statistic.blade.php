@@ -66,30 +66,6 @@
           .borderColors()
           .datasets([{ type: 'line', fill: false }, 'bar']),
        });
-       const chart2 = new Chartisan({
-         el: '#chart2',
-         data: {
-          chart: { "labels": daysInMonth },
-          datasets: [
-                { "name": "Tổng tiền", "values": orders_dayInMonth },
-                { "name": "Tổng đơn hoàn thành", "values": orders_complete }
-            ],
-         },
-         loader: {
-            color: '#1ed865',
-            size: [30, 30],
-            type: 'bar',
-            textColor: '#1c1c59',
-            text: 'Đang tải dữ liệu..',
-        },
-         hooks: new ChartisanHooks()
-          .title('Đồ thị thống kê doanh thu')
-          .responsive(true)
-          .beginAtZero()
-          .colors()
-          .borderColors()
-          .datasets([{ type: 'line', fill: false }, 'bar']),
-       });
       
      </script>
 <!-- end row -->

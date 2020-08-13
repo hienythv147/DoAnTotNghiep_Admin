@@ -104,10 +104,6 @@ Route::middleware('auth')->group(function() {
 		});
 	});
 });
-Route::middleware('auth')->group(function() {
-	//Custom reset password
-	Route::get('/password/reset','CustomsController@showRequestEmail')->name('show-request-email');
-});
 
 // Route home index
 Route::get('/', 'HomeController@index_user')->name('home');

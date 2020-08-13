@@ -24,7 +24,7 @@
             <div class="col-lg-12">
                 <div class="title-all text-center">
                     <h1>Thực Đơn</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet lacus enim.</p>
+                    <p>Sau đây là danh sách thực đơn của chúng thôi.</p>
                 </div>
             </div>
         </div>

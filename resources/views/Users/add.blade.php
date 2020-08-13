@@ -7,13 +7,13 @@
     <div style="margin-top: 50px;" class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h1 style=" text-align: center"> Thêm nhân viên </h1>
+                <h1 style=" text-align: center"> Thêm mới </h1>
                 <form class="form-horizontal" action="{{ route('users-add-process') }}" method="POST" >
                  @csrf
                     {{-- Chọn loại nhân viên --}}
                     <div style="margin-top:25px" class="input-group">
                         <div class="input-group-prepend">
-                            <label class="input-group-text" for="inputGroupSelect01">Loại nhân viên</label>
+                            <label class="input-group-text" for="inputGroupSelect01">Loại người dùng</label>
                         </div>
                         <select name="role_id" class="custom-select" id="inputGroupSelect01">
                             {{-- <option selected>Choose...</option> --}}

@@ -6,9 +6,9 @@
 @section('page-content')
 @if(isset($hienThi))
 @if($hienThi == 1)
-<h1 style="margin-top: 50px; text-align: center;">Danh sách loại nhân viên</h1>
+<h1 style="margin-top: 50px; text-align: center;">Danh sách loại người dùng</h1>
 @else
-<h1 style="margin-top: 50px; text-align: center;">Danh sách loại nhân viên đã xóa</h1>
+<h1 style="margin-top: 50px; text-align: center;">Danh sách loại người dùng đã xóa</h1>
 @endif
 <div class="row">
 	<div class="col-12">
@@ -22,13 +22,13 @@
                 </a>
                 <a href="{{ route('roles-trash') }}" style="margin-bottom: 10px;color:black;"
                     class="btn btn-warning waves-effect waves-light">
-                    <i class="far fa-trash-alt" style="padding-right:10px"></i>Danh sách loại nhân viên đã xóa</a>
+                    <i class="far fa-trash-alt" style="padding-right:10px"></i>Loại người dùng đã xóa</a>
                 @endif
 				<table id="basic-datatable" class="table table-striped table-bordered  table-wrap">
                     <thead class="thead-dark">
                         <tr>
                             <th style="color:white; width: 6%;">ID</th>
-                            <th style="color:white; width: 69%;">Tên loại nhân viên</th>
+                            <th style="color:white; width: 69%;">Tên loại người dùng</th>
                             <th class="h-tool" style="color: white;">Thao Tác</th>
                         </tr>
                     </thead>

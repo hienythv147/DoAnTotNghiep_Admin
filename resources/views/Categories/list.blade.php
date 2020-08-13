@@ -29,7 +29,7 @@
                         <tr>
                             <th style="color:white; width: 7%;">ID</th>
                             <th style="color:white;width:50%;">Tên loại sản phẩm</th>
-                            <th style="color:white; width:10%;">Ảnh minh họa</th>
+                            <th style="color:white; width:15%;">Ảnh minh họa</th>
                             <th class="h-tool" style="color: white;">Thao Tác</th>
                         </tr>
                     </thead>

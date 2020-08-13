@@ -198,7 +198,7 @@ class OrderController extends Controller
     public function historyOrder() {
         if(Auth::user()->role_id == 3)
         {
-            $orders = Orders_out::where('id',Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(10);
+            $orders = Orders_out::where('user_id',Auth::user()->id)->orderBy('created_at', 'DESC')->paginate(5);
             return view('home.history_order', compact('orders'));
         }
         else

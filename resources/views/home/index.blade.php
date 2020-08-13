@@ -5,34 +5,34 @@
 <div id="slides-shop" class="cover-slides">
     <ul class="slides-container">
         <li class="text-center">
-            <img src="{{ asset('assets/images/banner-01.jpg') }}" alt="">
+            <img src="{{ asset('assets/images/slider_image/1.jpg') }}" alt="">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="m-b-20"><strong>Chào mừng đến với <br> Cà phê SP</strong></h1>
-                        <p  class="m-b-40">Sự hiện diện của bạn <br> là niềm hạnh phúc của chúng tôi.</p>
+                        <h1 class="m-b-20">Chào mừng đến với <br> Cà phê SP</h1>
+                        <p  class="m-b-40">Đồ ăn và thức uống <br> chúng tôi có tất cả.  </p>
                     </div>
                 </div>
             </div>
         </li>
         <li class="text-center">
-            <img src="{{ asset('assets/images/banner-02.jpg') }}" alt="">
+            <img src="{{ asset('assets/images/slider_image/2.jpg') }}" alt="">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="m-b-20"><strong>Chào mừng đến với <br> Cà phê SP</strong></h1>
-                        <p  class="m-b-40">Sự hiện diện của bạn <br> là niềm hạnh phúc của chúng tôi.</p>
+                        <h1 class="m-b-20"> <br> </h1>
+                        <p  class="m-b-40">Và bạn là tất cả <br>với chúng tôi! </p>
                     </div>
                 </div>
             </div>
         </li>
         <li class="text-center">
-            <img src="{{ asset('assets/images/banner-03.jpg') }}" alt="">
+            <img src="{{ asset('assets/images/slider_image/3.jpg') }}" alt="">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="m-b-20"><strong>Chào mừng đến với <br> Cà phê SP</strong></h1>
-                        <p  class="m-b-40">Sự hiện diện của bạn <br> là niềm hạnh phúc của chúng tôi.</p>
+                        <h1 class="m-b-20"> Hãy đến với chúng tôi<br> mỗi khi bạn cần</h1>
+                        <p  class="m-b-40"> Sự hiện diện của bạn <br> là niềm hạnh phúc của chúng tôi ♥</p>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
 </div>
 <!-- End Categories -->
 
-<div class="box-add-products">
+{{-- <div class="box-add-products">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -113,7 +113,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <!-- Start Products  -->
 <div class="products-box">

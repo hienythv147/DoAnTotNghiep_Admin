@@ -79,7 +79,12 @@
                     </div> <!-- end card-body -->
                     <div class="row mt-3">
                         <div class="col-12 text-center">
-                            <p class="text-muted">Tôi đã có tài khoản! <a href="{{ route('login') }}" class="text-muted ml-1"><b class="font-weight-semibold">{{ __('Đăng nhập') }}</b></a></p>
+                                <a class="text-muted ml-1" href="{{ route('login') }}">
+                                    <b>Đăng nhập</b>
+                                </a>
+                                @if (Route::has('register'))
+                                <p class="text-muted">Bạn chưa có tài khoản? <a href="{{ route('register') }}" class="text-muted ml-1"><b class="font-weight-semibold">{{ __('Đăng ký') }}</b></a></p>
+                                @endif
                         </div>
                     </div>
                 <!-- end row -->    
