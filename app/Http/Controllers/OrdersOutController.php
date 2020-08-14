@@ -18,7 +18,7 @@ class OrdersOutController extends Controller
      */
     public function index()
     {
-        $orders_out = Orders_out::all();
+        $orders_out = Orders_out::select()->orderBy('created_at', 'desc')->get();
         return view('OrdersOut.list',compact('orders_out'));
     }
     /**
