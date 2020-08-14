@@ -20,7 +20,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 class="m-b-20"> <br> </h1>
+                        <h1 class="m-b-20">Chào mừng đến với <br> Cà phê SP</h1>
                         <p  class="m-b-40">Và bạn là tất cả <br>với chúng tôi! </p>
                     </div>
                 </div>
