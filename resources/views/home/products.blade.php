@@ -133,8 +133,8 @@
                 <div class="product-categori">
                     <div class="search-product">
                         <form action="#">
-                            <input class="form-control" placeholder="Tìm kiếm..." type="text">
-                            <button type="submit"> <i class="fa fa-search"></i> </button>
+                            <input class="form-control" type="text" disabled>
+                            <!-- <button type="submit"> <i class="fa fa-search"></i> </button> -->
                         </form>
                     </div>
                     <div class="filter-sidebar-left">

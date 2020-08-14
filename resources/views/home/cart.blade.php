@@ -125,7 +125,12 @@
                     <hr>
                     <div class="d-flex gr-total">
                         <h5>Thành tiền</h5>
+                        @if(isset($cart))
                         <div class="ml-auto h5 font-weight-bold"> {{ isset($subTotal) ? number_format($subTotal+15000, "0", ".", ".") : 0 }} VNĐ </div>
+                        @else
+                        <div class="ml-auto font-weight-bold"> 0 VNĐ</div>
+                        @endif
+                        
                     </div>
                     <hr> </div>
             </div>

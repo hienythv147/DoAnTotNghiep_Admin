@@ -50,7 +50,7 @@
                                 <td><span class="badge badge-pill badge-danger" style="width: 100px">Chờ xác nhận</span></td>
                                 @endif
                                 <td>
-                                    {{$item->created_at}}
+                                    {{date_format($item->created_at,"d-m-Y")}}
                                 </td>
                                 <td>
                                     <button type="button" class="ml-auto btn hvr-hover" onclick="historyOrderDetail({{$item->id}})"
