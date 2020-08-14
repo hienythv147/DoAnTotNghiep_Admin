@@ -1591,7 +1591,7 @@
      color: #000000;
 }
  .about-box-main{
-     padding: 70px 0px;
+     padding: 20px 0px;
 }
  .noo-sh-title{
      font-size: 28px;
@@ -2230,11 +2230,11 @@
      background-color: #b0b435;
      box-shadow: none;
 }
- .new-account-login h5 {
+ /* .new-account-login h5 {
      font-size: 18px;
      color: #1111111;
      font-weight: 600;
-}
+} */
  .new-account-login h5 a:hover{
      color: #b0b435;
 }
@@ -2287,8 +2287,9 @@
  .service-icon i{
      font-size: 34px;
 }
- .my-account-page a:hover i{
-}
+/* .my-account-page a:hover i{
+
+} */
  .service-desc p{
      font-size: 16px;
 }
