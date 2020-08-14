@@ -58,18 +58,20 @@ class OrderChartController extends Controller
         $orders_complete = DB::table('orders_out')
                         ->select(DB::raw('count(*) don_ht_trong_thang'))
                         ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
-                        ->where('status', '=', 1)
+                        ->where('status', '=', 4)
                         ->groupBy(DB::raw('Date(created_at)'))
                         ->get();
         $orders_complete = $orders_complete->pluck("don_ht_trong_thang")->toArray();
         $orders_complete = json_encode($orders_complete);
-        // $orders_queue = DB::table('orders_out')
-        //                 ->select(DB::raw('count(*) don_cho_trong_thang'))
-        //                 ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
-        //                 ->where('status', '=', 0)
-        //                 ->groupBy(DB::raw('Date(created_at)'))
-        //                 ->get();
-        // $orders_queue = $orders_queue->pluck("don_cho_trong_thang")->toArray();
+
+        $orders_fail = DB::table('orders_out')
+                        ->select(DB::raw('count(*) don_cho_trong_thang'))
+                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
+                        ->where('status', '=', 5)
+                        ->groupBy(DB::raw('Date(created_at)'))
+                        ->get();
+        $orders_fail = $orders_fail->pluck("don_cho_trong_thang")->toArray();
+        $orders_fail = json_encode($orders_fail);
 
         return view('Dashboard.statistic',compact('daysInMonth','orders_dayInMonth','orders_complete'));
     }

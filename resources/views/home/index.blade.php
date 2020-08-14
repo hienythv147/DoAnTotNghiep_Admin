@@ -44,7 +44,8 @@
 <!-- End Slider -->
 
 <!-- Start Categories  -->
-<div class="categories-shop">
+{{-- <div class="categories-shop"> --}}
+<div>    
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -116,7 +117,8 @@
 </div> --}}
 
 <!-- Start Products  -->
-<div class="products-box">
+{{-- <div class="products-box"> --}}
+<div>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
