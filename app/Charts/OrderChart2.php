@@ -66,7 +66,7 @@ class OrderChart2 extends BaseChart
 
         $total_by_day = DB::table('orders_out')
         ->select(DB::raw("sum(total) tien_trong_ngay"))
-        ->where('status', '=', 1)
+        ->where('status', '=', 3)
         ->groupBy(DB::raw('Date(created_at)'))
         ->get();
         $total_by_day = $total_by_day->pluck("tien_trong_ngay")->toArray();

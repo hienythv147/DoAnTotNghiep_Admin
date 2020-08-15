@@ -42,20 +42,20 @@ class HomeController extends Controller
         
         $total_toDay = Orders_out::select(DB::raw("sum(total) tien_trong_ngay"))
                         ->where(DB::raw('Date(created_at)'),'=',$day)     
-                        ->where('status', '=', 1)
+                        ->where('status', '=', 3)
                         ->get();
         $total_toDay = $total_toDay->pluck("tien_trong_ngay")->toArray();
         // End thống kê trong ngày
         // Thống kê trong tuần
         $orders_toWeek = Orders_out::select(DB::raw('count(*) tong_don'))
                         ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))     
-                        ->where('status', '=', 1)
+                        ->where('status', '=', 3)
                         ->get();
         $orders_toWeek = $orders_toWeek->pluck("tong_don")->toArray();
         // dd($orders_toWeek);
         $total_toWeek = Orders_out::select(DB::raw("sum(total) tien_trong_tuan"))
                         ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))      
-                        ->where('status', '=', 1)
+                        ->where('status', '=', 3)
                         ->get();
         $total_toWeek = $total_toWeek->pluck("tien_trong_tuan")->toArray();
         // end thống kê trong tuần
@@ -65,7 +65,7 @@ class HomeController extends Controller
 
         $total_toMonth = Orders_out::select(DB::raw("sum(total) tien_trong_thang"))
                         ->whereBetween(DB::raw('Date(created_at)'),array($startMonth, $endMonth))      
-                        ->where('status', '=', 1)
+                        ->where('status', '=', 3)
                         ->get();
         $total_toMonth = $total_toMonth->pluck("tien_trong_thang")->toArray();
 
@@ -96,13 +96,13 @@ class HomeController extends Controller
         // dd($newCustomerLastWeek,$endDay);
         $orders_LastWeek = Orders_out::select(DB::raw('count(*) tong_don'))
                         ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))     
-                        ->where('status', '=', 1)
+                        ->where('status', '=', 3)
                         ->get();
         $orders_LastWeek = $orders_LastWeek->pluck("tong_don")->toArray();
 
         $total_LastWeek = Orders_out::select(DB::raw('sum(total) tien_tuan_truoc'))
                         ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))     
-                        ->where('status', '=', 1)
+                        ->where('status', '=', 3)
                         ->get();
         $total_LastWeek = $total_LastWeek->pluck("tien_tuan_truoc")->toArray();
         // dd($total_LastWeek);

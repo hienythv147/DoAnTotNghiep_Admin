@@ -17,15 +17,28 @@ class OrderChartController extends Controller
      */
     public function index(Request $request)
     {
-        $startDay = '';
-        $endDay = '';
+        $startDay = null;
+        $endDay = null;
         if($request->post())
         {
-            if(!empty($request->all()))
+            $this->validate($request,
+            [
+                'startDay' => ['required','date'],
+                'endDay' => ['required','date']
+            ],
+            [
+                'startDay.required' => 'Ngày bắt đầu không được bỏ trống.',
+                'endDay.required' => 'Ngày kết thúc không được bỏ trống.',
+                'startDay.date' => 'Ngày bắt đầu không hợp lệ.',
+                'endDay.date' => 'Ngày kết thúc không hợp lệ'
+            ]);
+            $startDay = $request->startDay;
+            $endDay = $request->endDay;
+            if(strtotime($startDay)>strtotime($endDay))
             {
-                $startDay = $request->startDay;
-                $endDay = $request->endDay;
+                return back()->with('message_error','Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu.');
             }
+            
         }
         else
         {
@@ -33,32 +46,27 @@ class OrderChartController extends Controller
             $startDay = $currentDay->startOfMonth()->format('Y-m-d');
             $endDay = $currentDay->endOfMonth()->format('Y-m-d');
         }
-        // Tổng đơn các ngày trong tháng
-        
+        // SELECT DISTINCT date(`created_at`) ngay FROM `orders_out` WHERE date(`created_at`) BETWEEN '2020-08-02' AND '2020-08-05' Order By `created_at` ASC
         // dd($startDay,$endDay);
-        $daysInMonth = DB::table('orders_out')
-        ->select(DB::raw('Date(created_at) ngay'))->distinct()
-        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
-        ->where('status', '=', 3)
-        ->orWhere('status', '=', 4)
+        $daysInMonth = Orders_out::select(DB::raw('Date(created_at) ngay'))->distinct()
+        ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
+        // ->where('status', '=', 3)
+        // ->orWhere('status', '=', 4)
         ->orderBy('ngay', 'asc')
         ->get();
         $daysInMonth = $daysInMonth->pluck("ngay")->toArray();
-
+        
+        // dd($daysInMonth);   
         // tổng đơn 
         $orders_dayInMonth = DB::table('orders_out')
                         ->select(DB::raw('count(*) don_trong_thang'))
-                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
-                        ->where('status', '=', 3)
-                        ->orWhere('status', '=', 4)
+                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
                         ->groupBy(DB::raw('Date(created_at)'))
                         ->get();
         $orders_dayInMonth = $orders_dayInMonth->pluck("don_trong_thang")->toArray();
         $total_dayInMonth = DB::table('orders_out')
         ->select(DB::raw('sum(total) tien_trong_thang'))
-        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
-        ->where('status', '=', 3)
-        ->orWhere('status', '=', 4)
+        ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
         ->groupBy(DB::raw('Date(created_at)'))
         ->get();
         $total_dayInMonth = $total_dayInMonth->pluck("tien_trong_thang")->toArray();
@@ -82,10 +90,24 @@ class OrderChartController extends Controller
         $total_complete = $total_complete->pluck("tien_ht_trong_thang")->toArray();
 
         $orders_fail = [];
-        for($i =0; $i<count($orders_dayInMonth);$i++)
+        for($i =0; $i<count($daysInMonth);$i++)
         {   
-            $fail = $orders_dayInMonth[$i] - $orders_complete[$i];
-            array_push($orders_fail,$fail);
+            if(!empty($orders_dayInMonth) && !empty($orders_complete))
+            {
+                $fail = $orders_dayInMonth[$i] - $orders_complete[$i];
+                array_push($orders_fail,$fail);
+            }
+            
+        }
+
+        $total_fail = [];
+        for($i =0; $i<count($daysInMonth);$i++)
+        {   
+            if(!empty($total_dayInMonth) && !empty($total_complete))
+            {
+                $fail = $total_dayInMonth[$i] - $total_complete[$i];
+                array_push($total_fail,$fail);
+            }
         }
         $daysInMonth = json_encode($daysInMonth);
 
@@ -96,7 +118,8 @@ class OrderChartController extends Controller
         $total_complete = json_encode($total_complete);
 
         $orders_fail = json_encode($orders_fail);
-        return view('Dashboard.statistic',compact('daysInMonth','orders_dayInMonth','total_dayInMonth','orders_complete','orders_fail','total_complete'));
+        $total_fail = json_encode($total_fail);
+        return view('Dashboard.statistic',compact('daysInMonth','orders_dayInMonth','total_dayInMonth','orders_complete','orders_fail','total_complete','total_fail'));
     }
     /**
      * Show the form for creating a new resource.

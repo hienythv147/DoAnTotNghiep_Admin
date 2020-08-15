@@ -154,7 +154,7 @@
           .beginAtZero()
           .colors(['rgb(240, 100, 59)'])
           .borderColors()
-          // .datasets(['bar']),
+          .datasets( type: 'line' )
        });
 </script>
 
