@@ -149,12 +149,12 @@
             text: 'Đang tải dữ liệu..',
         },
          hooks: new ChartisanHooks()
-          .title("Đồ thị thống kê doanh thu tháng")
+          .title("Đồ thị thống kê doanh thu trong tháng")
           .responsive(true)
           .beginAtZero()
-          .colors(['rgb(240, 100, 59)'])
-          .borderColors()
-          .datasets( type: 'line' )
+          .colors(['#00bf5f'])
+          .borderColors(['#00ff83'])
+        //   .datasets([{ type: 'line', fill:false}] )
        });
 </script>
 
