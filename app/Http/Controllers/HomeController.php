@@ -245,4 +245,20 @@ class HomeController extends Controller
             return response()->json($products);
         }
     }
+
+    public function updateAmount(Request $request) {
+        if($request->ajax()) {
+            $spId = $request->id;
+            $cart =  Session::get('cart', null);
+            for($i = 0; $i < count($cart); $i++) {
+                if($cart[$i]['id'] == $spId) {
+                    $cart[$i]['amount'] =  $request->query('amount');
+                    $isExist = true;
+                    $request->session()->put('cart', $cart);   
+                    break;
+                }
+            }
+            return response()->json(['status'=> 'OK']);
+        }
+    }
 }

@@ -27,9 +27,10 @@
                     <thead class="thead-dark">
                         <tr>
                             <th style="color:white; width: 5%;">ID</th>
-                            <th style="color:white; width: 20%;">Người lập hóa đơn</th>
-                            <th style="color:white; width: 10%;">Tổng tiền</th>
-                            <th style="color:white; width: 10%; text-align: center;">Trạng thái</th>
+                            <th style="color:white; width: 30%; ">Người lập hóa đơn</th>
+                            <th style="color:white; width: 20%; text-align: center;">Tổng tiền</th>
+                            <th style="color:white; width: 20%; text-align: center;">Trạng thái</th>
+                            <th style="color:white; width: 20%; text-align: center;">Ngày lập</th>
                             <th class="h-tool" style="color: white;">Thao Tác</th>
                         </tr>
                     </thead>
@@ -38,22 +39,23 @@
                         <tr style="font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->User->last_name ." ". $value->User->first_name }}</td>
-                            <td>{{ $value->total }} VNĐ</td>
+                            <td class="tool">{{ $value->total }} VNĐ</td>
                             @if($value->status == 0)
-                            <td><span class="badge badge-pill badge-danger" style="width: 100px">Chờ xác nhận</span></td>
+                            <td class="tool"><span class="badge badge-pill badge-danger" style="width: 100px">Chờ xác nhận</span></td>
                             @endif
                             @if($value->status == 1)
-                            <td><span class="badge badge-pill badge-warning" style="width: 100px">Đang xử lý</span></td>
+                            <td class="tool"><span class="badge badge-pill badge-warning" style="width: 100px">Đang xử lý</span></td>
                             @endif
                             @if($value->status == 2)
-                            <td><span class="badge badge-pill badge-primary" style="width: 100px">Giao hàng</span></td>
+                            <td class="tool"><span class="badge badge-pill badge-primary" style="width: 100px">Giao hàng</span></td>
                             @endif
                             @if($value->status == 3)
-                            <td><span class="badge badge-pill badge-success" style="width: 100px">Đã hoàn tất</span></td>
+                            <td class="tool"><span class="badge badge-pill badge-success" style="width: 100px">Đã hoàn tất</span></td>
                             @endif
                             @if($value->status == 4)
-                            <td><span class="badge badge-pill badge-dark" style="width: 100px">Đã hủy</span></td>
+                            <td class="tool"><span class="badge badge-pill badge-dark" style="width: 100px">Đã hủy</span></td>
                             @endif
+                            <td class="tool">{{ date_format($value->created_at, 'd-m-yy')}}</td>
                             <td class="tool">
                                 <a href="{{ route('orders-out-detail',['id' => $value->id]) }}" class="btn btn-success waves-effect waves-light ">
                                     <i class="fas fa-info"></i>

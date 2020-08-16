@@ -99,8 +99,8 @@ Route::middleware('auth')->group(function() {
 			Route::prefix('orders-out')->group(function(){
 				Route::get('list','OrdersOutController@index')->name('orders-out-list');
 				Route::get('detail/{id}','OrdersOutController@show')->name('orders-out-detail');
-				Route::get('confirm-order/{id}','OrdersOutController@confirmOrder')->name('confirm-order');
 				Route::get('list/{id}','OrdersOutController@showByStatus')->name('orders-by-status');
+				Route::get('/edit-status', 'OrdersOutController@editStatus')->name('edit-status');
 			});
 		});
 	});
@@ -150,3 +150,6 @@ Route::get('/remove-product', 'HomeController@removeProduct')->middleware('auth'
 
 // Reute live search
 Route::get('/live-search', 'HomeController@liveSearch');
+
+// change amount cart
+Route::get('/update-amount/{id}', 'HomeController@updateAmount')->middleware('auth');

@@ -17,7 +17,6 @@ use Carbon\Carbon;
 class OrderController extends Controller
 {
     public function processPayment(Request $request) {
-        $this->saveNewAddress($request->address);
         $data = $request->session()->get('cart', null);
         $total = 0;
         if(!empty($data)) {
@@ -28,9 +27,7 @@ class OrderController extends Controller
             session()->flash('message_error', 'Giỏ hàng rỗng');
             return redirect()->back();
         }
-        $userId =  Auth::user()['id'];
-        $roleId = Auth::user()['role_id'];
-        $userEmail =  Auth::user()['email'];
+        $this->saveNewAddress($request->address);
         // Check payment momo
         if($request->momo == 'on') {
             $endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
@@ -69,14 +66,14 @@ class OrderController extends Controller
                 return redirect()->to($jsonResult['payUrl'])->send();
             }
         }   
-        $result = $this->createOrder($data, $total, $userId, $roleId, $userEmail);
+        $result = $this->createOrder();
         return redirect($result);
     }
 
     // save new address
     public function saveNewAddress($newAddress) {
         $data = User::find(Auth::user()['id']);
-        if($data['address'] !== $newAddress) {
+        if($data['address'] !== $newAddress && !empty($data['address'])) {  
             $data->address = $newAddress;
             $data->save();
         } 
@@ -116,8 +113,8 @@ class OrderController extends Controller
         $newContent = str_replace('list_products', $listProducts, $newContent);
         $newContent = str_replace('sub_total', number_format($total, "0", ".", ".").' VNĐ', $newContent);
         $newContent = str_replace('gif_code', '0 VNĐ', $newContent);
-        $newContent = str_replace('ship_code', '15.000 VNĐ', $newContent);
-        $newContent = str_replace('grand_total', number_format($total + 15000, "0", ".", ".") . " VNĐ", $newContent);
+        $newContent = str_replace('ship_code', 'Thanh toán khi nhận hàng', $newContent);
+        $newContent = str_replace('grand_total', number_format($total, "0", ".", ".") . " VNĐ", $newContent);
         if($isUser) {
             $newContent = str_replace('url_order', 'http://'.$_SERVER['HTTP_HOST'].'/history-order', $newContent);
         } else {
@@ -139,67 +136,63 @@ class OrderController extends Controller
         return $response;
     }
 
-    public function createOrder($data, $total, $userId, $roleId, $userEmail) {
+    public function createOrder() {
+        $data = Session::get('cart', null);
         if(!empty($data)) {
-            $order = new Orders_out();
-            // check role is staff
-            $order->user_id = $userId;
-            $order->total = $total;
-            $result = $order->save();
-            if($result == false) {
-                session()->flash('message_error', 'Thanh toán thất bại. Vui lòng thử lại sau');
-                return '/cart';
-            }
-            // get created date
-            $created_at = Carbon::now('Asia/Ho_Chi_Minh');
-            // get last id of table order
-            $orderId = Orders_out::all()->last()['id'];
-            // save new order detail
+            $total = 0;
             foreach($data as $item) {
-                $orderDetail = new Orders_out_detail();
-                $orderDetail->order_out_id = $orderId;
-                $orderDetail->product_id = $item['id'];
-                $orderDetail->price = $item['price'];
-                $orderDetail->amount = $item['amount'];
-                $resultDetail = $orderDetail->save();
-                if($resultDetail == false) {
-                    session()->flash('message_error', 'Thanh toán thất bại. Vui lòng thử lại sau');
-                    return '/cart';
-                }
+                $total += $item['price'] * $item['amount'];
             }
-            // send mail if user is customer
-            if($roleId == 3) {
-                $this->sendMail($orderId, $total, $data, $created_at, $userEmail, true);
-            }
-            // send email for admin
-            $this->sendMail($orderId, $total, $data, $created_at);
-            // clear order session
-            Session::pull('cart');
-            // flash session
+        } else {
             session()->flash('message_success', 'Thanh toán thành công');
             return "/home";
         }
-        session()->flash('message_error', 'Giỏ hàng rỗng');
-        return "/cart";
+        $userId =  Auth::user()['id'];
+        $roleId = Auth::user()['role_id'];
+        $userEmail =  Auth::user()['email'];
+        // create order
+        $order = new Orders_out();
+        // check role is staff
+        $order->user_id = $userId;
+        $order->total = $total;
+        $result = $order->save();
+        if($result == false) {
+            session()->flash('message_error', 'Thanh toán thất bại. Vui lòng thử lại sau');
+            return '/cart';
+        }
+        // get created date
+        $created_at = Carbon::now('Asia/Ho_Chi_Minh');
+        // get last id of table order
+        $orderId = Orders_out::all()->last()['id'];
+        // save new order detail
+        foreach($data as $item) {
+            $orderDetail = new Orders_out_detail();
+            $orderDetail->order_out_id = $orderId;
+            $orderDetail->product_id = $item['id'];
+            $orderDetail->price = $item['price'];
+            $orderDetail->amount = $item['amount'];
+            $resultDetail = $orderDetail->save();
+            if($resultDetail == false) {
+                session()->flash('message_error', 'Thanh toán thất bại. Vui lòng thử lại sau');
+                return '/cart';
+            }
+        }
+        // send mail if user is customer
+        if($roleId == 3) {
+            $this->sendMail($orderId, $total, $data, $created_at, $userEmail, true);
+        }
+        // send email for admin
+        $this->sendMail($orderId, $total, $data, $created_at);
+        // clear order session
+        Session::pull('cart');
+        // flash session
+        session()->flash('message_success', 'Thanh toán thành công');
+        return "/home";
     }
 
     public function processResultMomo(Request $request) {
         if($request->errorCode == 0) {
-            $data = $request->session()->get('cart', null);
-            $total = 0;
-            if(!empty($data)) {
-                foreach($data as $item) {
-                    $total += $item['price'] * $item['amount'];
-                }
-            } else {
-                session()->flash('message_error', 'Giỏ hàng rỗng');
-                return redirect('/cart');
-            }
-            $userId =  Auth::user()['id'];
-            $roleId = Auth::user()['role_id'];
-            $userEmail =  Auth::user()['email'];
-            // create order
-            $result = $this->createOrder($data, $total, $userId, $roleId, $userEmail);
+            $result = $this->createOrder();
             return redirect($result);
         }
         session()->flash('message_error', $request->localMessage);

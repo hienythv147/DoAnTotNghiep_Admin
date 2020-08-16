@@ -19,8 +19,8 @@
 
 <!-- Start About Page  -->
 {{-- <div class="about-box-main"> --}}
-<div>
-    <div class="container">
+<!-- <div> -->
+    <div class="container" style="margin-top: 50px">
         <div class="row">
             <div class="col-lg-6">
                 <div class="banner-frame"> <img class="img-fluid" src="{{ asset('assets/images/about_us.jpg') }}" alt="" />
@@ -55,6 +55,6 @@
             </div>
         </div>
     </div>
-</div>
+<!-- </div> -->
 <!-- End About Page -->
 @endsection

@@ -56,6 +56,9 @@
                                 @if($item->status == 3)
                                 <td><span class="badge badge-pill badge-success" style="width: 100px">Đã hoàn tất</span></td>
                                 @endif
+                                @if($item->status == 4)
+                                <td><span class="badge badge-pill badge-dark" style="width: 100px">Đã hủy</span></td>
+                                @endif
                                 <td>
                                     {{date_format($item->created_at,"d-m-Y")}}
                                 </td>
