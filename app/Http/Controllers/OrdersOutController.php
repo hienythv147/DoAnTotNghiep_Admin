@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Orders_out;
+
 class OrdersOutController extends Controller
 {
     // Xác thực
@@ -42,5 +43,22 @@ class OrdersOutController extends Controller
         } else {
             return back()->with('message_error','Xác nhận đơn hàng không thành công!');
         }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showByStatus(Request $request)
+    {
+        $status = $request->id;
+        if($status == 5) {
+            $orders_out = Orders_out::all();
+        } else {
+            $orders_out = Orders_out::where('status', $status)->get();
+        }
+        return view('OrdersOut.list', compact('orders_out'));
     }
 }

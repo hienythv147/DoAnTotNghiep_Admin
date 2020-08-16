@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Orders_out;
 use App\Orders_out_detail;
+use App\User;
 use Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,7 @@ use Carbon\Carbon;
 class OrderController extends Controller
 {
     public function processPayment(Request $request) {
+        $this->saveNewAddress($request->address);
         $data = $request->session()->get('cart', null);
         $total = 0;
         if(!empty($data)) {
@@ -69,6 +71,15 @@ class OrderController extends Controller
         }   
         $result = $this->createOrder($data, $total, $userId, $roleId, $userEmail);
         return redirect($result);
+    }
+
+    // save new address
+    public function saveNewAddress($newAddress) {
+        $data = User::find(Auth::user()['id']);
+        if($data['address'] !== $newAddress) {
+            $data->address = $newAddress;
+            $data->save();
+        } 
     }
 
     // Send mail by Sendgrid

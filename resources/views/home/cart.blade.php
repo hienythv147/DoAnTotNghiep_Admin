@@ -65,6 +65,9 @@
                                 <td class="total-pr">
                                     <p>{{ number_format($item['price'] * $item['amount'], "0", ".", ".") }} VNĐ</p>
                                 </td>
+                                @if($value->status == 4)
+                                    <td><span class="badge badge-pill badge-dark" style="width: 100px">Đã hủy</span></td>
+                                @endif
                                 <td style="text-align: center">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="deleteRow(this, {{ $item['id'] }})" style="float: none;">
                                         <span aria-hidden="true"><i class="fas fa-times"></i></span>
@@ -116,7 +119,7 @@
                     
                     <div class="d-flex">
                         <h4>Phí vận chuyển</h4>
-                        @if(isset($cart))
+                        @if(isset($cart) && count($cart) > 0)
                         <div class="ml-auto font-weight-bold"> {{ number_format("15000", "0", ".", ".") }} VNĐ</div>
                         @else
                         <div class="ml-auto font-weight-bold"> 0 VNĐ</div>
@@ -125,7 +128,7 @@
                     <hr>
                     <div class="d-flex gr-total">
                         <h5>Thành tiền</h5>
-                        @if(isset($cart))
+                        @if(isset($cart) && count($cart) > 0)
                         <div class="ml-auto h5 font-weight-bold"> {{ isset($subTotal) ? number_format($subTotal+15000, "0", ".", ".") : 0 }} VNĐ </div>
                         @else
                         <div class="ml-auto font-weight-bold"> 0 VNĐ</div>
@@ -189,7 +192,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="field-3" class="control-label">Địa Chỉ</label>
-                                        <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" disabled name="address" value="{{ Auth::user()->address }}">
+                                        <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" name="address" value="{{ Auth::user()->address }}">
                                     </div>
                                 </div>
                                 

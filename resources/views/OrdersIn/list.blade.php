@@ -20,7 +20,7 @@
                     </thead>
                     <tbody>
                         @foreach($orders_in as $value) 
-                        <tr style="font-size: 90%; font-weight: bold;">
+                        <tr style="font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->User->last_name ." ". $value->User->first_name }}</td>
                             <td>{{ $value->total }} VNĐ</td>

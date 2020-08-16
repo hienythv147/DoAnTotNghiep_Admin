@@ -21,7 +21,7 @@
                     </thead>
                     <tbody>
                         @foreach($orders_in_detail as $value) 
-                        <tr style="font-size: 90%; font-weight: bold;">
+                        <tr style="font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->pivot->order_in_id }}</td>
                             <td>{{ $value->name }}</td>

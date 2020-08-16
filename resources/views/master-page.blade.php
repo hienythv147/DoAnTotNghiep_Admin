@@ -71,6 +71,7 @@
     @yield('js')
     <!-- App js-->
     <script src="{{ asset('assets/js/common.js') }}"></script>
+    <script src="{{ asset('assets/js/order_out.js') }}"></script>
     {{-- <script src="{{asset('assets/js/app.min.js')}}"></script> --}}
    
 </body>

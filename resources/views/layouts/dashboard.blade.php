@@ -39,7 +39,7 @@
         <div class="card-box">
             
 
-            <h4 class="header-title mt-0 mb-3">Đơn đặt hàng</h4>
+            <h4 class="header-title mt-0 mb-3">Đơn hàng trong ngày</h4>
 
             <div class="mt-1">
                 <div class="float-left" dir="ltr">
