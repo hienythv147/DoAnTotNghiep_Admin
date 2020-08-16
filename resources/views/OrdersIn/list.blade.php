@@ -23,7 +23,7 @@
                         <tr style="font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->User->last_name ." ". $value->User->first_name }}</td>
-                            <td>{{ $value->total }} VNĐ</td>
+                            <td>{{ number_format($value->total,"0",",",".") }} VNĐ</td>
                             <td class="tool">
                                 <a href="{{ route('orders-in-detail',['id' => $value->id]) }}"  class="btn btn-success waves-effect waves-light "><i class="fas fa-info"></i> Chi tiết</a>
                             </td>

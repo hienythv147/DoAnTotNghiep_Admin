@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $("#basic-datatable").DataTable({
-        ordering:false,
+        // ordering:false,
         language:{
             paginate:{
                 previous:"<i class='mdi mdi-chevron-left'>",

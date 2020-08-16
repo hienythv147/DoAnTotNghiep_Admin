@@ -26,7 +26,7 @@
                             <td class="tool">{{ $count++ }}</td>
                             <!-- <td>{{ $value->pivot->order_out_id }}</td> -->
                             <td>{{ $value->name }}</td>
-                            <td>{{ $value->pivot->price }} VNĐ</td>
+                            <td>{{ number_format($value->pivot->price,"0",",",".") }} VNĐ</td>
                             <td>{{ $value->pivot->amount }}</td>
                         </tr>
                         @endforeach
@@ -51,8 +51,8 @@
                     </div>
                     <!--/Blue select-->
                     <input type="hidden" value="{{ $orderId }}" name="order_id"/>
-                    <a href="{{route('orders-by-status', $orderStatus)}}" class="btn btn-info waves-effect waves-light"><i
-                        class="mdi mdi-keyboard-return" style="padding-right:10px"></i>Quay lại</a>
+                    <a href="{{route('orders-out-list')}}" class="btn btn-info waves-effect waves-light">
+                        <i class="mdi mdi-keyboard-return" style="padding-right:10px"></i>Quay lại</a>
                     <button type="submit" class="btn btn-danger waves-effect waves-light"><i
                         class="fe-edit-1" style="padding-right:10px"></i>Cập nhật</button>
                 </form>

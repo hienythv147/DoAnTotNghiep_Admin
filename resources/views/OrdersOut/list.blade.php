@@ -26,7 +26,7 @@
 				<table id="basic-datatable" class="table table-striped table-bordered table-wrap">
                     <thead class="thead-dark">
                         <tr>
-                            <th style="color:white; width: 5%;">ID</th>
+                            <th style="color:white; width: 7%;">ID</th>
                             <th style="color:white; width: 30%; ">Người lập hóa đơn</th>
                             <th style="color:white; width: 20%; text-align: center;">Tổng tiền</th>
                             <th style="color:white; width: 20%; text-align: center;">Trạng thái</th>
@@ -39,7 +39,7 @@
                         <tr style="font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->User->last_name ." ". $value->User->first_name }}</td>
-                            <td class="tool">{{ $value->total }} VNĐ</td>
+                            <td class="tool">{{ number_format($value->total,"0",",",".") }} VNĐ</td>
                             @if($value->status == 0)
                             <td class="tool"><span class="badge badge-pill badge-danger" style="width: 100px">Chờ xác nhận</span></td>
                             @endif

@@ -11,13 +11,27 @@
 @endsection
 @section('page-content')
   <div class="row" style="margin-top: 40px;">
-    <form method="POST">
+    <form class="form-row" method="POST">
       @csrf
-      <div class="row">
-        <input value="{{ old('startDay') }}" name="startDay" id="datepicker1" width="276" autocomplete="off"/>
-        <input value="{{ old('endDay') }}"  name="endDay" style="margin-left: 10px" id="datepicker2" width="276" autocomplete="off"/>
-        <button style="margin-left: 10px" class="btn btn-primary waves-effect waves-light"> Tìm</button>
-      </div>
+        <div class="col-md-2">
+          <select name="user" class="browser-default custom-select" id="list-status-order">
+              <option selected>Khách hàng</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <select name="product" class="browser-default custom-select" id="list-status-order">
+              <option selected>Sản phẩm</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+        <input id="datepicker1" value="{{ old('startDay') }}" name="startDay"  placeholder="Ngày bắt đầu" autocomplete="off"/>
+        </div>
+        <div class="col-md-3">
+        <input id="datepicker2" value="{{ old('endDay') }}"  name="endDay"  placeholder="Ngày kết thúc"  autocomplete="off"/>
+        </div>
+        <div class="col-md-2">
+        <button  class="btn btn-primary waves-effect waves-light"> Tìm</button>
+        </div>
     </form>
   </div>
 

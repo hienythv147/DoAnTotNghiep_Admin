@@ -23,6 +23,10 @@ Route::middleware('auth')->group(function() {
 			Route::get('/home', 'HomeController@index')->name('admin-home');
 
 			Route::get('statistic','OrderChartController@index')->name('statistic');
+			Route::get('statistic/user/{id}','OrderChartController@showWithUser')->name('statistic-with-user');
+			Route::get('statistic/product/{id}','OrderChartController@showWithProduct')->name('statistic-with-product');
+			Route::get('statistic/category/{id}','OrderChartController@showWitCategory')->name('statistic-with-category');
+
 			Route::post('statistic','OrderChartController@index');
 
 			Route::prefix('products')->group(function(){

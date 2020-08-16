@@ -43,7 +43,7 @@
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->Categories->name }}</td>
-                            <td>{{ $value->price }} VNĐ</td>
+                            <td>{{ number_format($value->price,"0",",",".") }} VNĐ</td>
                             <td style="text-align: center;"><img style="height:40px;width:40px;" src="{{asset('assets/images/products_image/'.$value->image)}}" alt=""></td>
                             @if($value->in_stock == 1)
                             <td style="text-align: center;"><span class="badge badge-pill badge-success">Còn hàng</span></td>

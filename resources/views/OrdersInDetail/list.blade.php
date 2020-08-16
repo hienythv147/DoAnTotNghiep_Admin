@@ -25,7 +25,7 @@
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->pivot->order_in_id }}</td>
                             <td>{{ $value->name }}</td>
-                            <td>{{ $value->pivot->price }} VNĐ</td>
+                            <td>{{ number_format($value->pivot->price,"0",",",".") }} VNĐ</td>
                             <td>{{ $value->pivot->amount }}</td>
                         </tr>
                         @endforeach
