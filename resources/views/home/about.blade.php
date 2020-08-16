@@ -2,23 +2,24 @@
 
 @section('body')
 <!-- Start All Title Box -->
-<div class="all-title-box">
+{{-- <div class="all-title-box">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <h2>Liên hệ</h2>
-                {{-- <ul class="breadcrumb">
+                <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">Liên hệ</li>
-                </ul> --}}
+                </ul>
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- End All Title Box -->
 
 <!-- Start About Page  -->
-<div class="about-box-main">
+{{-- <div class="about-box-main"> --}}
+<div>
     <div class="container">
         <div class="row">
             <div class="col-lg-6">

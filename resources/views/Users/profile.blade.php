@@ -4,7 +4,7 @@
 <div class="wrapper">
     <div class="container">
         <div class="row" style="font-family: 'Poppins', sans-serif;">
-            <div class="col-lg-4 col-xl-4" style="background: #f4f4f4; margin-top:50px" >
+            <div class="col-lg-4 col-xl-4" style="background: #f4f4f4; margin-top:50px;" >
                 <div class="card-box text-center" >
                     {{-- <img src="assets/images/users/user-1.jpg" class="rounded-circle avatar-lg img-thumbnail"
                         alt="profile-image"> --}}
@@ -15,7 +15,7 @@
 
                     <p class="text-muted mb-2 "><strong>Email:</strong> <span class="ml-2 ">{{  Auth::user()->email  }}</span></p>
                     <p class="text-muted mb-2 "><strong>Số điện thoại:</strong><span class="ml-2">{{ Auth::user()->phone_number }}</span></p>
-                    <p class="text-muted mb-1 "><strong>Địa chỉ:</strong> <span class="ml-2">{{  Auth::user()->address }}</span></p>
+                    {{-- <p class="text-muted mb-1 "><strong>Địa chỉ:</strong> <span class="ml-2">{{  Auth::user()->address }}</span></p> --}}
                     </div>
                 </div> <!-- end card-box -->
 
@@ -61,7 +61,7 @@
                                    @enderror
                                </div>
                             </div>
-                            <div class="col-md-12">
+                            {{-- <div class="col-md-12">
                                <div class="form-group">
                                    <label for="field-6" class="control-label"><b>Địa chỉ</b></label>
                                    <input id="field-6" value="{{  Auth::user()->address }}" name="address" type="text" class="form-control @error('address') is-invalid @enderror" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Nhập địa chỉ" >
@@ -71,7 +71,7 @@
                                    </span>
                                    @enderror
                                </div>
-                            </div>
+                            </div> --}}
                             </div>
                             <div style="margin-top: 25px" class="form-group mb-0 text-center">
                                 <button type="button" class="ml-auto btn hvr-hover" style="color: #ffffff; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 600"
