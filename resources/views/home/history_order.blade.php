@@ -35,7 +35,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if(isset($orders))
+                            @if(isset($orders) && count($orders) > 0)
                             @foreach($orders as $item)
                             <tr style="font-weight: 1000">
                                 <td style='text-align: center'>
@@ -44,10 +44,20 @@
                                 <td>
                                     {{ number_format($item->total, "0", ".", ".")}}
                                 </td>
-                                @if($item->status == 1)
-                                <td><span class="badge badge-pill badge-success" style="width: 100px">Đã hoàn tất</span></td>
-                                @else
+                                @if($item->status == 0)
                                 <td><span class="badge badge-pill badge-danger" style="width: 100px">Chờ xác nhận</span></td>
+                                @endif
+                                @if($item->status == 1)
+                                <td><span class="badge badge-pill badge-warning" style="width: 100px">Đang xử lý</span></td>
+                                @endif
+                                @if($item->status == 2)
+                                <td><span class="badge badge-pill badge-primary" style="width: 100px">Giao hàng</span></td>
+                                @endif
+                                @if($item->status == 3)
+                                <td><span class="badge badge-pill badge-success" style="width: 100px">Đã hoàn tất</span></td>
+                                @endif
+                                @if($item->status == 4)
+                                <td><span class="badge badge-pill badge-dark" style="width: 100px">Đã hủy</span></td>
                                 @endif
                                 <td>
                                     {{date_format($item->created_at,"d-m-Y")}}
@@ -65,9 +75,17 @@
                             @endforeach
                             @else 
                             <tr>
-                                <td class="name-pr">
+                                <td>
+                                </td> 
+                                <td>
+                                <td class="name-pr" style="font-weight: 1000">
                                     <p>Không có đơn hàng</p>
-                                </td>   
+                                </td>  
+                                </td> 
+                                <td>
+                                </td> 
+                                <td>
+                                </td>    
                             </tr>
                             @endif
                         </tbody>

@@ -25,17 +25,17 @@
 <div class="cart-box-main">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="table-main table-responsive">
+            <div class="col-lg-8">
+                <div class="table-main table-responsive" id="cart-table-scroll">
                     <table class="table" id="cart-table">
                         <thead>
                             <tr>
-                                <th>Hình ảnh</th>
-                                <th>Sản phẩm</th>
-                                <th>Giá</th>
-                                <th style="text-align: center">Số lượng</th>
-                                <th>Tổng tiền</th>
-                                <th style="text-align: center">Xóa</th>
+                                <th style="width:10%">Hình ảnh</th>
+                                <th style="width:30%">Sản phẩm</th>
+                                <th style="width:15%">Giá</th>
+                                <th style="text-align: center; width:15%">Số lượng</th>
+                                <th style="width:15%">Tổng tiền</th>
+                                <th style="text-align: center; width:5%">Xóa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,13 +57,13 @@
                                     </a>
                                 </td>
                                 <td class="price-pr">
-                                    <p>{{ number_format($item['price'], "0", ".", ".") }} VNĐ</p>
+                                    <p id="price-{{$item['id']}}">{{ number_format($item['price'], "0", ".", ".") }}</p>
                                 </td>
-                                <td style="text-align: center">
-                                    {{ $item['amount'] }}
+                                <td class="quantity-box" style="width: 10%">
+                                    <input id="amount-{{$item['id']}}" type="number" size="4" value="{{ $item['amount'] }}" min="1" max="20" step="1" class="c-input-text qty text" onchange="changeAmount({{ $item['id'] }})">
                                 </td>
                                 <td class="total-pr">
-                                    <p>{{ number_format($item['price'] * $item['amount'], "0", ".", ".") }} VNĐ</p>
+                                    <p id="total-{{$item['id']}}">{{ number_format($item['price'] * $item['amount'], "0", ".", ".") }}</p>
                                 </td>
                                 <td style="text-align: center">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="deleteRow(this, {{ $item['id'] }})" style="float: none;">
@@ -77,11 +77,11 @@
                                 <td>
                                 </td> 
                                 <td>
-                                </td> 
-                                <td>
                                 <td class="name-pr" style="font-weight: 1000">
                                     <p>Không có sản phẩm</p>
                                 </td>  
+                                </td> 
+                                <td>
                                 </td> 
                                 <td>
                                 </td> 
@@ -93,21 +93,16 @@
                     </table>
                 </div>
             </div>
-        </div>
 
-        <div class="row my-5">
-            <div class="col-lg-8 col-sm-12"></div>
-            <div class="col-lg-4 col-sm-12">
-                <div class="order-box">
-                    <h3>Tổng Tiền Đơn Hàng</h3>
+            <div class="col-lg-4">
+                <div class="order-box" style="margin-top:15px">
+                    <div class="d-flex gr-total">
+                        <h5>Tổng Tiền Đơn Hàng</h5>
+                    </div>
                     <div class="d-flex">
                         <h4>Tổng tiền</h4>
                         <div class="ml-auto font-weight-bold">{{ isset($subTotal) ? number_format($subTotal, "0", ".", ".") : 0 }} VNĐ</div>
                     </div>
-                    <!-- <div class="d-flex">
-                        <h4>Discount</h4>
-                        <div class="ml-auto font-weight-bold"> $ 40 </div>
-                    </div> -->
                     <hr class="my-1">
                     <div class="d-flex">
                         <h4>Mã giảm giá</h4>
@@ -116,7 +111,49 @@
                     
                     <div class="d-flex">
                         <h4>Phí vận chuyển</h4>
-                        @if(isset($cart))
+                        <div class="ml-auto font-weight-bold">Thanh toán khi nhận hàng</div>
+                    </div>
+                    <hr>
+                    <div class="d-flex gr-total">
+                        <h5>Thành tiền</h5>
+                        @if(isset($cart) && count($cart) > 0)
+                        <div class="ml-auto h5 font-weight-bold"> {{ isset($subTotal) ? number_format($subTotal, "0", ".", ".") : 0 }} VNĐ </div>
+                        @else
+                        <div class="ml-auto font-weight-bold"> 0 VNĐ</div>
+                        @endif
+                        
+                    </div>
+                    <hr> </div>
+                    <div style="width: 100%">
+                        <button type="button" class="ml-auto btn hvr-hover" style="color: #ffffff; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 600"
+                            data-toggle="modal" data-target="#exampleModal">Thanh toán</a> 
+                        </button>
+                        <a href="{{ Route('cart') }}">
+                            <button type="button" class="ml-auto btn hvr-hover" style="color: #ffffff; font-size: 14px; font-family: 'Poppins', sans-serif; font-weight: 600; margin-right: 20px">
+                                Cập nhật
+                            </button>
+                        </a>
+                    </div>
+                </div>
+        </div>
+        <!-- <div class="row my-5">
+            <div class="col-lg-8 col-sm-12"></div>
+            <div class="col-lg-4 col-sm-12">
+                <div class="order-box">
+                    <h3>Tổng Tiền Đơn Hàng</h3>
+                    <div class="d-flex">
+                        <h4>Tổng tiền</h4>
+                        <div class="ml-auto font-weight-bold">{{ isset($subTotal) ? number_format($subTotal, "0", ".", ".") : 0 }} VNĐ</div>
+                    </div>
+                    <hr class="my-1">
+                    <div class="d-flex">
+                        <h4>Mã giảm giá</h4>
+                        <div class="ml-auto font-weight-bold"> {{ number_format("0", "0", ".", ".") }} VNĐ</div>
+                    </div>
+                    
+                    <div class="d-flex">
+                        <h4>Phí vận chuyển</h4>
+                        @if(isset($cart) && count($cart) > 0)
                         <div class="ml-auto font-weight-bold"> {{ number_format("15000", "0", ".", ".") }} VNĐ</div>
                         @else
                         <div class="ml-auto font-weight-bold"> 0 VNĐ</div>
@@ -125,7 +162,7 @@
                     <hr>
                     <div class="d-flex gr-total">
                         <h5>Thành tiền</h5>
-                        @if(isset($cart))
+                        @if(isset($cart) && count($cart) > 0)
                         <div class="ml-auto h5 font-weight-bold"> {{ isset($subTotal) ? number_format($subTotal+15000, "0", ".", ".") : 0 }} VNĐ </div>
                         @else
                         <div class="ml-auto font-weight-bold"> 0 VNĐ</div>
@@ -144,7 +181,7 @@
                     </button>
                 </a>
             </div>
-        </div>
+        </div> -->
         <div id="exampleModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; font-family: 'Poppins', sans-serif;">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -189,7 +226,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="field-3" class="control-label">Địa Chỉ</label>
-                                        <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" disabled name="address" value="{{ Auth::user()->address }}">
+                                        <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" name="address" value="{{ Auth::user()->address }}">
                                     </div>
                                 </div>
                                 

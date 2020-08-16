@@ -40,7 +40,7 @@
                     <tbody>
                         @if($hienThi == 1)
                         @foreach($users as $value) 
-                        <tr style="font-size: 90%; font-weight: bold;">
+                        <tr style="font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->email }}</td>
                             <td>{{ $value->first_name }}</td>
@@ -61,8 +61,8 @@
                         </tr>
                         @endforeach
                         @else
-                        @foreach($users as $value) 
-                        <tr style="font-size: 90%; font-weight: bold;">
+                        @foreach($users as $value)
+                        <tr style="font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->email }}</td>
                             <td>{{ $value->first_name }}</td>

@@ -55,6 +55,6 @@
             </div>
         </div>
     </div>
-</div>
+<!-- </div> -->
 <!-- End About Page -->
 @endsection

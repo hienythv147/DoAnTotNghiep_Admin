@@ -253,3 +253,51 @@ function clearSearch() {
     $('#result').html('');
 }
 
+
+// change amount cart
+function changeAmount(id) {
+    var price = $('#price-'+id).text();
+    var amount = $('#amount-'+id).val();
+    var total = price * amount;
+    var num = new Number(total).toLocaleString("vn-VI");
+    if(amount >= 1 && amount <= 20) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            type: 'GET',
+            url: '/update-amount/'+id,
+            data: {
+                amount
+            },
+            dataType: 'json',
+            success: function() {
+                $('#total-'+id).text( num+".000");
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        })
+    } else if(amount > 20) {
+        $("body").append('<div id="flash-message" class="alert alert-danger alert-dismissible fade show" role="alert">' + 'Số lượng tối đa 20' + 
+            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' + 
+            '<span aria-hidden="true">&times;</span>'
+            + '</button>' +
+        '</div>');
+    } else {
+        $("body").append('<div id="flash-message" class="alert alert-danger alert-dismissible fade show" role="alert">' + 'Số lượng không được ít hơn 1' + 
+            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' + 
+            '<span aria-hidden="true">&times;</span>'
+            + '</button>' +
+        '</div>');
+    }
+    // set timeout for alert using ajax
+    window.setTimeout(function() {
+        $(".alert").fadeTo(500, 0).slideUp(500, function(){
+            $(this).remove(); 
+        });
+    }, 2000);
+}
+

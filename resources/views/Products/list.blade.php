@@ -39,7 +39,7 @@
                     <tbody>
                         @if($hienThi == 1)
                         @foreach($products as $value) 
-                        <tr style="font-size: 90%; font-weight: bold;">
+                        <tr style="font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->Categories->name }}</td>
@@ -61,7 +61,7 @@
                         @endforeach
                         @else
                         @foreach($products as $value) 
-                        <tr style="font-size: 90%; font-weight: bold;">
+                        <tr style="font-weight: bold;">
                             <td class="tool">{{ $value->id }}</td>
                             <td>{{ $value->name }}</td>
                             <td>{{ $value->Categories->name }}</td>
