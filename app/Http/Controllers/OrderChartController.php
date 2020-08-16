@@ -50,23 +50,25 @@ class OrderChartController extends Controller
         // dd($startDay,$endDay);
         $daysInMonth = Orders_out::select(DB::raw('Date(created_at) ngay'))->distinct()
         ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
-        // ->where('status', '=', 3)
-        // ->orWhere('status', '=', 4)
         ->orderBy('ngay', 'asc')
         ->get();
         $daysInMonth = $daysInMonth->pluck("ngay")->toArray();
         
         // dd($daysInMonth);   
         // tổng đơn 
+        // SELECT * from `orders_out` where (`status` = 3  OR `status` = 4) AND (date(`created_at`) BETWEEN '2020-08-14' AND '2020-08-14')
         $orders_dayInMonth = DB::table('orders_out')
-                        ->select(DB::raw('count(*) don_trong_thang'))
-                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
-                        ->groupBy(DB::raw('Date(created_at)'))
-                        ->get();
+        ->select(DB::raw('count(*) don_trong_thang'))
+        ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
+        ->whereIn('status',[3,4])
+        ->groupBy(DB::raw('Date(created_at)'))
+        ->get();
         $orders_dayInMonth = $orders_dayInMonth->pluck("don_trong_thang")->toArray();
+        // dd($orders_dayInMonth);
         $total_dayInMonth = DB::table('orders_out')
         ->select(DB::raw('sum(total) tien_trong_thang'))
         ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
+        ->whereIn('status',[3,4])
         ->groupBy(DB::raw('Date(created_at)'))
         ->get();
         $total_dayInMonth = $total_dayInMonth->pluck("tien_trong_thang")->toArray();
@@ -109,6 +111,8 @@ class OrderChartController extends Controller
                 array_push($total_fail,$fail);
             }
         }
+
+
         $daysInMonth = json_encode($daysInMonth);
 
         $total_dayInMonth = json_encode($total_dayInMonth);

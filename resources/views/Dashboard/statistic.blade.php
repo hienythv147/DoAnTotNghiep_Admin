@@ -69,8 +69,8 @@
           chart: { "labels": daysInMonth },
           datasets: [
                 { "name": "Tổng đơn", "values": orders_dayInMonth },
-                { "name": "Tổng đơn hủy", "values": orders_fail },
                 { "name": "Tổng đơn hoàn thành", "values": orders_complete },
+                { "name": "Tổng đơn hủy", "values": orders_fail },
             ],
          },
          loader: {
@@ -84,7 +84,7 @@
           .title('Đồ thị thống kê đơn hàng')
           .responsive(true)
           .beginAtZero()
-          .colors(['#56aaff','#ff5656','#aaffaa',])
+          .colors(['#56aaff','#aaffaa','#ff5656'])
           .borderColors()
           .datasets('bar'),
        });
@@ -94,8 +94,8 @@
           chart: { "labels": daysInMonth },
           datasets: [
                 { "name": "Tổng doanh thu", "values": total_dayInMonth },
-                { "name": "Tổn thất", "values": total_fail },
                 { "name": "Doanh thu thật sự", "values": total_complete },
+                { "name": "Tổn thất", "values": total_fail },
             ],
          },
          loader: {
@@ -109,7 +109,7 @@
           .title('Đồ thị thống kê doanh thu')
           .responsive(true)
           .beginAtZero()
-          .colors(['#56aaff','#ff5656','#aaffaa',])
+          .colors(['#56aaff','#aaffaa','#ff5656'])
           .borderColors()
           .datasets('bar'),
        });
@@ -117,4 +117,3 @@
 <!-- end row -->
  @endsection 
 {{-- @include('Dashboard.js') --}}
-s

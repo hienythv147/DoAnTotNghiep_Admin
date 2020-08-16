@@ -18,8 +18,8 @@
 <!-- End All Title Box -->
 
 <!-- Start About Page  -->
-{{-- <div class="about-box-main"> --}}
-<div>
+<div class="about-box-main">
+{{-- <div> --}}
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
