@@ -70,21 +70,21 @@
             format: 'yyyy-mm-dd',
 
         });
-      var daysInMonth = {!!$daysInMonth!!};
-      var orders_dayInMonth = {!!$orders_dayInMonth!!};
-      var orders_complete = {!!$orders_complete!!};
-      var total_dayInMonth = {!!$total_dayInMonth!!};
-      var total_complete = {!!$total_complete!!};
-      var orders_fail = {!!$orders_fail!!};
-      var total_fail = {!!$total_fail!!};
-      const chart = new Chartisan({
+      var ngay_tong = {!!$ngay_tong!!};
+      var don_tong = {!!$don_tong!!};
+      var tien_tong = {!!$tien_tong!!};
+      var don_ht_2 = {!!$don_ht_2!!};
+      var tien_ht_2 = {!!$tien_ht_2!!};
+      var don_huy = {!!$don_huy!!};
+      var tien_huy = {!!$tien_huy!!};
+      const chartDon = new Chartisan({
          el: '#chart',
          data: {
-          chart: { "labels": daysInMonth },
+          chart: { "labels": ngay_tong },
           datasets: [
-                { "name": "Tổng đơn", "values": orders_dayInMonth },
-                { "name": "Tổng đơn hoàn thành", "values": orders_complete },
-                { "name": "Tổng đơn hủy", "values": orders_fail },
+                { "name": "Tổng đơn", "values": don_tong },
+                { "name": "Tổng đơn hoàn thành", "values": don_ht_2 },
+                { "name": "Tổng đơn hủy", "values": don_huy },
             ],
          },
          loader: {
@@ -102,14 +102,14 @@
           .borderColors()
           .datasets('bar'),
        });
-       const chart2 = new Chartisan({
+       const chartTien = new Chartisan({
          el: '#chart2',
          data: {
-          chart: { "labels": daysInMonth },
+          chart: { "labels": ngay_tong },
           datasets: [
-                { "name": "Tổng doanh thu", "values": total_dayInMonth },
-                { "name": "Doanh thu thật sự", "values": total_complete },
-                { "name": "Tổn thất", "values": total_fail },
+                { "name": "Tổng doanh thu", "values": tien_tong },
+                { "name": "Doanh thu thật sự", "values": tien_ht_2 },
+                { "name": "Tổn thất", "values": tien_huy },
             ],
          },
          loader: {

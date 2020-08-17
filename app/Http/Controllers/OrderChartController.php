@@ -48,146 +48,75 @@ class OrderChartController extends Controller
         }
         // SELECT DISTINCT date(`created_at`) ngay FROM `orders_out` WHERE date(`created_at`) BETWEEN '2020-08-02' AND '2020-08-05' Order By `created_at` ASC
         // dd($startDay,$endDay);
-        $daysInMonth = Orders_out::select(DB::raw('Date(created_at) ngay'))->distinct()
-        ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
-        ->orderBy('ngay', 'asc')
-        ->get();
-        $daysInMonth = $daysInMonth->pluck("ngay")->toArray();
-        
-        // dd($daysInMonth);   
-        // tổng đơn 
-        // SELECT * from `orders_out` where (`status` = 3  OR `status` = 4) AND (date(`created_at`) BETWEEN '2020-08-14' AND '2020-08-14')
-        $orders_dayInMonth = DB::table('orders_out')
-        ->select(DB::raw('count(*) don_trong_thang'))
+        $tong = Orders_out::select(DB::raw('Date(created_at) ngay,sum(total) tien, count(*) don'))
         ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
         ->whereIn('status',[3,4])
         ->groupBy(DB::raw('Date(created_at)'))
         ->get();
-        $orders_dayInMonth = $orders_dayInMonth->pluck("don_trong_thang")->toArray();
-        // dd($orders_dayInMonth);
-        $total_dayInMonth = DB::table('orders_out')
-        ->select(DB::raw('sum(total) tien_trong_thang'))
+        $ngay_tong = $tong->pluck("ngay")->toArray();
+        $don_tong = $tong->pluck("don")->toArray();
+        $tien_tong = $tong->pluck("tien")->toArray();
+        // dd($ngay_tong,$don_tong,$tien_tong);   
+    
+        $hoan_thanh = Orders_out::select(DB::raw('Date(created_at) ngay,sum(total) tien, count(*) don'))
         ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
-        ->whereIn('status',[3,4])
+        ->where('status','=',3)
         ->groupBy(DB::raw('Date(created_at)'))
         ->get();
-        $total_dayInMonth = $total_dayInMonth->pluck("tien_trong_thang")->toArray();
+        $ngay_ht = $hoan_thanh->pluck("ngay")->toArray();
+        $don_ht = $hoan_thanh->pluck("don")->toArray();
+        $tien_ht = $hoan_thanh->pluck("tien")->toArray();
+        // dd($ngay_ht,$don_ht,$tien_ht);   
 
-        // Lấy tổng đơn hoàn thành các ngày trong tuần statuc = 3 hoàn thành
-        $orders_complete = DB::table('orders_out')
-                        ->select(DB::raw('count(*) don_ht_trong_thang'))
-                        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
-                        ->where('status', '=', 3)
-                        ->groupBy(DB::raw('Date(created_at)'))
-                        ->get();
-        $orders_complete = $orders_complete->pluck("don_ht_trong_thang")->toArray();
-
-        // Lấy tổng tiền hoàn thành
-        $total_complete = DB::table('orders_out')
-        ->select(DB::raw('sum(total) tien_ht_trong_thang'))
-        ->whereBetween(DB::raw('Date(created_at)'),array($startDay.'%', $endDay.'%'))
-        ->where('status', '=', 3)
-        ->groupBy(DB::raw('Date(created_at)'))
-        ->get();
-        $total_complete = $total_complete->pluck("tien_ht_trong_thang")->toArray();
-
-        $orders_fail = [];
-        for($i =0; $i<count($daysInMonth);$i++)
-        {   
-            if(!empty($orders_dayInMonth) && !empty($orders_complete))
+        $don_ht_2 = [];
+        for($i =0,$count = 0; $i < count($ngay_tong) ; $i++)
+        {
+            if($i <= count($don_ht))
             {
-                $fail = $orders_dayInMonth[$i] - $orders_complete[$i];
-                array_push($orders_fail,$fail);
-            }
-            
-        }
-
-        $total_fail = [];
-        for($i =0; $i<count($daysInMonth);$i++)
-        {   
-            if(!empty($total_dayInMonth) && !empty($total_complete))
-            {
-                $fail = $total_dayInMonth[$i] - $total_complete[$i];
-                array_push($total_fail,$fail);
+                if($ngay_tong[$i] == $ngay_ht[$count])
+                {
+                    array_push($don_ht_2,$don_ht[$count]);
+                    $count++;
+                }
+                else
+                {
+                    array_push($don_ht_2,0);
+                }
             }
         }
+        $tien_ht_2 = [];
+        for($i =0,$count = 0; $i < count($ngay_tong) ; $i++)
+        {
+            if($i <= count($tien_ht))
+            {
+                if($ngay_tong[$i] == $ngay_ht[$count])
+                {
+                    array_push($tien_ht_2,$tien_ht[$count]);
+                    $count++;
+                }
+                else
+                {
+                    array_push($tien_ht_2,0);
+                }
+            }
+        }
+        $don_huy = [];
+        $tien_huy = [];
+        for($i=0; $i < count($ngay_tong) ; $i++)
+        {
+            $so_luong = $don_tong[$i] - $don_ht_2[$i];
+            $tien = $tien_tong[$i] - $tien_ht_2[$i];
+            array_push($don_huy,$so_luong);
+            array_push($tien_huy,$tien);
+        }
+        $ngay_tong = json_encode($ngay_tong);
+        $don_tong = json_encode($don_tong);
+        $tien_tong = json_encode($tien_tong);
 
-
-        $daysInMonth = json_encode($daysInMonth);
-
-        $total_dayInMonth = json_encode($total_dayInMonth);
-        $orders_dayInMonth = json_encode($orders_dayInMonth);
-
-        $orders_complete = json_encode($orders_complete);
-        $total_complete = json_encode($total_complete);
-
-        $orders_fail = json_encode($orders_fail);
-        $total_fail = json_encode($total_fail);
-        return view('Dashboard.statistic',compact('daysInMonth','orders_dayInMonth','total_dayInMonth','orders_complete','orders_fail','total_complete','total_fail'));
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $don_ht_2 = json_encode($don_ht_2);
+        $tien_ht_2 = json_encode($tien_ht_2);
+        $don_huy = json_encode($don_huy);
+        $tien_huy = json_encode($tien_huy);
+        return view('Dashboard.statistic',compact('ngay_tong','don_tong','tien_tong','don_ht_2','tien_ht_2','don_huy','tien_huy'));
     }
 }
