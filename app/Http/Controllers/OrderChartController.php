@@ -7,7 +7,7 @@ use App\Charts\OrderChart;
 use App\Orders_out;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
+use App\Categories;
 class OrderChartController extends Controller
 {
     /**
@@ -19,16 +19,16 @@ class OrderChartController extends Controller
     {
         $startDay = null;
         $endDay = null;
-        if($request->post())
+        if($request->post() && !($request->startDay == '' && $request->endDay == ''))
         {
             $this->validate($request,
             [
-                'startDay' => ['required','date'],
-                'endDay' => ['required','date']
+                'startDay' => ['date'],
+                'endDay' => ['date']
             ],
             [
-                'startDay.required' => 'Ngày bắt đầu không được bỏ trống.',
-                'endDay.required' => 'Ngày kết thúc không được bỏ trống.',
+                // 'startDay.required' => 'Ngày bắt đầu không được bỏ trống.',
+                // 'endDay.required' => 'Ngày kết thúc không được bỏ trống.',
                 'startDay.date' => 'Ngày bắt đầu không hợp lệ.',
                 'endDay.date' => 'Ngày kết thúc không hợp lệ'
             ]);
@@ -38,7 +38,10 @@ class OrderChartController extends Controller
             {
                 return back()->with('message_error','Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu.');
             }
-            
+            if($request->category_id)
+            {
+                $category_id = $request->category_id;
+            }
         }
         else
         {
@@ -46,8 +49,7 @@ class OrderChartController extends Controller
             $startDay = $currentDay->startOfMonth()->format('Y-m-d');
             $endDay = $currentDay->endOfMonth()->format('Y-m-d');
         }
-        // SELECT DISTINCT date(`created_at`) ngay FROM `orders_out` WHERE date(`created_at`) BETWEEN '2020-08-02' AND '2020-08-05' Order By `created_at` ASC
-        // dd($startDay,$endDay);
+
         $tong = Orders_out::select(DB::raw('Date(created_at) ngay,sum(total) tien, count(*) don'))
         ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
         ->whereIn('status',[3,4])
@@ -117,6 +119,7 @@ class OrderChartController extends Controller
         $tien_ht_2 = json_encode($tien_ht_2);
         $don_huy = json_encode($don_huy);
         $tien_huy = json_encode($tien_huy);
-        return view('Dashboard.statistic',compact('ngay_tong','don_tong','tien_tong','don_ht_2','tien_ht_2','don_huy','tien_huy'));
+        $categories = Categories::all();
+        return view('Dashboard.statistic',compact('categories','ngay_tong','don_tong','tien_tong','don_ht_2','tien_ht_2','don_huy','tien_huy'));
     }
 }

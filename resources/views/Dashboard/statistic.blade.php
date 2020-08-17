@@ -13,14 +13,12 @@
   <div class="row" style="margin-top: 40px;">
     <form class="form-row" method="POST">
       @csrf
-        <div class="col-md-2">
-          <select name="user" class="browser-default custom-select" id="list-status-order">
-              <option selected>Khách hàng</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-          <select name="product" class="browser-default custom-select" id="list-status-order">
-              <option selected>Sản phẩm</option>
+        <div class="col-md-3">
+          <select name="category_id" class="browser-default custom-select">
+              <option selected>Loại sản phẩm</option>
+              @foreach($categories as $value)
+              <option value="{{ $value->id }}">{{ $value->name }}</option>
+              @endforeach
           </select>
         </div>
         <div class="col-md-3">
@@ -29,7 +27,7 @@
         <div class="col-md-3">
         <input id="datepicker2" value="{{ old('endDay') }}"  name="endDay"  placeholder="Ngày kết thúc"  autocomplete="off"/>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
         <button  class="btn btn-primary waves-effect waves-light"> Tìm</button>
         </div>
     </form>
