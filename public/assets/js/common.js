@@ -260,6 +260,7 @@ function changeAmount(id) {
     var amount = $('#amount-'+id).val();
     var total = price * amount;
     var num = new Number(total).toLocaleString("vn-VI");
+    $('#total-'+id).text( num+".000");
     if(amount >= 1 && amount <= 20) {
         $.ajaxSetup({
             headers: {
@@ -274,7 +275,7 @@ function changeAmount(id) {
             },
             dataType: 'json',
             success: function() {
-                $('#total-'+id).text( num+".000");
+                
             },
             error: function(error) {
                 console.log(error);

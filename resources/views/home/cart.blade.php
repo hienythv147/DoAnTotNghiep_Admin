@@ -207,29 +207,18 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="field-4" class="control-label">Email</label>
-                                        <input type="text" class="form-control" id="field-4" placeholder="Nhập email" disabled name="email" value="{{ Auth::user()->email }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="field-5" class="control-label">Số Điện Thoại</label>
-                                        <input type="text" class="form-control" id="field-5" placeholder="Nhập số điện thoại" disabled name="phone_number" value="{{ Auth::user()->phone_number }}">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="field-3" class="control-label">Địa Chỉ</label>
                                         <input type="text" class="form-control" id="field-3" placeholder="Nhập địa chỉ" name="address" value="{{ Auth::user()->address }}">
                                     </div>
                                 </div>
-                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-5" class="control-label">Số Điện Thoại</label>
+                                        <input type="text" class="form-control" id="field-5" placeholder="Nhập số điện thoại" disabled name="phone_number" value="{{ Auth::user()->phone_number }}">
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
