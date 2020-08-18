@@ -24,10 +24,10 @@
         <div class="col-md-3">
         <input id="datepicker1" value="{{ old('startDay') }}" name="startDay"  placeholder="Ngày bắt đầu" autocomplete="off"/>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
         <input id="datepicker2" value="{{ old('endDay') }}"  name="endDay"  placeholder="Ngày kết thúc"  autocomplete="off"/>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
         <button  class="btn btn-primary waves-effect waves-light"> Tìm</button>
         </div>
     </form>
