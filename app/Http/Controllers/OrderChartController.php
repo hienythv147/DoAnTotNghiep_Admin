@@ -8,6 +8,7 @@ use App\Orders_out;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Categories;
+use App\Products;
 class OrderChartController extends Controller
 {
     /**
@@ -38,9 +39,10 @@ class OrderChartController extends Controller
             {
                 return back()->with('message_error','Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu.');
             }
-            if($request->category_id)
+            if($request->product_id)
             {
-                $category_id = $request->category_id;
+                // SELECT date(orders_out.created_at) ngay, count(*) don FROM `orders_out`, `orders_out_detail` WHERE `orders_out`.`id` = `orders_out_detail`.`order_out_id` AND (`orders_out`.`status` = 3 OR `orders_out`.`status` = 4) and product_id = 1 GROUP BY date(orders_out.created_at)
+                $product_id = $request->product_id;
             }
         }
         else
@@ -119,7 +121,7 @@ class OrderChartController extends Controller
         $tien_ht_2 = json_encode($tien_ht_2);
         $don_huy = json_encode($don_huy);
         $tien_huy = json_encode($tien_huy);
-        $categories = Categories::all();
+        $products = Products::all();
         return view('Dashboard.statistic',compact('categories','ngay_tong','don_tong','tien_tong','don_ht_2','tien_ht_2','don_huy','tien_huy'));
     }
 }

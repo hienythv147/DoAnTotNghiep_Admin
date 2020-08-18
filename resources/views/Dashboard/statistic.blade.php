@@ -14,9 +14,9 @@
     <form class="form-row" method="POST">
       @csrf
         <div class="col-md-3">
-          <select name="category_id" class="browser-default custom-select">
-              <option selected>Loại sản phẩm</option>
-              @foreach($categories as $value)
+          <select name="product_id" class="browser-default custom-select">
+              <option selected>Sản phẩm</option>
+              @foreach($products as $value)
               <option value="{{ $value->id }}">{{ $value->name }}</option>
               @endforeach
           </select>
