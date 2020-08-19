@@ -15,7 +15,7 @@
       @csrf
         <div class="col-md-3">
           <select name="product_id" class="browser-default custom-select">
-              <option selected>Sản phẩm</option>
+              <option value="-1" selected>Sản phẩm</option>
               @foreach($products as $value)
               <option value="{{ $value->id }}">{{ $value->name }}</option>
               @endforeach
@@ -81,8 +81,8 @@
           chart: { "labels": ngay_tong },
           datasets: [
                 { "name": "Tổng đơn", "values": don_tong },
-                { "name": "Tổng đơn hoàn thành", "values": don_ht_2 },
-                { "name": "Tổng đơn hủy", "values": don_huy },
+                { "name": "Đơn hoàn thành", "values": don_ht_2 },
+                { "name": "Đơn bị hủy", "values": don_huy },
             ],
          },
          loader: {
@@ -105,7 +105,7 @@
          data: {
           chart: { "labels": ngay_tong },
           datasets: [
-                { "name": "Tổng doanh thu", "values": tien_tong },
+                { "name": "Tổng", "values": tien_tong },
                 { "name": "Doanh thu thật sự", "values": tien_ht_2 },
                 { "name": "Tổn thất", "values": tien_huy },
             ],
