@@ -13,7 +13,7 @@
   <div class="row" style="margin-top: 40px;">
     <form class="form-row" method="POST">
       @csrf
-        <div class="col-md-3">
+        <div class="col-md-2">
           <select name="product_id" class="browser-default custom-select">
               <option value="-1" selected>Sản phẩm</option>
               @foreach($products as $value)
@@ -21,7 +21,7 @@
               @endforeach
           </select>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
         <input id="datepicker1" value="{{ old('startDay') }}" name="startDay"  placeholder="Ngày bắt đầu" autocomplete="off"/>
         </div>
         <div class="col-md-4">
