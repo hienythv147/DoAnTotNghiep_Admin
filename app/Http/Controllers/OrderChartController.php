@@ -21,7 +21,7 @@ class OrderChartController extends Controller
     {
         $startDay = null;
         $endDay = null;
-        if(!($request->startDay == null && $request->endDay == null))
+        if(!empty($request->startDay) && !empty($request->endDay))
         {
             $this->validate($request,
             [
@@ -36,6 +36,8 @@ class OrderChartController extends Controller
             ]);
             $startDay = $request->startDay;
             $endDay = $request->endDay;
+            print_r($startDay);
+            
             if(strtotime($startDay)>strtotime($endDay))
             {
                 return back()->with('message_error','Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu.');
@@ -44,9 +46,10 @@ class OrderChartController extends Controller
         else{
             $currentDay = Carbon::now();
             $startDay = $currentDay->startOfMonth()->format('Y-m-d');
+            print_r($startDay);
             $endDay = $currentDay->endOfMonth()->format('Y-m-d');
         }
-        if($request->product_id)
+        if(!empty($request->product_id ))
         {
             $this->validate($request,
             [
@@ -96,14 +99,14 @@ class OrderChartController extends Controller
                 $that_bai = Orders_out::join('orders_out_detail','orders_out.id','=','orders_out_detail.order_out_id')
                 ->select(DB::raw('Date(orders_out.created_at) ngay,sum(orders_out_detail.price) tien, count(*) don'))
                 ->whereBetween(DB::raw('Date(orders_out.created_at)'),array($startDay, $endDay))
-                ->where('orders_out.status','=', 3)
+                ->where('orders_out.status','=', 4)
                 ->where('orders_out_detail.product_id', '=', $product_id)
                 ->groupBy(DB::raw('Date(orders_out.created_at)'))
                 ->get();
                 $ngay_tb = $that_bai->pluck("ngay")->toArray();
                 $don_tb = $that_bai->pluck("don")->toArray();
                 $tien_tb = $that_bai->pluck("tien")->toArray();
-                // dd($ngay_tong,$ngay_tb,$ngay_ht,$don_tong,$don_tb);
+                // dd($ngay_tong,$ngay_tb,$ngay_ht,$don_tong,$don_ht,$don_tb);
                 $don_ht_2 = [];
                 $don_huy = [];
                 $tien_ht_2 = [];
@@ -134,7 +137,7 @@ class OrderChartController extends Controller
                             // print_r($ngay_ht[count($ngay_ht) - 1]);
                             // echo '</br>';
                             $vt_cuoi = count($ngay_ht) - 1;
-                            if($vt_cuoi > 0) {
+                            if($vt_cuoi >= 0) {
                                 if($ngay_tong[$i] == $ngay_ht[$vt_cuoi])
                                 {
                                     // print_r($ngay_tong[$i]);
@@ -173,7 +176,7 @@ class OrderChartController extends Controller
                             // print_r($ngay_ht[count($ngay_ht) - 1]);
                             // echo '</br>';
                             $vt_cuoi = count($ngay_ht) - 1;
-                            if($vt_cuoi > 0) {
+                            if($vt_cuoi >= 0) {
                                 if($ngay_tong[$i] == $ngay_ht[$vt_cuoi])
                                 {
                                     array_push($tien_ht_2,$tien_ht[$vt_cuoi]);
@@ -212,7 +215,7 @@ class OrderChartController extends Controller
                         else if($i >= count($don_tb))
                         {
                             $vt_cuoi = count($ngay_tb) - 1;
-                            if($vt_cuoi > 0) {
+                            if($vt_cuoi >= 0) {
                                 if($ngay_tong[$i] == $ngay_tb[$vt_cuoi])
                                 {
                                     array_push($don_huy,$don_tb[$vt_cuoi]);
@@ -241,7 +244,7 @@ class OrderChartController extends Controller
                         else if($i >= count($tien_tb))
                         {
                             $vt_cuoi = count($ngay_tb) - 1;
-                            if($vt_cuoi > 0) {
+                            if($vt_cuoi >= 0) {
                                 if($ngay_tong[$i] == $ngay_tb[$vt_cuoi])
                                 {
                                     array_push($tien_huy,$tien_tb[$vt_cuoi]);
@@ -284,7 +287,9 @@ class OrderChartController extends Controller
             }
 
         }
-            
+        print_r($startDay);
+
+        // dd($startDay,$endDay);
         $tong = Orders_out::select(DB::raw('Date(created_at) ngay,sum(total) tien, count(*) don'))
         ->whereBetween(DB::raw('Date(created_at)'),array($startDay, $endDay))
         ->whereIn('status',[3,4])

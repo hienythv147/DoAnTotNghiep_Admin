@@ -258,10 +258,10 @@ function clearSearch() {
 function changeAmount(id) {
     var price = $('#price-'+id).text();
     var amount = $('#amount-'+id).val();
-    var total = price * amount;
-    var num = new Number(total).toLocaleString("vn-VI");
-    $('#total-'+id).text( num+".000");
     if(amount >= 1 && amount <= 20) {
+        var total = price * amount;
+        var num = new Number(total).toLocaleString("vn-VI");
+        $('#total-'+id).text( num+".000");
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
