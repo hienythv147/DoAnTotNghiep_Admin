@@ -104,8 +104,11 @@ class OrderChartController extends Controller
                 $don_tb = $that_bai->pluck("don")->toArray();
                 $tien_tb = $that_bai->pluck("tien")->toArray();
                 // dd($ngay_tong,$ngay_tb,$ngay_ht,$don_tong,$don_tb);
-                if(!empty($ngay_ht) && empty($ngay_tb)){
-                    $don_ht_2 = [];
+                $don_ht_2 = [];
+                $don_huy = [];
+                $tien_ht_2 = [];
+                $tien_huy = [];
+                if(!empty($ngay_ht)){
                     for($i =0,$count = 0; $i < count($ngay_tong) ; $i++)
                     {
                         if($i < count($don_ht))
@@ -149,7 +152,6 @@ class OrderChartController extends Controller
                     }
                     
                     // dd($ngay_tong,$ngay_ht,$don_tong,$don_ht_2);
-                    $tien_ht_2 = [];
                     for($i =0,$count = 0; $i < count($ngay_tong) ; $i++)
                     {
                         if($i < count($tien_ht))
@@ -183,8 +185,6 @@ class OrderChartController extends Controller
                             }
                         }
                     }
-                    $don_huy = [];
-                    $tien_huy = [];
                     for($i=0; $i < count($ngay_tong) ; $i++)
                     {
                         $so_luong = $don_tong[$i] - $don_ht_2[$i];
@@ -193,9 +193,8 @@ class OrderChartController extends Controller
                         array_push($tien_huy,$tien);
                     }
                 }
-                elseif(empty($ngay_ht) && !empty($ngay_tb))
+                elseif(!empty($ngay_tb))
                 {   
-                    $don_huy = [];
                     for($i =0,$count = 0; $i < count($ngay_tong) ; $i++)
                     {
                         if($i < count($don_tb))
@@ -225,7 +224,6 @@ class OrderChartController extends Controller
                             }
                         }
                     }
-                    $tien_huy = [];
                     for($i =0,$count = 0; $i < count($ngay_tong) ; $i++)
                     {
                         if($i < count($tien_tb))
@@ -255,8 +253,6 @@ class OrderChartController extends Controller
                             }
                         }
                     }
-                    $don_ht_2 = [];
-                    $tien_ht_2 = [];
                     for($i=0; $i < count($ngay_tong) ; $i++)
                     {
                         $so_luong = $don_tong[$i] - $don_huy[$i];
@@ -317,8 +313,11 @@ class OrderChartController extends Controller
         $ngay_tb = $that_bai->pluck("ngay")->toArray();
         $don_tb = $that_bai->pluck("don")->toArray();
         $tien_tb = $that_bai->pluck("tien")->toArray();
-        if(!empty($ngay_ht) && empty($ngay_tb)){
-            $don_ht_2 = [];
+        $don_ht_2 = [];
+        $don_huy = [];
+        $tien_ht_2 = [];
+        $tien_huy = [];
+        if(!empty($ngay_ht)){
             for($i =0,$count = 0; $i < count($ngay_tong) ; $i++)
             {
                 if($i < count($don_ht))
@@ -362,7 +361,6 @@ class OrderChartController extends Controller
             }
             
             // dd($ngay_tong,$ngay_ht,$don_tong,$don_ht_2);
-            $tien_ht_2 = [];
             for($i =0,$count = 0; $i < count($ngay_tong) ; $i++)
             {
                 if($i < count($tien_ht))
@@ -396,8 +394,6 @@ class OrderChartController extends Controller
                     }
                 }
             }
-            $don_huy = [];
-            $tien_huy = [];
             for($i=0; $i < count($ngay_tong) ; $i++)
             {
                 $so_luong = $don_tong[$i] - $don_ht_2[$i];
@@ -406,7 +402,7 @@ class OrderChartController extends Controller
                 array_push($tien_huy,$tien);
             }
         }
-        elseif(empty($ngay_ht) && !empty($ngay_tb))
+        elseif(!empty($ngay_tb))
         {   
             $don_huy = [];
             for($i =0,$count = 0; $i < count($ngay_tong) ; $i++)
@@ -478,7 +474,10 @@ class OrderChartController extends Controller
                 array_push($tien_ht_2,$tien);
             }
         }
-
+        elseif(empty($ngay_ht) && empty($ngay_tb))
+        {
+            return back()->with('message_error','Hiện chưa có dữ liệu để thống kê.');
+        }
         // dd($ngay_tong,$ngay_ht,$don_tong,$don_ht_2,$don_huy);
         // dd($ngay_tong,$ngay_ht,$tien_tong,$tien_ht_2,$tien_huy);
         $ngay_tong = json_encode($ngay_tong);
