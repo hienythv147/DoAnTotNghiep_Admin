@@ -100,11 +100,7 @@ class OrderChartController extends Controller
                     {
                         if($ngay_tong[$i] == $ngay_ht[$count])
                         {
-                            // print_r($ngay_tong[$i]);
-                            // echo ' và ';
-                            // print_r($ngay_ht[$count]);
-                            // echo '</br>';
-                            array_push($don_ht_2,$don_ht[$count]);
+                            array_push($don_ht_2, $don_ht[$count]);
                             $count++;
                         }
                         else
@@ -115,13 +111,15 @@ class OrderChartController extends Controller
                     else if($i >= count($don_ht))
                     {
                         $vt_cuoi = count($ngay_ht) - 1;
-                        if($ngay_tong[$i] == $ngay_ht[$vt_cuoi])
-                        {
-                            array_push($don_ht_2,$don_ht[$vt_cuoi]);
-                        }
-                        else
-                        {
-                            array_push($don_ht_2,0);
+                        if($vt_cuoi > 0) {
+                            if($ngay_tong[$i] == $ngay_ht[$vt_cuoi])
+                            {
+                                array_push($don_ht_2,$don_ht[$vt_cuoi]);
+                            }
+                            else
+                            {
+                                array_push($don_ht_2,0);
+                            }
                         }
                     }
                 }
@@ -145,25 +143,31 @@ class OrderChartController extends Controller
                     else if($i >= count($tien_ht))
                     {
                         $vt_cuoi = count($ngay_ht) - 1;
-                        if($ngay_tong[$i] == $ngay_ht[$vt_cuoi])
-                        {
-                            array_push($tien_ht_2,$tien_ht[$vt_cuoi]);
-                        }
-                        else
-                        {
-                            array_push($tien_ht_2,0);
+                        if($vt_cuoi > 0) {
+                            if($ngay_tong[$i] == $ngay_ht[$vt_cuoi])
+                            {
+                                array_push($tien_ht_2,$tien_ht[$vt_cuoi]);
+                            }
+                            else
+                            {
+                                array_push($tien_ht_2,0);
+                            }
                         }
                     }
                 }
                 
                 $don_huy = [];
                 $tien_huy = [];
-                for($i=0; $i < count($ngay_tong) ; $i++)
-                {
-                    $so_luong = $don_tong[$i] - $don_ht_2[$i];
-                    $tien = $tien_tong[$i] - $tien_ht_2[$i];
-                    array_push($don_huy,$so_luong);
-                    array_push($tien_huy,$tien);
+                if(count($ngay_tong) > 0) {
+                    for($i=0; $i < count($ngay_tong) ; $i++)
+                    {
+                        if(count($don_ht_2) > 0 && count($tien_ht_2) > 0) {
+                            $so_luong = $don_tong[$i] - $don_ht_2[$i];
+                            $tien = $tien_tong[$i] - $tien_ht_2[$i];
+                            array_push($don_huy,$so_luong);
+                            array_push($tien_huy,$tien);
+                        }
+                    }
                 }
                 // dd($ngay_tong,$ngay_ht,$don_tong,$don_ht_2,$don_huy);
                 // dd($ngay_tong,$ngay_ht,$tien_tong,$tien_ht_2,$tien_huy);
@@ -231,17 +235,19 @@ class OrderChartController extends Controller
                 // print_r($ngay_ht[count($ngay_ht) - 1]);
                 // echo '</br>';
                 $vt_cuoi = count($ngay_ht) - 1;
-                if($ngay_tong[$i] == $ngay_ht[$vt_cuoi])
-                {
-                    // print_r($ngay_tong[$i]);
-                    // echo 'và';
-                    // print_r($ngay_ht[$vt_cuoi]);
-                    // echo '</br>';
-                    array_push($don_ht_2,$don_ht[$vt_cuoi]);
-                }
-                else
-                {
-                    array_push($don_ht_2,0);
+                if($vt_cuoi > 0) {
+                    if($ngay_tong[$i] == $ngay_ht[$vt_cuoi])
+                    {
+                        // print_r($ngay_tong[$i]);
+                        // echo 'và';
+                        // print_r($ngay_ht[$vt_cuoi]);
+                        // echo '</br>';
+                        array_push($don_ht_2,$don_ht[$vt_cuoi]);
+                    }
+                    else
+                    {
+                        array_push($don_ht_2,0);
+                    }
                 }
             }
         }
@@ -269,13 +275,15 @@ class OrderChartController extends Controller
                 // print_r($ngay_ht[count($ngay_ht) - 1]);
                 // echo '</br>';
                 $vt_cuoi = count($ngay_ht) - 1;
-                if($ngay_tong[$i] == $ngay_ht[$vt_cuoi])
-                {
-                    array_push($tien_ht_2,$tien_ht[$vt_cuoi]);
-                }
-                else
-                {
-                    array_push($tien_ht_2,0);
+                if($vt_cuoi > 0) {
+                    if($ngay_tong[$i] == $ngay_ht[$vt_cuoi])
+                    {
+                        array_push($tien_ht_2,$tien_ht[$vt_cuoi]);
+                    }
+                    else
+                    {
+                        array_push($tien_ht_2,0);
+                    }
                 }
             }
         }
