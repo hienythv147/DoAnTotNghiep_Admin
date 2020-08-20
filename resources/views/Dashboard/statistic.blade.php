@@ -15,7 +15,7 @@
       @csrf
         <div class="col-md-2">
           <select name="product_id" class="browser-default custom-select">
-              <option  selected>Sản phẩm</option>
+              <option value=""  selected>Sản phẩm</option>
               @foreach($products as $value)
               <option value="{{ $value->id }}">{{ $value->name }}</option>
               @endforeach
